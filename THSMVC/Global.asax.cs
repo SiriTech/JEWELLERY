@@ -23,6 +23,7 @@ namespace THSMVC
               new { controller = "Shared", action = "Empty" },
               new { MenuId = @"\d+" });
 
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
