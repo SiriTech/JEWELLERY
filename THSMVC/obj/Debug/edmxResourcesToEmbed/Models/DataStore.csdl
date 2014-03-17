@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="THSMVCDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DataStoreEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="stp_get_OnlineTestAuthRoles" ReturnType="Collection(THSMVCDataModel.stp_get_OnlineTestAuthRoles_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_OnlineTestAuthClass" ReturnType="Collection(THSMVCDataModel.stp_get_OnlineTestAuthClass_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_OnlineTestAuthSection" ReturnType="Collection(THSMVCDataModel.stp_get_OnlineTestAuthSection_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="ClassId" Mode="In" Type="Int32" />
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_AssignedUsers" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleAuthIds" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="GroupName" Mode="In" Type="String" />
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetAssignedGroups_By_Test" ReturnType="Collection(THSMVCDataModel.ShowTestGroupsModel)">
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_NoticeAuthClass" ReturnType="Collection(THSMVCDataModel.stp_get_NoticeAuthClass_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="NoticeId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_NoticeAuthRoles" ReturnType="Collection(THSMVCDataModel.stp_get_NoticeAuthRoles_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="NoticeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_NoticeAuthSection" ReturnType="Collection(THSMVCDataModel.stp_get_NoticeAuthSection_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="NoticeId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="ClassId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Notice_AssignedUsers" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="NoticeId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleAuthIds" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_NoticesDisplay" ReturnType="Collection(THSMVCDataModel.stp_get_NoticesDisplay_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_InstanceWeekDays" ReturnType="Collection(THSMVCDataModel.stp_get_InstanceWeekDays_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_UsersForSMS" ReturnType="Collection(THSMVCDataModel.stp_get_UsersForSMS_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_TemplateFilled" ReturnType="Collection(THSMVCDataModel.stp_get_TemplateFilled_Result)">
+      <Parameter Name="USERIDS" Mode="In" Type="String" />
+      <Parameter Name="TEMPLATEID" Mode="In" Type="Int32" />
+      <Parameter Name="SMSMarksDraftId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_ALLSMSLogs" ReturnType="Collection(THSMVCDataModel.stp_get_ALLSMSLogs_Result)">
+      <Parameter Name="From" Mode="In" Type="String" />
+      <Parameter Name="To" Mode="In" Type="String" />
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_insert_SMSMarksDraftData" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="DraftId" Mode="In" Type="Int32" />
+      <Parameter Name="Data" Mode="In" Type="String" />
+      <Parameter Name="Delete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_insert_BulkUploadUsersDraftData" ReturnType="Collection(Int32)">
+      <Parameter Name="DraftId" Mode="In" Type="Int32" />
+      <Parameter Name="Data" Mode="In" Type="String" />
+      <Parameter Name="Role" Mode="In" Type="String" />
+      <Parameter Name="Delete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Upload_Users">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="Session" Mode="In" Type="Int32" />
+      <Parameter Name="Class" Mode="In" Type="Int32" />
+      <Parameter Name="Section" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="DraftId" Mode="In" Type="Int32" />
+      <Parameter Name="ERRORMSG" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Get_Menuitems_By_Role_Id" ReturnType="Collection(THSMVCDataModel.stp_Get_Menuitems_By_Role_Id_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Assign_Remove_MenuItems_Role" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="MenuItems" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Intial_Menus_For_Admin" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_ALLSMSLogs_Export" ReturnType="Collection(THSMVCDataModel.stp_get_ALLSMSLogs_Export_Result)">
+      <Parameter Name="From" Mode="In" Type="String" />
+      <Parameter Name="To" Mode="In" Type="String" />
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_AvailableTests_To_Take" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_AvailableTests_To_Take_Result)">
+      <Parameter Name="InstanceID" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_EnableTakeTest" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_EnableTakeTest_Result)">
+      <Parameter Name="OnlineTestID" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Time" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_GetAnswers_By_Question" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_GetAnswers_By_Question_Result)">
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+      <Parameter Name="USerId" Mode="In" Type="Int32" />
+      <Parameter Name="Preview" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_Results_AutoSave" ReturnType="Collection(Int32)">
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="AutoSave" Mode="In" Type="Boolean" />
+      <Parameter Name="IsReviewed" Mode="In" Type="Boolean" />
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="AnswerId" Mode="In" Type="String" />
+      <Parameter Name="Answer" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_Available_To_Review" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_Available_To_Review_Result)">
+      <Parameter Name="InstanceID" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_GetAnswers_By_Question_Review" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_GetAnswers_By_Question_Review_Result)">
+      <Parameter Name="OnlineTestId" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+      <Parameter Name="USerId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_Result_TemplateFilled" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_Result_TemplateFilled_Result)">
+      <Parameter Name="TestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_Available_To_Result" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_Available_To_Result_Result)">
+      <Parameter Name="InstanceID" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_TestResult" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_TestResult_Result)">
+      <Parameter Name="TestId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_OnlineTest_Review_Test" ReturnType="Collection(THSMVCDataModel.stp_OnlineTest_Review_Test_Result)">
+      <Parameter Name="TestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_UsersForAllocateSubCategoryUsers" ReturnType="Collection(THSMVCDataModel.stp_get_UsersForAllocateSubCategoryUsers_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_ALLSCHEDULEDSMSLogs" ReturnType="Collection(THSMVCDataModel.stp_get_ALLSCHEDULEDSMSLogs_Result)">
+      <Parameter Name="From" Mode="In" Type="String" />
+      <Parameter Name="To" Mode="In" Type="String" />
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_LMSLeaveLevelsByDept" ReturnType="Collection(THSMVCDataModel.stp_get_LMSLeaveLevelsByDept_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Delete_LeaveLevelsDept" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_LMSLeaveLevelsByRole" ReturnType="Collection(THSMVCDataModel.stp_get_LMSLeaveLevelsByRole_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Delete_LeaveLevelsRole" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_LMSLeaveLevelsByUser" ReturnType="Collection(THSMVCDataModel.stp_get_LMSLeaveLevelsByUser_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_Delete_LeaveLevelsUser" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LeaveDetails_By_User" ReturnType="Collection(THSMVCDataModel.stp_LeaveDetails_By_User_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Available_Leaves_By_LeaveTypeId" ReturnType="Collection(Double)">
+      <Parameter Name="LeaveTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Get_LeaveStatus" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_LeaveStatus_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Get_Leaves_To_Approve" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_Leaves_To_Approve_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Get_Total_LeaveOrders" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Get_LeaveStatus_Audit" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_LeaveStatus_Audit_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="ApplyLeaveId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Check_Approver_Or_Not" ReturnType="Collection(Int32)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_get_UsersForDelegation" ReturnType="Collection(THSMVCDataModel.stp_get_UsersForDelegation_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_LMS_Get_DelegateLeavesList" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_DelegateLeavesList_Result)">
+      <Parameter Name="InstanceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
+    <EntitySet Name="Menus" EntityType="THSMVCDataModel.Menu" />
+    <EntitySet Name="MenuAccessRights" EntityType="THSMVCDataModel.MenuAccessRight" />
+    <EntitySet Name="MenuGroups" EntityType="THSMVCDataModel.MenuGroup" />
+    <EntitySet Name="MenuRights" EntityType="THSMVCDataModel.MenuRight" />
+    <EntitySet Name="Rights" EntityType="THSMVCDataModel.Right" />
+    <EntitySet Name="Roles" EntityType="THSMVCDataModel.Role" />
+    <EntitySet Name="RoleMenus" EntityType="THSMVCDataModel.RoleMenu" />
+    <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
+    <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
+  </EntityContainer>
+  <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
+    <Property Type="Int32" Name="Usercount" Nullable="true" />
+    <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_OnlineTestAuthClass_Result">
+    <Property Type="Int32" Name="UserCount" Nullable="true" />
+    <Property Type="String" Name="Class" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_OnlineTestAuthSection_Result">
+    <Property Type="Int32" Name="UserCount" Nullable="true" />
+    <Property Type="String" Name="Section" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ShowTestGroupsModel">
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TestId" Nullable="true" />
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_TemplateFilled_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Template" Nullable="false" />
+    <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="stp_get_NoticeAuthClass_Result">
+    <Property Type="Int32" Name="UserCount" Nullable="true" />
+    <Property Type="String" Name="Class" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_NoticeAuthRoles_Result">
+    <Property Type="Int32" Name="Usercount" Nullable="true" />
+    <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_NoticeAuthSection_Result">
+    <Property Type="Int32" Name="UserCount" Nullable="true" />
+    <Property Type="String" Name="Section" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="AuthTypeId" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_NoticesDisplay_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="NoticeDesc" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="NoticeDoc" Nullable="true" />
+    <Property Type="Double" Name="NoticeDocSize" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_get_InstanceWeekDays_Result">
+    <Property Type="String" Name="WeekDay" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Value" Nullable="false" />
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="Int32" Name="chked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_UsersForSMS_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="Gender" Nullable="false" />
+    <Property Type="Int32" Name="Class" Nullable="true" />
+    <Property Type="Int32" Name="Section" Nullable="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="RollNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="stp_get_ALLSMSLogs_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Message" Nullable="false" />
+    <Property Type="String" Name="Numbers" Nullable="false" />
+    <Property Type="String" Name="Response" Nullable="true" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="EditedBy" Nullable="true" />
+    <Property Type="DateTime" Name="EditedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="DlvStatus" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="stp_Get_Menuitems_By_Role_Id_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ParentId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+    <Property Type="Int32" Name="Order" Nullable="false" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="Int32" Name="checked" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_ALLSMSLogs_Export_Result">
+    <Property Type="String" Name="Message" Nullable="false" />
+    <Property Type="String" Name="Numbers" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="DateSent" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="17" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_AvailableTests_To_Take_Result">
+    <Property Type="Int32" Name="OnlineTestID" Nullable="false" />
+    <Property Type="String" Name="OnlineTestName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TestComments" Nullable="true" />
+    <Property Type="Boolean" Name="Availability" Nullable="false" />
+    <Property Type="DateTime" Name="AvailableFromDate" Nullable="true" />
+    <Property Type="String" Name="AvailableFromTime" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="AvailableToDate" Nullable="true" />
+    <Property Type="String" Name="AvailableToTime" Nullable="true" MaxLength="10" />
+    <Property Type="Boolean" Name="QRandom" Nullable="true" />
+    <Property Type="Int32" Name="NoofQPerPage" Nullable="true" />
+    <Property Type="Int32" Name="TimeLimit" Nullable="true" />
+    <Property Type="Boolean" Name="GoBack" Nullable="true" />
+    <Property Type="Decimal" Name="PassMark" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_EnableTakeTest_Result">
+    <Property Type="DateTime" Name="AvailableFromDate" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_GetAnswers_By_Question_Result">
+    <Property Type="String" Name="Answer" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_Available_To_Review_Result">
+    <Property Type="Int32" Name="OnlineTestID" Nullable="false" />
+    <Property Type="String" Name="OnlineTestName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TestComments" Nullable="true" />
+    <Property Type="Boolean" Name="Availability" Nullable="false" />
+    <Property Type="DateTime" Name="AvailableFromDate" Nullable="true" />
+    <Property Type="String" Name="AvailableFromTime" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="AvailableToDate" Nullable="true" />
+    <Property Type="String" Name="AvailableToTime" Nullable="true" MaxLength="10" />
+    <Property Type="Boolean" Name="QRandom" Nullable="true" />
+    <Property Type="Int32" Name="NoofQPerPage" Nullable="true" />
+    <Property Type="Int32" Name="TimeLimit" Nullable="true" />
+    <Property Type="Boolean" Name="GoBack" Nullable="true" />
+    <Property Type="Decimal" Name="PassMark" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_GetAnswers_By_Question_Review_Result">
+    <Property Type="String" Name="AnswerByUser" Nullable="true" />
+    <Property Type="String" Name="Answer" Nullable="true" />
+    <Property Type="String" Name="IsQuestionCorrect" Nullable="true" />
+    <Property Type="String" Name="ReviewAnswer" Nullable="true" />
+    <Property Type="String" Name="TotalPoints" Nullable="true" />
+    <Property Type="String" Name="GainedPoints" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_Result_TemplateFilled_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Template" Nullable="true" MaxLength="319" />
+    <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_Available_To_Result_Result">
+    <Property Type="Int32" Name="OnlineTestID" Nullable="false" />
+    <Property Type="String" Name="OnlineTestName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TestComments" Nullable="true" />
+    <Property Type="Boolean" Name="Availability" Nullable="false" />
+    <Property Type="DateTime" Name="AvailableFromDate" Nullable="true" />
+    <Property Type="String" Name="AvailableFromTime" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="AvailableToDate" Nullable="true" />
+    <Property Type="String" Name="AvailableToTime" Nullable="true" MaxLength="10" />
+    <Property Type="Boolean" Name="QRandom" Nullable="true" />
+    <Property Type="Int32" Name="NoofQPerPage" Nullable="true" />
+    <Property Type="Int32" Name="TimeLimit" Nullable="true" />
+    <Property Type="Boolean" Name="GoBack" Nullable="true" />
+    <Property Type="Decimal" Name="PassMark" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_TestResult_Result">
+    <Property Type="Int32" Name="OnlineTestID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="151" />
+    <Property Type="String" Name="Class" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="MobilePhone" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="IsSubmitted" Nullable="false" MaxLength="56" />
+    <Property Type="String" Name="IsReviewed" Nullable="false" MaxLength="53" />
+    <Property Type="String" Name="LastModifiedBy" Nullable="true" MaxLength="151" />
+    <Property Type="String" Name="SMS" Nullable="false" MaxLength="103" />
+    <Property Type="String" Name="Points" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Total" Nullable="false" MaxLength="30" />
+    <Property Type="Decimal" Name="PassMark" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Percentage" Nullable="true" MaxLength="65" />
+    <Property Type="Int32" Name="SendSMS" Nullable="false" />
+    <Property Type="String" Name="IsSMSSent" Nullable="false" MaxLength="53" />
+  </ComplexType>
+  <ComplexType Name="stp_OnlineTest_Review_Test_Result">
+    <Property Type="Int32" Name="OnlineTestID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="151" />
+    <Property Type="String" Name="Class" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="MobilePhone" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="IsSubmitted" Nullable="false" MaxLength="56" />
+    <Property Type="String" Name="IsReviewed" Nullable="false" MaxLength="53" />
+    <Property Type="String" Name="Review" Nullable="true" MaxLength="207" />
+    <Property Type="String" Name="LastModifiedBy" Nullable="true" MaxLength="151" />
+    <Property Type="String" Name="SMS" Nullable="false" MaxLength="103" />
+    <Property Type="String" Name="Points" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="stp_get_UsersForAllocateSubCategoryUsers_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="151" />
+    <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="Gender" Nullable="false" />
+    <Property Type="Int32" Name="Class" Nullable="true" />
+    <Property Type="Int32" Name="Section" Nullable="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="RollNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="stp_get_ALLSCHEDULEDSMSLogs_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="true" />
+    <Property Type="String" Name="Message" Nullable="true" />
+    <Property Type="String" Name="Numbers" Nullable="true" />
+    <Property Type="String" Name="Response" Nullable="true" />
+    <Property Type="DateTime" Name="ScheduleDate" Nullable="true" />
+    <Property Type="String" Name="ScheduleTime" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="DlvStatus" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="EditedBy" Nullable="true" />
+    <Property Type="DateTime" Name="EditedDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_get_LMSLeaveLevelsByDept_Result">
+    <Property Type="String" Name="FirstName" Nullable="true" />
+    <Property Type="String" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="LevelName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="LevelOrder" Nullable="true" />
+    <Property Type="Boolean" Name="IsNotifier" Nullable="true" />
+    <Property Type="Boolean" Name="DefaultFlag" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_LMSLeaveLevelsByRole_Result">
+    <Property Type="String" Name="FirstName" Nullable="true" />
+    <Property Type="String" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="LevelName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="LevelOrder" Nullable="true" />
+    <Property Type="Boolean" Name="IsNotifier" Nullable="true" />
+    <Property Type="Boolean" Name="DefaultFlag" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_get_LMSLeaveLevelsByUser_Result">
+    <Property Type="String" Name="FirstName" Nullable="true" />
+    <Property Type="String" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="LeaveLevelUserId" Nullable="true" />
+    <Property Type="String" Name="ApproverId" Nullable="true" />
+    <Property Type="String" Name="LevelName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="LevelOrder" Nullable="true" />
+    <Property Type="Boolean" Name="IsNotifier" Nullable="true" />
+    <Property Type="Boolean" Name="DefaultFlag" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_LeaveDetails_By_User_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="LeaveTypeName" Nullable="true" MaxLength="203" />
+    <Property Type="Double" Name="Value" Nullable="true" />
+    <Property Type="Boolean" Name="PlannedLeave" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_LMS_Get_LeaveStatus_Result">
+    <Property Type="String" Name="LeaveTypeName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LeaveReason" Nullable="false" />
+    <Property Type="String" Name="LeaveApplyMode" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDay" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDay" Nullable="true" Precision="23" />
+    <Property Type="String" Name="NoofLeavesApplied" Nullable="true" MaxLength="62" />
+    <Property Type="String" Name="Comment" Nullable="true" />
+    <Property Type="DateTime" Name="AppliedDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="stp_LMS_Get_Leaves_To_Approve_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="Class" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="Section" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="LeaveTypeName" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="LeaveApplyMode" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="LeaveReason" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="Comment" Nullable="false" MaxLength="2" />
+    <Property Type="DateTime" Name="FromDay" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDay" Nullable="false" Precision="23" />
+    <Property Type="String" Name="NoofLeavesApplied" Nullable="false" MaxLength="1" />
+    <Property Type="DateTime" Name="AppliedDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="LevelOrder" Nullable="false" />
+    <Property Type="Int32" Name="Flag" Nullable="false" />
+    <Property Type="Boolean" Name="IsNotifier" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_LMS_Get_LeaveStatus_Audit_Result">
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LeaveTypeName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LeaveApplyMode" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDay" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDay" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="LevelOrder" Nullable="true" />
+    <Property Type="Int32" Name="TotalLevels" Nullable="true" />
+    <Property Type="String" Name="Approver" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="stp_get_UsersForDelegation_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="151" />
+    <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="Gender" Nullable="false" />
+    <Property Type="Int32" Name="Class" Nullable="true" />
+    <Property Type="Int32" Name="Section" Nullable="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="RollNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="stp_LMS_Get_DelegateLeavesList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Approver" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="DelegatedUser" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" />
+    <Property Type="DateTime" Name="DelegatedOn" Nullable="false" Precision="23" />
+  </ComplexType>
+  <EntityType Name="Instance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ParentInstance" />
+    <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
+    <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" />
+    <Property Type="Int32" Name="ParentId" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Action" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Controller" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="GroupId" />
+    <Property Type="Int32" Name="Order" Nullable="false" />
+    <Property Type="Int32" Name="Level" Nullable="false" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="MenuAccessRight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MenuId" Nullable="false" />
+    <Property Type="Int32" Name="MenuRightId" Nullable="false" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="MenuGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" />
+    <Property Type="String" Name="GroupName" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GroupShortName" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="MenuRight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="MenuRight1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MenuRightDescription" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="Right">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MenuRightId" Nullable="false" />
+    <Property Type="Boolean" Name="Flag" Nullable="false" />
+    <Property Type="Int32" Name="UserMenuId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" />
+    <Property Type="String" Name="Role1" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RoleDesc" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="RoleMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Int32" Name="MenuId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RoleId" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="InstanceId" />
+    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+    <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="DateTime" Name="LastLoginDate" Precision="3" />
+    <Property Type="DateTime" Name="LastPasswordChangedDate" Precision="3" />
+    <Property Type="DateTime" Name="LastLockedOutDate" Precision="3" />
+    <Property Type="Int32" Name="FailedPasswordAttemptCount" />
+    <Property Type="Boolean" Name="ChangePwdonLogin" />
+    <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Int32" Name="MenuId" Nullable="false" />
+    <Property Type="DateTime" Name="FromDate" Precision="3" />
+    <Property Type="DateTime" Name="ToDate" Precision="3" />
+    <Property Type="Boolean" Name="Flag" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
+</Schema>

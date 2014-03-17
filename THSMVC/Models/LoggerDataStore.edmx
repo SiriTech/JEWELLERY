@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="THSMVCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="THSMVCModelStoreContainer">
+          <EntitySet Name="Log4Net_Error" EntityType="THSMVCModel.Store.Log4Net_Error" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SiteLog" EntityType="THSMVCModel.Store.SiteLog" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Log4Net_Error">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Level" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Logger" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="4000" />
+          <Property Name="Exception" Type="varchar" Nullable="false" MaxLength="2000" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SiteLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Action" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Controller" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="1000" />
+          <Property Name="URL" Type="varchar" MaxLength="1000" />
+          <Property Name="HostAddress" Type="varchar" MaxLength="1000" />
+          <Property Name="UserID" Type="varchar" MaxLength="1000" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="THSMVCModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LoggerDataStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Log4Net_Error" EntityType="THSMVCModel.Log4Net_Error" />
+          <EntitySet Name="SiteLogs" EntityType="THSMVCModel.SiteLog" />
+        </EntityContainer>
+        <EntityType Name="Log4Net_Error">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Level" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="Exception" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SiteLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="Controller" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="URL" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="HostAddress" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="UserID" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="THSMVCModelStoreContainer" CdmEntityContainer="LoggerDataStoreEntities">
+          <EntitySetMapping Name="Log4Net_Error"><EntityTypeMapping TypeName="THSMVCModel.Log4Net_Error"><MappingFragment StoreEntitySet="Log4Net_Error">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Thread" ColumnName="Thread" />
+            <ScalarProperty Name="Level" ColumnName="Level" />
+            <ScalarProperty Name="Logger" ColumnName="Logger" />
+            <ScalarProperty Name="Message" ColumnName="Message" />
+            <ScalarProperty Name="Exception" ColumnName="Exception" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SiteLogs"><EntityTypeMapping TypeName="THSMVCModel.SiteLog"><MappingFragment StoreEntitySet="SiteLog">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+            <ScalarProperty Name="Action" ColumnName="Action" />
+            <ScalarProperty Name="Controller" ColumnName="Controller" />
+            <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+            <ScalarProperty Name="URL" ColumnName="URL" />
+            <ScalarProperty Name="HostAddress" ColumnName="HostAddress" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="LoggerDataStore">
+        <EntityTypeShape EntityType="THSMVCModel.Log4Net_Error" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="THSMVCModel.SiteLog" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5571907552083326" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

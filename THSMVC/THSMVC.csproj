@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A22F20FF-D34F-44D8-92AA-EB64E91C173F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>THSMVC</RootNamespace>
+    <AssemblyName>THSMVC</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\MyMVCApp\MyMVCApp\bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\Reddy\Downloads\Json45r11\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.14\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>C:\Users\srikanthk\Desktop\System.Linq.Dynamic\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ErrorLogsLogic.cs" />
+    <Compile Include="Classes\GroupLogic.cs" />
+    <Compile Include="Classes\SiteLogsLogic.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GlobalController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Classes\DiskFileStore.cs" />
+    <Compile Include="Classes\EmailHelper.cs" />
+    <Compile Include="Classes\IFileStore.cs" />
+    <Compile Include="Classes\InstanceLogic.cs" />
+    <Compile Include="Classes\JsonDropdownData.cs" />
+    <Compile Include="Classes\MenuLogic.cs" />
+    <Compile Include="CustomActionResults\ExcelControllerExtensions.cs" />
+    <Compile Include="CustomActionResults\ExcelListControllerExtensions.cs" />
+    <Compile Include="CustomActionResults\ExcelListResult.cs" />
+    <Compile Include="CustomActionResults\ExcelResult.cs" />
+    <Compile Include="CustomActionResults\WordControllerExtensions.cs" />
+    <Compile Include="CustomActionResults\WordListControllerExtensions.cs" />
+    <Compile Include="CustomActionResults\WordListResult.cs" />
+    <Compile Include="CustomActionResults\WordResult.cs" />
+    <Compile Include="Models\AdministrationModels.cs" />
+    <Compile Include="Models\DataStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataStore.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoggerDataStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoggerDataStore.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SharedModels.cs" />
+    <Compile Include="Classes\RolesLogic.cs" />
+    <Compile Include="Classes\SecurityProvider.cs" />
+    <Compile Include="Classes\SelectListItemCls.cs" />
+    <Compile Include="Classes\SharedMethods.cs" />
+    <Compile Include="Classes\UserCreateStatus.cs" />
+    <Compile Include="Services\Logging\ILogger.cs" />
+    <Compile Include="Services\Logging\Log4netXmlLayout.cs" />
+    <Compile Include="Services\Logging\Log4Net\Log4NetLogger.cs" />
+    <Compile Include="Services\Logging\LogUtility.cs" />
+    <Compile Include="Views\Shared\LogsRequestAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Grid\Filter.cs" />
+    <Compile Include="Models\Grid\GridModelBinder.cs" />
+    <Compile Include="Models\Grid\GridSettings.cs" />
+    <Compile Include="Models\Grid\JsonModelBinder.cs" />
+    <Compile Include="Models\Grid\Rule.cs" />
+    <Compile Include="Models\Helpers\LinqExtensions.cs" />
+    <Compile Include="Models\Helpers\StringEnum.cs" />
+    <Compile Include="Models\Helpers\WhereOperation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\basic.css" />
+    <Content Include="Content\basic_ie.css" />
+    <Content Include="Content\chat.css" />
+    <Content Include="Content\GmailStyle.css" />
+    <Content Include="Content\jquery.autocomplete.css" />
+    <Content Include="Content\jquery.noty.css" />
+    <Content Include="Content\mobiscroll-1.6.css" />
+    <Content Include="Content\mobiscroll-1.6.min.css" />
+    <Content Include="Content\noty_theme_default.css" />
+    <Content Include="Content\noty_theme_mitgux.css" />
+    <Content Include="Content\noty_theme_twitter.css" />
+    <Content Include="Content\queryLoader.css" />
+    <Content Include="Content\screen.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\Tabs.css" />
+    <Content Include="Content\token-input-facebook.css" />
+    <Content Include="Content\token-input.css" />
+    <Content Include="Content\ui.datepicker.css" />
+    <Content Include="Content\ui.daterangepicker.css" />
+    <Content Include="Content\ui.theme.css" />
+    <Content Include="Global.asax" />
+    <Content Include="images\001.jpg" />
+    <Content Include="images\002.jpg" />
+    <Content Include="images\Add.png" />
+    <Content Include="images\addnew.png" />
+    <Content Include="images\ADSLOGO.gif" />
+    <Content Include="images\attachment.png" />
+    <Content Include="images\B.gif" />
+    <Content Include="images\BBCode_Images\bold.gif" />
+    <Content Include="images\BBCode_Images\color.gif" />
+    <Content Include="images\BBCode_Images\img.gif" />
+    <Content Include="images\BBCode_Images\italic.gif" />
+    <Content Include="images\BBCode_Images\link.gif" />
+    <Content Include="images\BBCode_Images\sqroot.gif" />
+    <Content Include="images\BBCode_Images\strike.gif" />
+    <Content Include="images\BBCode_Images\sub.gif" />
+    <Content Include="images\BBCode_Images\sup.gif" />
+    <Content Include="images\BBCode_Images\underline.gif" />
+    <Content Include="images\BBCode_Images\youtube.gif" />
+    <Content Include="images\bg_twistyExpand.png" />
+    <Content Include="images\bg_twistyExpand_Over.png" />
+    <Content Include="images\bg_twistyExpand_Over_Old.png" />
+    <Content Include="images\blue-document-word.png" />
+    <Content Include="images\bullet.gif" />
+    <Content Include="images\CalendarBox.png" />
+    <Content Include="images\checkmark.png" />
+    <Content Include="images\collapse.png" />
+    <Content Include="images\Contacts.png" />
+    <Content Include="images\contactus.jpg" />
+    <Content Include="images\correct.gif" />
+    <Content Include="images\D.gif" />
+    <Content Include="images\default_student_photo.gif" />
+    <Content Include="images\Del.png" />
+    <Content Include="images\del1010.png" />
+    <Content Include="images\Delete.gif" />
+    <Content Include="images\DeleteRed.png" />
+    <Content Include="images\Delete_gray.gif" />
+    <Content Include="images\Download.png" />
+    <Content Include="images\E.gif" />
+    <Content Include="images\expand.png" />
+    <Content Include="images\file.gif" />
+    <Content Include="images\flash-on.gif" />
+    <Content Include="images\flashtext-bg.jpg" />
+    <Content Include="images\folder-closed.gif" />
+    <Content Include="images\folder.gif" />
+    <Content Include="images\glyphicons_181_download_alt.png" />
+    <Content Include="images\grad_inline.gif" />
+    <Content Include="images\icons_35.png" />
+    <Content Include="images\indicator.gif" />
+    <Content Include="images\K.gif" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\next.png" />
+    <Content Include="images\nextdisabled.gif" />
+    <Content Include="images\no-file.jpg" />
+    <Content Include="images\No_idea.png" />
+    <Content Include="images\O.gif" />
+    <Content Include="images\OnlineTest\Attempts.gif" />
+    <Content Include="images\OnlineTest\Availability.gif" />
+    <Content Include="images\OnlineTest\BriefSettings.gif" />
+    <Content Include="images\OnlineTest\contgraygrad.gif" />
+    <Content Include="images\OnlineTest\GoBack.gif" />
+    <Content Include="images\OnlineTest\NoQ.gif" />
+    <Content Include="images\OnlineTest\Percentage.gif" />
+    <Content Include="images\OnlineTest\Print.gif" />
+    <Content Include="images\OnlineTest\Random.gif" />
+    <Content Include="images\OnlineTest\Show.gif" />
+    <Content Include="images\OnlineTest\Time.gif" />
+    <Content Include="images\page_excel.png" />
+    <Content Include="images\pdf_document.png" />
+    <Content Include="images\previous.png" />
+    <Content Include="images\previousdisabled.gif" />
+    <Content Include="images\search_button_green.png" />
+    <Content Include="images\selectFile.jpg" />
+    <Content Include="images\Settings.png" />
+    <Content Include="images\Sms.gif" />
+    <Content Include="images\sms_gray.gif" />
+    <Content Include="images\sprite_black2.png" />
+    <Content Include="images\sprite_white2.png" />
+    <Content Include="images\testgrad.gif" />
+    <Content Include="images\tick.png" />
+    <Content Include="images\tick_green_3d.gif" />
+    <Content Include="images\treeview-default-line.gif" />
+    <Content Include="images\treeview-default.gif" />
+    <Content Include="images\U.gif" />
+    <Content Include="images\UploadButton_2.jpg" />
+    <Content Include="images\x.png" />
+    <Content Include="Scripts\AllowNumbers.js" />
+    <Content Include="Scripts\AppScripts\CreateInstance.js" />
+    <Content Include="Scripts\AppScripts\UpdateInstance.js" />
+    <Content Include="Scripts\basic.js" />
+    <Content Include="Scripts\bubbletip\bubbletip-B-tail.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-B.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-BL-corner.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-BR-corner.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-IE.css" />
+    <Content Include="Scripts\bubbletip\bubbletip-L-R.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-L-tail.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-L.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-R-tail.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-R.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-T-B.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-T-tail.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-T.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-TL-corner.png" />
+    <Content Include="Scripts\bubbletip\bubbletip-TR-corner.png" />
+    <Content Include="Scripts\bubbletip\bubbletip.css" />
+    <Content Include="Scripts\bubbletip\bubbletip.png" />
+    <Content Include="Scripts\CFInstall.min.js" />
+    <Content Include="Scripts\chat.js" />
+    <Content Include="Scripts\ChromeIdleTimer.js" />
+    <Content Include="Scripts\CountDown\examples.css" />
+    <Content Include="Scripts\CountDown\jquery.countdown.min.js" />
+    <Content Include="Scripts\csspopup.js" />
+    <Content Include="Scripts\CSSrefresh.js" />
+    <Content Include="Scripts\CustomFunctions.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.js" />
+    <Content Include="Scripts\desSlideshow.js" />
+    <Content Include="Scripts\ExcelPlugin\jquery.handsontable.full.css" />
+    <Content Include="Scripts\ExcelPlugin\jquery.handsontable.full.js" />
+    <Content Include="Scripts\fixFloat.js" />
+    <Content Include="Scripts\ImagePreview.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.contextmenu.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.layout.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.tablednd.js" />
+    <Content Include="Scripts\jqgrid\js\src\css\ellipsis-xbl.xml" />
+    <Content Include="Scripts\jqgrid\js\src\css\jquery.searchFilter.css" />
+    <Content Include="Scripts\jqgrid\js\src\css\ui.jqgrid.css" />
+    <Content Include="Scripts\jqgrid\js\src\css\ui.multiselect.css" />
+    <Content Include="Scripts\jqgrid\js\src\grid.base.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.celledit.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.common.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.custom.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.formedit.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.import.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.inlinedit.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.jqueryui.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.loader.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.postext.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.setcolumns.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.subgrid.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.tbltogrid.js" />
+    <Content Include="Scripts\jqgrid\js\src\grid.treegrid.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-jp.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-sp.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\jqgrid\js\src\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\jqgrid\js\src\jqDnR.js" />
+    <Content Include="Scripts\jqgrid\js\src\jqModal.js" />
+    <Content Include="Scripts\jqgrid\js\src\jquery.fmatter.js" />
+    <Content Include="Scripts\jqgrid\js\src\jquery.searchFilter.js" />
+    <Content Include="Scripts\jqgrid\js\src\JsonXml.js" />
+    <Content Include="Scripts\jqgrid\js\src\ui.multiselect.js" />
+    <Content Include="Scripts\jqgrid\js\tablednd.js" />
+    <Content Include="Scripts\jqgrid\js\ui.multiselect.js" />
+    <Content Include="Scripts\jqgrid\themes\ellipsis-xbl.xml" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\redmond\jquery-ui-1.7.1.custom.css" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery-ui-1.8.19.custom.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.accordion.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.all.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.base.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.button.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.core.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.dialog.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.resizable.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.selectable.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.slider.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.tabs.css" />
+    <Content Include="Scripts\jqgrid\themes\start\jquery.ui.theme.css" />
+    <Content Include="Scripts\jqgrid\themes\ui.jqgrid.css" />
+    <Content Include="Scripts\jqgrid\themes\ui.multiselect.css" />
+    <Content Include="Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\jquery-asyncUpload-0.1.js" />
+    <Content Include="Scripts\jquery-asyncUpload-0.2.js" />
+    <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-sliderAccess.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="Scripts\jquery-ui.custom.js" />
+    <Content Include="Scripts\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\dial-controls\index.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\dial-controls\style.css" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\infinite-scroll\index.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\infinite-scroll\style.css" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\modernizr.custom.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\scroll-analytics\index.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\scroll-analytics\style.css" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\sticky-elements\index.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\examples\sticky-elements\style.css" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\GPL-license.txt" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\MIT-license.txt" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\fixtures\standard.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\index.html" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\lib\jasmine-html.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\lib\jasmine-jquery.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\lib\jasmine.css" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\lib\jasmine.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\test\spec.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\waypoints.js" />
+    <Content Include="Scripts\jquery-waypoints-v1.1\waypoints.min.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jQuery.bubbletip-1.0.6.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.dynatree.js" />
+    <Content Include="Scripts\jquery.dynatree.min.js" />
+    <Content Include="Scripts\jquery.idletimeout.js" />
+    <Content Include="Scripts\jquery.idletimer.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.MultiFile.js" />
+    <Content Include="Scripts\jquery.noty.js" />
+    <Content Include="Scripts\jquery.simplemodal.js" />
+    <Content Include="Scripts\jQuery.tmpl.js" />
+    <Content Include="Scripts\jQuery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.tokeninput.js" />
+    <Content Include="Scripts\jquery.tools.min.js" />
+    <Content Include="Scripts\Jquery.TreeView.js" />
+    <Content Include="Scripts\jquery.ui.sortable.js" />
+    <Content Include="Scripts\jquery.validation.js" />
+    <Content Include="Scripts\maxlength.js" />
+    <Content Include="Scripts\mobiscroll-1.6.js" />
+    <Content Include="Scripts\mobiscroll-1.6.min.js" />
+    <Content Include="Scripts\OnlyOthers.js" />
+    <Content Include="Scripts\OTEditor.js" />
+    <Content Include="Scripts\Others.js" />
+    <Content Include="Scripts\queryLoader.js" />
+    <Content Include="Scripts\SetCase.js" />
+    <Content Include="Scripts\skin\icons.gif" />
+    <Content Include="Scripts\skin\loading.gif" />
+    <Content Include="Scripts\skin\ui.dynatree.css" />
+    <Content Include="Scripts\skin\vline.gif" />
+    <Content Include="Scripts\swfupload.js" />
+    <Content Include="Scripts\swfupload.swf" />
+    <Content Include="Scripts\timer.js" />
+    <Content Include="Scripts\tokeninput\jquery.tokeninput.js" />
+    <Content Include="Scripts\tokeninput\token-input-facebook.css" />
+    <Content Include="Scripts\tokeninput\token-input.css" />
+    <Content Include="Scripts\tristate-0.9.1-min.js" />
+    <Content Include="Scripts\ui.datepicker.js" />
+    <Content Include="Todo.txt" />
+    <Content Include="Views\Account\ForgotPassword.aspx" />
+    <Content Include="Views\Admin\Blank.aspx" />
+    <Content Include="Views\Admin\CreateInstance.aspx" />
+    <Content Include="Views\Admin\ErrorLogs.aspx" />
+    <Content Include="Views\Admin\ManageInstance.aspx" />
+    <Content Include="Views\Admin\ManageRoles.aspx" />
+    <Content Include="Views\Admin\MenuItems.aspx" />
+    <Content Include="Views\Admin\RegisterAdmin.aspx" />
+    <Content Include="Views\Admin\SiteLog.aspx" />
+    <Content Include="Views\Admin\UpdateInstance.aspx" />
+    <Content Include="Views\Admin\Welcome.aspx" />
+    <Content Include="Views\Dashboard\Notices.aspx" />
+    <Content Include="Views\Home\ContactUS.aspx" />
+    <Content Include="Views\Shared\SessionExpire.aspx" />
+    <Content Include="Views\Shared\ChangePwd.aspx" />
+    <Content Include="Views\Shared\Empty.aspx" />
+    <Content Include="Views\Shared\EmptyContent.aspx" />
+    <Content Include="Views\Shared\LeftMenu.ascx" />
+    <Content Include="Views\Shared\MainMenu.ascx" />
+    <Content Include="Views\Shared\TimeoutExpired.aspx" />
+    <Content Include="Views\Shared\UnAuthorized.aspx" />
+    <Content Include="Views\Shared\ViewPage1.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exports\" />
+    <Folder Include="Logs\Exceptions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\LoggerDataStore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LoggerDataStore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <EntityDeploy Include="Models\DataStore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataStore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Scripts\jquery-waypoints-v1.1\README.markdown" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

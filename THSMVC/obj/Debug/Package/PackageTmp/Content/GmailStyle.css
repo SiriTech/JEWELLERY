@@ -1,0 +1,283 @@
+
+.disBlock
+{
+    display: none;
+}
+.Googlemenu
+{
+    height: 30px;
+    font-size: 14px;
+    color: #FFF;
+    margin-left: 0px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    background-color: #fff;
+}
+#toolbar_holder
+{
+    position: absolute;
+    height: 30px;
+    font-size: 14px;
+    color: #FFF;
+    margin-left: 0px;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    background-color: #fff;
+}
+ul, li
+{
+    padding: 0px;
+    margin: 0px;
+}
+.Googlemenu ul
+{
+    list-style: none;
+    color: #FFF;
+    width: auto;
+}
+.Googlemenu ul li
+{
+    float: left;
+    position: relative;
+}
+.Googlemenu ul li a
+{
+    color: #666;
+    font: bold 75% arial,sans-serif;
+    text-decoration: none;
+    padding: 7px 12px;
+    position: relative;
+    display: inline-block; /*Background*/
+    background: #f3f3f3;
+    background: -webkit-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1)); /*linear-gradient*/
+    background: -webkit-gradient(linear,left top,left bottom,from(from(#F5F5F5)),to(to(#F1F1F1)));
+    background: -webkit-linear-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    background: -moz-linear-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    background: -o-linear-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    background: linear-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    border: solid 1px #dcdcdc; /*border-radius*/
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 10px;
+    cursor: default;
+}
+.Googlemenu ul li a:hover
+{
+    color: #333;
+    border-color: #999; /*box-shadow*/ /* -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.2) -webkit-box-shadow:0 2px 5px rgba(0,0,0,0.2);             -moz-box-shadow: 0 2px 0 rgba(0,0,0,0.2) -moz-box-shadow:0 2px 5px rgba(0,0,0,0.2);             box-shadow: 0 2px 0 rgba(0,0,0,0.2) box-shadow:0 2px 5px rgba(0,0,0,0.2);*/
+}
+/* styling for the left buttons(buttons which are joined)*/
+.Googlemenu ul li a.left
+{
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+    margin: 0;
+}
+/* styling for the middle buttons(buttons which are joined)*/
+.Googlemenu ul li a.middle
+{
+    /*border-radius*/
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-left: solid 1px #f3f3f3;
+    margin: 0;
+    border-left: solid 1px rgba(255,255,255,0);
+}
+.Googlemenu ul li a.middle:hover, .Googlemenu ul li a.right:hover
+{
+    border-left: solid 1px #999;
+}
+/* styling for the right buttons(buttons which are joined)*/
+.Googlemenu ul li a.right
+{
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    border-left: solid 1px #f3f3f3;
+    border-left: solid 1px rgba(255,255,255,0);
+}
+/*style for the arrow pointing downward*/
+.arrow
+{
+    border: thick;
+    border-color: #777777 transparent white;
+    border-style: solid dashed dashed;
+    margin-left: 5px;
+    position: relative;
+    top: 10px;
+}
+/* button with checkbox*/
+.Googlemenu ul li a.check
+{
+    padding: 6px 6px 7px 12px;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+/*refresh button*/
+.Googlemenu ul li a.refresh
+{
+    background: url(/images/refresh.png) 10px 4px no-repeat #f3f3f3;
+    width: 17px;
+}
+/* previous button*/
+.Googlemenu ul li a.previous
+{
+    background: url(/images/previous.png) 10px 4px no-repeat #f3f3f3;
+    width: 17px;
+}
+/*next button */
+.Googlemenu ul li a.next
+{
+    background: url(/images/next.png) 10px 4px no-repeat #f3f3f3;
+    width: 17px;
+}
+/* delete button*/
+.Googlemenu ul li a.del
+{
+    background: url(/images/Delete.gif) 22px 4px no-repeat #F3F3F3;
+    width: 40px;
+}
+/* delete button disabled*/
+.Googlemenu ul li a.deldisabled
+{
+    background: url(/images/Delete_gray.gif) 22px 4px no-repeat #F3F3F3;
+    width: 40px;
+}
+.Googlemenu ul li a.deldisabled:hover
+{
+    color: #666;
+    border: solid 1px #dcdcdc;
+}
+/* previous button disabled*/
+.Googlemenu ul li a.previousdisabled
+{
+    background: url(/images/previousdisabled.gif) 10px 4px no-repeat #f3f3f3;
+    width: 17px;
+}
+.Googlemenu ul li a.previousdisabled:hover
+{
+    color: #666;
+    border: solid 1px #dcdcdc;
+}
+/*next button disabled*/
+.Googlemenu ul li a.nextdisabled
+{
+    background: url(/images/nextdisabled.gif) 10px 4px no-repeat #f3f3f3;
+    width: 17px;
+}
+.Googlemenu ul li a.nextdisabled:hover
+{
+    color: #666;
+    border: solid 1px #dcdcdc;
+}
+/*showing the number of emails in inbox(eg:1–50 of 52)*/
+.Googlemenu ul li a.num
+{
+    color: #000;
+    font: normal 80% arial,sans-serif;
+    text-decoration: none;
+    padding: 7px 12px;
+    position: relative;
+    display: inline-block;
+    text-shadow: none;
+    background: #FFF;
+    margin-right: 10px;
+    border: none;
+}
+/* hide the dropdown*/
+.Googlemenu ul li ul
+{
+    display: none;
+}
+/*changing the background of the button(which has a dropdown) to creyish gradient when we hover the mouse over it*/
+.Googlemenu ul li:hover a.dropdown
+{
+    border: 1px solid #989898;
+    color: #000;
+}
+.Googlemenu ul li:hover ul
+{
+    display: block;
+    position: absolute;
+    margin-left: 0px;
+    margin-top: -1px;
+    -webkit-box-shadow: 0 4px 10px #8b8b8b;
+    -moz-box-shadow: 0 4px 10px #8b8b8b;
+    box-shadow: 0 4px 10px #8b8b8b;
+    padding: 1px;
+    background-color: #fff;
+    z-index: 1000;
+}
+.Googlemenu ul li:hover ul li a
+{
+    display: block;
+    color: #000000;
+    background: #ffffff;
+    border: none;
+    margin-right: 1px;
+    cursor: pointer;
+}
+
+.Googlemenu ul li:hover ul li a:hover
+{
+    background: #EEEEEE;
+}
+/*the first item in dropdown must not have a border on top */
+.Googlemenu ul li ul li:first-child a
+{
+    border-top: none;
+}
+/* now let us define the widths of various dropdown*/
+.width-1 li a
+{
+    width: 55px;
+}
+.width-2 li a
+{
+    width: 125px;
+}
+.width-2 img
+{
+    border: 0px;
+}
+.width-3 li a
+{
+    width: 165px;
+}
+#preview
+{
+    position: absolute;
+    border: 1px solid #ccc;
+    background: #333;
+    padding: 5px;
+    display: none;
+    color: #fff;
+}
+/*#portamento_container
+{
+    position: relative;
+    float: left;
+}
+
+#portamento_container #portamento
+{
+    float: none;
+    position: absolute;
+}
+
+#portamento_container #portamento.fixed
+{
+    position: fixed;
+}*/
+

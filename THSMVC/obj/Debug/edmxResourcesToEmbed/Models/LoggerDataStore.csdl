@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="THSMVCModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="LoggerDataStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Log4Net_Error" EntityType="THSMVCModel.Log4Net_Error" />
+    <EntitySet Name="SiteLogs" EntityType="THSMVCModel.SiteLog" />
+  </EntityContainer>
+  <EntityType Name="Log4Net_Error">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Thread" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Level" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="Exception" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="SiteLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Action" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="Controller" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="URL" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="HostAddress" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="UserID" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+  </EntityType>
+</Schema>
