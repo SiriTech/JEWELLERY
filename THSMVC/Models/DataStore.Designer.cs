@@ -224,6 +224,22 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<UserMenu> _UserMenus;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Lot> Lots
+        {
+            get
+            {
+                if ((_Lots == null))
+                {
+                    _Lots = base.CreateObjectSet<Lot>("Lots");
+                }
+                return _Lots;
+            }
+        }
+        private ObjectSet<Lot> _Lots;
 
         #endregion
 
@@ -307,6 +323,14 @@ namespace THSMVC.Models
         public void AddToUserMenus(UserMenu userMenu)
         {
             base.AddObject("UserMenus", userMenu);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Lots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLots(Lot lot)
+        {
+            base.AddObject("Lots", lot);
         }
 
         #endregion
@@ -2387,6 +2411,187 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Lot")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Lot : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Lot object.
+        /// </summary>
+        /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="lotName">Initial value of the LotName property.</param>
+        /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
+        public static Lot CreateLot(global::System.Int32 lotId, global::System.String lotName, global::System.Int32 productGroupId)
+        {
+            Lot lot = new Lot();
+            lot.LotId = lotId;
+            lot.LotName = lotName;
+            lot.ProductGroupId = productGroupId;
+            return lot;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                if (_LotId != value)
+                {
+                    OnLotIdChanging(value);
+                    ReportPropertyChanging("LotId");
+                    _LotId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LotId");
+                    OnLotIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LotName
+        {
+            get
+            {
+                return _LotName;
+            }
+            set
+            {
+                OnLotNameChanging(value);
+                ReportPropertyChanging("LotName");
+                _LotName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LotName");
+                OnLotNameChanged();
+            }
+        }
+        private global::System.String _LotName;
+        partial void OnLotNameChanging(global::System.String value);
+        partial void OnLotNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Weight
+        {
+            get
+            {
+                return _Weight;
+            }
+            set
+            {
+                OnWeightChanging(value);
+                ReportPropertyChanging("Weight");
+                _Weight = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Weight");
+                OnWeightChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Weight;
+        partial void OnWeightChanging(Nullable<global::System.Decimal> value);
+        partial void OnWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> NoOfPieces
+        {
+            get
+            {
+                return _NoOfPieces;
+            }
+            set
+            {
+                OnNoOfPiecesChanging(value);
+                ReportPropertyChanging("NoOfPieces");
+                _NoOfPieces = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoOfPieces");
+                OnNoOfPiecesChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _NoOfPieces;
+        partial void OnNoOfPiecesChanging(Nullable<global::System.Int32> value);
+        partial void OnNoOfPiecesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductGroupId
+        {
+            get
+            {
+                return _ProductGroupId;
+            }
+            set
+            {
+                OnProductGroupIdChanging(value);
+                ReportPropertyChanging("ProductGroupId");
+                _ProductGroupId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProductGroupId");
+                OnProductGroupIdChanged();
+            }
+        }
+        private global::System.Int32 _ProductGroupId;
+        partial void OnProductGroupIdChanging(global::System.Int32 value);
+        partial void OnProductGroupIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DealerId
+        {
+            get
+            {
+                return _DealerId;
+            }
+            set
+            {
+                OnDealerIdChanging(value);
+                ReportPropertyChanging("DealerId");
+                _DealerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DealerId");
+                OnDealerIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DealerId;
+        partial void OnDealerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDealerIdChanged();
 
         #endregion
 

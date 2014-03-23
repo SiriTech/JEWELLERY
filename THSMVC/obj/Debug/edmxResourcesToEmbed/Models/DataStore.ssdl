@@ -2,6 +2,7 @@
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
     <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lot" EntityType="THSMVCDataModel.Store.Lot" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Menu" EntityType="THSMVCDataModel.Store.Menu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
@@ -27,6 +28,17 @@
     <Property Name="LicenseStartDate" Type="date" />
     <Property Name="LicenseEndDate" Type="date" />
     <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Lot">
+    <Key>
+      <PropertyRef Name="LotId" />
+    </Key>
+    <Property Name="LotId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Weight" Type="decimal" Scale="2" />
+    <Property Name="NoOfPieces" Type="int" />
+    <Property Name="ProductGroupId" Type="int" Nullable="false" />
+    <Property Name="DealerId" Type="int" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -164,114 +176,9 @@
     <Parameter Name="MenuItems" Type="varchar(max)" Mode="In" />
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
   </Function>
-  <Function Name="stp_Delete_LeaveLevelsDept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_Delete_LeaveLevelsRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_Delete_LeaveLevelsUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_AllocateLeavesRole_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_ALLSCHEDULEDSMSLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="From" Type="varchar" Mode="In" />
-    <Parameter Name="To" Type="varchar" Mode="In" />
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_ALLSMSLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="From" Type="varchar" Mode="In" />
-    <Parameter Name="To" Type="varchar" Mode="In" />
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_ALLSMSLogs_Export" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="From" Type="varchar" Mode="In" />
-    <Parameter Name="To" Type="varchar" Mode="In" />
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_InstanceWeekDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_LMSLeaveLevelsByDept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_LMSLeaveLevelsByRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_LMSLeaveLevelsByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
   <Function Name="stp_Get_Menuitems_By_Role_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
     <Parameter Name="RoleId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_NoticeAuthClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="NoticeId" Type="int" Mode="In" />
-    <Parameter Name="RoleId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_NoticeAuthRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="NoticeId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_NoticeAuthSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="NoticeId" Type="int" Mode="In" />
-    <Parameter Name="RoleId" Type="int" Mode="In" />
-    <Parameter Name="ClassId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_NoticesDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_OnlineTestAuthClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="RoleId" Type="int" Mode="In" />
-    <Parameter Name="GroupId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_OnlineTestAuthRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="GroupId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_OnlineTestAuthSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="RoleId" Type="int" Mode="In" />
-    <Parameter Name="ClassId" Type="int" Mode="In" />
-    <Parameter Name="GroupId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_TemplateFilled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="USERIDS" Type="varchar(max)" Mode="In" />
-    <Parameter Name="TEMPLATEID" Type="int" Mode="In" />
-    <Parameter Name="SMSMarksDraftId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_UsersForAllocateSubCategoryUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_UsersForDelegation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_get_UsersForSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_GetAssignedGroups_By_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_insert_BulkUploadUsersDraftData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="DraftId" Type="int" Mode="In" />
-    <Parameter Name="Data" Type="xml" Mode="In" />
-    <Parameter Name="Role" Type="varchar" Mode="In" />
-    <Parameter Name="Delete" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_insert_SMSMarksDraftData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="DraftId" Type="int" Mode="In" />
-    <Parameter Name="Data" Type="xml" Mode="In" />
-    <Parameter Name="Delete" Type="int" Mode="In" />
   </Function>
   <Function Name="stp_Intial_Menus_For_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
@@ -279,109 +186,5 @@
     <Parameter Name="UserId" Type="int" Mode="In" />
     <Parameter Name="FromDate" Type="date" Mode="In" />
     <Parameter Name="Todate" Type="date" Mode="In" />
-  </Function>
-  <Function Name="stp_LeaveDetails_By_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Available_Leaves_By_LeaveTypeId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LeaveTypeId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Check_Approver_Or_Not" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Get_DelegateLeavesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Get_Leaves_To_Approve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Get_LeaveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Get_LeaveStatus_Audit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="ApplyLeaveId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_LMS_Get_Total_LeaveOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_Notice_AssignedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="NoticeId" Type="int" Mode="In" />
-    <Parameter Name="RoleAuthIds" Type="varchar(max)" Mode="In" />
-    <Parameter Name="CreatedBy" Type="int" Mode="In" />
-    <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_AssignedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="RoleAuthIds" Type="varchar(max)" Mode="In" />
-    <Parameter Name="CreatedBy" Type="int" Mode="In" />
-    <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="GroupName" Type="varchar" Mode="In" />
-    <Parameter Name="GroupId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_Available_To_Result" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceID" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_Available_To_Review" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceID" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_AvailableTests_To_Take" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceID" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_EnableTakeTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OnlineTestID" Type="int" Mode="In" />
-    <Parameter Name="FromDate" Type="date" Mode="In" />
-    <Parameter Name="Time" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_GetAnswers_By_Question" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="QuestionId" Type="int" Mode="In" />
-    <Parameter Name="USerId" Type="int" Mode="In" />
-    <Parameter Name="Preview" Type="bit" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_GetAnswers_By_Question_Review" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="QuestionId" Type="int" Mode="In" />
-    <Parameter Name="USerId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_Result_TemplateFilled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TestId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_Results_AutoSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-    <Parameter Name="AutoSave" Type="bit" Mode="In" />
-    <Parameter Name="IsReviewed" Type="bit" Mode="In" />
-    <Parameter Name="QuestionId" Type="int" Mode="In" />
-    <Parameter Name="QuestionTypeId" Type="int" Mode="In" />
-    <Parameter Name="AnswerId" Type="varchar(max)" Mode="In" />
-    <Parameter Name="Answer" Type="varchar(max)" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_Review_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TestId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_OnlineTest_TestResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TestId" Type="int" Mode="In" />
-    <Parameter Name="UserId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="stp_Upload_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="InstanceId" Type="int" Mode="In" />
-    <Parameter Name="RoleId" Type="int" Mode="In" />
-    <Parameter Name="Session" Type="int" Mode="In" />
-    <Parameter Name="Class" Type="int" Mode="In" />
-    <Parameter Name="Section" Type="int" Mode="In" />
-    <Parameter Name="CreatedBy" Type="int" Mode="In" />
-    <Parameter Name="DraftId" Type="int" Mode="In" />
-    <Parameter Name="ERRORMSG" Type="varchar" Mode="InOut" />
   </Function>
 </Schema>

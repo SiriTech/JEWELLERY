@@ -16,11 +16,11 @@
         <div style="clear:both;width:100%;display:inline-block;">
         <div style="width:62%;float:left;">
         <div class="divHead">
-                    <span class="divHeading">EDU BOOK</span>
+                    <span class="divHeading">Jewels</span>
                 </div>
                 <div class="clear">
                     <div class="divBorder">
-                        <p>
+                        <%--<p>
                             <font style="font-size: large">Edu Book</font> is an Online Management tool for
                             Schools/Colleges in the world. User data management, Attendance Management, Leave
                             management, Pay roll system, Automatic Timetable generation etc., in a secured way.
@@ -35,7 +35,7 @@
                             be maintained upto 30 days from your trial period expiration date.</p>
                         <p>
                             Edu Book is very cheap as never before, than any of the other school/college management
-                            softwares.</p>
+                            softwares.</p>--%>
                     </div>
                 </div>
         </div>

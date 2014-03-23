@@ -92,9 +92,11 @@
   <ItemGroup>
     <Compile Include="Classes\ErrorLogsLogic.cs" />
     <Compile Include="Classes\GroupLogic.cs" />
+    <Compile Include="Classes\LotLogic.cs" />
     <Compile Include="Classes\SiteLogsLogic.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GlobalController.cs" />
+    <Compile Include="Controllers\LotController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Classes\DiskFileStore.cs" />
     <Compile Include="Classes\EmailHelper.cs" />
@@ -121,6 +123,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LotModel.cs" />
     <Compile Include="Models\SharedModels.cs" />
     <Compile Include="Classes\RolesLogic.cs" />
     <Compile Include="Classes\SecurityProvider.cs" />
@@ -510,6 +513,8 @@
     <Content Include="Views\Admin\Welcome.aspx" />
     <Content Include="Views\Dashboard\Notices.aspx" />
     <Content Include="Views\Home\ContactUS.aspx" />
+    <Content Include="Views\Lot\CreateLot.aspx" />
+    <Content Include="Views\Lot\LotMaster.aspx" />
     <Content Include="Views\Shared\SessionExpire.aspx" />
     <Content Include="Views\Shared\ChangePwd.aspx" />
     <Content Include="Views\Shared\Empty.aspx" />

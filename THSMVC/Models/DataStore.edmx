@@ -7,6 +7,7 @@
     <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="THSMVCDataModelStoreContainer">
           <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Lot" EntityType="THSMVCDataModel.Store.Lot" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Menu" EntityType="THSMVCDataModel.Store.Menu" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
@@ -32,6 +33,17 @@
           <Property Name="LicenseStartDate" Type="date" />
           <Property Name="LicenseEndDate" Type="date" />
           <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Lot">
+          <Key>
+            <PropertyRef Name="LotId" />
+          </Key>
+          <Property Name="LotId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Weight" Type="decimal" Scale="2" />
+          <Property Name="NoOfPieces" Type="int" />
+          <Property Name="ProductGroupId" Type="int" Nullable="false" />
+          <Property Name="DealerId" Type="int" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -169,114 +181,9 @@
           <Parameter Name="MenuItems" Type="varchar(max)" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
         </Function>
-        <Function Name="stp_Delete_LeaveLevelsDept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_Delete_LeaveLevelsRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_Delete_LeaveLevelsUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_AllocateLeavesRole_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_ALLSCHEDULEDSMSLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="From" Type="varchar" Mode="In" />
-          <Parameter Name="To" Type="varchar" Mode="In" />
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_ALLSMSLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="From" Type="varchar" Mode="In" />
-          <Parameter Name="To" Type="varchar" Mode="In" />
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_ALLSMSLogs_Export" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="From" Type="varchar" Mode="In" />
-          <Parameter Name="To" Type="varchar" Mode="In" />
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_InstanceWeekDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_LMSLeaveLevelsByDept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_LMSLeaveLevelsByRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_LMSLeaveLevelsByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
         <Function Name="stp_Get_Menuitems_By_Role_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="InstanceId" Type="int" Mode="In" />
           <Parameter Name="RoleId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_NoticeAuthClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="NoticeId" Type="int" Mode="In" />
-          <Parameter Name="RoleId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_NoticeAuthRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="NoticeId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_NoticeAuthSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="NoticeId" Type="int" Mode="In" />
-          <Parameter Name="RoleId" Type="int" Mode="In" />
-          <Parameter Name="ClassId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_NoticesDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_OnlineTestAuthClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="RoleId" Type="int" Mode="In" />
-          <Parameter Name="GroupId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_OnlineTestAuthRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="GroupId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_OnlineTestAuthSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="RoleId" Type="int" Mode="In" />
-          <Parameter Name="ClassId" Type="int" Mode="In" />
-          <Parameter Name="GroupId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_TemplateFilled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="USERIDS" Type="varchar(max)" Mode="In" />
-          <Parameter Name="TEMPLATEID" Type="int" Mode="In" />
-          <Parameter Name="SMSMarksDraftId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_UsersForAllocateSubCategoryUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_UsersForDelegation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_get_UsersForSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_GetAssignedGroups_By_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_insert_BulkUploadUsersDraftData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DraftId" Type="int" Mode="In" />
-          <Parameter Name="Data" Type="xml" Mode="In" />
-          <Parameter Name="Role" Type="varchar" Mode="In" />
-          <Parameter Name="Delete" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_insert_SMSMarksDraftData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="DraftId" Type="int" Mode="In" />
-          <Parameter Name="Data" Type="xml" Mode="In" />
-          <Parameter Name="Delete" Type="int" Mode="In" />
         </Function>
         <Function Name="stp_Intial_Menus_For_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="InstanceId" Type="int" Mode="In" />
@@ -284,110 +191,6 @@
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="date" Mode="In" />
           <Parameter Name="Todate" Type="date" Mode="In" />
-        </Function>
-        <Function Name="stp_LeaveDetails_By_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Available_Leaves_By_LeaveTypeId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LeaveTypeId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Check_Approver_Or_Not" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Get_DelegateLeavesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Get_Leaves_To_Approve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Get_LeaveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Get_LeaveStatus_Audit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="ApplyLeaveId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_LMS_Get_Total_LeaveOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_Notice_AssignedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="NoticeId" Type="int" Mode="In" />
-          <Parameter Name="RoleAuthIds" Type="varchar(max)" Mode="In" />
-          <Parameter Name="CreatedBy" Type="int" Mode="In" />
-          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_AssignedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="RoleAuthIds" Type="varchar(max)" Mode="In" />
-          <Parameter Name="CreatedBy" Type="int" Mode="In" />
-          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
-          <Parameter Name="GroupName" Type="varchar" Mode="In" />
-          <Parameter Name="GroupId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_Available_To_Result" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceID" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_Available_To_Review" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceID" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_AvailableTests_To_Take" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceID" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_EnableTakeTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OnlineTestID" Type="int" Mode="In" />
-          <Parameter Name="FromDate" Type="date" Mode="In" />
-          <Parameter Name="Time" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_GetAnswers_By_Question" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="QuestionId" Type="int" Mode="In" />
-          <Parameter Name="USerId" Type="int" Mode="In" />
-          <Parameter Name="Preview" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_GetAnswers_By_Question_Review" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="QuestionId" Type="int" Mode="In" />
-          <Parameter Name="USerId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_Result_TemplateFilled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TestId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_Results_AutoSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OnlineTestId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="AutoSave" Type="bit" Mode="In" />
-          <Parameter Name="IsReviewed" Type="bit" Mode="In" />
-          <Parameter Name="QuestionId" Type="int" Mode="In" />
-          <Parameter Name="QuestionTypeId" Type="int" Mode="In" />
-          <Parameter Name="AnswerId" Type="varchar(max)" Mode="In" />
-          <Parameter Name="Answer" Type="varchar(max)" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_Review_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TestId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_OnlineTest_TestResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TestId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="stp_Upload_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="InstanceId" Type="int" Mode="In" />
-          <Parameter Name="RoleId" Type="int" Mode="In" />
-          <Parameter Name="Session" Type="int" Mode="In" />
-          <Parameter Name="Class" Type="int" Mode="In" />
-          <Parameter Name="Section" Type="int" Mode="In" />
-          <Parameter Name="CreatedBy" Type="int" Mode="In" />
-          <Parameter Name="DraftId" Type="int" Mode="In" />
-          <Parameter Name="ERRORMSG" Type="varchar" Mode="InOut" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -627,6 +430,7 @@
           <EntitySet Name="RoleMenus" EntityType="THSMVCDataModel.RoleMenu" />
           <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
           <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
+          <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -1115,163 +919,23 @@
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
+        <EntityType Name="Lot">
+          <Key>
+            <PropertyRef Name="LotId" />
+          </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Weight" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="Int32" Name="DealerId" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="THSMVCDataModelStoreContainer" CdmEntityContainer="DataStoreEntities">
-          <FunctionImportMapping FunctionImportName="stp_get_OnlineTestAuthRoles" FunctionName="THSMVCDataModel.Store.stp_get_OnlineTestAuthRoles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_OnlineTestAuthRoles_Result">
-                <ScalarProperty Name="Usercount" ColumnName="Usercount" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_OnlineTestAuthClass" FunctionName="THSMVCDataModel.Store.stp_get_OnlineTestAuthClass">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_OnlineTestAuthClass_Result">
-                <ScalarProperty Name="UserCount" ColumnName="UserCount" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_OnlineTestAuthSection" FunctionName="THSMVCDataModel.Store.stp_get_OnlineTestAuthSection">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_OnlineTestAuthSection_Result">
-                <ScalarProperty Name="UserCount" ColumnName="UserCount" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_AssignedUsers" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_AssignedUsers" />
-          <FunctionImportMapping FunctionImportName="stp_GetAssignedGroups_By_Test" FunctionName="THSMVCDataModel.Store.stp_GetAssignedGroups_By_Test">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.ShowTestGroupsModel">
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_NoticeAuthClass" FunctionName="THSMVCDataModel.Store.stp_get_NoticeAuthClass">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_NoticeAuthClass_Result">
-                <ScalarProperty Name="UserCount" ColumnName="UserCount" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_NoticeAuthRoles" FunctionName="THSMVCDataModel.Store.stp_get_NoticeAuthRoles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_NoticeAuthRoles_Result">
-                <ScalarProperty Name="Usercount" ColumnName="Usercount" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_NoticeAuthSection" FunctionName="THSMVCDataModel.Store.stp_get_NoticeAuthSection">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_NoticeAuthSection_Result">
-                <ScalarProperty Name="UserCount" ColumnName="UserCount" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="AuthTypeId" ColumnName="AuthTypeId" />
-                <ScalarProperty Name="checked" ColumnName="checked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_Notice_AssignedUsers" FunctionName="THSMVCDataModel.Store.stp_Notice_AssignedUsers" />
-          <FunctionImportMapping FunctionImportName="stp_get_NoticesDisplay" FunctionName="THSMVCDataModel.Store.stp_get_NoticesDisplay">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_NoticesDisplay_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NoticeDesc" ColumnName="NoticeDesc" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="NoticeDoc" ColumnName="NoticeDoc" />
-                <ScalarProperty Name="NoticeDocSize" ColumnName="NoticeDocSize" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_InstanceWeekDays" FunctionName="THSMVCDataModel.Store.stp_get_InstanceWeekDays">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_InstanceWeekDays_Result">
-                <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="chked" ColumnName="chked" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_UsersForSMS" FunctionName="THSMVCDataModel.Store.stp_get_UsersForSMS">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_UsersForSMS_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_TemplateFilled" FunctionName="THSMVCDataModel.Store.stp_get_TemplateFilled">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_TemplateFilled_Result">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Template" ColumnName="Template" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_ALLSMSLogs" FunctionName="THSMVCDataModel.Store.stp_get_ALLSMSLogs">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_ALLSMSLogs_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
-                <ScalarProperty Name="Response" ColumnName="Response" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_insert_SMSMarksDraftData" FunctionName="THSMVCDataModel.Store.stp_insert_SMSMarksDraftData" />
-          <FunctionImportMapping FunctionImportName="stp_insert_BulkUploadUsersDraftData" FunctionName="THSMVCDataModel.Store.stp_insert_BulkUploadUsersDraftData" />
-          <FunctionImportMapping FunctionImportName="stp_Upload_Users" FunctionName="THSMVCDataModel.Store.stp_Upload_Users" />
           <FunctionImportMapping FunctionImportName="stp_Get_Menuitems_By_Role_Id" FunctionName="THSMVCDataModel.Store.stp_Get_Menuitems_By_Role_Id">
             <ResultMapping>
               <ComplexTypeMapping TypeName="THSMVCDataModel.stp_Get_Menuitems_By_Role_Id_Result">
@@ -1287,331 +951,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="stp_Assign_Remove_MenuItems_Role" FunctionName="THSMVCDataModel.Store.stp_Assign_Remove_MenuItems_Role" />
           <FunctionImportMapping FunctionImportName="stp_Intial_Menus_For_Admin" FunctionName="THSMVCDataModel.Store.stp_Intial_Menus_For_Admin" />
-          <FunctionImportMapping FunctionImportName="stp_get_ALLSMSLogs_Export" FunctionName="THSMVCDataModel.Store.stp_get_ALLSMSLogs_Export">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_ALLSMSLogs_Export_Result">
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="DateSent" ColumnName="DateSent" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_AvailableTests_To_Take" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_AvailableTests_To_Take">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_AvailableTests_To_Take_Result">
-                <ScalarProperty Name="OnlineTestID" ColumnName="OnlineTestID" />
-                <ScalarProperty Name="OnlineTestName" ColumnName="OnlineTestName" />
-                <ScalarProperty Name="TestComments" ColumnName="TestComments" />
-                <ScalarProperty Name="Availability" ColumnName="Availability" />
-                <ScalarProperty Name="AvailableFromDate" ColumnName="AvailableFromDate" />
-                <ScalarProperty Name="AvailableFromTime" ColumnName="AvailableFromTime" />
-                <ScalarProperty Name="AvailableToDate" ColumnName="AvailableToDate" />
-                <ScalarProperty Name="AvailableToTime" ColumnName="AvailableToTime" />
-                <ScalarProperty Name="QRandom" ColumnName="QRandom" />
-                <ScalarProperty Name="NoofQPerPage" ColumnName="NoofQPerPage" />
-                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
-                <ScalarProperty Name="GoBack" ColumnName="GoBack" />
-                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_EnableTakeTest" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_EnableTakeTest">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_EnableTakeTest_Result">
-                <ScalarProperty Name="AvailableFromDate" ColumnName="AvailableFromDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_GetAnswers_By_Question" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_GetAnswers_By_Question">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_GetAnswers_By_Question_Result">
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_Results_AutoSave" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_Results_AutoSave" />
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_Available_To_Review" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_Available_To_Review">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_Available_To_Review_Result">
-                <ScalarProperty Name="OnlineTestID" ColumnName="OnlineTestID" />
-                <ScalarProperty Name="OnlineTestName" ColumnName="OnlineTestName" />
-                <ScalarProperty Name="TestComments" ColumnName="TestComments" />
-                <ScalarProperty Name="Availability" ColumnName="Availability" />
-                <ScalarProperty Name="AvailableFromDate" ColumnName="AvailableFromDate" />
-                <ScalarProperty Name="AvailableFromTime" ColumnName="AvailableFromTime" />
-                <ScalarProperty Name="AvailableToDate" ColumnName="AvailableToDate" />
-                <ScalarProperty Name="AvailableToTime" ColumnName="AvailableToTime" />
-                <ScalarProperty Name="QRandom" ColumnName="QRandom" />
-                <ScalarProperty Name="NoofQPerPage" ColumnName="NoofQPerPage" />
-                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
-                <ScalarProperty Name="GoBack" ColumnName="GoBack" />
-                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_GetAnswers_By_Question_Review" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_GetAnswers_By_Question_Review">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_GetAnswers_By_Question_Review_Result">
-                <ScalarProperty Name="AnswerByUser" ColumnName="AnswerByUser" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="IsQuestionCorrect" ColumnName="IsQuestionCorrect" />
-                <ScalarProperty Name="ReviewAnswer" ColumnName="ReviewAnswer" />
-                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
-                <ScalarProperty Name="GainedPoints" ColumnName="GainedPoints" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_Result_TemplateFilled" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_Result_TemplateFilled">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_Result_TemplateFilled_Result">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Template" ColumnName="Template" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_Available_To_Result" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_Available_To_Result">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_Available_To_Result_Result">
-                <ScalarProperty Name="OnlineTestID" ColumnName="OnlineTestID" />
-                <ScalarProperty Name="OnlineTestName" ColumnName="OnlineTestName" />
-                <ScalarProperty Name="TestComments" ColumnName="TestComments" />
-                <ScalarProperty Name="Availability" ColumnName="Availability" />
-                <ScalarProperty Name="AvailableFromDate" ColumnName="AvailableFromDate" />
-                <ScalarProperty Name="AvailableFromTime" ColumnName="AvailableFromTime" />
-                <ScalarProperty Name="AvailableToDate" ColumnName="AvailableToDate" />
-                <ScalarProperty Name="AvailableToTime" ColumnName="AvailableToTime" />
-                <ScalarProperty Name="QRandom" ColumnName="QRandom" />
-                <ScalarProperty Name="NoofQPerPage" ColumnName="NoofQPerPage" />
-                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
-                <ScalarProperty Name="GoBack" ColumnName="GoBack" />
-                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_TestResult" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_TestResult">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_TestResult_Result">
-                <ScalarProperty Name="OnlineTestID" ColumnName="OnlineTestID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
-                <ScalarProperty Name="IsReviewed" ColumnName="IsReviewed" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="SMS" ColumnName="SMS" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="SendSMS" ColumnName="SendSMS" />
-                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_OnlineTest_Review_Test" FunctionName="THSMVCDataModel.Store.stp_OnlineTest_Review_Test">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_OnlineTest_Review_Test_Result">
-                <ScalarProperty Name="OnlineTestID" ColumnName="OnlineTestID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
-                <ScalarProperty Name="IsReviewed" ColumnName="IsReviewed" />
-                <ScalarProperty Name="Review" ColumnName="Review" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="SMS" ColumnName="SMS" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_UsersForAllocateSubCategoryUsers" FunctionName="THSMVCDataModel.Store.stp_get_UsersForAllocateSubCategoryUsers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_UsersForAllocateSubCategoryUsers_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_ALLSCHEDULEDSMSLogs" FunctionName="THSMVCDataModel.Store.stp_get_ALLSCHEDULEDSMSLogs">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_ALLSCHEDULEDSMSLogs_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
-                <ScalarProperty Name="Response" ColumnName="Response" />
-                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
-                <ScalarProperty Name="ScheduleTime" ColumnName="ScheduleTime" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_get_LMSLeaveLevelsByDept" FunctionName="THSMVCDataModel.Store.stp_get_LMSLeaveLevelsByDept">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_LMSLeaveLevelsByDept_Result">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
-                <ScalarProperty Name="LevelOrder" ColumnName="LevelOrder" />
-                <ScalarProperty Name="IsNotifier" ColumnName="IsNotifier" />
-                <ScalarProperty Name="DefaultFlag" ColumnName="DefaultFlag" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_Delete_LeaveLevelsDept" FunctionName="THSMVCDataModel.Store.stp_Delete_LeaveLevelsDept" />
-          <FunctionImportMapping FunctionImportName="stp_get_LMSLeaveLevelsByRole" FunctionName="THSMVCDataModel.Store.stp_get_LMSLeaveLevelsByRole">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_LMSLeaveLevelsByRole_Result">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
-                <ScalarProperty Name="LevelOrder" ColumnName="LevelOrder" />
-                <ScalarProperty Name="IsNotifier" ColumnName="IsNotifier" />
-                <ScalarProperty Name="DefaultFlag" ColumnName="DefaultFlag" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_Delete_LeaveLevelsRole" FunctionName="THSMVCDataModel.Store.stp_Delete_LeaveLevelsRole" />
-          <FunctionImportMapping FunctionImportName="stp_get_LMSLeaveLevelsByUser" FunctionName="THSMVCDataModel.Store.stp_get_LMSLeaveLevelsByUser">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_LMSLeaveLevelsByUser_Result">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="LeaveLevelUserId" ColumnName="LeaveLevelUserId" />
-                <ScalarProperty Name="ApproverId" ColumnName="ApproverId" />
-                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
-                <ScalarProperty Name="LevelOrder" ColumnName="LevelOrder" />
-                <ScalarProperty Name="IsNotifier" ColumnName="IsNotifier" />
-                <ScalarProperty Name="DefaultFlag" ColumnName="DefaultFlag" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_Delete_LeaveLevelsUser" FunctionName="THSMVCDataModel.Store.stp_Delete_LeaveLevelsUser" />
-          <FunctionImportMapping FunctionImportName="stp_LeaveDetails_By_User" FunctionName="THSMVCDataModel.Store.stp_LeaveDetails_By_User">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_LeaveDetails_By_User_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PlannedLeave" ColumnName="PlannedLeave" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_LMS_Available_Leaves_By_LeaveTypeId" FunctionName="THSMVCDataModel.Store.stp_LMS_Available_Leaves_By_LeaveTypeId" />
-          <FunctionImportMapping FunctionImportName="stp_LMS_Get_LeaveStatus" FunctionName="THSMVCDataModel.Store.stp_LMS_Get_LeaveStatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_LMS_Get_LeaveStatus_Result">
-                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
-                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
-                <ScalarProperty Name="LeaveApplyMode" ColumnName="LeaveApplyMode" />
-                <ScalarProperty Name="FromDay" ColumnName="FromDay" />
-                <ScalarProperty Name="ToDay" ColumnName="ToDay" />
-                <ScalarProperty Name="NoofLeavesApplied" ColumnName="NoofLeavesApplied" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_LMS_Get_Leaves_To_Approve" FunctionName="THSMVCDataModel.Store.stp_LMS_Get_Leaves_To_Approve">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_LMS_Get_Leaves_To_Approve_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
-                <ScalarProperty Name="LeaveApplyMode" ColumnName="LeaveApplyMode" />
-                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="FromDay" ColumnName="FromDay" />
-                <ScalarProperty Name="ToDay" ColumnName="ToDay" />
-                <ScalarProperty Name="NoofLeavesApplied" ColumnName="NoofLeavesApplied" />
-                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LevelOrder" ColumnName="LevelOrder" />
-                <ScalarProperty Name="Flag" ColumnName="Flag" />
-                <ScalarProperty Name="IsNotifier" ColumnName="IsNotifier" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_LMS_Get_Total_LeaveOrders" FunctionName="THSMVCDataModel.Store.stp_LMS_Get_Total_LeaveOrders" />
-          <FunctionImportMapping FunctionImportName="stp_LMS_Get_LeaveStatus_Audit" FunctionName="THSMVCDataModel.Store.stp_LMS_Get_LeaveStatus_Audit">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_LMS_Get_LeaveStatus_Audit_Result">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
-                <ScalarProperty Name="LeaveApplyMode" ColumnName="LeaveApplyMode" />
-                <ScalarProperty Name="FromDay" ColumnName="FromDay" />
-                <ScalarProperty Name="ToDay" ColumnName="ToDay" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LevelOrder" ColumnName="LevelOrder" />
-                <ScalarProperty Name="TotalLevels" ColumnName="TotalLevels" />
-                <ScalarProperty Name="Approver" ColumnName="Approver" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_LMS_Check_Approver_Or_Not" FunctionName="THSMVCDataModel.Store.stp_LMS_Check_Approver_Or_Not" />
-          <FunctionImportMapping FunctionImportName="stp_get_UsersForDelegation" FunctionName="THSMVCDataModel.Store.stp_get_UsersForDelegation">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_get_UsersForDelegation_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="stp_LMS_Get_DelegateLeavesList" FunctionName="THSMVCDataModel.Store.stp_LMS_Get_DelegateLeavesList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="THSMVCDataModel.stp_LMS_Get_DelegateLeavesList_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Approver" ColumnName="Approver" />
-                <ScalarProperty Name="DelegatedUser" ColumnName="DelegatedUser" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="DelegatedOn" ColumnName="DelegatedOn" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Instances">
             <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
               <MappingFragment StoreEntitySet="Instance">
@@ -1768,6 +1107,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Lots">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
+              <MappingFragment StoreEntitySet="Lot">
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="LotName" ColumnName="LotName" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1799,6 +1150,7 @@
         <EntityTypeShape EntityType="THSMVCDataModel.RoleMenu" Width="1.5" PointX="0.76783353871099347" PointY="1.0138680045557524" />
         <EntityTypeShape EntityType="THSMVCDataModel.User" Width="1.5" PointX="0.070038143578003226" PointY="4.4193572273568051" />
         <EntityTypeShape EntityType="THSMVCDataModel.UserMenu" Width="1.5" PointX="4.1149656121223073" PointY="17.237555437366272" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Lot" Width="1.5" PointX="3.375" PointY="0.75" Height="2.1725878906250031" />
       </Diagram>
     </Diagrams>
   </Designer>

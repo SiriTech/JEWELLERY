@@ -234,6 +234,7 @@
     <EntitySet Name="RoleMenus" EntityType="THSMVCDataModel.RoleMenu" />
     <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
     <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
+    <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -721,5 +722,16 @@
     <Property Type="Int32" Name="EditedBy" />
     <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
+  </EntityType>
+  <EntityType Name="Lot">
+    <Key>
+      <PropertyRef Name="LotId" />
+    </Key>
+    <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Weight" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="NoOfPieces" />
+    <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+    <Property Type="Int32" Name="DealerId" />
   </EntityType>
 </Schema>

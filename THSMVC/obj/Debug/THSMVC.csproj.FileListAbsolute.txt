@@ -85,3 +85,14 @@ D:\Projects\Sample\documents-export-2014-03-17\THSMVC\THSMVC\THSMVC\bin\Newtonso
 D:\Projects\Sample\documents-export-2014-03-17\THSMVC\THSMVC\THSMVC\bin\Newtonsoft.Json.xml
 D:\Projects\Sample\documents-export-2014-03-17\THSMVC\THSMVC\THSMVC\bin\PagedList.xml
 D:\Projects\Sample\documents-export-2014-03-17\THSMVC\THSMVC\THSMVC\bin\System.Web.Mvc.xml
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\THSMVC.dll
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\THSMVC.pdb
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\PagedList.dll
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\System.Web.Mvc.dll
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\Newtonsoft.Json.pdb
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\Newtonsoft.Json.xml
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\PagedList.xml
+D:\FL\Jewel\JEWELLERY\THSMVC\bin\System.Web.Mvc.xml
+D:\FL\Jewel\JEWELLERY\THSMVC\obj\Debug\THSMVC.csprojResolveAssemblyReference.cache
+D:\FL\Jewel\JEWELLERY\THSMVC\obj\Debug\THSMVC.dll
+D:\FL\Jewel\JEWELLERY\THSMVC\obj\Debug\THSMVC.pdb

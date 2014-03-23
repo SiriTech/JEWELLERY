@@ -333,10 +333,12 @@
                 <div class="clear">
                     <div class="FloatLeft">
                         <h1>
-                            <img src="../../images/E.gif" alt="E" /><img src="../../images/D.gif" alt="D" /><img
+                           <%-- <img src="../../images/E.gif" alt="E" /><img src="../../images/D.gif" alt="D" /><img
                                 src="../../images/U.gif" alt="U" />
                             <img src="../../images/B.gif" alt="B" /><img src="../../images/O.gif" alt="O" /><img
-                                src="../../images/O.gif" alt="O" /><img src="../../images/K.gif" alt="K" /></h1>
+                                src="../../images/O.gif" alt="O" /><img src="../../images/K.gif" alt="K" />--%>
+                                Pooja Jewels
+                                </h1>
                     </div>
                     <div>
                         <%--<span style="font-weight: bolder; font-size: 2em; color: orange;">*</span>--%>
