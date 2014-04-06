@@ -68,22 +68,6 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Instance> Instances
-        {
-            get
-            {
-                if ((_Instances == null))
-                {
-                    _Instances = base.CreateObjectSet<Instance>("Instances");
-                }
-                return _Instances;
-            }
-        }
-        private ObjectSet<Instance> _Instances;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Menu> Menus
         {
             get
@@ -240,18 +224,58 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Lot> _Lots;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GoldRate> GoldRates
+        {
+            get
+            {
+                if ((_GoldRates == null))
+                {
+                    _GoldRates = base.CreateObjectSet<GoldRate>("GoldRates");
+                }
+                return _GoldRates;
+            }
+        }
+        private ObjectSet<GoldRate> _GoldRates;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GoldRatesManual> GoldRatesManuals
+        {
+            get
+            {
+                if ((_GoldRatesManuals == null))
+                {
+                    _GoldRatesManuals = base.CreateObjectSet<GoldRatesManual>("GoldRatesManuals");
+                }
+                return _GoldRatesManuals;
+            }
+        }
+        private ObjectSet<GoldRatesManual> _GoldRatesManuals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Instance> Instances
+        {
+            get
+            {
+                if ((_Instances == null))
+                {
+                    _Instances = base.CreateObjectSet<Instance>("Instances");
+                }
+                return _Instances;
+            }
+        }
+        private ObjectSet<Instance> _Instances;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Instances EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToInstances(Instance instance)
-        {
-            base.AddObject("Instances", instance);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Menus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -331,6 +355,30 @@ namespace THSMVC.Models
         public void AddToLots(Lot lot)
         {
             base.AddObject("Lots", lot);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GoldRates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGoldRates(GoldRate goldRate)
+        {
+            base.AddObject("GoldRates", goldRate);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GoldRatesManuals EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGoldRatesManuals(GoldRatesManual goldRatesManual)
+        {
+            base.AddObject("GoldRatesManuals", goldRatesManual);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Instances EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToInstances(Instance instance)
+        {
+            base.AddObject("Instances", instance);
         }
 
         #endregion
@@ -2119,6 +2167,354 @@ namespace THSMVC.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="GoldRate")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GoldRate : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GoldRate object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="goldCity">Initial value of the GoldCity property.</param>
+        /// <param name="uRL">Initial value of the URL property.</param>
+        public static GoldRate CreateGoldRate(global::System.Int32 id, global::System.String goldCity, global::System.String uRL)
+        {
+            GoldRate goldRate = new GoldRate();
+            goldRate.Id = id;
+            goldRate.GoldCity = goldCity;
+            goldRate.URL = uRL;
+            return goldRate;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GoldCity
+        {
+            get
+            {
+                return _GoldCity;
+            }
+            set
+            {
+                OnGoldCityChanging(value);
+                ReportPropertyChanging("GoldCity");
+                _GoldCity = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GoldCity");
+                OnGoldCityChanged();
+            }
+        }
+        private global::System.String _GoldCity;
+        partial void OnGoldCityChanging(global::System.String value);
+        partial void OnGoldCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String URL
+        {
+            get
+            {
+                return _URL;
+            }
+            set
+            {
+                OnURLChanging(value);
+                ReportPropertyChanging("URL");
+                _URL = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("URL");
+                OnURLChanged();
+            }
+        }
+        private global::System.String _URL;
+        partial void OnURLChanging(global::System.String value);
+        partial void OnURLChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="GoldRatesManual")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GoldRatesManual : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GoldRatesManual object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        /// <param name="city">Initial value of the City property.</param>
+        /// <param name="goldWeight">Initial value of the GoldWeight property.</param>
+        /// <param name="goldPrice">Initial value of the GoldPrice property.</param>
+        /// <param name="silverWeight">Initial value of the SilverWeight property.</param>
+        /// <param name="silverPrice">Initial value of the SilverPrice property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static GoldRatesManual CreateGoldRatesManual(global::System.Int32 id, global::System.Int32 instanceId, global::System.String city, global::System.String goldWeight, global::System.String goldPrice, global::System.String silverWeight, global::System.String silverPrice, global::System.DateTime createdDate)
+        {
+            GoldRatesManual goldRatesManual = new GoldRatesManual();
+            goldRatesManual.Id = id;
+            goldRatesManual.InstanceId = instanceId;
+            goldRatesManual.City = city;
+            goldRatesManual.GoldWeight = goldWeight;
+            goldRatesManual.GoldPrice = goldPrice;
+            goldRatesManual.SilverWeight = silverWeight;
+            goldRatesManual.SilverPrice = silverPrice;
+            goldRatesManual.CreatedDate = createdDate;
+            return goldRatesManual;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String City
+        {
+            get
+            {
+                return _City;
+            }
+            set
+            {
+                OnCityChanging(value);
+                ReportPropertyChanging("City");
+                _City = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("City");
+                OnCityChanged();
+            }
+        }
+        private global::System.String _City;
+        partial void OnCityChanging(global::System.String value);
+        partial void OnCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GoldWeight
+        {
+            get
+            {
+                return _GoldWeight;
+            }
+            set
+            {
+                OnGoldWeightChanging(value);
+                ReportPropertyChanging("GoldWeight");
+                _GoldWeight = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GoldWeight");
+                OnGoldWeightChanged();
+            }
+        }
+        private global::System.String _GoldWeight;
+        partial void OnGoldWeightChanging(global::System.String value);
+        partial void OnGoldWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GoldPrice
+        {
+            get
+            {
+                return _GoldPrice;
+            }
+            set
+            {
+                OnGoldPriceChanging(value);
+                ReportPropertyChanging("GoldPrice");
+                _GoldPrice = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GoldPrice");
+                OnGoldPriceChanged();
+            }
+        }
+        private global::System.String _GoldPrice;
+        partial void OnGoldPriceChanging(global::System.String value);
+        partial void OnGoldPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SilverWeight
+        {
+            get
+            {
+                return _SilverWeight;
+            }
+            set
+            {
+                OnSilverWeightChanging(value);
+                ReportPropertyChanging("SilverWeight");
+                _SilverWeight = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SilverWeight");
+                OnSilverWeightChanged();
+            }
+        }
+        private global::System.String _SilverWeight;
+        partial void OnSilverWeightChanging(global::System.String value);
+        partial void OnSilverWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SilverPrice
+        {
+            get
+            {
+                return _SilverPrice;
+            }
+            set
+            {
+                OnSilverPriceChanging(value);
+                ReportPropertyChanging("SilverPrice");
+                _SilverPrice = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SilverPrice");
+                OnSilverPriceChanged();
+            }
+        }
+        private global::System.String _SilverPrice;
+        partial void OnSilverPriceChanging(global::System.String value);
+        partial void OnSilverPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Instance")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2411,6 +2807,54 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> GoldCityId
+        {
+            get
+            {
+                return _GoldCityId;
+            }
+            set
+            {
+                OnGoldCityIdChanging(value);
+                ReportPropertyChanging("GoldCityId");
+                _GoldCityId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GoldCityId");
+                OnGoldCityIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _GoldCityId;
+        partial void OnGoldCityIdChanging(Nullable<global::System.Int32> value);
+        partial void OnGoldCityIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Domain
+        {
+            get
+            {
+                return _Domain;
+            }
+            set
+            {
+                OnDomainChanging(value);
+                ReportPropertyChanging("Domain");
+                _Domain = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Domain");
+                OnDomainChanged();
+            }
+        }
+        private global::System.String _Domain;
+        partial void OnDomainChanging(global::System.String value);
+        partial void OnDomainChanged();
 
         #endregion
 

@@ -14,7 +14,7 @@ using System.Data.Objects;
 using System.IO;
 using System.Web.Hosting;
 using System.Web.Routing;
-using THSMVC.Classes;
+using THSMVC.App_Code;
 using PagedList;
 
 namespace THSMVC.Controllers

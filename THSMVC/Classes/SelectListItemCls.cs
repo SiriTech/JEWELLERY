@@ -62,5 +62,18 @@ namespace THSMVC.App_Code
                 });
         }
 
+
+        internal static IEnumerable<SelectListItem> ToSelectListItemsGoldRates(IEnumerable<GoldRate> albums, int selected)
+        {
+            return
+      albums.OrderBy(album => album.Id)
+            .Select(album =>
+                new SelectListItem
+                {
+                    Selected = (album.Id == selected),
+                    Text = album.GoldCity,
+                    Value = album.URL
+                });
+        }
     }
 }

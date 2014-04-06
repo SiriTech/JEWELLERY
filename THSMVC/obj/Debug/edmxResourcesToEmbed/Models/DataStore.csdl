@@ -224,7 +224,6 @@
     <FunctionImport Name="stp_LMS_Get_DelegateLeavesList" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_DelegateLeavesList_Result)">
       <Parameter Name="InstanceId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
     <EntitySet Name="Menus" EntityType="THSMVCDataModel.Menu" />
     <EntitySet Name="MenuAccessRights" EntityType="THSMVCDataModel.MenuAccessRight" />
     <EntitySet Name="MenuGroups" EntityType="THSMVCDataModel.MenuGroup" />
@@ -235,6 +234,9 @@
     <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
     <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
     <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
+    <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
+    <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
+    <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -577,22 +579,6 @@
     <Property Type="DateTime" Name="ToDate" Nullable="true" />
     <Property Type="DateTime" Name="DelegatedOn" Nullable="false" Precision="23" />
   </ComplexType>
-  <EntityType Name="Instance">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="ParentInstance" />
-    <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-    <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
-    <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
-    <Property Type="Boolean" Name="Status" />
-  </EntityType>
   <EntityType Name="Menu">
     <Key>
       <PropertyRef Name="Id" />
@@ -733,5 +719,44 @@
     <Property Type="Int32" Name="NoOfPieces" />
     <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
     <Property Type="Int32" Name="DealerId" />
+  </EntityType>
+  <EntityType Name="GoldRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="GoldCity" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="URL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GoldRatesManual">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GoldWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Instance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ParentInstance" />
+    <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="LicenseStartDate" />
+    <Property Type="DateTime" Name="LicenseEndDate" />
+    <Property Type="Boolean" Name="Status" />
+    <Property Type="Int32" Name="GoldCityId" />
+    <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

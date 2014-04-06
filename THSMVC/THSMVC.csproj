@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ErrorLogsLogic.cs" />
+    <Compile Include="Classes\GoldRateLogic.cs" />
     <Compile Include="Classes\GroupLogic.cs" />
     <Compile Include="Classes\LotLogic.cs" />
     <Compile Include="Classes\SiteLogsLogic.cs" />
@@ -118,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoldRateModel.cs" />
     <Compile Include="Models\LoggerDataStore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

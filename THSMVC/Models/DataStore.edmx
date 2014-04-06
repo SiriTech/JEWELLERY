@@ -6,6 +6,8 @@
     <edmx:StorageModels>
     <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="THSMVCDataModelStoreContainer">
+          <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Lot" EntityType="THSMVCDataModel.Store.Lot" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Menu" EntityType="THSMVCDataModel.Store.Menu" store:Type="Tables" Schema="dbo" />
@@ -18,6 +20,27 @@
           <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="GoldRates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GoldCity" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="URL" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoldRatesManual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="GoldWeight" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="GoldPrice" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="SilverWeight" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SilverPrice" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Instance">
           <Key>
             <PropertyRef Name="Id" />
@@ -33,6 +56,8 @@
           <Property Name="LicenseStartDate" Type="date" />
           <Property Name="LicenseEndDate" Type="date" />
           <Property Name="Status" Type="bit" />
+          <Property Name="GoldCityId" Type="int" />
+          <Property Name="Domain" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Lot">
           <Key>
@@ -420,7 +445,6 @@
           <FunctionImport Name="stp_LMS_Get_DelegateLeavesList" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_DelegateLeavesList_Result)">
           <Parameter Name="InstanceId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
           <EntitySet Name="Menus" EntityType="THSMVCDataModel.Menu" />
           <EntitySet Name="MenuAccessRights" EntityType="THSMVCDataModel.MenuAccessRight" />
           <EntitySet Name="MenuGroups" EntityType="THSMVCDataModel.MenuGroup" />
@@ -431,6 +455,9 @@
           <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
           <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
           <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
+          <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
+          <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
+          <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -773,22 +800,6 @@
           <Property Type="DateTime" Name="ToDate" Nullable="true" />
           <Property Type="DateTime" Name="DelegatedOn" Nullable="false" Precision="23" />
         </ComplexType>
-        <EntityType Name="Instance">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="ParentInstance" />
-          <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
-          <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
-          <Property Type="Boolean" Name="Status" />
-        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -930,6 +941,45 @@
           <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
           <Property Type="Int32" Name="DealerId" />
         </EntityType>
+        <EntityType Name="GoldRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GoldCity" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GoldRatesManual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GoldWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ParentInstance" />
+          <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LicenseStartDate" />
+          <Property Type="DateTime" Name="LicenseEndDate" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="GoldCityId" />
+          <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -951,23 +1001,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="stp_Assign_Remove_MenuItems_Role" FunctionName="THSMVCDataModel.Store.stp_Assign_Remove_MenuItems_Role" />
           <FunctionImportMapping FunctionImportName="stp_Intial_Menus_For_Admin" FunctionName="THSMVCDataModel.Store.stp_Intial_Menus_For_Admin" />
-          <EntitySetMapping Name="Instances">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
-              <MappingFragment StoreEntitySet="Instance">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
-                <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="PIN" ColumnName="PIN" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="THSMVCDataModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
@@ -1119,6 +1152,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GoldRates">
+            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
+              <MappingFragment StoreEntitySet="GoldRates">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldRatesManuals">
+            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
+              <MappingFragment StoreEntitySet="GoldRatesManual">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
+                <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
+                <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
+                <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instances">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
+              <MappingFragment StoreEntitySet="Instance">
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
+                <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1140,7 +1215,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="DataStore" ShowGrid="true" DisplayType="false" ZoomLevel="83">
-        <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="6.9910773574333067" PointY="0.99045319901334739" />
         <EntityTypeShape EntityType="THSMVCDataModel.Menu" Width="1.5" PointX="9.5754055201892765" PointY="21.5580836932911" />
         <EntityTypeShape EntityType="THSMVCDataModel.MenuAccessRight" Width="1.5" PointX="11.860801711613686" PointY="2.0346771637139272" />
         <EntityTypeShape EntityType="THSMVCDataModel.MenuGroup" Width="1.5" PointX="5.1893715789492116" PointY="8.7495851110432223" />
@@ -1151,6 +1225,9 @@
         <EntityTypeShape EntityType="THSMVCDataModel.User" Width="1.5" PointX="0.070038143578003226" PointY="4.4193572273568051" />
         <EntityTypeShape EntityType="THSMVCDataModel.UserMenu" Width="1.5" PointX="4.1149656121223073" PointY="17.237555437366272" />
         <EntityTypeShape EntityType="THSMVCDataModel.Lot" Width="1.5" PointX="3.375" PointY="0.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="3.375" PointY="3.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="5.375" PointY="0.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="7.375" PointY="0.75" Height="3.5186979166666674" />
       </Diagram>
     </Diagrams>
   </Designer>

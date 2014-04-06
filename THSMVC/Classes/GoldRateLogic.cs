@@ -6,31 +6,19 @@ using THSMVC.Models;
 
 namespace THSMVC.App_Code
 {
-    public class SiteLogsLogic : IDisposable
+    public class GoldRateLogic:IDisposable
     {
         // Track whether Dispose has been called.
         private bool disposed = false;
-        LoggerDataStoreEntities dse = new LoggerDataStoreEntities();
-        public IQueryable<SiteLog> GetSitelogs()
+
+        DataStoreEntities dse = new DataStoreEntities();
+        public IQueryable<GoldRate> GetGoldRates()
         {
-
-            //List<SiteLog> sales = new List<SiteLog>();
-            List<SiteLog> siteLog = (from d in dse.SiteLogs select d).ToList<SiteLog>();
-
-            return siteLog.AsQueryable();
+            List<GoldRate> GoldRate = (from d in dse.GoldRates select d).ToList<GoldRate>();
+            return GoldRate.AsQueryable();
         }
 
-        public List<SiteLog> GetSitelogsByDateRange(DateTime startDate, DateTime endDate)
-        {
-            var siteLog = (from s in GetSitelogs()
-                           where s.TimeStamp >= startDate
-                           && s.TimeStamp <= endDate
-                           orderby s.TimeStamp descending
-                           select s).ToList<SiteLog>();
-
-            return siteLog;
-        }
-        // Implement IDisposable.
+         // Implement IDisposable.
         // Do not make this method virtual.
         // A derived class should not be able to override this method.
         public void Dispose()
@@ -75,7 +63,7 @@ namespace THSMVC.App_Code
         // does not get called.
         // It gives your base class the opportunity to finalize.
         // Do not provide destructors in types derived from this class.
-        ~SiteLogsLogic()
+        ~GoldRateLogic()
         {
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of

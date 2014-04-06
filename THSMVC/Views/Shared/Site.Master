@@ -359,7 +359,7 @@
             %>
             <div class="menucontainer">
                 <ul id="menu">
-                    <li><a id="Home" href="/">Home</a></li>
+                    <li><a id="Home" href="/Home/Index">Rates</a></li>
                     <li><a id="About" href="/Home/About">About</a></li>
                     <li><a id="Contact" href="/Home/ContactUS">ContactUs</a></li>
                 </ul>

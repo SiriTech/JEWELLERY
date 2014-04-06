@@ -16,23 +16,6 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="stp_Assign_Remove_MenuItems_Role" FunctionName="THSMVCDataModel.Store.stp_Assign_Remove_MenuItems_Role" />
     <FunctionImportMapping FunctionImportName="stp_Intial_Menus_For_Admin" FunctionName="THSMVCDataModel.Store.stp_Intial_Menus_For_Admin" />
-    <EntitySetMapping Name="Instances">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
-        <MappingFragment StoreEntitySet="Instance">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
-          <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="PIN" ColumnName="PIN" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Menus">
       <EntityTypeMapping TypeName="THSMVCDataModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
@@ -181,6 +164,48 @@
           <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldRates">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
+        <MappingFragment StoreEntitySet="GoldRates">
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldRatesManuals">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
+        <MappingFragment StoreEntitySet="GoldRatesManual">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
+          <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
+          <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
+          <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instances">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
+        <MappingFragment StoreEntitySet="Instance">
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
+          <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PIN" ColumnName="PIN" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

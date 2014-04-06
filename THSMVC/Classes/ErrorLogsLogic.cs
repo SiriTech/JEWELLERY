@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using THSMVC.Models;
 
-namespace THSMVC.Classes
+namespace THSMVC.App_Code
 {
     public class ErrorLogsLogic : IDisposable
     {

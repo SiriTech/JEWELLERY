@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
+    <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lot" EntityType="THSMVCDataModel.Store.Lot" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Menu" EntityType="THSMVCDataModel.Store.Menu" store:Type="Tables" Schema="dbo" />
@@ -13,6 +15,27 @@
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
+  <EntityType Name="GoldRates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GoldCity" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="URL" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoldRatesManual">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="GoldWeight" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="GoldPrice" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="SilverWeight" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SilverPrice" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Instance">
     <Key>
       <PropertyRef Name="Id" />
@@ -28,6 +51,8 @@
     <Property Name="LicenseStartDate" Type="date" />
     <Property Name="LicenseEndDate" Type="date" />
     <Property Name="Status" Type="bit" />
+    <Property Name="GoldCityId" Type="int" />
+    <Property Name="Domain" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Lot">
     <Key>
