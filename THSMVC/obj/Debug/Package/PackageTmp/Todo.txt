@@ -1,11 +1,1 @@
-﻿Siblings details in manage users
-Student Photos and Parent Photos path configuration
-Exports folder move to absolute location
-Logs Folder move to absolute location
-Test Tools(Online Test)
-Browse Image in BBCode Toolbar(Online Test)
-Paging in Displaying Questions in ManageTest
-
-
-
-
+﻿

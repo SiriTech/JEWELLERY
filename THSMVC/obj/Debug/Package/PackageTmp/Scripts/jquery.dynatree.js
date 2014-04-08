@@ -150,7 +150,8 @@ DynaTreeNode.prototype = {
 	},
 
 	toString: function() {
-		return "DynaTreeNode<" + this.data.key + ">: '" + this.data.title + "'";
+		//return "DynaTreeNode<" + this.data.key + ">: '" + this.data.title + "'";
+        return "'" + this.data.title + "'";
 	},
 
 	toDict: function(recursive, callback) {
@@ -2401,6 +2402,7 @@ DynaTree.prototype = {
 		});
 		return nodeList;
 	},
+   
 
 	activateKey: function(key) {
 		var dtnode = (key === null) ? null : this.getNodeByKey(key);

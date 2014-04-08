@@ -154,6 +154,23 @@ ul, li
     background: url(/images/Delete_gray.gif) 22px 4px no-repeat #F3F3F3;
     width: 40px;
 }
+/* sms button*/
+.Googlemenu ul li a.sms
+{
+    background: url(/images/sms.gif) 22px 4px no-repeat #F3F3F3;
+    width: 40px;
+}
+/* sms button disabled*/
+.Googlemenu ul li a.smsdisabled
+{
+    background: url(/images/sms_gray.gif) 22px 4px no-repeat #F3F3F3;
+    width: 40px;
+}
+.Googlemenu ul li a.smsdisabled:hover
+{
+    color: #666;
+    border: solid 1px #dcdcdc;
+}
 .Googlemenu ul li a.deldisabled:hover
 {
     color: #666;
@@ -227,11 +244,12 @@ ul, li
     border: none;
     margin-right: 1px;
     cursor: pointer;
+    margin-left:17px;
 }
 
 .Googlemenu ul li:hover ul li a:hover
 {
-    background: #EEEEEE;
+    color: #D14836;
 }
 /*the first item in dropdown must not have a border on top */
 .Googlemenu ul li ul li:first-child a

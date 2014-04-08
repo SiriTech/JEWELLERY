@@ -33,6 +33,10 @@
                     else
                     { %>
                         <div>
+                        <% if (p.MenuName == "My Tests")
+                           { %>
+                           <input type="hidden" id="hdnMyTests" value="<%= p.MenuId %>" />
+                        <%} %>
                             <a id="A2" href="#" onclick="LoadFirstContent('<%= Html.Encode(p.MenuId) %>','<%= Html.Encode(p.MenuName) %>');">
                                 <%= Html.Encode(p.MenuName) %></a>
                         </div>

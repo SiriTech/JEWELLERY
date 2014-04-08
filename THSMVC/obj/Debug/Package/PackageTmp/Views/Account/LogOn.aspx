@@ -15,14 +15,36 @@
      <% using (Html.BeginForm()) { %>
         <div style="clear:both;width:100%;display:inline-block;">
         <div style="width:62%;float:left;">
-        <fieldset>
-                <legend>Content</legend>
-        </fieldset>
+        <div class="divHead">
+                    <span class="divHeading">Jewels</span>
+                </div>
+                <div class="clear">
+                    <div class="divBorder">
+                        <%--<p>
+                            <font style="font-size: large">Edu Book</font> is an Online Management tool for
+                            Schools/Colleges in the world. User data management, Attendance Management, Leave
+                            management, Pay roll system, Automatic Timetable generation etc., in a secured way.
+                            Edu Book provides value to your school/college.</p>
+                        <p>
+                            Edu Book collaborates Students, Parents and Teachers, So that the parents can enhance
+                            their children's performance . Edu Book is a cloud based application, Which can
+                            be accessed from anywhere in the world.</p>
+                        <p>
+                            Edu Book is providing <a style="color: Green;" href="/Home/ContactUS"><b>1 Month Free
+                                Trail</b></a> for any school/college. Your Data during the trial period can
+                            be maintained upto 30 days from your trial period expiration date.</p>
+                        <p>
+                            Edu Book is very cheap as never before, than any of the other school/college management
+                            softwares.</p>--%>
+                    </div>
+                </div>
         </div>
         <div id="LogOn" style="width:35%;float:right;">
-            <fieldset>
-                <legend>Account Information</legend>
-                
+                 <div class="divHead">
+                    <span class="divHeading">LOG ON</span>
+                </div>
+                 <div class="clear">
+                    <div class="divBorder">
                 <div class="editor-label">
                     <%: Html.LabelFor(m => m.UserName) %>
                 </div>
@@ -56,8 +78,8 @@
                      <%: Html.ValidationSummary(true, "Login was unsuccessful.") %>
                    
                     </div>
-               
-            </fieldset>
+               </div>
+               </div>
         </div>
         </div>
        

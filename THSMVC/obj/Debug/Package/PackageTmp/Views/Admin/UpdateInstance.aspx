@@ -167,38 +167,6 @@
                     </div>
                     <div class="clear">
                         <div class="editor-label FloatLeft" style="width: 40%;">
-                            <span class="ValidationSpan">*</span> Country
-                        </div>
-                        <div class="editor-field">
-                            <%= Html.DropDownListFor(m => m.Country, Model.Countries, "Select Country", new { onChange = "CountryChange();return false;" })%>
-                        </div>
-                    </div>
-                    <div class="clear">
-                        <div class="editor-label FloatLeft" style="width: 40%;">
-                            <span class="ValidationSpan">*</span> State
-                        </div>
-                        <div class="editor-field">
-                            <%= Html.DropDownListFor(m => m.State, Model.States, "Select State", new { onChange = "StateChange();return false;" })%>
-                        </div>
-                    </div>
-                    <div class="clear">
-                        <div class="editor-label FloatLeft" style="width: 40%;">
-                            City
-                        </div>
-                        <div class="editor-field">
-                            <%= Html.DropDownListFor(m => m.City, Model.Cities, "Select City", new { onChange = "CityChange();return false;" })%>
-                        </div>
-                    </div>
-                    <div class="clear">
-                        <div class="editor-label FloatLeft" style="width: 40%;">
-                            Sector
-                        </div>
-                        <div class="editor-field">
-                           <%= Html.DropDownListFor(m => m.Sector, Model.Sectors, "Select Sector")%>
-                        </div>
-                    </div>
-                    <div class="clear">
-                        <div class="editor-label FloatLeft" style="width: 40%;">
                             Location
                         </div>
                         <div class="editor-field">

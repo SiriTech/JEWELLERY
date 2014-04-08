@@ -54,7 +54,7 @@ function fixGridWidth(grid) {
             if (newGridWidth != gviewScrollWidth) {
                 grid.jqGrid("setGridWidth", newGridWidth);
             }
-            
+
         }
         else {
             grid.jqGrid("setGridWidth", mainWidth);
@@ -93,6 +93,16 @@ function toggleContentDivHead(obj, contentdiv) {
         $(contentdiv).slideUp();
     }
 }
+function toggleContentDivHeadMenu(obj, contentdiv) {
+    if ($(obj)[0].className == "ContentdivHeadOverMenu") {
+        $(obj)[0].className = "ContentdivHeadMenu";
+        $(contentdiv).slideDown();
+    }
+    else {
+        $(obj)[0].className = "ContentdivHeadOverMenu";
+        $(contentdiv).slideUp();
+    }
+}
 function Success(result) {
     //    $("#center250b").css({ 'display': 'block' });
     //    $("#fixedtop2").css({ 'color': 'green' });
@@ -112,27 +122,26 @@ function Error(req, status, error) {
     //    $("#fixedtop2").css({ 'background-color': 'white', 'color': 'green' });
     //    $("#fixedtop2").html("Sorry! Please try again later" + "<a id='closeMsg' onclick='ClearMsg();' href='#' style='margin-right:15px;float:right;color:gray;text-decoration:none;'>X</a>"); // show status message with animation
     // window.scroll(0, 0);
-   
     $.ajax({
         type: "POST",
         url: "/Shared/ErrorLog",
         dataType: "json",
         traditional: true,
-         data: {
-                    ErrorHead:  "<head>" + $(req.responseText)[0].outerHTML + "</head>",
-                    ErrorBody: "<body>" + $(req.responseText)[1].outerHTML,
-                    ErrorBody1: $(req.responseText)[2].outerHTML,
-                    ErrorScript: $(req.responseText)[3].outerHTML + "</body>"
-                    },
+        data: {
+            ErrorHead: "<head>" + $(req.responseText)[0].outerHTML + "</head>",
+            ErrorBody: "<body>" + $(req.responseText)[1].outerHTML,
+            ErrorBody1: $(req.responseText)[2].outerHTML,
+            ErrorScript: $(req.responseText)[7].outerHTML + "</body>"
+        },
         beforeSend: function () {
-            $.blockUI();   //this is great plugin - 'blockUI'
+            //$.blockUI();   //this is great plugin - 'blockUI'
         },
         success: function (response) {
 
-            $.unblockUI();
+           // $.unblockUI();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            $.unblockUI();
+            //$.unblockUI();
 
         }
     });
@@ -218,7 +227,7 @@ function LoadFirstContent(Id, Name) {
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 $.unblockUI();
-                Error(XMLHttpRequest, text, errorThrown);
+                Error(XMLHttpRequest, textStatus, errorThrown);
 
             }
         });
@@ -270,12 +279,12 @@ function GetContentByActionAndController(Action, Controller, Viewtitle, contentH
         success: function (response) {
             $(contentHolder).html(response);
             document.title = Viewtitle;
-           // $("#Content :input[type='text']:enabled:first").focus();
+            // $("#Content :input[type='text']:enabled:first").focus();
             $.unblockUI();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             $.unblockUI();
-            
+
             Error(XMLHttpRequest, textStatus, errorThrown);
 
         }
@@ -311,7 +320,67 @@ function LoadContentByActionAndControllerForEdit(Action, Controller, Viewtitle, 
         }
     });
 }
-function LoadContentByActionAndControllerForEditWithMenuId(Action, Controller, Viewtitle, Id,MenuId) {
+function LoadContentByActionAndControllerForEditMultipleParams(Action, Controller, Viewtitle, Id, Id1) {
+    ClearMsg();
+    $("#Content").empty();
+    $.ajax({
+        type: "POST",
+        url: "/Shared/JsonViewByActionAndControllerForEditMultipleParams",
+        data: "Action=" + Action + "&Controller=" + Controller + "&Id=" + Id + "&Id1=" + Id1,
+        dataType: "html",
+        beforeSend: function () {
+            $.blockUI();   //this is great plugin - 'blockUI'
+        },
+        success: function (response) {
+            $("#Content").html(response);
+            document.title = Viewtitle;
+            //            var div = getElement("Content");
+            //            debugger;
+            //            var x = div.getElementsByTagName("script");
+            //            for (var i = 0; i < x.length; i++) {
+            //                eval(x[i].text);
+            //            }
+            //$("#Content :input[type='text']:enabled:first").focus();
+            $.unblockUI();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.unblockUI();
+            Error(XMLHttpRequest, textStatus, errorThrown);
+
+        }
+    });
+}
+function LoadContentByActionAndControllerForEditMultipleParamsWithMenuId(Action, Controller, Viewtitle, Id, Id1, MenuId) {
+    ClearMsg();
+    $("#Content").empty();
+    $.ajax({
+        type: "POST",
+        url: "/Shared/JsonViewByActionAndControllerForEditMultipleParamsWithMenuId",
+        data: "Action=" + Action + "&Controller=" + Controller + "&Id=" + Id + "&Id1=" + Id1 + "&MenuId=" + MenuId,
+        dataType: "html",
+        beforeSend: function () {
+            $.blockUI();   //this is great plugin - 'blockUI'
+        },
+        success: function (response) {
+            $("#Content").html(response);
+            document.title = Viewtitle;
+            //            var div = getElement("Content");
+            //            debugger;
+            //            var x = div.getElementsByTagName("script");
+            //            for (var i = 0; i < x.length; i++) {
+            //                eval(x[i].text);
+            //            }
+            //$("#Content :input[type='text']:enabled:first").focus();
+            $.unblockUI();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.unblockUI();
+            Error(XMLHttpRequest, textStatus, errorThrown);
+
+        }
+    });
+}
+function LoadContentByActionAndControllerForEditWithMenuId(Action, Controller, Viewtitle, Id, MenuId) {
     ClearMsg();
     $("#Content").empty();
     $.ajax({
@@ -348,6 +417,36 @@ function GetContentByActionAndControllerForEdit(Action, Controller, Viewtitle, I
         type: "POST",
         url: "/Shared/JsonViewByActionAndControllerForEdit",
         data: "Action=" + Action + "&Controller=" + Controller + "&Id=" + Id,
+        dataType: "html",
+        beforeSend: function () {
+            $.blockUI();   //this is great plugin - 'blockUI'
+        },
+        success: function (response) {
+            $(contentHolder).html(response);
+            document.title = Viewtitle;
+            //            var div = getElement("Content");
+            //            debugger;
+            //            var x = div.getElementsByTagName("script");
+            //            for (var i = 0; i < x.length; i++) {
+            //                eval(x[i].text);
+            //            }
+            //$("#Content :input[type='text']:enabled:first").focus();
+            $.unblockUI();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.unblockUI();
+            Error(XMLHttpRequest, textStatus, errorThrown);
+
+        }
+    });
+}
+function GetContentByActionAndControllerForEditMenuId(Action, Controller, Viewtitle, Id, contentHolder,MenuId) {
+    ClearMsg();
+    $(contentHolder).empty();
+    $.ajax({
+        type: "POST",
+        url: "/Shared/JsonViewByActionAndControllerForEditWithMenuId",
+        data: "Action=" + Action + "&Controller=" + Controller + "&Id=" + Id + "&MenuId=" + MenuId,
         dataType: "html",
         beforeSend: function () {
             $.blockUI();   //this is great plugin - 'blockUI'

@@ -177,7 +177,7 @@ page width. Or, you can specify an exact pixel width. */
 #header h1
 {
     font-weight: bold;
-    padding: 5px 0;
+    /*padding: 5px 0;*/
     margin: 0;
     color: #fff;
     border: none;
@@ -657,7 +657,9 @@ white-space: nowrap;
 
 .menucontainer
 {
-    margin-top: 40px;
+    margin-top: 0px;
+    background-color:#0B375A;
+    padding-top:16px;
 }
 #formContent
 {
@@ -903,6 +905,32 @@ div#title
 {
     padding: 5px;
     margin-bottom: 15px;
+    background-color:#fff;
+}
+.ContentdivHeadMenu
+{
+     cursor:pointer;
+    line-height:2.1em;
+    background-color:#666;
+    padding-left:10px;
+    background-repeat:no-repeat;
+    background-position:right center;
+    background-image:url(/images/bg_twistyExpand_Over.png);   
+}
+.ContentdivHeadOverMenu
+{
+    cursor:pointer;
+    line-height:2.1em;
+    background-color:#666;
+    padding-left:10px;
+    background-repeat:no-repeat;
+    background-position:right center;
+    background-image:url(/images/bg_twistyExpand.png);   
+}
+.ContentdivBorderMenu
+{
+    padding: 5px;
+    margin-bottom:5px;
     background-color:#fff;
 }
 .MenuCloseSpan
@@ -1472,3 +1500,4 @@ div#title
   color: #333;
 
   }
+   
