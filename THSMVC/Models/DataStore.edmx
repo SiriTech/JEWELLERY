@@ -14,6 +14,7 @@
           <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuRight" EntityType="THSMVCDataModel.Store.MenuRight" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductGroup" EntityType="THSMVCDataModel.Store.ProductGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
@@ -115,6 +116,18 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MenuRight" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="MenuRightDescription" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Right">
@@ -458,6 +471,7 @@
           <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
           <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
           <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
+          <EntitySet Name="ProductGroups" EntityType="THSMVCDataModel.ProductGroup" />
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -980,6 +994,18 @@
           <Property Type="Int32" Name="GoldCityId" />
           <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1194,6 +1220,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductGroups">
+            <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
+              <MappingFragment StoreEntitySet="ProductGroup">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductGroup1" ColumnName="ProductGroup" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1228,6 +1267,7 @@
         <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="3.375" PointY="3.75" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="5.375" PointY="0.75" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="7.375" PointY="0.75" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ProductGroup" Width="1.5" PointX="0.75" PointY="9.75" Height="2.3648893229166674" />
       </Diagram>
     </Diagrams>
   </Designer>

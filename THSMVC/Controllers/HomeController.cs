@@ -34,11 +34,15 @@ namespace THSMVC.Controllers
             model.IsConnected = HasConnection();
             if (objRates != null)
             {
-                model.SelectedCity = objRates.City;
-                model.GoldWt = objRates.GoldWeight;
-                model.GoldPrice = objRates.GoldPrice;
-                model.SilverWt = objRates.SilverWeight;
-                model.SilverPrice = objRates.SilverPrice;
+                DateTime dt = objRates.CreatedDate;
+                if (dt.Date == DateTime.Now.Date)
+                {
+                    model.SelectedCity = objRates.City;
+                    model.GoldWt = objRates.GoldWeight;
+                    model.GoldPrice = objRates.GoldPrice;
+                    model.SilverWt = objRates.SilverWeight;
+                    model.SilverPrice = objRates.SilverPrice;
+                }
             }
             return View(model);
         }

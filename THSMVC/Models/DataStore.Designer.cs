@@ -272,6 +272,22 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Instance> _Instances;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductGroup> ProductGroups
+        {
+            get
+            {
+                if ((_ProductGroups == null))
+                {
+                    _ProductGroups = base.CreateObjectSet<ProductGroup>("ProductGroups");
+                }
+                return _ProductGroups;
+            }
+        }
+        private ObjectSet<ProductGroup> _ProductGroups;
 
         #endregion
 
@@ -379,6 +395,14 @@ namespace THSMVC.Models
         public void AddToInstances(Instance instance)
         {
             base.AddObject("Instances", instance);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductGroups(ProductGroup productGroup)
+        {
+            base.AddObject("ProductGroups", productGroup);
         }
 
         #endregion
@@ -3808,6 +3832,213 @@ namespace THSMVC.Models
         private global::System.String _MenuRightDescription;
         partial void OnMenuRightDescriptionChanging(global::System.String value);
         partial void OnMenuRightDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnStatusChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="ProductGroup")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProductGroup : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProductGroup object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="productGroup1">Initial value of the ProductGroup1 property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static ProductGroup CreateProductGroup(global::System.Int32 id, global::System.String productGroup1, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        {
+            ProductGroup productGroup = new ProductGroup();
+            productGroup.Id = id;
+            productGroup.ProductGroup1 = productGroup1;
+            productGroup.CreatedBy = createdBy;
+            productGroup.CreatedDate = createdDate;
+            return productGroup;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ProductGroup1
+        {
+            get
+            {
+                return _ProductGroup1;
+            }
+            set
+            {
+                OnProductGroup1Changing(value);
+                ReportPropertyChanging("ProductGroup1");
+                _ProductGroup1 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ProductGroup1");
+                OnProductGroup1Changed();
+            }
+        }
+        private global::System.String _ProductGroup1;
+        partial void OnProductGroup1Changing(global::System.String value);
+        partial void OnProductGroup1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> EditedBy
+        {
+            get
+            {
+                return _EditedBy;
+            }
+            set
+            {
+                OnEditedByChanging(value);
+                ReportPropertyChanging("EditedBy");
+                _EditedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedBy");
+                OnEditedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _EditedBy;
+        partial void OnEditedByChanging(Nullable<global::System.Int32> value);
+        partial void OnEditedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> EditedDate
+        {
+            get
+            {
+                return _EditedDate;
+            }
+            set
+            {
+                OnEditedDateChanging(value);
+                ReportPropertyChanging("EditedDate");
+                _EditedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedDate");
+                OnEditedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _EditedDate;
+        partial void OnEditedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEditedDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

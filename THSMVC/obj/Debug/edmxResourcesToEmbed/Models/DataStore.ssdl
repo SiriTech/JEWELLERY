@@ -9,6 +9,7 @@
     <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuRight" EntityType="THSMVCDataModel.Store.MenuRight" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductGroup" EntityType="THSMVCDataModel.Store.ProductGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
@@ -110,6 +111,18 @@
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="MenuRight" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="MenuRightDescription" Type="varchar" MaxLength="500" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="Right">

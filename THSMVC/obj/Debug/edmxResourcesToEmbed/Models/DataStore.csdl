@@ -237,6 +237,7 @@
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
     <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
     <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
+    <EntitySet Name="ProductGroups" EntityType="THSMVCDataModel.ProductGroup" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -758,5 +759,17 @@
     <Property Type="Boolean" Name="Status" />
     <Property Type="Int32" Name="GoldCityId" />
     <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="Boolean" Name="Status" />
   </EntityType>
 </Schema>

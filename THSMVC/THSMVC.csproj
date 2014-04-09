@@ -94,10 +94,12 @@
     <Compile Include="Classes\GoldRateLogic.cs" />
     <Compile Include="Classes\GroupLogic.cs" />
     <Compile Include="Classes\LotLogic.cs" />
+    <Compile Include="Classes\ProductGroupLogic.cs" />
     <Compile Include="Classes\SiteLogsLogic.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GlobalController.cs" />
     <Compile Include="Controllers\LotController.cs" />
+    <Compile Include="Controllers\ProductGroupController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Classes\DiskFileStore.cs" />
     <Compile Include="Classes\EmailHelper.cs" />
@@ -136,6 +138,13 @@
     <Compile Include="Services\Logging\Log4netXmlLayout.cs" />
     <Compile Include="Services\Logging\Log4Net\Log4NetLogger.cs" />
     <Compile Include="Services\Logging\LogUtility.cs" />
+    <Compile Include="Views\ProductGroup\ProductGroupMaster.aspx.cs">
+      <DependentUpon>ProductGroupMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ProductGroup\ProductGroupMaster.aspx.designer.cs">
+      <DependentUpon>ProductGroupMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\LogsRequestAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -516,6 +525,7 @@
     <Content Include="Views\Home\ContactUS.aspx" />
     <Content Include="Views\Lot\CreateLot.aspx" />
     <Content Include="Views\Lot\LotMaster.aspx" />
+    <Content Include="Views\ProductGroup\ProductGroupMaster.aspx" />
     <Content Include="Views\Shared\SessionExpire.aspx" />
     <Content Include="Views\Shared\ChangePwd.aspx" />
     <Content Include="Views\Shared\Empty.aspx" />
