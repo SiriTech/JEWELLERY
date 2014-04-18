@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
+    <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
@@ -9,13 +10,35 @@
     <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuRight" EntityType="THSMVCDataModel.Store.MenuRight" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Product" EntityType="THSMVCDataModel.Store.Product" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCategory" EntityType="THSMVCDataModel.Store.ProductCategory" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductGroup" EntityType="THSMVCDataModel.Store.ProductGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
+  <EntityType Name="Dealer">
+    <Key>
+      <PropertyRef Name="DealerId" />
+    </Key>
+    <Property Name="DealerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DealerName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CompanyShortForm" Type="varchar" MaxLength="10" />
+    <Property Name="Address" Type="varchar" MaxLength="500" />
+    <Property Name="City" Type="varchar" MaxLength="20" />
+    <Property Name="State" Type="varchar" MaxLength="20" />
+    <Property Name="PinCode" Type="varchar" MaxLength="6" />
+    <Property Name="CompanyVATOrTinNo" Type="varchar" MaxLength="20" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
   <EntityType Name="GoldRates">
     <Key>
       <PropertyRef Name="Id" />
@@ -113,6 +136,39 @@
     <Property Name="MenuRightDescription" Type="varchar" MaxLength="500" />
     <Property Name="Status" Type="bit" />
   </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="ShortForm" Type="varchar" MaxLength="100" />
+    <Property Name="ValueAddedByPerc" Type="decimal" Scale="3" />
+    <Property Name="ValueAddedFixed" Type="decimal" Scale="3" />
+    <Property Name="MakingChargesPerGram" Type="decimal" Scale="3" />
+    <Property Name="MakingChargesFixed" Type="decimal" Scale="3" />
+    <Property Name="IsStone" Type="bit" Nullable="false" />
+    <Property Name="IsWeightless" Type="bit" Nullable="false" />
+    <Property Name="ProductCategoryId" Type="int" Nullable="false" />
+    <Property Name="ProductGroupId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductCategory" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
   <EntityType Name="ProductGroup">
     <Key>
       <PropertyRef Name="Id" />
@@ -189,6 +245,20 @@
     <Property Name="FailedPasswordAttemptCount" Type="int" />
     <Property Name="ChangePwdonLogin" Type="bit" />
     <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Address" Type="varchar" MaxLength="300" />
+    <Property Name="City" Type="varchar" MaxLength="100" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="PinCode" Type="varchar" MaxLength="10" />
+    <Property Name="Mobile" Type="varchar" MaxLength="20" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="UserMenu">
     <Key>

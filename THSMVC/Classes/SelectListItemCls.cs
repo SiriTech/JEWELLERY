@@ -22,7 +22,7 @@ namespace THSMVC.App_Code
                           });
         }
 
-       
+
         internal static IEnumerable<SelectListItem> ToSelectListItemsRole(IEnumerable<Role> albums, int selectedId)
         {
             return
@@ -73,6 +73,45 @@ namespace THSMVC.App_Code
                     Selected = (album.Id == selected),
                     Text = album.GoldCity,
                     Value = album.URL
+                });
+        }
+
+        internal static IEnumerable<SelectListItem> ToSelectListItemsProductGroups(IEnumerable<ProductGroupModel> albums, int selected)
+        {
+            return
+      albums.OrderBy(album => album.Id)
+            .Select(album =>
+                new SelectListItem
+                {
+                    Selected = (album.Id == selected),
+                    Text = album.ProductGroup1,
+                    Value = album.Id.ToString()
+                });
+        }
+
+        internal static IEnumerable<SelectListItem> ToSelectListItemsProductCategories(IEnumerable<ProductCategoryModel> albums, int selected)
+        {
+            return
+      albums.OrderBy(album => album.Id)
+            .Select(album =>
+                new SelectListItem
+                {
+                    Selected = (album.Id == selected),
+                    Text = album.ProductCategory1,
+                    Value = album.Id.ToString()
+                });
+        }
+
+        internal static IEnumerable<SelectListItem> ToSelectListItemsRoles(IEnumerable<RoleModel> albums, int? selected)
+        {
+            return
+      albums.OrderBy(album => album.Id)
+            .Select(album =>
+                new SelectListItem
+                {
+                    Selected = (album.Id == selected),
+                    Text = album.RoleName,
+                    Value = album.Id.ToString()
                 });
         }
     }

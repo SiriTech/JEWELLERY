@@ -11,53 +11,54 @@ using THSMVC.Views.Shared;
 
 namespace THSMVC.Controllers
 {
-    public class ProductGroupController : Controller
+    public class ProductCategoryController : Controller
     {
         Log4NetLogger logger = new Log4NetLogger();
         [LogsRequest]
-        public ActionResult ProductGroupMaster(string Id, string MenuId)
+        public ActionResult ProductCategoryMaster(string Id, string MenuId)
         {
             return View();
         }
         [LogsRequest]
-        public ActionResult AddEditProductGroup()
+        public ActionResult AddEditProductCategory()
         {
-            ProductGroupModel model = new ProductGroupModel();
+            ProductCategoryModel model = new ProductCategoryModel();
             model.BtnText = "Create";
             return View(model);
         }
         [LogsRequest]
-        public ActionResult EditProductGroup(int Id)
+        public ActionResult EditProductCategory(int Id)
         {
-            ProductGroupModel model = new ProductGroupModel();
+            ProductCategoryModel model = new ProductCategoryModel();
             using (DataStoreEntities dse = new DataStoreEntities())
             {
-                model = (from p in dse.ProductGroups
-                                           where p.Id == Id
-                                           select new ProductGroupModel { 
-                                            Id=p.Id,
-                                            ProductGroup1 = p.ProductGroup1
-                                           }).FirstOrDefault();
+                model = (from p in dse.ProductCategories
+                         where p.Id == Id
+                         select new ProductCategoryModel
+                         {
+                             Id = p.Id,
+                             ProductCategory1 = p.ProductCategory1
+                         }).FirstOrDefault();
             }
             model.BtnText = "Update";
-            return View("AddEditProductGroup",model);
+            return View("AddEditProductCategory", model);
         }
         [LogsRequest]
-        public ActionResult DelProductGroup(int id)
+        public ActionResult DelProductCategory(int id)
         {
             try
             {
                 using (var db = new DataStoreEntities())
                 {
-                    var query = from s in db.ProductGroups
+                    var query = from s in db.ProductCategories
                                 where s.Id.Equals(id)
                                 select s;
                     if (query.Count() > 0)
                     {
-                        var ProductGroup = query.First();
-                        ProductGroup.Status = true;
+                        var ProductCategory = query.First();
+                        ProductCategory.Status = true;
                         db.SaveChanges();
-                        return Json(new { success=true,message="Product Group deleted successfully"});
+                        return Json(new { success = true, message = "Product Category deleted successfully" });
                     }
                     else
                         return Json(new { success = false, message = "Sorry! Please try again later" });
@@ -67,12 +68,12 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("DelProductGroup", ex);
+                logger.Error("DelProductCategory", ex);
                 return Json(false);
             }
         }
         [LogsRequest]
-        public ActionResult SubmitProductGroup(ProductGroupModel model)
+        public ActionResult SubmitProductCategory(ProductCategoryModel model)
         {
             try
             {
@@ -80,42 +81,42 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
-                        ProductGroup group = new ProductGroup();
-                        group.ProductGroup1 = model.ProductGroup1;
+                        ProductCategory group = new ProductCategory();
+                        group.ProductCategory1 = model.ProductCategory1;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;
-                        dse.AddToProductGroups(group);
+                        dse.AddToProductCategories(group);
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Group created successfuly" });
+                        return Json(new { success = true, message = "Product Category created successfuly" });
                     }
                     else
                     {
-                        ProductGroup group = dse.ProductGroups.Where(p => p.Id == model.Id).FirstOrDefault();
-                        group.ProductGroup1 = model.ProductGroup1;
+                        ProductCategory group = dse.ProductCategories.Where(p => p.Id == model.Id).FirstOrDefault();
+                        group.ProductCategory1 = model.ProductCategory1;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);
                         group.EditedDate = DateTime.Now;
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Group updated successfuly" });
+                        return Json(new { success = true, message = "Product Category updated successfuly" });
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.Error("SubmitProductGroup", ex);
+                logger.Error("SubmitProductCategory", ex);
                 return Json(new { success = false, message = "Sorry! Please try again later" });
             }
         }
-        public IQueryable<ProductGroupModel> getProductGroups()
+        public IQueryable<ProductCategoryModel> getProductCategorys()
         {
-            using (ProductGroupLogic logicLayer = new ProductGroupLogic())
-                return logicLayer.GetProductGroups();
+            using (ProductCategoryLogic logicLayer = new ProductCategoryLogic())
+                return logicLayer.GetProductCategories();
         }
-        public ActionResult JsonProductGroupCollection(GridSettings grid)
+        public ActionResult JsonProductCategoryCollection(GridSettings grid)
         {
             try
             {
 
-                var context = this.getProductGroups();
+                var context = this.getProductCategorys();
                 //filtring
                 if (grid.IsSearch)
                 {
@@ -124,7 +125,7 @@ namespace THSMVC.Controllers
                     {
                         foreach (var rule in grid.Where.rules)
                         {
-                            context = context.Where<ProductGroupModel>(
+                            context = context.Where<ProductCategoryModel>(
                                                           rule.field, rule.data,
                                                           (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
                         }
@@ -132,21 +133,21 @@ namespace THSMVC.Controllers
                     else
                     {
                         //Or
-                        var temp = (new List<ProductGroupModel>()).AsQueryable();
+                        var temp = (new List<ProductCategoryModel>()).AsQueryable();
                         foreach (var rule in grid.Where.rules)
                         {
-                            var t = context.Where<ProductGroupModel>(
+                            var t = context.Where<ProductCategoryModel>(
                             rule.field, rule.data,
                             (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
-                            temp = temp.Concat<ProductGroupModel>(t);
+                            temp = temp.Concat<ProductCategoryModel>(t);
                         }
                         //remove repeating records
-                        context = temp.Distinct<ProductGroupModel>();
+                        context = temp.Distinct<ProductCategoryModel>();
                     }
                 }
 
                 //sorting
-                context = context.OrderBy<ProductGroupModel>(grid.SortColumn, grid.SortOrder);
+                context = context.OrderBy<ProductCategoryModel>(grid.SortColumn, grid.SortOrder);
 
                 //count
                 var count = context.Count();
@@ -167,7 +168,7 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.ProductGroup1.ToString().Replace("$$$$","'UpdateProductGroup("+s.Id.ToString()+")'").Replace("****","href='#'")
+                            s.ProductCategory1.ToString().Replace("$$$$","'UpdateProductCategory("+s.Id.ToString()+")'").Replace("****","href='#'")
                         }
                           }).ToArray()
                 };
@@ -177,7 +178,7 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("JsonProductGroupCollection", ex);
+                logger.Error("JsonProductCategoryCollection", ex);
                 return Json(false);
             }
         }

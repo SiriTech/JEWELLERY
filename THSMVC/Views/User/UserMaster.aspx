@@ -1,49 +1,63 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+    .ui-state-default .ui-icon-customtrash {
+    background: url("../images/info.png");
+    background-position: 0 0;
+
+}
+        </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadProductGroups();
+            LoadUsers();
         });
         function Create() {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+            $("#divUserMaster").hide();
+            $("#CreateUser").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndController('AddEditProductGroup', 'ProductGroup', 'Add/Edit Product Group', '#divCreateProductGroup');
+            $("#divCreateUser").show();
+            GetContentByActionAndController('AddEditUser', 'User', 'Add/Edit User', '#divCreateUser');
         }
-        function UpdateProductGroup(id) {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+        function UpdateUser(id) {
+            $("#divUserMaster").hide();
+            $("#CreateUser").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndControllerForEdit('EditProductGroup', 'ProductGroup', 'Add/Edit Product Group',id, '#divCreateProductGroup');
+            $("#divCreateUser").show();
+            GetContentByActionAndControllerForEdit('EditUser', 'User', 'Add/Edit User', id, '#divCreateUser');
         }
-        function LoadProductGroups() {
+        function LoadUsers() {
             var gridDataUrl;
-            gridDataUrl = '/ProductGroup/JsonProductGroupCollection';
+            gridDataUrl = '/User/JsonUserCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Group'],
+                colNames: ['Id', 'Name', 'Address', 'City', 'State', 'PinCode', 'Mobile', 'RoleName', 'Active'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductGroup1', index: 'ProductGroup1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'Name', index: 'Name', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
+                  { name: 'Address', index: 'Address', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
+                { name: 'City', index: 'City', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
+                { name: 'State', index: 'State', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
+                { name: 'PinCode', index: 'PinCode', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
+                { name: 'Mobile', index: 'Mobile', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
+                { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
+                { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
                 ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'ProductGroup1',
+                sortname: 'Name',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Product Groups",
+                caption: "Users",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -86,7 +100,7 @@
 
        }, // default settings for add
        {
-           url: "/ProductGroup/DelProductGroup",
+           url: "/User/DelUser",
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");
@@ -120,24 +134,26 @@
        { closeOnEscape: true, width: 350 } // view options
     );
             $.extend($.jgrid.search, { Find: 'Search' });
+            $.extend($.jgrid.navGrid, { delicon: 'ui-icon-customtrash' });
+            //$("#list").jqGrid("navGrid", "#pager", { delicon: "ui-icon-customtrash" });
 
         }
     </script>
 </head>
 <body>
-     <div class="clear">
+    <div class="clear">
         
         <div style="float: left;">
-            <input type="button" id="CreateProductGroup" class="rg_button_red upper" title="Click to Create Product Group"
-                value="Create Product Group" onclick="Create()" />
+            <input type="button" id="CreateUser" class="rg_button_red upper" title="Click to Create User"
+                value="Create User" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product Group List"
+            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To User List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divProductGroupMaster">
+    <div id="divUserMaster">
         
         <div id="gridWrapper" style="width: 100%;">
            
@@ -151,7 +167,7 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateProductGroup">
+    <div id="divCreateUser">
     </div>
 </body>
 </html>

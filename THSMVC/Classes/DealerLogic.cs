@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,33 +7,31 @@ using THSMVC.Models;
 
 namespace THSMVC.Classes
 {
-    public class ProductGroupLogic : IDisposable
+    public class DealerLogic: IDisposable
     {
         // Track whether Dispose has been called.
         private bool disposed = false;
+        public string CountryCode { get; set; }
+        public string CountryName { get; set; }
 
         DataStoreEntities dse = new DataStoreEntities();
-        public IQueryable<ProductGroupModel> GetProductGroups()
+        public IQueryable<DealerModel> GetDealers()
         {
-            List<ProductGroupModel> ProductGroup = (from d in dse.ProductGroups
+            List<DealerModel> Dealer = (from d in dse.Dealers
                                                     where ((d.Status) == null || (bool)d.Status == false)
-                                                    select new ProductGroupModel
+                                                    select new DealerModel
                                                     {
-                                                        Id = d.Id,
-                                                        ProductGroup1 = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.ProductGroup1 + "</a>"
-                                                    }).ToList<ProductGroupModel>();
-            return ProductGroup.AsQueryable();
-        }
-        public IQueryable<ProductGroupModel> GetProductGroupsList()
-        {
-            List<ProductGroupModel> ProductGroup = (from d in dse.ProductGroups
-                                                    where ((d.Status) == null || (bool)d.Status == false)
-                                                    select new ProductGroupModel
-                                                    {
-                                                        Id = d.Id,
-                                                        ProductGroup1 = d.ProductGroup1
-                                                    }).ToList<ProductGroupModel>();
-            return ProductGroup.AsQueryable();
+                                                        Id = d.DealerId,
+                                                        DealerName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.DealerName + "</a>",
+                                                        CompanyName=d.CompanyName,
+                                                        CompanyShortForm=d.CompanyShortForm,
+                                                        Address=d.Address,
+                                                        City=d.City,
+                                                        State=d.State,
+                                                        PinCode=d.PinCode,
+                                                        TinNo=d.CompanyVATOrTinNo
+                                                    }).ToList<DealerModel>();
+            return Dealer.AsQueryable();
         }
 
         // Implement IDisposable.
@@ -80,7 +79,7 @@ namespace THSMVC.Classes
         // does not get called.
         // It gives your base class the opportunity to finalize.
         // Do not provide destructors in types derived from this class.
-        ~ProductGroupLogic()
+        ~DealerLogic()
         {
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of

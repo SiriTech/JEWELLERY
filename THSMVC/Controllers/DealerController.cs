@@ -11,53 +11,61 @@ using THSMVC.Views.Shared;
 
 namespace THSMVC.Controllers
 {
-    public class ProductGroupController : Controller
+    public class DealerController : Controller
     {
         Log4NetLogger logger = new Log4NetLogger();
         [LogsRequest]
-        public ActionResult ProductGroupMaster(string Id, string MenuId)
+        public ActionResult DealerMaster(string Id, string MenuId)
         {
             return View();
         }
         [LogsRequest]
-        public ActionResult AddEditProductGroup()
+        public ActionResult AddEditDealer()
         {
-            ProductGroupModel model = new ProductGroupModel();
+            DealerModel model = new DealerModel();
             model.BtnText = "Create";
             return View(model);
         }
         [LogsRequest]
-        public ActionResult EditProductGroup(int Id)
+        public ActionResult EditDealer(int Id)
         {
-            ProductGroupModel model = new ProductGroupModel();
+            DealerModel model = new DealerModel();
             using (DataStoreEntities dse = new DataStoreEntities())
             {
-                model = (from p in dse.ProductGroups
-                                           where p.Id == Id
-                                           select new ProductGroupModel { 
-                                            Id=p.Id,
-                                            ProductGroup1 = p.ProductGroup1
-                                           }).FirstOrDefault();
+                model = (from p in dse.Dealers
+                         where p.DealerId == Id
+                         select new DealerModel
+                         {
+                             Id = p.DealerId,
+                             DealerName = p.DealerName,
+                             Address = p.Address,
+                             City = p.City,
+                             State = p.State,
+                             PinCode = p.PinCode,
+                             CompanyName = p.CompanyName,
+                             CompanyShortForm = p.CompanyShortForm,
+                             TinNo = p.CompanyVATOrTinNo
+                         }).FirstOrDefault();
             }
             model.BtnText = "Update";
-            return View("AddEditProductGroup",model);
+            return View("AddEditDealer", model);
         }
         [LogsRequest]
-        public ActionResult DelProductGroup(int id)
+        public ActionResult DelDealer(int id)
         {
             try
             {
                 using (var db = new DataStoreEntities())
                 {
-                    var query = from s in db.ProductGroups
-                                where s.Id.Equals(id)
+                    var query = from s in db.Dealers
+                                where s.DealerId.Equals(id)
                                 select s;
                     if (query.Count() > 0)
                     {
-                        var ProductGroup = query.First();
-                        ProductGroup.Status = true;
+                        var Dealer = query.First();
+                        Dealer.Status = true;
                         db.SaveChanges();
-                        return Json(new { success=true,message="Product Group deleted successfully"});
+                        return Json(new { success = true, message = "Dealer deleted successfully" });
                     }
                     else
                         return Json(new { success = false, message = "Sorry! Please try again later" });
@@ -67,12 +75,12 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("DelProductGroup", ex);
+                logger.Error("DelDealer", ex);
                 return Json(false);
             }
         }
         [LogsRequest]
-        public ActionResult SubmitProductGroup(ProductGroupModel model)
+        public ActionResult SubmitDealer(DealerModel model)
         {
             try
             {
@@ -80,42 +88,56 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
-                        ProductGroup group = new ProductGroup();
-                        group.ProductGroup1 = model.ProductGroup1;
+                        Dealer group = new Dealer();
+                        group.DealerName = model.DealerName;
+                        group.CompanyName = model.CompanyName;
+                        group.CompanyShortForm = model.CompanyShortForm;
+                        group.Address = model.Address;
+                        group.City = model.City;
+                        group.State = model.State;
+                        group.PinCode = model.PinCode;
+                        group.CompanyVATOrTinNo = model.TinNo;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;
-                        dse.AddToProductGroups(group);
+                        dse.AddToDealers(group);
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Group created successfuly" });
+                        return Json(new { success = true, message = "Dealer created successfuly" });
                     }
                     else
                     {
-                        ProductGroup group = dse.ProductGroups.Where(p => p.Id == model.Id).FirstOrDefault();
-                        group.ProductGroup1 = model.ProductGroup1;
+                        Dealer group = dse.Dealers.Where(p => p.DealerId == model.Id).FirstOrDefault();
+                        group.DealerName = model.DealerName;
+                        group.CompanyName = model.CompanyName;
+                        group.CompanyShortForm = model.CompanyShortForm;
+                        group.Address = model.Address;
+                        group.City = model.City;
+                        group.State = model.State;
+                        group.PinCode = model.PinCode;
+                        group.CompanyVATOrTinNo = model.TinNo;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);
                         group.EditedDate = DateTime.Now;
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Group updated successfuly" });
+                        return Json(new { success = true, message = "Dealer updated successfuly" });
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.Error("SubmitProductGroup", ex);
+                logger.Error("SubmitDealer", ex);
                 return Json(new { success = false, message = "Sorry! Please try again later" });
             }
         }
-        public IQueryable<ProductGroupModel> getProductGroups()
+        public IQueryable<DealerModel> getDealers()
         {
-            using (ProductGroupLogic logicLayer = new ProductGroupLogic())
-                return logicLayer.GetProductGroups();
+            using (DealerLogic logicLayer = new DealerLogic())
+                return logicLayer.GetDealers();
         }
-        public ActionResult JsonProductGroupCollection(GridSettings grid)
+        public ActionResult JsonDealerCollection(GridSettings grid)
         {
             try
             {
 
-                var context = this.getProductGroups();
+                var context = this.getDealers();
                 //filtring
                 if (grid.IsSearch)
                 {
@@ -124,7 +146,7 @@ namespace THSMVC.Controllers
                     {
                         foreach (var rule in grid.Where.rules)
                         {
-                            context = context.Where<ProductGroupModel>(
+                            context = context.Where<DealerModel>(
                                                           rule.field, rule.data,
                                                           (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
                         }
@@ -132,21 +154,21 @@ namespace THSMVC.Controllers
                     else
                     {
                         //Or
-                        var temp = (new List<ProductGroupModel>()).AsQueryable();
+                        var temp = (new List<DealerModel>()).AsQueryable();
                         foreach (var rule in grid.Where.rules)
                         {
-                            var t = context.Where<ProductGroupModel>(
+                            var t = context.Where<DealerModel>(
                             rule.field, rule.data,
                             (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
-                            temp = temp.Concat<ProductGroupModel>(t);
+                            temp = temp.Concat<DealerModel>(t);
                         }
                         //remove repeating records
-                        context = temp.Distinct<ProductGroupModel>();
+                        context = temp.Distinct<DealerModel>();
                     }
                 }
 
                 //sorting
-                context = context.OrderBy<ProductGroupModel>(grid.SortColumn, grid.SortOrder);
+                context = context.OrderBy<DealerModel>(grid.SortColumn, grid.SortOrder);
 
                 //count
                 var count = context.Count();
@@ -167,7 +189,14 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.ProductGroup1.ToString().Replace("$$$$","'UpdateProductGroup("+s.Id.ToString()+")'").Replace("****","href='#'")
+                            s.DealerName.ToString().Replace("$$$$","'UpdateDealer("+s.Id.ToString()+")'").Replace("****","href='#'"),
+                            s.CompanyName.ToString(),
+                            s.CompanyShortForm==null?"":s.CompanyShortForm,
+                            s.Address==null?"":s.Address,
+                            s.City==null?"":s.City,
+                            s.State==null?"":s.State,
+                            s.PinCode==null?"":s.PinCode,
+                            s.TinNo==null?"":s.TinNo
                         }
                           }).ToArray()
                 };
@@ -177,7 +206,7 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("JsonProductGroupCollection", ex);
+                logger.Error("JsonDealerCollection", ex);
                 return Json(false);
             }
         }

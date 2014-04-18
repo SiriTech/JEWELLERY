@@ -2,39 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using THSMVC.App_Code;
 using THSMVC.Models;
 
 namespace THSMVC.Classes
 {
-    public class ProductGroupLogic : IDisposable
+    public class UserLogic : IDisposable
     {
+        private static readonly IEncryptString _encrypter = new ConfigurationBasedStringEncrypter();
         // Track whether Dispose has been called.
         private bool disposed = false;
 
         DataStoreEntities dse = new DataStoreEntities();
-        public IQueryable<ProductGroupModel> GetProductGroups()
+        public IQueryable<UserModel> GetUsers()
         {
-            List<ProductGroupModel> ProductGroup = (from d in dse.ProductGroups
-                                                    where ((d.Status) == null || (bool)d.Status == false)
-                                                    select new ProductGroupModel
+            List<UserModel> Users = (from d in dse.UserDetails
+                                     join u in dse.Users on d.UserId equals u.Id
+                                     join r in dse.Roles on u.RoleId equals r.Id
+                                       select new UserModel
                                                     {
-                                                        Id = d.Id,
-                                                        ProductGroup1 = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.ProductGroup1 + "</a>"
-                                                    }).ToList<ProductGroupModel>();
-            return ProductGroup.AsQueryable();
+                                                        Id = u.Id,
+                                                        Name = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.Name + "</a>",
+                                                        Address=d.Address,
+                                                        City=d.City,
+                                                        State=d.State,
+                                                        PinCode=d.PinCode,
+                                                        Mobile=d.Mobile,
+                                                        Phone=d.Phone,
+                                                        Email=u.Email,
+                                                        Username=u.UserName,
+                                                        Password=u.Password,
+                                                        RoleId=u.RoleId,
+                                                        RoleName = r.Role1,
+                                                        Active = u.IsLockedOut == true ? "<img src='../../images/remove.png' />" : "<img src='../../images/tick.png' />"
+                                                    }).ToList<UserModel>();
+            return Users.AsQueryable();
         }
-        public IQueryable<ProductGroupModel> GetProductGroupsList()
-        {
-            List<ProductGroupModel> ProductGroup = (from d in dse.ProductGroups
-                                                    where ((d.Status) == null || (bool)d.Status == false)
-                                                    select new ProductGroupModel
-                                                    {
-                                                        Id = d.Id,
-                                                        ProductGroup1 = d.ProductGroup1
-                                                    }).ToList<ProductGroupModel>();
-            return ProductGroup.AsQueryable();
-        }
-
+        
         // Implement IDisposable.
         // Do not make this method virtual.
         // A derived class should not be able to override this method.
@@ -80,7 +84,7 @@ namespace THSMVC.Classes
         // does not get called.
         // It gives your base class the opportunity to finalize.
         // Do not provide destructors in types derived from this class.
-        ~ProductGroupLogic()
+        ~UserLogic()
         {
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of

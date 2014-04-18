@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="THSMVCDataModelStoreContainer">
+          <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
@@ -14,13 +15,35 @@
           <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenuRight" EntityType="THSMVCDataModel.Store.MenuRight" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Product" EntityType="THSMVCDataModel.Store.Product" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductCategory" EntityType="THSMVCDataModel.Store.ProductCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductGroup" EntityType="THSMVCDataModel.Store.ProductGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DealerName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CompanyShortForm" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="20" />
+          <Property Name="PinCode" Type="varchar" MaxLength="6" />
+          <Property Name="CompanyVATOrTinNo" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
         <EntityType Name="GoldRates">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,6 +141,39 @@
           <Property Name="MenuRightDescription" Type="varchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="ShortForm" Type="varchar" MaxLength="100" />
+          <Property Name="ValueAddedByPerc" Type="decimal" Scale="3" />
+          <Property Name="ValueAddedFixed" Type="decimal" Scale="3" />
+          <Property Name="MakingChargesPerGram" Type="decimal" Scale="3" />
+          <Property Name="MakingChargesFixed" Type="decimal" Scale="3" />
+          <Property Name="IsStone" Type="bit" Nullable="false" />
+          <Property Name="IsWeightless" Type="bit" Nullable="false" />
+          <Property Name="ProductCategoryId" Type="int" Nullable="false" />
+          <Property Name="ProductGroupId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCategory" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
         <EntityType Name="ProductGroup">
           <Key>
             <PropertyRef Name="Id" />
@@ -194,6 +250,20 @@
           <Property Name="FailedPasswordAttemptCount" Type="int" />
           <Property Name="ChangePwdonLogin" Type="bit" />
           <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="300" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="PinCode" Type="varchar" MaxLength="10" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="UserMenu">
           <Key>
@@ -472,6 +542,10 @@
           <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
           <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
           <EntitySet Name="ProductGroups" EntityType="THSMVCDataModel.ProductGroup" />
+          <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
+          <EntitySet Name="Products" EntityType="THSMVCDataModel.Product" />
+          <EntitySet Name="ProductCategories" EntityType="THSMVCDataModel.ProductCategory" />
+          <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.UserDetail" />
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -974,7 +1048,7 @@
           <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Instance">
           <Key>
@@ -987,9 +1061,9 @@
           <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-          <Property Type="DateTime" Name="LicenseStartDate" />
-          <Property Type="DateTime" Name="LicenseEndDate" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
+          <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
           <Property Type="Boolean" Name="Status" />
           <Property Type="Int32" Name="GoldCityId" />
           <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1001,10 +1075,76 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShortForm" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValueAddedByPerc" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="ValueAddedFixed" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="MakingChargesPerGram" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="MakingChargesFixed" Precision="18" Scale="3" />
+          <Property Type="Boolean" Name="IsStone" Nullable="false" />
+          <Property Type="Boolean" Name="IsWeightless" Nullable="false" />
+          <Property Type="Int32" Name="ProductCategoryId" Nullable="false" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProductCategory1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PinCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Mobile" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1233,6 +1373,76 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+                <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
+                <ScalarProperty Name="IsWeightless" ColumnName="IsWeightless" />
+                <ScalarProperty Name="IsStone" ColumnName="IsStone" />
+                <ScalarProperty Name="MakingChargesFixed" ColumnName="MakingChargesFixed" />
+                <ScalarProperty Name="MakingChargesPerGram" ColumnName="MakingChargesPerGram" />
+                <ScalarProperty Name="ValueAddedFixed" ColumnName="ValueAddedFixed" />
+                <ScalarProperty Name="ValueAddedByPerc" ColumnName="ValueAddedByPerc" />
+                <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductCategory1" ColumnName="ProductCategory" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1268,6 +1478,10 @@
         <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="5.375" PointY="0.75" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="7.375" PointY="0.75" Height="3.5186979166666674" />
         <EntityTypeShape EntityType="THSMVCDataModel.ProductGroup" Width="1.5" PointX="0.75" PointY="9.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Dealer" Width="1.5" PointX="5.1408718587555331" PointY="13.881910434869077" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Product" Width="1.5" PointX="5.4562039568350666" PointY="4.4005081078039989" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ProductCategory" Width="1.5" PointX="0.44551337531093194" PointY="27.911644322756512" />
+        <EntityTypeShape EntityType="THSMVCDataModel.UserDetail" Width="1.5" PointX="3.1210813257475762" PointY="21.468304957015583" />
       </Diagram>
     </Diagrams>
   </Designer>

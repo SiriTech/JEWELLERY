@@ -1,49 +1,49 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadProductGroups();
+            LoadProductCategorys();
         });
         function Create() {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+            $("#divProductCategoryMaster").hide();
+            $("#CreateProductCategory").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndController('AddEditProductGroup', 'ProductGroup', 'Add/Edit Product Group', '#divCreateProductGroup');
+            $("#divCreateProductCategory").show();
+            GetContentByActionAndController('AddEditProductCategory', 'ProductCategory', 'Add/Edit Product Category', '#divCreateProductCategory');
         }
-        function UpdateProductGroup(id) {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+        function UpdateProductCategory(id) {
+            $("#divProductCategoryMaster").hide();
+            $("#CreateProductCategory").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndControllerForEdit('EditProductGroup', 'ProductGroup', 'Add/Edit Product Group',id, '#divCreateProductGroup');
+            $("#divCreateProductCategory").show();
+            GetContentByActionAndControllerForEdit('EditProductCategory', 'ProductCategory', 'Add/Edit Product Category', id, '#divCreateProductCategory');
         }
-        function LoadProductGroups() {
+        function LoadProductCategorys() {
             var gridDataUrl;
-            gridDataUrl = '/ProductGroup/JsonProductGroupCollection';
+            gridDataUrl = '/ProductCategory/JsonProductCategoryCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Group'],
+                colNames: ['Id', 'Product Category'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductGroup1', index: 'ProductGroup1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'ProductCategory1', index: 'ProductCategory1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
                 ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'ProductGroup1',
+                sortname: 'ProductCategory1',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Product Groups",
+                caption: "Product Categories",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -86,7 +86,7 @@
 
        }, // default settings for add
        {
-           url: "/ProductGroup/DelProductGroup",
+           url: "/ProductCategory/DelProductCategory",
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");
@@ -125,19 +125,19 @@
     </script>
 </head>
 <body>
-     <div class="clear">
+      <div class="clear">
         
         <div style="float: left;">
-            <input type="button" id="CreateProductGroup" class="rg_button_red upper" title="Click to Create Product Group"
-                value="Create Product Group" onclick="Create()" />
+            <input type="button" id="CreateProductCategory" class="rg_button_red upper" title="Click to Create Product Category"
+                value="Create Product Category" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product Group List"
+            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product Category List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divProductGroupMaster">
+    <div id="divProductCategoryMaster">
         
         <div id="gridWrapper" style="width: 100%;">
            
@@ -151,7 +151,7 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateProductGroup">
+    <div id="divCreateProductCategory">
     </div>
 </body>
 </html>

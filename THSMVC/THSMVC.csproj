@@ -90,15 +90,23 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DealerLogic.cs" />
     <Compile Include="Classes\ErrorLogsLogic.cs" />
     <Compile Include="Classes\GoldRateLogic.cs" />
     <Compile Include="Classes\GroupLogic.cs" />
     <Compile Include="Classes\LotLogic.cs" />
+    <Compile Include="Classes\ProductCategoryLogic.cs" />
     <Compile Include="Classes\ProductGroupLogic.cs" />
+    <Compile Include="Classes\ProductLogic.cs" />
+    <Compile Include="Classes\RoleLogic.cs" />
     <Compile Include="Classes\SiteLogsLogic.cs" />
+    <Compile Include="Classes\UserLogic.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DealerController.cs" />
     <Compile Include="Controllers\GlobalController.cs" />
     <Compile Include="Controllers\LotController.cs" />
+    <Compile Include="Controllers\ProductCategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductGroupController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Classes\DiskFileStore.cs" />
@@ -107,6 +115,7 @@
     <Compile Include="Classes\InstanceLogic.cs" />
     <Compile Include="Classes\JsonDropdownData.cs" />
     <Compile Include="Classes\MenuLogic.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CustomActionResults\ExcelControllerExtensions.cs" />
     <Compile Include="CustomActionResults\ExcelListControllerExtensions.cs" />
     <Compile Include="CustomActionResults\ExcelListResult.cs" />
@@ -121,6 +130,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DealerModel.cs" />
     <Compile Include="Models\GoldRateModel.cs" />
     <Compile Include="Models\LoggerDataStore.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,23 +138,21 @@
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LotModel.cs" />
+    <Compile Include="Models\ProductCategoryModel.cs" />
+    <Compile Include="Models\ProductGroupModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\SharedModels.cs" />
     <Compile Include="Classes\RolesLogic.cs" />
     <Compile Include="Classes\SecurityProvider.cs" />
     <Compile Include="Classes\SelectListItemCls.cs" />
     <Compile Include="Classes\SharedMethods.cs" />
     <Compile Include="Classes\UserCreateStatus.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\Logging\ILogger.cs" />
     <Compile Include="Services\Logging\Log4netXmlLayout.cs" />
     <Compile Include="Services\Logging\Log4Net\Log4NetLogger.cs" />
     <Compile Include="Services\Logging\LogUtility.cs" />
-    <Compile Include="Views\ProductGroup\ProductGroupMaster.aspx.cs">
-      <DependentUpon>ProductGroupMaster.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\ProductGroup\ProductGroupMaster.aspx.designer.cs">
-      <DependentUpon>ProductGroupMaster.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\LogsRequestAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,9 +242,12 @@
     <Content Include="images\indicator.gif" />
     <Content Include="images\K.gif" />
     <Content Include="images\loading.gif" />
+    <Content Include="images\maximize.png" />
     <Content Include="images\next.png" />
     <Content Include="images\nextdisabled.gif" />
+    <Content Include="images\nextdisabled.png" />
     <Content Include="images\no-file.jpg" />
+    <Content Include="images\no-mobile.png" />
     <Content Include="images\No_idea.png" />
     <Content Include="images\O.gif" />
     <Content Include="images\OnlineTest\Attempts.gif" />
@@ -254,10 +265,15 @@
     <Content Include="images\pdf_document.png" />
     <Content Include="images\previous.png" />
     <Content Include="images\previousdisabled.gif" />
+    <Content Include="images\previousdisabled.png" />
+    <Content Include="images\remove.png" />
+    <Content Include="images\removenew.png" />
     <Content Include="images\search_button_green.png" />
     <Content Include="images\selectFile.jpg" />
     <Content Include="images\Settings.png" />
+    <Content Include="images\sms-green.png" />
     <Content Include="images\Sms.gif" />
+    <Content Include="images\sms.png" />
     <Content Include="images\sms_gray.gif" />
     <Content Include="images\sprite_black2.png" />
     <Content Include="images\sprite_white2.png" />
@@ -522,10 +538,17 @@
     <Content Include="Views\Admin\SiteLog.aspx" />
     <Content Include="Views\Admin\UpdateInstance.aspx" />
     <Content Include="Views\Admin\Welcome.aspx" />
+    <Content Include="Views\Dealer\AddEditDealer.aspx" />
+    <Content Include="Views\Dealer\DealerMaster.aspx" />
     <Content Include="Views\Home\ContactUS.aspx" />
     <Content Include="Views\Lot\CreateLot.aspx" />
     <Content Include="Views\Lot\LotMaster.aspx" />
+    <Content Include="Views\ProductCategory\AddEditProductCategory.aspx" />
+    <Content Include="Views\ProductCategory\ProductCategoryMaster.aspx" />
+    <Content Include="Views\ProductGroup\AddEditProductGroup.aspx" />
     <Content Include="Views\ProductGroup\ProductGroupMaster.aspx" />
+    <Content Include="Views\Product\AddEditProduct.aspx" />
+    <Content Include="Views\Product\ProductMaster.aspx" />
     <Content Include="Views\Shared\SessionExpire.aspx" />
     <Content Include="Views\Shared\ChangePwd.aspx" />
     <Content Include="Views\Shared\Empty.aspx" />
@@ -535,6 +558,8 @@
     <Content Include="Views\Shared\TimeoutExpired.aspx" />
     <Content Include="Views\Shared\UnAuthorized.aspx" />
     <Content Include="Views\Shared\ViewPage1.aspx" />
+    <Content Include="Views\User\AddEditUser.aspx" />
+    <Content Include="Views\User\UserMaster.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
