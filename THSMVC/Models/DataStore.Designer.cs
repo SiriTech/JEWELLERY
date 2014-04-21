@@ -17,6 +17,14 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM Relationship Metadata
+
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.LotStatu), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
+
+#endregion
+
 namespace THSMVC.Models
 {
     #region Contexts
@@ -352,6 +360,70 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<UserDetail> _UserDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LotStatu> LotStatus
+        {
+            get
+            {
+                if ((_LotStatus == null))
+                {
+                    _LotStatus = base.CreateObjectSet<LotStatu>("LotStatus");
+                }
+                return _LotStatus;
+            }
+        }
+        private ObjectSet<LotStatu> _LotStatus;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                if ((_LotUserMappings == null))
+                {
+                    _LotUserMappings = base.CreateObjectSet<LotUserMapping>("LotUserMappings");
+                }
+                return _LotUserMappings;
+            }
+        }
+        private ObjectSet<LotUserMapping> _LotUserMappings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Stone> Stones
+        {
+            get
+            {
+                if ((_Stones == null))
+                {
+                    _Stones = base.CreateObjectSet<Stone>("Stones");
+                }
+                return _Stones;
+            }
+        }
+        private ObjectSet<Stone> _Stones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LotUserMappingView> LotUserMappingViews
+        {
+            get
+            {
+                if ((_LotUserMappingViews == null))
+                {
+                    _LotUserMappingViews = base.CreateObjectSet<LotUserMappingView>("LotUserMappingViews");
+                }
+                return _LotUserMappingViews;
+            }
+        }
+        private ObjectSet<LotUserMappingView> _LotUserMappingViews;
 
         #endregion
 
@@ -499,6 +571,38 @@ namespace THSMVC.Models
         public void AddToUserDetails(UserDetail userDetail)
         {
             base.AddObject("UserDetails", userDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LotStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLotStatus(LotStatu lotStatu)
+        {
+            base.AddObject("LotStatus", lotStatu);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LotUserMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLotUserMappings(LotUserMapping lotUserMapping)
+        {
+            base.AddObject("LotUserMappings", lotUserMapping);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Stones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStones(Stone stone)
+        {
+            base.AddObject("Stones", stone);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LotUserMappingViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLotUserMappingViews(LotUserMappingView lotUserMappingView)
+        {
+            base.AddObject("LotUserMappingViews", lotUserMappingView);
         }
 
         #endregion
@@ -3533,6 +3637,581 @@ namespace THSMVC.Models
         private Nullable<global::System.Int32> _DealerId;
         partial void OnDealerIdChanging(Nullable<global::System.Int32> value);
         partial void OnDealerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsMRP
+        {
+            get
+            {
+                return _IsMRP;
+            }
+            set
+            {
+                OnIsMRPChanging(value);
+                ReportPropertyChanging("IsMRP");
+                _IsMRP = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsMRP");
+                OnIsMRPChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsMRP;
+        partial void OnIsMRPChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsMRPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> MRP
+        {
+            get
+            {
+                return _MRP;
+            }
+            set
+            {
+                OnMRPChanging(value);
+                ReportPropertyChanging("MRP");
+                _MRP = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MRP");
+                OnMRPChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _MRP;
+        partial void OnMRPChanging(Nullable<global::System.Decimal> value);
+        partial void OnMRPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> DiffAllowed
+        {
+            get
+            {
+                return _DiffAllowed;
+            }
+            set
+            {
+                OnDiffAllowedChanging(value);
+                ReportPropertyChanging("DiffAllowed");
+                _DiffAllowed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DiffAllowed");
+                OnDiffAllowedChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _DiffAllowed;
+        partial void OnDiffAllowedChanging(Nullable<global::System.Decimal> value);
+        partial void OnDiffAllowedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "LotUserMapping")]
+        public EntityCollection<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="LotStatu")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LotStatu : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LotStatu object.
+        /// </summary>
+        /// <param name="statusId">Initial value of the StatusId property.</param>
+        /// <param name="enumValue">Initial value of the EnumValue property.</param>
+        public static LotStatu CreateLotStatu(global::System.Int32 statusId, global::System.String enumValue)
+        {
+            LotStatu lotStatu = new LotStatu();
+            lotStatu.StatusId = statusId;
+            lotStatu.EnumValue = enumValue;
+            return lotStatu;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatusId
+        {
+            get
+            {
+                return _StatusId;
+            }
+            set
+            {
+                if (_StatusId != value)
+                {
+                    OnStatusIdChanging(value);
+                    ReportPropertyChanging("StatusId");
+                    _StatusId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StatusId");
+                    OnStatusIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _StatusId;
+        partial void OnStatusIdChanging(global::System.Int32 value);
+        partial void OnStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EnumValue
+        {
+            get
+            {
+                return _EnumValue;
+            }
+            set
+            {
+                OnEnumValueChanging(value);
+                ReportPropertyChanging("EnumValue");
+                _EnumValue = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EnumValue");
+                OnEnumValueChanged();
+            }
+        }
+        private global::System.String _EnumValue;
+        partial void OnEnumValueChanging(global::System.String value);
+        partial void OnEnumValueChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotUserMapping")]
+        public EntityCollection<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotUserMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotUserMapping", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="LotUserMapping")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LotUserMapping : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LotUserMapping object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="statusId">Initial value of the StatusId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        public static LotUserMapping CreateLotUserMapping(global::System.Int32 id, global::System.Int32 lotId, global::System.Int32 statusId, global::System.Int32 userId)
+        {
+            LotUserMapping lotUserMapping = new LotUserMapping();
+            lotUserMapping.Id = id;
+            lotUserMapping.LotId = lotId;
+            lotUserMapping.StatusId = statusId;
+            lotUserMapping.UserId = userId;
+            return lotUserMapping;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                OnLotIdChanging(value);
+                ReportPropertyChanging("LotId");
+                _LotId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LotId");
+                OnLotIdChanged();
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatusId
+        {
+            get
+            {
+                return _StatusId;
+            }
+            set
+            {
+                OnStatusIdChanging(value);
+                ReportPropertyChanging("StatusId");
+                _StatusId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StatusId");
+                OnStatusIdChanged();
+            }
+        }
+        private global::System.Int32 _StatusId;
+        partial void OnStatusIdChanging(global::System.Int32 value);
+        partial void OnStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot")]
+        public Lot Lot
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Lot> LotReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu")]
+        public LotStatu LotStatu
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LotStatu>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotStatu").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LotStatu>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotStatu").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LotStatu> LotStatuReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LotStatu>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotStatu");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LotStatu>("THSMVCDataModel.FK_LotUserMapping_LotStatus", "LotStatu", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_LotUserMapping_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_LotUserMapping_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_LotUserMapping_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("THSMVCDataModel.FK_LotUserMapping_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="LotUserMappingView")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LotUserMappingView : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LotUserMappingView object.
+        /// </summary>
+        /// <param name="lotName">Initial value of the LotName property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        public static LotUserMappingView CreateLotUserMappingView(global::System.String lotName, global::System.String userName, global::System.String status)
+        {
+            LotUserMappingView lotUserMappingView = new LotUserMappingView();
+            lotUserMappingView.LotName = lotName;
+            lotUserMappingView.UserName = userName;
+            lotUserMappingView.Status = status;
+            return lotUserMappingView;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LotName
+        {
+            get
+            {
+                return _LotName;
+            }
+            set
+            {
+                if (_LotName != value)
+                {
+                    OnLotNameChanging(value);
+                    ReportPropertyChanging("LotName");
+                    _LotName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("LotName");
+                    OnLotNameChanged();
+                }
+            }
+        }
+        private global::System.String _LotName;
+        partial void OnLotNameChanging(global::System.String value);
+        partial void OnLotNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                if (_UserName != value)
+                {
+                    OnUserNameChanging(value);
+                    ReportPropertyChanging("UserName");
+                    _UserName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("UserName");
+                    OnUserNameChanged();
+                }
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                if (_Status != value)
+                {
+                    OnStatusChanging(value);
+                    ReportPropertyChanging("Status");
+                    _Status = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Status");
+                    OnStatusChanged();
+                }
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
 
         #endregion
 
@@ -5956,6 +6635,167 @@ namespace THSMVC.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Stone")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Stone : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Stone object.
+        /// </summary>
+        /// <param name="stoneId">Initial value of the StoneId property.</param>
+        /// <param name="stoneName">Initial value of the StoneName property.</param>
+        /// <param name="stoneShortForm">Initial value of the StoneShortForm property.</param>
+        /// <param name="stonePerCarat">Initial value of the StonePerCarat property.</param>
+        /// <param name="isStoneWeightless">Initial value of the IsStoneWeightless property.</param>
+        public static Stone CreateStone(global::System.Int32 stoneId, global::System.String stoneName, global::System.String stoneShortForm, global::System.Int32 stonePerCarat, global::System.Boolean isStoneWeightless)
+        {
+            Stone stone = new Stone();
+            stone.StoneId = stoneId;
+            stone.StoneName = stoneName;
+            stone.StoneShortForm = stoneShortForm;
+            stone.StonePerCarat = stonePerCarat;
+            stone.IsStoneWeightless = isStoneWeightless;
+            return stone;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StoneId
+        {
+            get
+            {
+                return _StoneId;
+            }
+            set
+            {
+                if (_StoneId != value)
+                {
+                    OnStoneIdChanging(value);
+                    ReportPropertyChanging("StoneId");
+                    _StoneId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StoneId");
+                    OnStoneIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _StoneId;
+        partial void OnStoneIdChanging(global::System.Int32 value);
+        partial void OnStoneIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String StoneName
+        {
+            get
+            {
+                return _StoneName;
+            }
+            set
+            {
+                OnStoneNameChanging(value);
+                ReportPropertyChanging("StoneName");
+                _StoneName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("StoneName");
+                OnStoneNameChanged();
+            }
+        }
+        private global::System.String _StoneName;
+        partial void OnStoneNameChanging(global::System.String value);
+        partial void OnStoneNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String StoneShortForm
+        {
+            get
+            {
+                return _StoneShortForm;
+            }
+            set
+            {
+                OnStoneShortFormChanging(value);
+                ReportPropertyChanging("StoneShortForm");
+                _StoneShortForm = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("StoneShortForm");
+                OnStoneShortFormChanged();
+            }
+        }
+        private global::System.String _StoneShortForm;
+        partial void OnStoneShortFormChanging(global::System.String value);
+        partial void OnStoneShortFormChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StonePerCarat
+        {
+            get
+            {
+                return _StonePerCarat;
+            }
+            set
+            {
+                OnStonePerCaratChanging(value);
+                ReportPropertyChanging("StonePerCarat");
+                _StonePerCarat = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StonePerCarat");
+                OnStonePerCaratChanged();
+            }
+        }
+        private global::System.Int32 _StonePerCarat;
+        partial void OnStonePerCaratChanging(global::System.Int32 value);
+        partial void OnStonePerCaratChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsStoneWeightless
+        {
+            get
+            {
+                return _IsStoneWeightless;
+            }
+            set
+            {
+                OnIsStoneWeightlessChanging(value);
+                ReportPropertyChanging("IsStoneWeightless");
+                _IsStoneWeightless = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsStoneWeightless");
+                OnIsStoneWeightlessChanged();
+            }
+        }
+        private global::System.Boolean _IsStoneWeightless;
+        partial void OnIsStoneWeightlessChanging(global::System.Boolean value);
+        partial void OnIsStoneWeightlessChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -6428,6 +7268,32 @@ namespace THSMVC.Models
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "LotUserMapping")]
+        public EntityCollection<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_User", "LotUserMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_User", "LotUserMapping", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>

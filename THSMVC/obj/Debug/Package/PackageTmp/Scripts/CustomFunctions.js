@@ -279,7 +279,7 @@ function GetContentByActionAndController(Action, Controller, Viewtitle, contentH
         success: function (response) {
             $(contentHolder).html(response);
             document.title = Viewtitle;
-            // $("#Content :input[type='text']:enabled:first").focus();
+            $("#Content :input[type='text']:enabled:first").focus();
             $.unblockUI();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -468,6 +468,20 @@ function GetContentByActionAndControllerForEditMenuId(Action, Controller, Viewti
             Error(XMLHttpRequest, textStatus, errorThrown);
 
         }
+    });
+}
+function clearForm() {
+    ClearMsg();
+    $('input[type=text],input[type=password],select').each(function () {
+        $(this).val("");
+
+        if ($(this).is("select") & $(this)[0].size > 1) {
+            $(this)[0].options.length = 0;
+        }
+    });
+
+    $('input[type=radio]').each(function () {
+        $(this).attr("checked", false);
     });
 }
 function ChangePwdClear() {

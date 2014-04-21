@@ -6,6 +6,8 @@
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lot" EntityType="THSMVCDataModel.Store.Lot" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LotStatus" EntityType="THSMVCDataModel.Store.LotStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LotUserMapping" EntityType="THSMVCDataModel.Store.LotUserMapping" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Menu" EntityType="THSMVCDataModel.Store.Menu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuAccessRight" EntityType="THSMVCDataModel.Store.MenuAccessRight" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuGroup" EntityType="THSMVCDataModel.Store.MenuGroup" store:Type="Tables" Schema="dbo" />
@@ -16,9 +18,29 @@
     <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LotUserMappingView" EntityType="THSMVCDataModel.Store.LotUserMappingView" store:Type="Views" store:Schema="dbo" store:Name="LotUserMappingView">
+      <DefiningQuery>SELECT 
+      [LotUserMappingView].[LotName] AS [LotName], 
+      [LotUserMappingView].[UserName] AS [UserName], 
+      [LotUserMappingView].[Status] AS [Status]
+      FROM [dbo].[LotUserMappingView] AS [LotUserMappingView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.Store.FK_LotUserMapping_Lot">
+      <End Role="Lot" EntitySet="Lot" />
+      <End Role="LotUserMapping" EntitySet="LotUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LotUserMapping_LotStatus" Association="THSMVCDataModel.Store.FK_LotUserMapping_LotStatus">
+      <End Role="LotStatus" EntitySet="LotStatus" />
+      <End Role="LotUserMapping" EntitySet="LotUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LotUserMapping_User" Association="THSMVCDataModel.Store.FK_LotUserMapping_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="LotUserMapping" EntitySet="LotUserMapping" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Dealer">
     <Key>
@@ -88,6 +110,25 @@
     <Property Name="NoOfPieces" Type="int" />
     <Property Name="ProductGroupId" Type="int" Nullable="false" />
     <Property Name="DealerId" Type="int" />
+    <Property Name="IsMRP" Type="bit" />
+    <Property Name="MRP" Type="decimal" Scale="2" />
+    <Property Name="DiffAllowed" Type="decimal" Scale="2" />
+  </EntityType>
+  <EntityType Name="LotStatus">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EnumValue" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LotUserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LotId" Type="int" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -223,6 +264,16 @@
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
   </EntityType>
+  <EntityType Name="Stone">
+    <Key>
+      <PropertyRef Name="StoneId" />
+    </Key>
+    <Property Name="StoneId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StoneName" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="StoneShortForm" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="StonePerCarat" Type="int" Nullable="false" />
+    <Property Name="IsStoneWeightless" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -278,6 +329,55 @@
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="LotUserMappingView">
+    <Key>
+      <PropertyRef Name="LotName" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_LotUserMapping_Lot">
+    <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
+    <End Role="LotUserMapping" Type="THSMVCDataModel.Store.LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="LotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LotUserMapping_LotStatus">
+    <End Role="LotStatus" Type="THSMVCDataModel.Store.LotStatus" Multiplicity="1" />
+    <End Role="LotUserMapping" Type="THSMVCDataModel.Store.LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LotStatus">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LotUserMapping_User">
+    <End Role="User" Type="THSMVCDataModel.Store.User" Multiplicity="1" />
+    <End Role="LotUserMapping" Type="THSMVCDataModel.Store.LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="stp_Assign_Remove_MenuItems_Role" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
     <Parameter Name="RoleId" Type="int" Mode="In" />

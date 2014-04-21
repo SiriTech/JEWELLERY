@@ -242,6 +242,22 @@
     <EntitySet Name="Products" EntityType="THSMVCDataModel.Product" />
     <EntitySet Name="ProductCategories" EntityType="THSMVCDataModel.ProductCategory" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.UserDetail" />
+    <EntitySet Name="LotStatus" EntityType="THSMVCDataModel.LotStatu" />
+    <EntitySet Name="LotUserMappings" EntityType="THSMVCDataModel.LotUserMapping" />
+    <EntitySet Name="Stones" EntityType="THSMVCDataModel.Stone" />
+    <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.FK_LotUserMapping_Lot">
+      <End Role="Lot" EntitySet="Lots" />
+      <End Role="LotUserMapping" EntitySet="LotUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LotUserMapping_LotStatus" Association="THSMVCDataModel.FK_LotUserMapping_LotStatus">
+      <End Role="LotStatu" EntitySet="LotStatus" />
+      <End Role="LotUserMapping" EntitySet="LotUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LotUserMapping_User" Association="THSMVCDataModel.FK_LotUserMapping_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="LotUserMapping" EntitySet="LotUserMappings" />
+    </AssociationSet>
+    <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -695,6 +711,7 @@
     <Property Type="Int32" Name="FailedPasswordAttemptCount" />
     <Property Type="Boolean" Name="ChangePwdonLogin" />
     <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="User" ToRole="LotUserMapping" />
   </EntityType>
   <EntityType Name="UserMenu">
     <Key>
@@ -724,6 +741,10 @@
     <Property Type="Int32" Name="NoOfPieces" />
     <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
     <Property Type="Int32" Name="DealerId" />
+    <Property Type="Boolean" Name="IsMRP" />
+    <Property Type="Decimal" Name="MRP" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
+    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
   </EntityType>
   <EntityType Name="GoldRate">
     <Key>
@@ -841,5 +862,81 @@
     <Property Type="String" Name="PinCode" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Mobile" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LotStatu">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Type="Int32" Name="StatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="EnumValue" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotStatu" ToRole="LotUserMapping" />
+  </EntityType>
+  <EntityType Name="LotUserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="LotId" Nullable="false" />
+    <Property Type="Int32" Name="StatusId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
+    <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
+    <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Stone">
+    <Key>
+      <PropertyRef Name="StoneId" />
+    </Key>
+    <Property Type="Int32" Name="StoneId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="StoneName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StoneShortForm" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="StonePerCarat" Nullable="false" />
+    <Property Type="Boolean" Name="IsStoneWeightless" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_LotUserMapping_Lot">
+    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="LotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LotUserMapping_LotStatus">
+    <End Type="THSMVCDataModel.LotStatu" Role="LotStatu" Multiplicity="1" />
+    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LotStatu">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LotUserMapping_User">
+    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
+    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LotUserMappingView">
+    <Key>
+      <PropertyRef Name="LotName" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

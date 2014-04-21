@@ -158,6 +158,9 @@
     <EntitySetMapping Name="Lots">
       <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
         <MappingFragment StoreEntitySet="Lot">
+          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
           <ScalarProperty Name="DealerId" ColumnName="DealerId" />
           <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
           <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
@@ -289,6 +292,44 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LotStatus">
+      <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
+        <MappingFragment StoreEntitySet="LotStatus">
+          <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LotUserMappings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
+        <MappingFragment StoreEntitySet="LotUserMapping">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stones">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
+        <MappingFragment StoreEntitySet="Stone">
+          <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
+          <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
+          <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
+          <ScalarProperty Name="StoneName" ColumnName="StoneName" />
+          <ScalarProperty Name="StoneId" ColumnName="StoneId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LotUserMappingViews">
+      <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
+        <MappingFragment StoreEntitySet="LotUserMappingView">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LotName" ColumnName="LotName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

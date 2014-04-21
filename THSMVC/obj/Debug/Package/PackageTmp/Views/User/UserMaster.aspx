@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-    .ui-state-default .ui-icon-trash {
+    .ui-state-default .ui-icon-customtrash {
     background: url("../images/info.png");
     background-position: 0 0;
 

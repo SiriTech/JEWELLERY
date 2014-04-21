@@ -12,6 +12,7 @@ namespace THSMVC.App_Code
         private bool disposed = false;
         DataStoreEntities dse = new DataStoreEntities();
 
+        #region Lot
         public IQueryable<LotMasterModel> GetLots()
         {
             
@@ -22,12 +23,17 @@ namespace THSMVC.App_Code
                                              {
                                                 DealerId = (int)d.DealerId,
                                                 LotId = d.LotId,
-                                                LotName = d.LotName,
+                                                LotName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.LotName + "</a>",
                                                 ProductGroupId = d.ProductGroupId,
                                                 Qty = (double) d.NoOfPieces,
                                                 Weight = (double) d.Weight
                                              }).ToList<LotMasterModel>();
             return Userinfo.AsQueryable();
+        }
+
+        public List<Lot> GetAllLots()
+        {
+            return (from pg in dse.Lots select pg).ToList();
         }
 
         public bool CreateLot(Lot objLot)
@@ -43,6 +49,97 @@ namespace THSMVC.App_Code
                 return false;
             }
         }
+
+        public bool UpdateLot(Lot objLot)
+        {
+
+            try
+            {
+                Lot lot = dse.Lots.Where(x => x.LotId == objLot.LotId).FirstOrDefault();
+                lot.DealerId = objLot.DealerId;
+                lot.LotName = objLot.LotName;
+                lot.NoOfPieces = (int)objLot.NoOfPieces;
+                lot.ProductGroupId = objLot.ProductGroupId;
+                lot.Weight = (int)objLot.Weight;
+
+                // dse.Lots.AddObject(objLot);
+                dse.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public LotMasterModel GetLotModelById(int Id)
+        {
+            LotMasterModel model = new LotMasterModel();
+
+            model = (from lot in dse.Lots
+                     where lot.LotId == Id
+                     select new LotMasterModel()
+                     {
+                         DealerId = lot.DealerId == null ? 0:  (int)lot.DealerId,
+                         DiffAllowed = lot.DiffAllowed == null ?0: (double)lot.DiffAllowed,
+                         IsMRP = lot.IsMRP == null ? false : (bool)lot.IsMRP,
+                         LotId = lot.LotId,
+                         LotName = lot.LotName,
+                         MRP = lot.MRP == null ? 0 : (double)lot.MRP,
+                         ProductGroupId = lot.ProductGroupId,
+                         Qty = lot.NoOfPieces == null ? 0 : (double)lot.NoOfPieces,
+                         Weight = lot.Weight == null ? 0 : (double)lot.Weight
+                     }).FirstOrDefault();
+
+            return model;
+        }
+
+        #endregion
+
+        public IQueryable<User> GetUsers()
+        {
+            List<User> Userinfo = (from u in dse.Users
+                                   join ud in dse.UserDetails on u.Id equals ud.UserId
+                                   select u).ToList<User>();
+            return Userinfo.AsQueryable();
+        }
+
+        public List<ProductGroup> GetAllProductGroups()
+        {
+            return (from pg in dse.ProductGroups where (pg.Status == null || pg.Status == false) select pg).ToList();
+        }
+
+        public List<Dealer> GetAllDealers()
+        {
+            return (from dealer in dse.Dealers where (dealer.Status == null || dealer.Status == false) select dealer).ToList();
+        }
+
+        public bool AssignLot(int LotId, int UserId, int StatusId)
+        {
+            LotUserMapping obj = new LotUserMapping
+            {
+                LotId = LotId,
+                UserId = UserId,
+                StatusId = StatusId
+            };
+            try
+            {
+                dse.LotUserMappings.AddObject(obj);
+                dse.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<LotUserMappingView> GetAssignedLots()
+        {
+            return (from lotMapping in dse.LotUserMappingViews select lotMapping).ToList();
+        }
+        
+             
 
         // Implement IDisposable.
         // Do not make this method virtual.

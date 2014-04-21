@@ -5,59 +5,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">
-    .ui-state-default .ui-icon-trash {
-    background: url("../images/info.png");
-    background-position: 0 0;
-
-}
-        </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadUsers();
+            LoadProductCategorys();
         });
         function Create() {
-            $("#divUserMaster").hide();
-            $("#CreateUser").hide();
+            $("#divProductCategoryMaster").hide();
+            $("#CreateProductCategory").hide();
             $("#backToList").show();
-            $("#divCreateUser").show();
-            GetContentByActionAndController('AddEditUser', 'User', 'Add/Edit User', '#divCreateUser');
+            $("#divCreateProductCategory").show();
+            GetContentByActionAndController('AddEditProductCategory', 'ProductCategory', 'Add/Edit Product Category', '#divCreateProductCategory');
         }
-        function UpdateUser(id) {
-            $("#divUserMaster").hide();
-            $("#CreateUser").hide();
+        function UpdateProductCategory(id) {
+            $("#divProductCategoryMaster").hide();
+            $("#CreateProductCategory").hide();
             $("#backToList").show();
-            $("#divCreateUser").show();
-            GetContentByActionAndControllerForEdit('EditUser', 'User', 'Add/Edit User', id, '#divCreateUser');
+            $("#divCreateProductCategory").show();
+            GetContentByActionAndControllerForEdit('EditProductCategory', 'ProductCategory', 'Add/Edit Product Category', id, '#divCreateProductCategory');
         }
-        function LoadUsers() {
+        function LoadProductCategorys() {
             var gridDataUrl;
-            gridDataUrl = '/User/JsonUserCollection';
+            gridDataUrl = '/ProductCategory/JsonProductCategoryCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Name', 'Address', 'City', 'State', 'PinCode', 'Mobile', 'RoleName', 'Active'],
+                colNames: ['Id', 'Product Category'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'Name', index: 'Name', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
-                  { name: 'Address', index: 'Address', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
-                { name: 'City', index: 'City', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
-                { name: 'State', index: 'State', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
-                { name: 'PinCode', index: 'PinCode', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
-                { name: 'Mobile', index: 'Mobile', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
-                { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
-                { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
+                  { name: 'ProductCategory1', index: 'ProductCategory1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
                 ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'Name',
+                sortname: 'ProductCategory1',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Users",
+                caption: "Product Categories",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -100,7 +86,7 @@
 
        }, // default settings for add
        {
-           url: "/User/DelUser",
+           url: "/ProductCategory/DelProductCategory",
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");
@@ -134,26 +120,24 @@
        { closeOnEscape: true, width: 350 } // view options
     );
             $.extend($.jgrid.search, { Find: 'Search' });
-            $.extend($.jgrid.navGrid, { delicon: 'ui-icon-customtrash' });
-            //$("#list").jqGrid("navGrid", "#pager", { delicon: "ui-icon-customtrash" });
 
         }
     </script>
 </head>
 <body>
-    <div class="clear">
+      <div class="clear">
         
         <div style="float: left;">
-            <input type="button" id="CreateUser" class="rg_button_red upper" title="Click to Create User"
-                value="Create User" onclick="Create()" />
+            <input type="button" id="CreateProductCategory" class="rg_button_red upper" title="Click to Create Product Category"
+                value="Create Product Category" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To User List"
+            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product Category List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divUserMaster">
+    <div id="divProductCategoryMaster">
         
         <div id="gridWrapper" style="width: 100%;">
            
@@ -167,7 +151,7 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateUser">
+    <div id="divCreateProductCategory">
     </div>
 </body>
 </html>

@@ -3,61 +3,48 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
-    <style type="text/css">
-    .ui-state-default .ui-icon-trash {
-    background: url("../images/info.png");
-    background-position: 0 0;
-
-}
-        </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadUsers();
+            LoadDealers();
         });
         function Create() {
-            $("#divUserMaster").hide();
-            $("#CreateUser").hide();
+            $("#divDealerMaster").hide();
+            $("#CreateDealer").hide();
             $("#backToList").show();
-            $("#divCreateUser").show();
-            GetContentByActionAndController('AddEditUser', 'User', 'Add/Edit User', '#divCreateUser');
+            $("#divCreateDealer").show();
+            GetContentByActionAndController('AddEditDealer', 'Dealer', 'Add/Edit Dealer', '#divCreateDealer');
         }
-        function UpdateUser(id) {
-            $("#divUserMaster").hide();
-            $("#CreateUser").hide();
+        function UpdateDealer(id) {
+            $("#divDealerMaster").hide();
+            $("#CreateDealer").hide();
             $("#backToList").show();
-            $("#divCreateUser").show();
-            GetContentByActionAndControllerForEdit('EditUser', 'User', 'Add/Edit User', id, '#divCreateUser');
+            $("#divCreateDealer").show();
+            GetContentByActionAndControllerForEdit('EditDealer', 'Dealer', 'Add/Edit Dealer', id, '#divCreateDealer');
         }
-        function LoadUsers() {
+        function LoadDealers() {
             var gridDataUrl;
-            gridDataUrl = '/User/JsonUserCollection';
+            gridDataUrl = '/Dealer/JsonDealerCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Name', 'Address', 'City', 'State', 'PinCode', 'Mobile', 'RoleName', 'Active'],
+                colNames: ['Id', 'Dealer Name','Company Name'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'Name', index: 'Name', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
-                  { name: 'Address', index: 'Address', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
-                { name: 'City', index: 'City', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
-                { name: 'State', index: 'State', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
-                { name: 'PinCode', index: 'PinCode', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
-                { name: 'Mobile', index: 'Mobile', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
-                { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
-                { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
+                  { name: 'DealerName', index: 'DealerName', align: 'left', formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
+                  { name: 'CompanyName', index: 'CompanyName', align: 'left', formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } }
                 ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'Name',
+                sortname: 'DealerName',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Users",
+                caption: "Dealers",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -100,7 +87,7 @@
 
        }, // default settings for add
        {
-           url: "/User/DelUser",
+           url: "/Dealer/DelDealer",
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");
@@ -134,29 +121,27 @@
        { closeOnEscape: true, width: 350 } // view options
     );
             $.extend($.jgrid.search, { Find: 'Search' });
-            $.extend($.jgrid.navGrid, { delicon: 'ui-icon-customtrash' });
-            //$("#list").jqGrid("navGrid", "#pager", { delicon: "ui-icon-customtrash" });
 
         }
     </script>
 </head>
 <body>
     <div class="clear">
-        
+
         <div style="float: left;">
-            <input type="button" id="CreateUser" class="rg_button_red upper" title="Click to Create User"
-                value="Create User" onclick="Create()" />
+            <input type="button" id="CreateDealer" class="rg_button_red upper" title="Click to Create Dealer"
+                value="Create Dealer" onclick="Create()" />
         </div>
-      
+
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To User List"
+            <input type="button" class="rg_button_red upper" style="display: none;" id="backToList" title="Back" value="Back To Dealer List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divUserMaster">
-        
+    <div id="divDealerMaster">
+
         <div id="gridWrapper" style="width: 100%;">
-           
+
             <div>
                 <table id="list" class="scroll" cellpadding="0" cellspacing="0">
                 </table>
@@ -167,7 +152,20 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateUser">
+    <div id="validationDiv" style="margin-top: 10px; font-weight: bold; color: Red;">
     </div>
+    <div id="statusDiv" style="margin-top: 10px;">
+        <center>
+            <span id="_status" style="font-size: 1px; font-weight: bold;"></span>
+        </center>
+    </div>
+    <div id="divCreateDealer">
+    </div>
+
+    <script type="text/javascript">
+
+        
+        
+    </script>
 </body>
 </html>

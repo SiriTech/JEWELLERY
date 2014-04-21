@@ -137,6 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LotAssignModel.cs" />
     <Compile Include="Models\LotModel.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
     <Compile Include="Models\ProductGroupModel.cs" />
@@ -240,6 +241,7 @@
     <Content Include="images\grad_inline.gif" />
     <Content Include="images\icons_35.png" />
     <Content Include="images\indicator.gif" />
+    <Content Include="images\info.png" />
     <Content Include="images\K.gif" />
     <Content Include="images\loading.gif" />
     <Content Include="images\maximize.png" />
@@ -541,6 +543,7 @@
     <Content Include="Views\Dealer\AddEditDealer.aspx" />
     <Content Include="Views\Dealer\DealerMaster.aspx" />
     <Content Include="Views\Home\ContactUS.aspx" />
+    <Content Include="Views\Lot\AssignLot.aspx" />
     <Content Include="Views\Lot\CreateLot.aspx" />
     <Content Include="Views\Lot\LotMaster.aspx" />
     <Content Include="Views\ProductCategory\AddEditProductCategory.aspx" />

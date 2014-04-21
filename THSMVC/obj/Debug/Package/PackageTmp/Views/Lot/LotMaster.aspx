@@ -23,6 +23,7 @@
             ClearMsg();
             $("#ManageUsers").slideUp();
             $("#divbackToSearch").show();
+            $("#CreateUser").hide();
             $("#UserTabs").show();
             GetContentByActionAndController('CreateLot', 'Lot', 'Create Lot', '#UserTabs');
             $("#backToList").show();
@@ -30,40 +31,78 @@
 
         function CreateLot_Submit() {
 
-            $.ajax({
-                type: "POST",
-                traditional: true,
-                url: "/Lot/CreateLot",
-                data: {
-                    LotId: $("#hdnLotID").val(),
-                    LotName: $("#LotName").val(),
-                    ProductGroupId: $("#ProductGroupId").val(),
-                    Weight: $("#Weight").val(),
-                    Qty: $("#Qty").val(),
-                    DealerId: $("#DealerId").val()
-                },
-                dataType: "json",
-                beforeSend: function () {
-                    $.blockUI();   //this is great plugin - 'blockUI'
-                },
-                success: function (result) {
-                    if (result.success) {
-                        Success(result.msg);
-                    }
-                    else {
-                        Failure(result.msg);
-                    }
-                    $.unblockUI();
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $.unblockUI();
-                    Error(XMLHttpRequest, textStatus, errorThrown);
+            var url = '';
+            var error = '';
+            var LId = $("#hdnLotID").val();
+            var LName = $("#LotName").val();
+            var PGId = $("#ProductGroupId").val();
+            var Weight =  $("#Weight").val();
+            var Qty = $("#Qty").val();
+            var DId = $("#DealerId").val();
+            var IsMRP = $("#IsMRP").val();
+            var MRP = $("#MRP").val();
+            var DiffAllowed = $("#DiffAllowed").val();
+            debugger;
+            if (LName == null || LName == '' || LName == undefined) {
+                error = error + "Lot name is missing. <br />";
+            }
+            if (PGId == null || PGId == '' || PGId == undefined || PGId == '0') {
+                error = error + "Product Group is missing. <br />";
+            }
+            if (Qty == null || Qty == '' || Qty == undefined || Qty =="0") {
+                error = error + "Quantity is missing. <br />";
+            }
+            if ((Weight == null || Weight == '' || Weight == undefined || Weight =="0") && ( MRP == null || MRP == '' || MRP == undefined || MRP == "0")) {
+                error = error + "Weight/MRP is missing.";
+            }
+
+            if (error.trim().length > 1) {
+                Failure(error);
+            }else {
+                if ($("#hdnLotID").val() == '' || $("#hdnLotID").val() == null || $("#hdnLotID").val() == "0") {
+                    url = "/Lot/CreateLot";
+                } else {
+                    url = "/Lot/UpdateLot";
                 }
-            });
+
+                $.ajax({
+                    type: "POST",
+                    traditional: true,
+                    url: url,
+                    data: {
+                        LotId: LId,
+                        LotName: LName,
+                        ProductGroupId: PGId,
+                        Weight: Weight,
+                        Qty: Qty,
+                        DealerId: DId,
+                        IsMRP: IsMRP,
+                        MRP: MRP,
+                        DiffAllowed: DiffAllowed
+                    },
+                    dataType: "json",
+                    beforeSend: function () {
+                        $.blockUI();   //this is great plugin - 'blockUI'
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            Success(result.msg);
+                            clearForm();
+                        }
+                        else {
+                            Failure(result.msg);
+                        }
+                        $.unblockUI();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $.unblockUI();
+                        Error(XMLHttpRequest, textStatus, errorThrown);
+                    }
+                });
+            }
 
         }
 
-        
 
         function toggleSearch() {
             ClearMsg();
@@ -75,7 +114,7 @@
                 $("#UserTabs").hide();
                 $("#divbackToSearch").hide();
                 $("#backToList").hide();
-                
+                $("#CreateUser").show();
                 jQuery('#list').jqGrid('setGridParam', { url: gridDataUrl }).trigger("reloadGrid");
             }
 
@@ -125,10 +164,10 @@
         var gridDataUrl;
         var Update = '<%=Model.Update %>';
         if (Update == "True") {
-            gridDataUrl = '/Admin/JsonLotCollection';
+            gridDataUrl = '/Lot/JsonLotCollection';
         }
         else {
-            gridDataUrl = '/Admin/JsonLotCollection';
+            gridDataUrl = '/Lot/JsonLotCollection';
         }
         jQuery("#list").jqGrid({
             url: gridDataUrl,
@@ -217,6 +256,19 @@
                 return false;
             }
         });
+
+        function UpdateLot(lotId) {
+            ClearMsg();
+            $("#ManageUsers").slideUp();
+            $("#divbackToSearch").show();
+            $("#backToList").show();
+            $("#CreateUser")[0].className = "rg_button upper";
+            $("#UserTabs").show();
+            $(".TabContent").show();
+
+           // GetContentByActionAndController('CreateUser', 'Admin', 'Create User', '#UserTabs');
+            GetContentByActionAndControllerForEdit("EditLot", "Lot", "Update Lot", lotId, '#UserTabs');
+        }
     </script>
 </body>
 </html>
