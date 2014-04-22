@@ -15,10 +15,11 @@ namespace THSMVC.Classes
         public string CountryName { get; set; }
 
         DataStoreEntities dse = new DataStoreEntities();
+        int inststanceId = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
         public IQueryable<DealerModel> GetDealers()
         {
             List<DealerModel> Dealer = (from d in dse.Dealers
-                                                    where ((d.Status) == null || (bool)d.Status == false)
+                                        where ((d.Status) == null || (bool)d.Status == false) && d.InstanceId == inststanceId
                                                     select new DealerModel
                                                     {
                                                         Id = d.DealerId,

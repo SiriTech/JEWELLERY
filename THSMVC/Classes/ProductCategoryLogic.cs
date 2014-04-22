@@ -12,10 +12,11 @@ namespace THSMVC.Classes
         private bool disposed = false;
 
         DataStoreEntities dse = new DataStoreEntities();
+        int inststanceId = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
         public IQueryable<ProductCategoryModel> GetProductCategories()
         {
             List<ProductCategoryModel> ProductCategory = (from d in dse.ProductCategories
-                                                    where ((d.Status) == null || (bool)d.Status == false)
+                                                    where ((d.Status) == null || (bool)d.Status == false) && d.InstanceId == inststanceId
                                                     select new ProductCategoryModel
                                                     {
                                                         Id = d.Id,
@@ -27,7 +28,7 @@ namespace THSMVC.Classes
         public IQueryable<ProductCategoryModel> GetProductCategoriesList()
         {
             List<ProductCategoryModel> ProductCategory = (from d in dse.ProductCategories
-                                                          where ((d.Status) == null || (bool)d.Status == false)
+                                                          where ((d.Status) == null || (bool)d.Status == false) && d.InstanceId == inststanceId
                                                           select new ProductCategoryModel
                                                           {
                                                               Id = d.Id,

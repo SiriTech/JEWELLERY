@@ -9,5 +9,6 @@ namespace THSMVC.Models
     {
         public int Id { get; set; }
         public string RoleName { get; set; }
+        public string BtnText { get; set; }
     }
 }

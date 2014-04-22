@@ -108,6 +108,7 @@
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductGroupController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Classes\DiskFileStore.cs" />
     <Compile Include="Classes\EmailHelper.cs" />
@@ -138,6 +139,7 @@
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LotAssignModel.cs" />
+    <Compile Include="Models\LotDropdownModel.cs" />
     <Compile Include="Models\LotModel.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
     <Compile Include="Models\ProductGroupModel.cs" />
@@ -552,6 +554,8 @@
     <Content Include="Views\ProductGroup\ProductGroupMaster.aspx" />
     <Content Include="Views\Product\AddEditProduct.aspx" />
     <Content Include="Views\Product\ProductMaster.aspx" />
+    <Content Include="Views\Role\AddEditRole.aspx" />
+    <Content Include="Views\Role\RoleMaster.aspx" />
     <Content Include="Views\Shared\SessionExpire.aspx" />
     <Content Include="Views\Shared\ChangePwd.aspx" />
     <Content Include="Views\Shared\Empty.aspx" />

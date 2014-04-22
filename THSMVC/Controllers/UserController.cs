@@ -101,11 +101,13 @@ namespace THSMVC.Controllers
         {
             try
             {
+                int inststanceId = Convert.ToInt32(Session["InstanceId"]);
                 using (DataStoreEntities dse = new DataStoreEntities())
                 {
                     if (model.Id == 0)
                     {
                         User group = new User();
+                        group.InstanceId = inststanceId;
                         group.UserName = model.Username;
                         group.Password = _encrypter.Encrypt(model.Password);
                         group.Email = model.Email;

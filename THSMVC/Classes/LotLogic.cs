@@ -13,12 +13,13 @@ namespace THSMVC.App_Code
         DataStoreEntities dse = new DataStoreEntities();
 
         #region Lot
+        int inststanceId = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
         public IQueryable<LotMasterModel> GetLots()
         {
             
 
             List<LotMasterModel> Userinfo = (from d in dse.Lots
-
+                                             where d.InstanceId == inststanceId
                                              select new LotMasterModel()
                                              {
                                                 DealerId = (int)d.DealerId,
@@ -33,7 +34,12 @@ namespace THSMVC.App_Code
 
         public List<Lot> GetAllLots()
         {
-            return (from pg in dse.Lots select pg).ToList();
+            List<int> lotMappings = dse.LotUserMappings.Select(x=>x.LotId).ToList();
+            return (from pg in dse.Lots
+                    join lm in dse.LotUserMappings on pg.LotId equals lm.LotId into lj
+                    from lm in lj.DefaultIfEmpty()
+                    where !lotMappings.Contains(pg.LotId) && pg.InstanceId == inststanceId
+                    select pg).ToList();
         }
 
         public bool CreateLot(Lot objLot)
@@ -100,18 +106,19 @@ namespace THSMVC.App_Code
         {
             List<User> Userinfo = (from u in dse.Users
                                    join ud in dse.UserDetails on u.Id equals ud.UserId
+                                   where u.InstanceId==inststanceId
                                    select u).ToList<User>();
             return Userinfo.AsQueryable();
         }
 
         public List<ProductGroup> GetAllProductGroups()
         {
-            return (from pg in dse.ProductGroups where (pg.Status == null || pg.Status == false) select pg).ToList();
+            return (from pg in dse.ProductGroups where (pg.Status == null || pg.Status == false) && pg.InstanceId == inststanceId select pg).ToList();
         }
 
         public List<Dealer> GetAllDealers()
         {
-            return (from dealer in dse.Dealers where (dealer.Status == null || dealer.Status == false) select dealer).ToList();
+            return (from dealer in dse.Dealers where (dealer.Status == null || dealer.Status == false) && dealer.InstanceId == inststanceId select dealer).ToList();
         }
 
         public bool AssignLot(int LotId, int UserId, int StatusId)
@@ -136,7 +143,7 @@ namespace THSMVC.App_Code
 
         public List<LotUserMappingView> GetAssignedLots()
         {
-            return (from lotMapping in dse.LotUserMappingViews select lotMapping).ToList();
+            return (from lotMapping in dse.LotUserMappingViews where lotMapping.InstanceId == inststanceId select lotMapping).ToList();
         }
         
              

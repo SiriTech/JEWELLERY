@@ -29,9 +29,11 @@
           <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LotUserMappingView" EntityType="THSMVCDataModel.Store.LotUserMappingView" store:Type="Views" store:Schema="dbo" store:Name="LotUserMappingView">
             <DefiningQuery>SELECT 
+      [LotUserMappingView].[LotId] AS [LotId], 
       [LotUserMappingView].[LotName] AS [LotName], 
       [LotUserMappingView].[UserName] AS [UserName], 
-      [LotUserMappingView].[Status] AS [Status]
+      [LotUserMappingView].[Status] AS [Status], 
+      [LotUserMappingView].[InstanceId] AS [InstanceId]
       FROM [dbo].[LotUserMappingView] AS [LotUserMappingView]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.Store.FK_LotUserMapping_Lot">
@@ -52,6 +54,7 @@
             <PropertyRef Name="DealerId" />
           </Key>
           <Property Name="DealerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="DealerName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="CompanyShortForm" Type="varchar" MaxLength="10" />
@@ -110,6 +113,7 @@
             <PropertyRef Name="LotId" />
           </Key>
           <Property Name="LotId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="Weight" Type="decimal" Scale="2" />
           <Property Name="NoOfPieces" Type="int" />
@@ -187,6 +191,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="ShortForm" Type="varchar" MaxLength="100" />
           <Property Name="ValueAddedByPerc" Type="decimal" Scale="3" />
@@ -208,6 +213,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="ProductCategory" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -220,6 +226,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -274,10 +281,16 @@
             <PropertyRef Name="StoneId" />
           </Key>
           <Property Name="StoneId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
           <Property Name="StoneName" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="StoneShortForm" Type="varchar" Nullable="false" MaxLength="10" />
-          <Property Name="StonePerCarat" Type="int" Nullable="false" />
+          <Property Name="StonePerCarat" Type="int" />
           <Property Name="IsStoneWeightless" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -339,13 +352,17 @@
       -->
         <EntityType Name="LotUserMappingView">
           <Key>
+            <PropertyRef Name="LotId" />
             <PropertyRef Name="LotName" />
             <PropertyRef Name="UserName" />
             <PropertyRef Name="Status" />
+            <PropertyRef Name="InstanceId" />
           </Key>
+          <Property Name="LotId" Type="int" Nullable="false" />
           <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_LotUserMapping_Lot">
           <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
@@ -1149,6 +1166,7 @@
           <Property Type="Decimal" Name="MRP" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
           <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="GoldRate">
           <Key>
@@ -1200,6 +1218,7 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="Dealer">
           <Key>
@@ -1219,6 +1238,7 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1240,6 +1260,7 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductCategory">
           <Key>
@@ -1252,6 +1273,7 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -1294,8 +1316,14 @@
           <Property Type="Int32" Name="StoneId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="StoneName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="StoneShortForm" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="StonePerCarat" Nullable="false" />
+          <Property Type="Int32" Name="StonePerCarat" />
           <Property Type="Boolean" Name="IsStoneWeightless" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <Association Name="FK_LotUserMapping_Lot">
           <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
@@ -1335,13 +1363,17 @@
         </Association>
         <EntityType Name="LotUserMappingView">
           <Key>
+            <PropertyRef Name="LotId" />
             <PropertyRef Name="LotName" />
             <PropertyRef Name="UserName" />
             <PropertyRef Name="Status" />
+            <PropertyRef Name="InstanceId" />
           </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" />
           <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1506,6 +1538,7 @@
           <EntitySetMapping Name="Lots">
             <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
               <MappingFragment StoreEntitySet="Lot">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
                 <ScalarProperty Name="MRP" ColumnName="MRP" />
                 <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
@@ -1563,6 +1596,7 @@
           <EntitySetMapping Name="ProductGroups">
             <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
               <MappingFragment StoreEntitySet="ProductGroup">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
@@ -1576,6 +1610,7 @@
           <EntitySetMapping Name="Dealers">
             <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
               <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
@@ -1596,6 +1631,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="THSMVCDataModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
@@ -1618,6 +1654,7 @@
           <EntitySetMapping Name="ProductCategories">
             <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
               <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
@@ -1664,6 +1701,12 @@
           <EntitySetMapping Name="Stones">
             <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
               <MappingFragment StoreEntitySet="Stone">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
                 <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
                 <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
@@ -1675,9 +1718,11 @@
           <EntitySetMapping Name="LotUserMappingViews">
             <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
               <MappingFragment StoreEntitySet="LotUserMappingView">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="LotName" ColumnName="LotName" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1712,7 +1757,7 @@
         <EntityTypeShape EntityType="THSMVCDataModel.User" Width="1.5" PointX="0.070038143578003226" PointY="4.4193572273568051" />
         <EntityTypeShape EntityType="THSMVCDataModel.UserMenu" Width="1.5" PointX="4.1149656121223073" PointY="17.237555437366272" />
         <EntityTypeShape EntityType="THSMVCDataModel.Lot" Width="1.5" PointX="3.375" PointY="0.75" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="3.375" PointY="3.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="3" PointY="4.5" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="5.375" PointY="0.75" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="7.375" PointY="0.75" Height="3.5186979166666674" />
         <EntityTypeShape EntityType="THSMVCDataModel.ProductGroup" Width="1.5" PointX="0.75" PointY="9.75" Height="2.3648893229166674" />
@@ -1748,7 +1793,7 @@
           <ConnectorPoint PointX="10.593752" PointY="6.5" />
           <ConnectorPoint PointX="10.593752" PointY="5.1148893229166674" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="7.375" PointY="10.75" Height="1.5956835937500067" />
+        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="7.8416569828249782" PointY="31.176742314909" />
       </Diagram>
     </Diagrams>
   </Designer>

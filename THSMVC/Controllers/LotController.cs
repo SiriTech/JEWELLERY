@@ -11,7 +11,7 @@ using THSMVC.Services.Logging.Log4Net;
 
 namespace THSMVC.Controllers
 {
-    public class LotController: Controller
+    public class LotController : Controller
     {
         Log4NetLogger logger = new Log4NetLogger();
 
@@ -65,6 +65,7 @@ namespace THSMVC.Controllers
             bool result = false;
             Lot lot = new Lot
             {
+                InstanceId = Convert.ToInt32(Session["InstanceId"]),
                 DealerId = objLotMasterModel.DealerId,
                 LotId = objLotMasterModel.LotId,
                 LotName = objLotMasterModel.LotName,
@@ -113,7 +114,7 @@ namespace THSMVC.Controllers
                 var context = GetLots();
 
                 //sorting
-              //  context = context.OrderBy<LotMasterModel>(grid.SortColumn, grid.SortOrder);
+                //  context = context.OrderBy<LotMasterModel>(grid.SortColumn, grid.SortOrder);
 
                 //count
                 var count = context.Count();
@@ -180,9 +181,10 @@ namespace THSMVC.Controllers
                           from s in context
                           select new
                           {
-                              i = s.LotName,
+                              Id = s.LotId,
                               cell = new string[] {
-                            s.LotName, //s.LotName,
+                                  s.LotId.ToString(),
+                            s.LotName,
                             s.UserName,
                             s.Status
                         }
@@ -199,7 +201,25 @@ namespace THSMVC.Controllers
                 return Json(false);
             }
         }
-
+        [LogsRequest]
+        public ActionResult DelLotAssignment(int id)
+        {
+            try
+            {
+                using (var db = new DataStoreEntities())
+                {
+                    LotUserMapping lm = db.LotUserMappings.Where(x => x.LotId == id).FirstOrDefault();
+                    db.LotUserMappings.DeleteObject(lm);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Lot deleted successfully" });
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("DelUser", ex);
+                return Json(false);
+            }
+        }
         public ActionResult EditLot(int Id)
         {
             LotMasterModel lot = new LotMasterModel();
@@ -250,12 +270,24 @@ namespace THSMVC.Controllers
             LotAssignModel model = new LotAssignModel
             {
                 LotList = LotList,
-                 UserList = UserList
+                UserList = UserList
             };
 
             return View(model);
         }
-
+        public ActionResult LotDropdown()
+        {
+            List<Lot> LotList = GetAllLots();
+            List<LotDropdownModel> model = new List<LotDropdownModel>();
+            foreach (Lot l in LotList)
+            {
+                LotDropdownModel mdl = new LotDropdownModel();
+                mdl.LotId = l.LotId;
+                mdl.LotName = l.LotName;
+                model.Add(mdl);
+            }
+            return Json(new { result=model});
+        }
         [HttpPost]
         public ActionResult AssignLot(int LotId, int UserId)
         {

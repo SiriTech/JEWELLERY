@@ -11,54 +11,62 @@ using THSMVC.Views.Shared;
 
 namespace THSMVC.Controllers
 {
-    public class ProductCategoryController : Controller
+    public class RoleController : Controller
     {
         Log4NetLogger logger = new Log4NetLogger();
         [LogsRequest]
-        public ActionResult ProductCategoryMaster(string Id, string MenuId)
+        public ActionResult RoleMaster(string Id, string MenuId)
         {
             return View();
         }
         [LogsRequest]
-        public ActionResult AddEditProductCategory()
+        public ActionResult AddEditRole()
         {
-            ProductCategoryModel model = new ProductCategoryModel();
+            RoleModel model = new RoleModel();
             model.BtnText = "Create";
             return View(model);
         }
         [LogsRequest]
-        public ActionResult EditProductCategory(int Id)
+        public ActionResult EditRole(int Id)
         {
-            ProductCategoryModel model = new ProductCategoryModel();
+            RoleModel model = new RoleModel();
             using (DataStoreEntities dse = new DataStoreEntities())
             {
-                model = (from p in dse.ProductCategories
+                model = (from p in dse.Roles
                          where p.Id == Id
-                         select new ProductCategoryModel
+                         select new RoleModel
                          {
                              Id = p.Id,
-                             ProductCategory1 = p.ProductCategory1
+                             RoleName = p.Role1
                          }).FirstOrDefault();
             }
             model.BtnText = "Update";
-            return View("AddEditProductCategory", model);
+            return View("AddEditRole", model);
         }
         [LogsRequest]
-        public ActionResult DelProductCategory(int id)
+        public ActionResult DelRole(int id)
         {
             try
             {
                 using (var db = new DataStoreEntities())
                 {
-                    var query = from s in db.ProductCategories
+                    var query = from s in db.Roles
                                 where s.Id.Equals(id)
                                 select s;
                     if (query.Count() > 0)
                     {
-                        var ProductCategory = query.First();
-                        ProductCategory.Status = true;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Product Category deleted successfully" });
+                        var Role = query.First();
+                        var chkQuery = from a in db.Users
+                                       where a.RoleId== id
+                                       select a;
+                        if (chkQuery.Count() <= 0)
+                        {
+                            Role.Status = true;
+                            db.SaveChanges();
+                            return Json(new { success = true, message = "Role deleted successfully" });
+                        }
+                        else
+                            return Json(new { success = false, message = "Role was assigned to user(s). Unable to delete." });
                     }
                     else
                         return Json(new { success = false, message = "Sorry! Please try again later" });
@@ -68,12 +76,12 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("DelProductCategory", ex);
+                logger.Error("DelRole", ex);
                 return Json(false);
             }
         }
         [LogsRequest]
-        public ActionResult SubmitProductCategory(ProductCategoryModel model)
+        public ActionResult SubmitRole(RoleModel model)
         {
             try
             {
@@ -82,43 +90,43 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
-                        ProductCategory group = new ProductCategory();
+                        Role group = new Role();
                         group.InstanceId = inststanceId;
-                        group.ProductCategory1 = model.ProductCategory1;
+                        group.Role1 = model.RoleName;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;
-                        dse.AddToProductCategories(group);
+                        dse.AddToRoles(group);
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Category created successfuly" });
+                        return Json(new { success = true, message = "Role created successfuly" });
                     }
                     else
                     {
-                        ProductCategory group = dse.ProductCategories.Where(p => p.Id == model.Id).FirstOrDefault();
-                        group.ProductCategory1 = model.ProductCategory1;
+                        Role group = dse.Roles.Where(p => p.Id == model.Id).FirstOrDefault();
+                        group.Role1 = model.RoleName;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);
                         group.EditedDate = DateTime.Now;
                         dse.SaveChanges();
-                        return Json(new { success = true, message = "Product Category updated successfuly" });
+                        return Json(new { success = true, message = "Role updated successfuly" });
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.Error("SubmitProductCategory", ex);
+                logger.Error("SubmitRole", ex);
                 return Json(new { success = false, message = "Sorry! Please try again later" });
             }
         }
-        public IQueryable<ProductCategoryModel> getProductCategorys()
+        public IQueryable<RoleModel> getRoles()
         {
-            using (ProductCategoryLogic logicLayer = new ProductCategoryLogic())
-                return logicLayer.GetProductCategories();
+            using (RoleLogic logicLayer = new RoleLogic())
+                return logicLayer.GetRolesList();
         }
-        public ActionResult JsonProductCategoryCollection(GridSettings grid)
+        public ActionResult JsonRoleCollection(GridSettings grid)
         {
             try
             {
 
-                var context = this.getProductCategorys();
+                var context = this.getRoles();
                 //filtring
                 if (grid.IsSearch)
                 {
@@ -127,7 +135,7 @@ namespace THSMVC.Controllers
                     {
                         foreach (var rule in grid.Where.rules)
                         {
-                            context = context.Where<ProductCategoryModel>(
+                            context = context.Where<RoleModel>(
                                                           rule.field, rule.data,
                                                           (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
                         }
@@ -135,21 +143,21 @@ namespace THSMVC.Controllers
                     else
                     {
                         //Or
-                        var temp = (new List<ProductCategoryModel>()).AsQueryable();
+                        var temp = (new List<RoleModel>()).AsQueryable();
                         foreach (var rule in grid.Where.rules)
                         {
-                            var t = context.Where<ProductCategoryModel>(
+                            var t = context.Where<RoleModel>(
                             rule.field, rule.data,
                             (WhereOperation)StringEnum.Parse(typeof(WhereOperation), rule.op));
-                            temp = temp.Concat<ProductCategoryModel>(t);
+                            temp = temp.Concat<RoleModel>(t);
                         }
                         //remove repeating records
-                        context = temp.Distinct<ProductCategoryModel>();
+                        context = temp.Distinct<RoleModel>();
                     }
                 }
 
                 //sorting
-                context = context.OrderBy<ProductCategoryModel>(grid.SortColumn, grid.SortOrder);
+                context = context.OrderBy<RoleModel>(grid.SortColumn, grid.SortOrder);
 
                 //count
                 var count = context.Count();
@@ -170,7 +178,7 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.ProductCategory1.ToString().Replace("$$$$","'UpdateProductCategory("+s.Id.ToString()+")'").Replace("****","href='#'")
+                            s.RoleName.ToString().Replace("$$$$","'UpdateRole("+s.Id.ToString()+")'").Replace("****","href='#'")
                         }
                           }).ToArray()
                 };
@@ -180,7 +188,7 @@ namespace THSMVC.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("JsonProductCategoryCollection", ex);
+                logger.Error("JsonRoleCollection", ex);
                 return Json(false);
             }
         }

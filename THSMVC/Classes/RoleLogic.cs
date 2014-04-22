@@ -12,10 +12,11 @@ namespace THSMVC.Classes
         private bool disposed = false;
 
         DataStoreEntities dse = new DataStoreEntities();
+        int inststanceId = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
         public IQueryable<RoleModel> GetRoles()
         {
             List<RoleModel> Role = (from d in dse.Roles
-                                    where ((d.Status) == null || (bool)d.Status == false)
+                                    where ((d.Status) == null || (bool)d.Status == false) && d.InstanceId == inststanceId
                                     select new RoleModel
                                                  {
                                                      Id = d.Id,
@@ -23,6 +24,19 @@ namespace THSMVC.Classes
                                                  }).ToList<RoleModel>();
             return Role.AsQueryable();
         }
+        public IQueryable<RoleModel> GetRolesList()
+        {
+            List<RoleModel> Role = (from d in dse.Roles
+                                               where ((d.Status) == null || (bool)d.Status == false) && d.InstanceId == inststanceId
+                                               select new RoleModel
+                                                          {
+                                                              Id = d.Id,
+                                                              RoleName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.Role1 + "</a>"
+                                                          }).ToList<RoleModel>();
+            return Role.AsQueryable();
+        }
+
+        
 
         // Implement IDisposable.
         // Do not make this method virtual.

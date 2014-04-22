@@ -86,11 +86,13 @@ namespace THSMVC.Controllers
         {
             try
             {
+                int inststanceId = Convert.ToInt32(Session["InstanceId"]);
                 using (DataStoreEntities dse = new DataStoreEntities())
                 {
                     if (model.Id == 0)
                     {
                         Product group = new Product();
+                        group.InstanceId = inststanceId;
                         group.ProductName = model.ProductName;
                         group.ShortForm = model.ShortForm;
                         group.ValueAddedByPerc = model.ValueAddedByPerc;

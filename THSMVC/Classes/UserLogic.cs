@@ -14,11 +14,13 @@ namespace THSMVC.Classes
         private bool disposed = false;
 
         DataStoreEntities dse = new DataStoreEntities();
+        int inststanceId = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
         public IQueryable<UserModel> GetUsers()
         {
             List<UserModel> Users = (from d in dse.UserDetails
                                      join u in dse.Users on d.UserId equals u.Id
                                      join r in dse.Roles on u.RoleId equals r.Id
+                                     where u.InstanceId == inststanceId
                                        select new UserModel
                                                     {
                                                         Id = u.Id,

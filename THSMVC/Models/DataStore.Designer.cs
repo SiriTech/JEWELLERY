@@ -2406,7 +2406,8 @@ namespace THSMVC.Models
         /// <param name="companyName">Initial value of the CompanyName property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static Dealer CreateDealer(global::System.Int32 dealerId, global::System.String dealerName, global::System.String companyName, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static Dealer CreateDealer(global::System.Int32 dealerId, global::System.String dealerName, global::System.String companyName, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
         {
             Dealer dealer = new Dealer();
             dealer.DealerId = dealerId;
@@ -2414,6 +2415,7 @@ namespace THSMVC.Models
             dealer.CompanyName = companyName;
             dealer.CreatedBy = createdBy;
             dealer.CreatedDate = createdDate;
+            dealer.InstanceId = instanceId;
             return dealer;
         }
 
@@ -2759,6 +2761,30 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -3478,12 +3504,14 @@ namespace THSMVC.Models
         /// <param name="lotId">Initial value of the LotId property.</param>
         /// <param name="lotName">Initial value of the LotName property.</param>
         /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
-        public static Lot CreateLot(global::System.Int32 lotId, global::System.String lotName, global::System.Int32 productGroupId)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static Lot CreateLot(global::System.Int32 lotId, global::System.String lotName, global::System.Int32 productGroupId, global::System.Int32 instanceId)
         {
             Lot lot = new Lot();
             lot.LotId = lotId;
             lot.LotName = lotName;
             lot.ProductGroupId = productGroupId;
+            lot.InstanceId = instanceId;
             return lot;
         }
 
@@ -3709,6 +3737,30 @@ namespace THSMVC.Models
         private Nullable<global::System.Decimal> _DiffAllowed;
         partial void OnDiffAllowedChanging(Nullable<global::System.Decimal> value);
         partial void OnDiffAllowedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -4116,21 +4168,52 @@ namespace THSMVC.Models
         /// <summary>
         /// Create a new LotUserMappingView object.
         /// </summary>
+        /// <param name="lotId">Initial value of the LotId property.</param>
         /// <param name="lotName">Initial value of the LotName property.</param>
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        public static LotUserMappingView CreateLotUserMappingView(global::System.String lotName, global::System.String userName, global::System.String status)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static LotUserMappingView CreateLotUserMappingView(global::System.Int32 lotId, global::System.String lotName, global::System.String userName, global::System.String status, global::System.Int32 instanceId)
         {
             LotUserMappingView lotUserMappingView = new LotUserMappingView();
+            lotUserMappingView.LotId = lotId;
             lotUserMappingView.LotName = lotName;
             lotUserMappingView.UserName = userName;
             lotUserMappingView.Status = status;
+            lotUserMappingView.InstanceId = instanceId;
             return lotUserMappingView;
         }
 
         #endregion
 
         #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                if (_LotId != value)
+                {
+                    OnLotIdChanging(value);
+                    ReportPropertyChanging("LotId");
+                    _LotId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LotId");
+                    OnLotIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4212,6 +4295,33 @@ namespace THSMVC.Models
         private global::System.String _Status;
         partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                if (_InstanceId != value)
+                {
+                    OnInstanceIdChanging(value);
+                    ReportPropertyChanging("InstanceId");
+                    _InstanceId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("InstanceId");
+                    OnInstanceIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -5035,7 +5145,8 @@ namespace THSMVC.Models
         /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static Product CreateProduct(global::System.Int32 id, global::System.String productName, global::System.Boolean isStone, global::System.Boolean isWeightless, global::System.Int32 productCategoryId, global::System.Int32 productGroupId, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static Product CreateProduct(global::System.Int32 id, global::System.String productName, global::System.Boolean isStone, global::System.Boolean isWeightless, global::System.Int32 productCategoryId, global::System.Int32 productGroupId, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
         {
             Product product = new Product();
             product.Id = id;
@@ -5046,6 +5157,7 @@ namespace THSMVC.Models
             product.ProductGroupId = productGroupId;
             product.CreatedBy = createdBy;
             product.CreatedDate = createdDate;
+            product.InstanceId = instanceId;
             return product;
         }
 
@@ -5439,6 +5551,30 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -5462,13 +5598,15 @@ namespace THSMVC.Models
         /// <param name="productCategory1">Initial value of the ProductCategory1 property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static ProductCategory CreateProductCategory(global::System.Int32 id, global::System.String productCategory1, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static ProductCategory CreateProductCategory(global::System.Int32 id, global::System.String productCategory1, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
         {
             ProductCategory productCategory = new ProductCategory();
             productCategory.Id = id;
             productCategory.ProductCategory1 = productCategory1;
             productCategory.CreatedBy = createdBy;
             productCategory.CreatedDate = createdDate;
+            productCategory.InstanceId = instanceId;
             return productCategory;
         }
 
@@ -5646,6 +5784,30 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -5669,13 +5831,15 @@ namespace THSMVC.Models
         /// <param name="productGroup1">Initial value of the ProductGroup1 property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static ProductGroup CreateProductGroup(global::System.Int32 id, global::System.String productGroup1, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static ProductGroup CreateProductGroup(global::System.Int32 id, global::System.String productGroup1, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
         {
             ProductGroup productGroup = new ProductGroup();
             productGroup.Id = id;
             productGroup.ProductGroup1 = productGroup1;
             productGroup.CreatedBy = createdBy;
             productGroup.CreatedDate = createdDate;
+            productGroup.InstanceId = instanceId;
             return productGroup;
         }
 
@@ -5853,6 +6017,30 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 
@@ -6648,16 +6836,20 @@ namespace THSMVC.Models
         /// <param name="stoneId">Initial value of the StoneId property.</param>
         /// <param name="stoneName">Initial value of the StoneName property.</param>
         /// <param name="stoneShortForm">Initial value of the StoneShortForm property.</param>
-        /// <param name="stonePerCarat">Initial value of the StonePerCarat property.</param>
         /// <param name="isStoneWeightless">Initial value of the IsStoneWeightless property.</param>
-        public static Stone CreateStone(global::System.Int32 stoneId, global::System.String stoneName, global::System.String stoneShortForm, global::System.Int32 stonePerCarat, global::System.Boolean isStoneWeightless)
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static Stone CreateStone(global::System.Int32 stoneId, global::System.String stoneName, global::System.String stoneShortForm, global::System.Boolean isStoneWeightless, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
         {
             Stone stone = new Stone();
             stone.StoneId = stoneId;
             stone.StoneName = stoneName;
             stone.StoneShortForm = stoneShortForm;
-            stone.StonePerCarat = stonePerCarat;
             stone.IsStoneWeightless = isStoneWeightless;
+            stone.CreatedBy = createdBy;
+            stone.CreatedDate = createdDate;
+            stone.InstanceId = instanceId;
             return stone;
         }
 
@@ -6743,9 +6935,9 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 StonePerCarat
+        public Nullable<global::System.Int32> StonePerCarat
         {
             get
             {
@@ -6760,8 +6952,8 @@ namespace THSMVC.Models
                 OnStonePerCaratChanged();
             }
         }
-        private global::System.Int32 _StonePerCarat;
-        partial void OnStonePerCaratChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _StonePerCarat;
+        partial void OnStonePerCaratChanging(Nullable<global::System.Int32> value);
         partial void OnStonePerCaratChanged();
     
         /// <summary>
@@ -6787,6 +6979,150 @@ namespace THSMVC.Models
         private global::System.Boolean _IsStoneWeightless;
         partial void OnIsStoneWeightlessChanging(global::System.Boolean value);
         partial void OnIsStoneWeightlessChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> EditedBy
+        {
+            get
+            {
+                return _EditedBy;
+            }
+            set
+            {
+                OnEditedByChanging(value);
+                ReportPropertyChanging("EditedBy");
+                _EditedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedBy");
+                OnEditedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _EditedBy;
+        partial void OnEditedByChanging(Nullable<global::System.Int32> value);
+        partial void OnEditedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> EditedDate
+        {
+            get
+            {
+                return _EditedDate;
+            }
+            set
+            {
+                OnEditedDateChanging(value);
+                ReportPropertyChanging("EditedDate");
+                _EditedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedDate");
+                OnEditedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _EditedDate;
+        partial void OnEditedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEditedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
 

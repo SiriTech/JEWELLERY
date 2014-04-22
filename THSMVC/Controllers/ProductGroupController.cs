@@ -76,11 +76,13 @@ namespace THSMVC.Controllers
         {
             try
             {
+                int inststanceId = Convert.ToInt32(Session["InstanceId"]);
                 using (DataStoreEntities dse = new DataStoreEntities())
                 {
                     if (model.Id == 0)
                     {
                         ProductGroup group = new ProductGroup();
+                        group.InstanceId = inststanceId;
                         group.ProductGroup1 = model.ProductGroup1;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;

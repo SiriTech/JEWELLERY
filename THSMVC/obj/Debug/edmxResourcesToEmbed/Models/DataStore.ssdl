@@ -24,9 +24,11 @@
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LotUserMappingView" EntityType="THSMVCDataModel.Store.LotUserMappingView" store:Type="Views" store:Schema="dbo" store:Name="LotUserMappingView">
       <DefiningQuery>SELECT 
+      [LotUserMappingView].[LotId] AS [LotId], 
       [LotUserMappingView].[LotName] AS [LotName], 
       [LotUserMappingView].[UserName] AS [UserName], 
-      [LotUserMappingView].[Status] AS [Status]
+      [LotUserMappingView].[Status] AS [Status], 
+      [LotUserMappingView].[InstanceId] AS [InstanceId]
       FROM [dbo].[LotUserMappingView] AS [LotUserMappingView]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.Store.FK_LotUserMapping_Lot">
@@ -47,6 +49,7 @@
       <PropertyRef Name="DealerId" />
     </Key>
     <Property Name="DealerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="DealerName" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="CompanyShortForm" Type="varchar" MaxLength="10" />
@@ -105,6 +108,7 @@
       <PropertyRef Name="LotId" />
     </Key>
     <Property Name="LotId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="Weight" Type="decimal" Scale="2" />
     <Property Name="NoOfPieces" Type="int" />
@@ -182,6 +186,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
     <Property Name="ShortForm" Type="varchar" MaxLength="100" />
     <Property Name="ValueAddedByPerc" Type="decimal" Scale="3" />
@@ -203,6 +208,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="ProductCategory" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -215,6 +221,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -269,10 +276,16 @@
       <PropertyRef Name="StoneId" />
     </Key>
     <Property Name="StoneId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="StoneName" Type="varchar" Nullable="false" MaxLength="30" />
     <Property Name="StoneShortForm" Type="varchar" Nullable="false" MaxLength="10" />
-    <Property Name="StonePerCarat" Type="int" Nullable="false" />
+    <Property Name="StonePerCarat" Type="int" />
     <Property Name="IsStoneWeightless" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -334,13 +347,17 @@
       -->
   <EntityType Name="LotUserMappingView">
     <Key>
+      <PropertyRef Name="LotId" />
       <PropertyRef Name="LotName" />
       <PropertyRef Name="UserName" />
       <PropertyRef Name="Status" />
+      <PropertyRef Name="InstanceId" />
     </Key>
+    <Property Name="LotId" Type="int" Nullable="false" />
     <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_LotUserMapping_Lot">
     <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
