@@ -24,6 +24,28 @@ namespace THSMVC.Classes
                                                     }).ToList<ProductModel>();
             return Product.AsQueryable();
         }
+
+        public List<Product> GetProductsList()
+        {
+            List<Product> Product = (from d in dse.Products select d).ToList<Product>();
+            return Product;
+        }
+
+        public Product GetProductById(int id)
+        {
+            Product product = new Product();
+
+            try
+            {
+                product = (from p in dse.Products where p.Id == id select p).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return product;
+        }
         
         // Implement IDisposable.
         // Do not make this method virtual.

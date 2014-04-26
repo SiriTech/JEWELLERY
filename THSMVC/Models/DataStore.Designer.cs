@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -22,6 +21,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.LotStatu), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Product), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
 
 #endregion
 
@@ -424,9 +425,56 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<LotUserMappingView> _LotUserMappingViews;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GetCompletedButNotSubmittedProduct> GetCompletedButNotSubmittedProducts
+        {
+            get
+            {
+                if ((_GetCompletedButNotSubmittedProducts == null))
+                {
+                    _GetCompletedButNotSubmittedProducts = base.CreateObjectSet<GetCompletedButNotSubmittedProduct>("GetCompletedButNotSubmittedProducts");
+                }
+                return _GetCompletedButNotSubmittedProducts;
+            }
+        }
+        private ObjectSet<GetCompletedButNotSubmittedProduct> _GetCompletedButNotSubmittedProducts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ViewLotDetail> ViewLotDetails
+        {
+            get
+            {
+                if ((_ViewLotDetails == null))
+                {
+                    _ViewLotDetails = base.CreateObjectSet<ViewLotDetail>("ViewLotDetails");
+                }
+                return _ViewLotDetails;
+            }
+        }
+        private ObjectSet<ViewLotDetail> _ViewLotDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Barcode> Barcodes
+        {
+            get
+            {
+                if ((_Barcodes == null))
+                {
+                    _Barcodes = base.CreateObjectSet<Barcode>("Barcodes");
+                }
+                return _Barcodes;
+            }
+        }
+        private ObjectSet<Barcode> _Barcodes;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -604,9 +652,32 @@ namespace THSMVC.Models
         {
             base.AddObject("LotUserMappingViews", lotUserMappingView);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GetCompletedButNotSubmittedProducts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGetCompletedButNotSubmittedProducts(GetCompletedButNotSubmittedProduct getCompletedButNotSubmittedProduct)
+        {
+            base.AddObject("GetCompletedButNotSubmittedProducts", getCompletedButNotSubmittedProduct);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ViewLotDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToViewLotDetails(ViewLotDetail viewLotDetail)
+        {
+            base.AddObject("ViewLotDetails", viewLotDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Barcodes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBarcodes(Barcode barcode)
+        {
+            base.AddObject("Barcodes", barcode);
+        }
 
         #endregion
-
         #region Function Imports
     
         /// <summary>
@@ -2381,12 +2452,404 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Barcode")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Barcode : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Barcode object.
+        /// </summary>
+        /// <param name="barcodeId">Initial value of the BarcodeId property.</param>
+        /// <param name="barcodeNumber">Initial value of the BarcodeNumber property.</param>
+        /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="productId">Initial value of the ProductId property.</param>
+        /// <param name="noOfPieces">Initial value of the NoOfPieces property.</param>
+        /// <param name="netWeight">Initial value of the NetWeight property.</param>
+        /// <param name="grossWeight">Initial value of the GrossWeight property.</param>
+        /// <param name="weightMeasure">Initial value of the WeightMeasure property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="isSubmitted">Initial value of the IsSubmitted property.</param>
+        public static Barcode CreateBarcode(global::System.Int32 barcodeId, global::System.Int32 barcodeNumber, global::System.Int32 lotId, global::System.Int32 productId, global::System.Int32 noOfPieces, global::System.Decimal netWeight, global::System.Decimal grossWeight, global::System.String weightMeasure, global::System.Decimal price, global::System.Boolean isSubmitted)
+        {
+            Barcode barcode = new Barcode();
+            barcode.BarcodeId = barcodeId;
+            barcode.BarcodeNumber = barcodeNumber;
+            barcode.LotId = lotId;
+            barcode.ProductId = productId;
+            barcode.NoOfPieces = noOfPieces;
+            barcode.NetWeight = netWeight;
+            barcode.GrossWeight = grossWeight;
+            barcode.WeightMeasure = weightMeasure;
+            barcode.Price = price;
+            barcode.IsSubmitted = isSubmitted;
+            return barcode;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BarcodeId
+        {
+            get
+            {
+                return _BarcodeId;
+            }
+            set
+            {
+                if (_BarcodeId != value)
+                {
+                    OnBarcodeIdChanging(value);
+                    ReportPropertyChanging("BarcodeId");
+                    _BarcodeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BarcodeId");
+                    OnBarcodeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BarcodeId;
+        partial void OnBarcodeIdChanging(global::System.Int32 value);
+        partial void OnBarcodeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BarcodeNumber
+        {
+            get
+            {
+                return _BarcodeNumber;
+            }
+            set
+            {
+                OnBarcodeNumberChanging(value);
+                ReportPropertyChanging("BarcodeNumber");
+                _BarcodeNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BarcodeNumber");
+                OnBarcodeNumberChanged();
+            }
+        }
+        private global::System.Int32 _BarcodeNumber;
+        partial void OnBarcodeNumberChanging(global::System.Int32 value);
+        partial void OnBarcodeNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                OnLotIdChanging(value);
+                ReportPropertyChanging("LotId");
+                _LotId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LotId");
+                OnLotIdChanged();
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                OnProductIdChanging(value);
+                ReportPropertyChanging("ProductId");
+                _ProductId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProductId");
+                OnProductIdChanged();
+            }
+        }
+        private global::System.Int32 _ProductId;
+        partial void OnProductIdChanging(global::System.Int32 value);
+        partial void OnProductIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoOfPieces
+        {
+            get
+            {
+                return _NoOfPieces;
+            }
+            set
+            {
+                OnNoOfPiecesChanging(value);
+                ReportPropertyChanging("NoOfPieces");
+                _NoOfPieces = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoOfPieces");
+                OnNoOfPiecesChanged();
+            }
+        }
+        private global::System.Int32 _NoOfPieces;
+        partial void OnNoOfPiecesChanging(global::System.Int32 value);
+        partial void OnNoOfPiecesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal NetWeight
+        {
+            get
+            {
+                return _NetWeight;
+            }
+            set
+            {
+                OnNetWeightChanging(value);
+                ReportPropertyChanging("NetWeight");
+                _NetWeight = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NetWeight");
+                OnNetWeightChanged();
+            }
+        }
+        private global::System.Decimal _NetWeight;
+        partial void OnNetWeightChanging(global::System.Decimal value);
+        partial void OnNetWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal GrossWeight
+        {
+            get
+            {
+                return _GrossWeight;
+            }
+            set
+            {
+                OnGrossWeightChanging(value);
+                ReportPropertyChanging("GrossWeight");
+                _GrossWeight = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GrossWeight");
+                OnGrossWeightChanged();
+            }
+        }
+        private global::System.Decimal _GrossWeight;
+        partial void OnGrossWeightChanging(global::System.Decimal value);
+        partial void OnGrossWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String WeightMeasure
+        {
+            get
+            {
+                return _WeightMeasure;
+            }
+            set
+            {
+                OnWeightMeasureChanging(value);
+                ReportPropertyChanging("WeightMeasure");
+                _WeightMeasure = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("WeightMeasure");
+                OnWeightMeasureChanged();
+            }
+        }
+        private global::System.String _WeightMeasure;
+        partial void OnWeightMeasureChanging(global::System.String value);
+        partial void OnWeightMeasureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsSubmitted
+        {
+            get
+            {
+                return _IsSubmitted;
+            }
+            set
+            {
+                OnIsSubmittedChanging(value);
+                ReportPropertyChanging("IsSubmitted");
+                _IsSubmitted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsSubmitted");
+                OnIsSubmittedChanged();
+            }
+        }
+        private global::System.Boolean _IsSubmitted;
+        partial void OnIsSubmittedChanging(global::System.Boolean value);
+        partial void OnIsSubmittedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Notes
+        {
+            get
+            {
+                return _Notes;
+            }
+            set
+            {
+                OnNotesChanging(value);
+                ReportPropertyChanging("Notes");
+                _Notes = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Notes");
+                OnNotesChanged();
+            }
+        }
+        private global::System.String _Notes;
+        partial void OnNotesChanging(global::System.String value);
+        partial void OnNotesChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot")]
+        public Lot Lot
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Lot> LotReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product")]
+        public Product Product
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Product>("THSMVCDataModel.FK_Barcode_Product", "Product").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Product>("THSMVCDataModel.FK_Barcode_Product", "Product").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Product> ProductReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Product>("THSMVCDataModel.FK_Barcode_Product", "Product");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Product>("THSMVCDataModel.FK_Barcode_Product", "Product", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -2420,7 +2883,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2787,7 +3249,375 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="GetCompletedButNotSubmittedProduct")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GetCompletedButNotSubmittedProduct : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GetCompletedButNotSubmittedProduct object.
+        /// </summary>
+        /// <param name="barcodeId">Initial value of the BarcodeId property.</param>
+        /// <param name="barcodeNumber">Initial value of the BarcodeNumber property.</param>
+        /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="netWeight">Initial value of the NetWeight property.</param>
+        /// <param name="noOfPieces">Initial value of the NoOfPieces property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="productId">Initial value of the ProductId property.</param>
+        /// <param name="weightMeasure">Initial value of the WeightMeasure property.</param>
+        /// <param name="productName">Initial value of the ProductName property.</param>
+        /// <param name="grossWeight">Initial value of the GrossWeight property.</param>
+        /// <param name="isSubmitted">Initial value of the IsSubmitted property.</param>
+        public static GetCompletedButNotSubmittedProduct CreateGetCompletedButNotSubmittedProduct(global::System.Int32 barcodeId, global::System.Int32 barcodeNumber, global::System.Int32 lotId, global::System.Decimal netWeight, global::System.Int32 noOfPieces, global::System.Decimal price, global::System.Int64 productId, global::System.String weightMeasure, global::System.String productName, global::System.Decimal grossWeight, global::System.Boolean isSubmitted)
+        {
+            GetCompletedButNotSubmittedProduct getCompletedButNotSubmittedProduct = new GetCompletedButNotSubmittedProduct();
+            getCompletedButNotSubmittedProduct.BarcodeId = barcodeId;
+            getCompletedButNotSubmittedProduct.BarcodeNumber = barcodeNumber;
+            getCompletedButNotSubmittedProduct.LotId = lotId;
+            getCompletedButNotSubmittedProduct.NetWeight = netWeight;
+            getCompletedButNotSubmittedProduct.NoOfPieces = noOfPieces;
+            getCompletedButNotSubmittedProduct.Price = price;
+            getCompletedButNotSubmittedProduct.ProductId = productId;
+            getCompletedButNotSubmittedProduct.WeightMeasure = weightMeasure;
+            getCompletedButNotSubmittedProduct.ProductName = productName;
+            getCompletedButNotSubmittedProduct.GrossWeight = grossWeight;
+            getCompletedButNotSubmittedProduct.IsSubmitted = isSubmitted;
+            return getCompletedButNotSubmittedProduct;
+        }
 
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BarcodeId
+        {
+            get
+            {
+                return _BarcodeId;
+            }
+            set
+            {
+                if (_BarcodeId != value)
+                {
+                    OnBarcodeIdChanging(value);
+                    ReportPropertyChanging("BarcodeId");
+                    _BarcodeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BarcodeId");
+                    OnBarcodeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BarcodeId;
+        partial void OnBarcodeIdChanging(global::System.Int32 value);
+        partial void OnBarcodeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BarcodeNumber
+        {
+            get
+            {
+                return _BarcodeNumber;
+            }
+            set
+            {
+                if (_BarcodeNumber != value)
+                {
+                    OnBarcodeNumberChanging(value);
+                    ReportPropertyChanging("BarcodeNumber");
+                    _BarcodeNumber = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BarcodeNumber");
+                    OnBarcodeNumberChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BarcodeNumber;
+        partial void OnBarcodeNumberChanging(global::System.Int32 value);
+        partial void OnBarcodeNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                if (_LotId != value)
+                {
+                    OnLotIdChanging(value);
+                    ReportPropertyChanging("LotId");
+                    _LotId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LotId");
+                    OnLotIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal NetWeight
+        {
+            get
+            {
+                return _NetWeight;
+            }
+            set
+            {
+                if (_NetWeight != value)
+                {
+                    OnNetWeightChanging(value);
+                    ReportPropertyChanging("NetWeight");
+                    _NetWeight = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("NetWeight");
+                    OnNetWeightChanged();
+                }
+            }
+        }
+        private global::System.Decimal _NetWeight;
+        partial void OnNetWeightChanging(global::System.Decimal value);
+        partial void OnNetWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoOfPieces
+        {
+            get
+            {
+                return _NoOfPieces;
+            }
+            set
+            {
+                if (_NoOfPieces != value)
+                {
+                    OnNoOfPiecesChanging(value);
+                    ReportPropertyChanging("NoOfPieces");
+                    _NoOfPieces = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("NoOfPieces");
+                    OnNoOfPiecesChanged();
+                }
+            }
+        }
+        private global::System.Int32 _NoOfPieces;
+        partial void OnNoOfPiecesChanging(global::System.Int32 value);
+        partial void OnNoOfPiecesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Notes
+        {
+            get
+            {
+                return _Notes;
+            }
+            set
+            {
+                OnNotesChanging(value);
+                ReportPropertyChanging("Notes");
+                _Notes = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Notes");
+                OnNotesChanged();
+            }
+        }
+        private global::System.String _Notes;
+        partial void OnNotesChanging(global::System.String value);
+        partial void OnNotesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                if (_Price != value)
+                {
+                    OnPriceChanging(value);
+                    ReportPropertyChanging("Price");
+                    _Price = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Price");
+                    OnPriceChanged();
+                }
+            }
+        }
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                if (_ProductId != value)
+                {
+                    OnProductIdChanging(value);
+                    ReportPropertyChanging("ProductId");
+                    _ProductId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ProductId");
+                    OnProductIdChanged();
+                }
+            }
+        }
+        private global::System.Int64 _ProductId;
+        partial void OnProductIdChanging(global::System.Int64 value);
+        partial void OnProductIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String WeightMeasure
+        {
+            get
+            {
+                return _WeightMeasure;
+            }
+            set
+            {
+                if (_WeightMeasure != value)
+                {
+                    OnWeightMeasureChanging(value);
+                    ReportPropertyChanging("WeightMeasure");
+                    _WeightMeasure = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("WeightMeasure");
+                    OnWeightMeasureChanged();
+                }
+            }
+        }
+        private global::System.String _WeightMeasure;
+        partial void OnWeightMeasureChanging(global::System.String value);
+        partial void OnWeightMeasureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ProductName
+        {
+            get
+            {
+                return _ProductName;
+            }
+            set
+            {
+                if (_ProductName != value)
+                {
+                    OnProductNameChanging(value);
+                    ReportPropertyChanging("ProductName");
+                    _ProductName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("ProductName");
+                    OnProductNameChanged();
+                }
+            }
+        }
+        private global::System.String _ProductName;
+        partial void OnProductNameChanging(global::System.String value);
+        partial void OnProductNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal GrossWeight
+        {
+            get
+            {
+                return _GrossWeight;
+            }
+            set
+            {
+                if (_GrossWeight != value)
+                {
+                    OnGrossWeightChanging(value);
+                    ReportPropertyChanging("GrossWeight");
+                    _GrossWeight = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("GrossWeight");
+                    OnGrossWeightChanged();
+                }
+            }
+        }
+        private global::System.Decimal _GrossWeight;
+        partial void OnGrossWeightChanging(global::System.Decimal value);
+        partial void OnGrossWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsSubmitted
+        {
+            get
+            {
+                return _IsSubmitted;
+            }
+            set
+            {
+                if (_IsSubmitted != value)
+                {
+                    OnIsSubmittedChanging(value);
+                    ReportPropertyChanging("IsSubmitted");
+                    _IsSubmitted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IsSubmitted");
+                    OnIsSubmittedChanged();
+                }
+            }
+        }
+        private global::System.Boolean _IsSubmitted;
+        partial void OnIsSubmittedChanging(global::System.Boolean value);
+        partial void OnIsSubmittedChanged();
+
+        #endregion
     
     }
     
@@ -2817,7 +3647,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2896,7 +3725,6 @@ namespace THSMVC.Models
         partial void OnURLChanged();
 
         #endregion
-
     
     }
     
@@ -2936,7 +3764,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3135,7 +3962,6 @@ namespace THSMVC.Models
         partial void OnCreatedDateChanged();
 
         #endregion
-
     
     }
     
@@ -3165,7 +3991,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3484,7 +4309,6 @@ namespace THSMVC.Models
         partial void OnDomainChanged();
 
         #endregion
-
     
     }
     
@@ -3516,7 +4340,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3763,7 +4586,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3788,9 +4610,30 @@ namespace THSMVC.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Barcode")]
+        public EntityCollection<Barcode> Barcodes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Barcode>("THSMVCDataModel.FK_Barcode_Lot", "Barcode");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Barcode>("THSMVCDataModel.FK_Barcode_Lot", "Barcode", value);
+                }
+            }
+        }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3817,7 +4660,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3872,7 +4714,6 @@ namespace THSMVC.Models
         partial void OnEnumValueChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3899,7 +4740,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3930,7 +4770,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4033,7 +4872,6 @@ namespace THSMVC.Models
         partial void OnUserIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4152,7 +4990,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4173,7 +5010,9 @@ namespace THSMVC.Models
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static LotUserMappingView CreateLotUserMappingView(global::System.Int32 lotId, global::System.String lotName, global::System.String userName, global::System.String status, global::System.Int32 instanceId)
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="statusId">Initial value of the StatusId property.</param>
+        public static LotUserMappingView CreateLotUserMappingView(global::System.Int32 lotId, global::System.String lotName, global::System.String userName, global::System.String status, global::System.Int32 instanceId, global::System.Int32 userId, global::System.Int32 statusId)
         {
             LotUserMappingView lotUserMappingView = new LotUserMappingView();
             lotUserMappingView.LotId = lotId;
@@ -4181,11 +5020,12 @@ namespace THSMVC.Models
             lotUserMappingView.UserName = userName;
             lotUserMappingView.Status = status;
             lotUserMappingView.InstanceId = instanceId;
+            lotUserMappingView.UserId = userId;
+            lotUserMappingView.StatusId = statusId;
             return lotUserMappingView;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4322,9 +5162,62 @@ namespace THSMVC.Models
         private global::System.Int32 _InstanceId;
         partial void OnInstanceIdChanging(global::System.Int32 value);
         partial void OnInstanceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                if (_UserId != value)
+                {
+                    OnUserIdChanging(value);
+                    ReportPropertyChanging("UserId");
+                    _UserId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserId");
+                    OnUserIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatusId
+        {
+            get
+            {
+                return _StatusId;
+            }
+            set
+            {
+                if (_StatusId != value)
+                {
+                    OnStatusIdChanging(value);
+                    ReportPropertyChanging("StatusId");
+                    _StatusId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StatusId");
+                    OnStatusIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _StatusId;
+        partial void OnStatusIdChanging(global::System.Int32 value);
+        partial void OnStatusIdChanged();
 
         #endregion
-
     
     }
     
@@ -4356,7 +5249,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4603,7 +5495,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -4633,7 +5524,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4736,7 +5626,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -4766,7 +5655,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4989,7 +5877,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -5017,7 +5904,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5120,7 +6006,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -5162,7 +6047,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5577,8 +6461,32 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Product", "Barcode")]
+        public EntityCollection<Barcode> Barcodes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Barcode>("THSMVCDataModel.FK_Barcode_Product", "Barcode");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Barcode>("THSMVCDataModel.FK_Barcode_Product", "Barcode", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -5611,7 +6519,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5810,7 +6717,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -5844,7 +6750,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6043,7 +6948,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -6079,7 +6983,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6302,7 +7205,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -6334,7 +7236,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6557,7 +7458,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -6593,7 +7493,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6816,7 +7715,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -6854,7 +7752,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7125,7 +8022,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -7163,7 +8059,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7602,7 +8497,6 @@ namespace THSMVC.Models
         partial void OnCommentChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -7629,7 +8523,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -7658,7 +8551,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7881,7 +8773,6 @@ namespace THSMVC.Models
         partial void OnPhoneChanged();
 
         #endregion
-
     
     }
     
@@ -7921,7 +8812,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8240,12 +9130,350 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="ViewLotDetail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ViewLotDetail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ViewLotDetail object.
+        /// </summary>
+        /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        /// <param name="lotName">Initial value of the LotName property.</param>
+        /// <param name="weight">Initial value of the Weight property.</param>
+        /// <param name="noOfPieces">Initial value of the NoOfPieces property.</param>
+        /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
+        /// <param name="productGroup">Initial value of the ProductGroup property.</param>
+        /// <param name="isMRP">Initial value of the IsMRP property.</param>
+        /// <param name="mRP">Initial value of the MRP property.</param>
+        /// <param name="diffAllowed">Initial value of the DiffAllowed property.</param>
+        public static ViewLotDetail CreateViewLotDetail(global::System.Int32 lotId, global::System.Int32 instanceId, global::System.String lotName, global::System.Decimal weight, global::System.Int32 noOfPieces, global::System.Int32 productGroupId, global::System.String productGroup, global::System.Boolean isMRP, global::System.Decimal mRP, global::System.Decimal diffAllowed)
+        {
+            ViewLotDetail viewLotDetail = new ViewLotDetail();
+            viewLotDetail.LotId = lotId;
+            viewLotDetail.InstanceId = instanceId;
+            viewLotDetail.LotName = lotName;
+            viewLotDetail.Weight = weight;
+            viewLotDetail.NoOfPieces = noOfPieces;
+            viewLotDetail.ProductGroupId = productGroupId;
+            viewLotDetail.ProductGroup = productGroup;
+            viewLotDetail.IsMRP = isMRP;
+            viewLotDetail.MRP = mRP;
+            viewLotDetail.DiffAllowed = diffAllowed;
+            return viewLotDetail;
+        }
 
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LotId
+        {
+            get
+            {
+                return _LotId;
+            }
+            set
+            {
+                if (_LotId != value)
+                {
+                    OnLotIdChanging(value);
+                    ReportPropertyChanging("LotId");
+                    _LotId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LotId");
+                    OnLotIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LotId;
+        partial void OnLotIdChanging(global::System.Int32 value);
+        partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                if (_InstanceId != value)
+                {
+                    OnInstanceIdChanging(value);
+                    ReportPropertyChanging("InstanceId");
+                    _InstanceId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("InstanceId");
+                    OnInstanceIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LotName
+        {
+            get
+            {
+                return _LotName;
+            }
+            set
+            {
+                if (_LotName != value)
+                {
+                    OnLotNameChanging(value);
+                    ReportPropertyChanging("LotName");
+                    _LotName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("LotName");
+                    OnLotNameChanged();
+                }
+            }
+        }
+        private global::System.String _LotName;
+        partial void OnLotNameChanging(global::System.String value);
+        partial void OnLotNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Weight
+        {
+            get
+            {
+                return _Weight;
+            }
+            set
+            {
+                if (_Weight != value)
+                {
+                    OnWeightChanging(value);
+                    ReportPropertyChanging("Weight");
+                    _Weight = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Weight");
+                    OnWeightChanged();
+                }
+            }
+        }
+        private global::System.Decimal _Weight;
+        partial void OnWeightChanging(global::System.Decimal value);
+        partial void OnWeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoOfPieces
+        {
+            get
+            {
+                return _NoOfPieces;
+            }
+            set
+            {
+                if (_NoOfPieces != value)
+                {
+                    OnNoOfPiecesChanging(value);
+                    ReportPropertyChanging("NoOfPieces");
+                    _NoOfPieces = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("NoOfPieces");
+                    OnNoOfPiecesChanged();
+                }
+            }
+        }
+        private global::System.Int32 _NoOfPieces;
+        partial void OnNoOfPiecesChanging(global::System.Int32 value);
+        partial void OnNoOfPiecesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductGroupId
+        {
+            get
+            {
+                return _ProductGroupId;
+            }
+            set
+            {
+                if (_ProductGroupId != value)
+                {
+                    OnProductGroupIdChanging(value);
+                    ReportPropertyChanging("ProductGroupId");
+                    _ProductGroupId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ProductGroupId");
+                    OnProductGroupIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ProductGroupId;
+        partial void OnProductGroupIdChanging(global::System.Int32 value);
+        partial void OnProductGroupIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ProductGroup
+        {
+            get
+            {
+                return _ProductGroup;
+            }
+            set
+            {
+                if (_ProductGroup != value)
+                {
+                    OnProductGroupChanging(value);
+                    ReportPropertyChanging("ProductGroup");
+                    _ProductGroup = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("ProductGroup");
+                    OnProductGroupChanged();
+                }
+            }
+        }
+        private global::System.String _ProductGroup;
+        partial void OnProductGroupChanging(global::System.String value);
+        partial void OnProductGroupChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DealerId
+        {
+            get
+            {
+                return _DealerId;
+            }
+            set
+            {
+                OnDealerIdChanging(value);
+                ReportPropertyChanging("DealerId");
+                _DealerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DealerId");
+                OnDealerIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DealerId;
+        partial void OnDealerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDealerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsMRP
+        {
+            get
+            {
+                return _IsMRP;
+            }
+            set
+            {
+                if (_IsMRP != value)
+                {
+                    OnIsMRPChanging(value);
+                    ReportPropertyChanging("IsMRP");
+                    _IsMRP = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IsMRP");
+                    OnIsMRPChanged();
+                }
+            }
+        }
+        private global::System.Boolean _IsMRP;
+        partial void OnIsMRPChanging(global::System.Boolean value);
+        partial void OnIsMRPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal MRP
+        {
+            get
+            {
+                return _MRP;
+            }
+            set
+            {
+                if (_MRP != value)
+                {
+                    OnMRPChanging(value);
+                    ReportPropertyChanging("MRP");
+                    _MRP = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MRP");
+                    OnMRPChanged();
+                }
+            }
+        }
+        private global::System.Decimal _MRP;
+        partial void OnMRPChanging(global::System.Decimal value);
+        partial void OnMRPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal DiffAllowed
+        {
+            get
+            {
+                return _DiffAllowed;
+            }
+            set
+            {
+                if (_DiffAllowed != value)
+                {
+                    OnDiffAllowedChanging(value);
+                    ReportPropertyChanging("DiffAllowed");
+                    _DiffAllowed = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DiffAllowed");
+                    OnDiffAllowedChanged();
+                }
+            }
+        }
+        private global::System.Decimal _DiffAllowed;
+        partial void OnDiffAllowedChanging(global::System.Decimal value);
+        partial void OnDiffAllowedChanged();
+
+        #endregion
     
     }
 
     #endregion
-
     #region ComplexTypes
     
     /// <summary>
@@ -8270,7 +9498,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8346,7 +9573,6 @@ namespace THSMVC.Models
         partial void OnGroupIdChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -8377,7 +9603,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8765,7 +9990,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -8796,7 +10020,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8920,7 +10143,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -8955,7 +10177,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9271,7 +10492,6 @@ namespace THSMVC.Models
         partial void OnDlvStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -9300,7 +10520,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9400,7 +10619,6 @@ namespace THSMVC.Models
         partial void OnchkedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -9429,7 +10647,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9601,7 +10818,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -9630,7 +10846,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9802,7 +11017,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -9829,7 +11043,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10025,7 +11238,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10058,7 +11270,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10230,7 +11441,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10261,7 +11471,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10385,7 +11594,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10416,7 +11624,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10540,7 +11747,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10571,7 +11777,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10695,7 +11900,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10726,7 +11930,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10874,7 +12077,6 @@ namespace THSMVC.Models
         partial void OnNoticeDocSizeChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10905,7 +12107,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11029,7 +12230,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11060,7 +12260,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11184,7 +12383,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11215,7 +12413,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11339,7 +12536,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11366,7 +12562,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11442,7 +12637,6 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11483,7 +12677,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11871,7 +13064,6 @@ namespace THSMVC.Models
         partial void OnSubCategoryChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11912,7 +13104,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12276,7 +13467,6 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12317,7 +13507,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12681,7 +13870,6 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12708,7 +13896,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12808,7 +13995,6 @@ namespace THSMVC.Models
         partial void OnPlannedLeaveChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12841,7 +14027,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12989,7 +14174,6 @@ namespace THSMVC.Models
         partial void OnDelegatedOnChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13044,7 +14228,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13432,7 +14615,6 @@ namespace THSMVC.Models
         partial void OnIsNotifierChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13463,7 +14645,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13683,7 +14864,6 @@ namespace THSMVC.Models
         partial void OnApproverChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13716,7 +14896,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13936,7 +15115,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13965,7 +15143,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14281,7 +15458,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14310,7 +15486,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14626,7 +15801,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14655,7 +15829,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14971,7 +16144,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15009,7 +16181,6 @@ namespace THSMVC.Models
         partial void OnAvailableFromDateChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15047,7 +16218,6 @@ namespace THSMVC.Models
         partial void OnAnswerChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15205,7 +16375,6 @@ namespace THSMVC.Models
         partial void OnGainedPointsChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15230,7 +16399,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15306,7 +16474,6 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15345,7 +16512,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15589,7 +16755,6 @@ namespace THSMVC.Models
         partial void OnPointsChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15634,7 +16799,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15974,10 +17138,8 @@ namespace THSMVC.Models
         partial void OnIsSMSSentChanged();
 
         #endregion
-
     }
 
     #endregion
-
     
 }

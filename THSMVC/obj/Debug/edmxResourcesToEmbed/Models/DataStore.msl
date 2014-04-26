@@ -338,11 +338,65 @@
     <EntitySetMapping Name="LotUserMappingViews">
       <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
         <MappingFragment StoreEntitySet="LotUserMappingView">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
+        <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
+          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewLotDetails">
+      <EntityTypeMapping TypeName="THSMVCDataModel.ViewLotDetail">
+        <MappingFragment StoreEntitySet="ViewLotDetails">
+          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="LotName" ColumnName="LotName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Barcodes">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
+        <MappingFragment StoreEntitySet="Barcode">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

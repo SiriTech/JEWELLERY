@@ -378,7 +378,7 @@
             <%
                 if (Session["UserId"] != null)
                 {
-                    var s = Session["MenuId"].ToString();
+                    var s = Session["MenuId"] != null ? Session["MenuId"].ToString() : string.Empty;
             %>
             <div style="width: 100%;">
                 <div style="width: 20%; float: left;" id="LeftMenuContainer">

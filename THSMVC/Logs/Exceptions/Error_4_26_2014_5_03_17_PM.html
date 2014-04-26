@@ -1,0 +1,89 @@
+<html>
+<head>undefined</head>
+<body><title>The cast to value type 'Double' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.</title>
+
+<font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+
+            <b> Description: </b>An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.
+
+            <br><br>
+
+            <b> Exception Details: </b>System.InvalidOperationException: The cast to value type 'Double' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.<br><br>
+
+            <b>Source Error:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+Line 119:        public LotDetailsModel GetLotDetailsById(int lotId)
+Line 120:        {
+<font color="red">Line 121:            LotDetailsModel model = (from lot in dse.ViewLotDetails
+</font>Line 122:                                     select new LotDetailsModel
+Line 123:                                     {</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <b> Source File: </b> E:\Work\PJ_New\JEWELLERY\THSMVC\Classes\LotLogic.cs<b> &nbsp;&nbsp; Line: </b> 121
+            <br><br>
+
+            <b>Stack Trace:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+[InvalidOperationException: The cast to value type 'Double' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.]
+   System.Data.Common.Internal.Materialization.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal) +218
+   System.Data.Common.Internal.Materialization.Shaper.GetColumnValueWithErrorHandling(Int32 ordinal) +76
+   lambda_method(Closure , Shaper ) +174
+   System.Data.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper) +262
+   System.Data.Common.Internal.Materialization.SimpleEnumerator.MoveNext() +112
+   System.Linq.Enumerable.FirstOrDefault(IEnumerable`1 source) +336
+   System.Data.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__1(IEnumerable`1 sequence) +75
+   System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle(IEnumerable`1 query, Expression queryRoot) +95
+   System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute(Expression expression) +162
+   System.Linq.Queryable.FirstOrDefault(IQueryable`1 source) +425
+   THSMVC.App_Code.LotLogic.GetLotDetailsById(Int32 lotId) in E:\Work\PJ_New\JEWELLERY\THSMVC\Classes\LotLogic.cs:121
+   THSMVC.Controllers.LotController.GetLotDetailsByLotId(Int32 lotId) in E:\Work\PJ_New\JEWELLERY\THSMVC\Controllers\LotController.cs:401
+   THSMVC.Controllers.LotController.GetLotDetails(Int32 lotId) in E:\Work\PJ_New\JEWELLERY\THSMVC\Controllers\LotController.cs:326
+   lambda_method(Closure , ControllerBase , Object[] ) +150
+   System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters) +51
+   System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters) +411
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +52
+   System.Web.Mvc.&lt;&gt;c__DisplayClassd.&lt;InvokeActionMethodWithFilters&gt;b__a() +127
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation) +436
+   System.Web.Mvc.&lt;&gt;c__DisplayClassf.&lt;InvokeActionMethodWithFilters&gt;b__c() +61
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +307
+   System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName) +831
+   System.Web.Mvc.Controller.ExecuteCore() +136
+   System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext) +112
+   System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext) +39
+   System.Web.Mvc.&lt;&gt;c__DisplayClass8.&lt;BeginProcessRequest&gt;b__4() +65
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0() +44
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _) +42
+   System.Web.Mvc.Async.WrappedAsyncResult`1.End() +142
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +54
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +40
+   System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult) +52
+   System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) +38
+   System.Web.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute() +690
+   System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously) +194
+</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <hr color="silver" size="1" width="100%">
+
+            <b>Version Information:</b>&nbsp;Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.0.30319.225
+
+            </font></body>
+</html>

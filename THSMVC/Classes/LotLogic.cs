@@ -100,6 +100,56 @@ namespace THSMVC.App_Code
             return model;
         }
 
+        public bool AcceptLot(int lotId)
+        {
+            try
+            {
+                LotUserMapping lot = dse.LotUserMappings.Where(x => x.LotId == lotId).FirstOrDefault();
+                lot.StatusId = 3;
+                // dse.Lots.AddObject(objLot);
+                dse.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public LotDetailsModel GetLotDetailsById(int lotId)
+        {
+            LotDetailsModel model = new LotDetailsModel();
+
+            try
+            {
+                model = (from lot in dse.ViewLotDetails
+                         select new LotDetailsModel
+                         {
+                             LotId = lot.LotId,
+                             DealerId = (int)lot.DealerId,
+                             DiffAllowed = (double)lot.DiffAllowed,
+                             IsMRP = (bool)lot.IsMRP,
+                             LotName = lot.LotName,
+                             //MRP = lot.MRP,
+                             NoOfPcs = (double)lot.NoOfPieces,
+                             ProductGroupId = lot.ProductGroupId,
+                             ProductGroupName = lot.ProductGroup,
+                             Weight = (double)(((bool)lot.IsMRP) ? lot.MRP : lot.Weight)
+                         }).FirstOrDefault();
+
+                Classes.ProductLogic productLogic = new Classes.ProductLogic();
+
+                List<Product> productList = productLogic.GetProductsList();
+                model.ProductList = productList.Where(x => x.ProductGroupId == model.ProductGroupId).ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+ 
+            return model;
+        }
+
         #endregion
 
         public IQueryable<User> GetUsers()
@@ -145,8 +195,63 @@ namespace THSMVC.App_Code
         {
             return (from lotMapping in dse.LotUserMappingViews where lotMapping.InstanceId == inststanceId select lotMapping).ToList();
         }
-        
-             
+
+        public List<StoneModel> GetStoneList()
+        {
+            return (from s in dse.Stones
+                    select new StoneModel
+                    {
+                        StoneId = s.StoneId,
+                        StoneName = s.StoneName
+                    }).ToList<StoneModel>();
+
+        }
+
+        public List<CompletedBarcodeModel> GetCompletedProductsList(int lotId)
+        {
+            List<CompletedBarcodeModel> list = new List<CompletedBarcodeModel>();
+            try
+            {
+                list =(from d in dse.GetCompletedButNotSubmittedProducts
+                        where d.IsSubmitted == false && d.LotId == lotId
+                        select new CompletedBarcodeModel
+                        {
+                            BarcodeId = d.BarcodeId,
+                            BarcodeNumber = d.BarcodeNumber,
+                            GrossWeight = (double)d.GrossWeight,
+                            IsSubmitted = d.IsSubmitted,
+                            LotId = d.LotId,
+                            NetWeight = (double)d.NetWeight,
+                            NoOfPieces = d.NoOfPieces,
+                            Notes = d.Notes,
+                            Price = (double)d.Price,
+                            ProductId = (int) d.ProductId,
+                            ProductName = d.ProductName,
+                            WeightMeasure = d.WeightMeasure,
+                            Edit = "<a style='color:gray;font-weight:bold;' href='#' title='Click to edit' onclick='EditLot(" + d.BarcodeId + ")'> Edit </a>", // l.LotName, 
+                            Delete = "<a style='color:gray;font-weight:bold;' href='#' title='Click to Delete' onclick='DeleteLot(" + d.BarcodeId + ")'> Edit </a>" // l.LotName, 
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return list;
+        }
+
+        public bool InsertBarcode(Barcode objBarcode)
+        {
+            try
+            {
+                dse.Barcodes.AddObject(objBarcode);
+                dse.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         // Implement IDisposable.
         // Do not make this method virtual.
