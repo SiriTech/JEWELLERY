@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using THSMVC.Models;
+using THSMVC.Classes;
 
 namespace THSMVC.App_Code
 {
@@ -121,7 +122,7 @@ namespace THSMVC.App_Code
             return (from dealer in dse.Dealers where (dealer.Status == null || dealer.Status == false) && dealer.InstanceId == inststanceId select dealer).ToList();
         }
 
-        public bool AssignLot(int LotId, int UserId, int StatusId)
+        public bool AssignLot(int LotId, int UserId, int StatusId,out string msg)
         {
             LotUserMapping obj = new LotUserMapping
             {
@@ -129,14 +130,35 @@ namespace THSMVC.App_Code
                 UserId = UserId,
                 StatusId = StatusId
             };
+            int InstanceID = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
+            bool IsSms = dse.Settings.Where(x => x.InstanceId == inststanceId).Select(x => x.SMS).FirstOrDefault();
+            string mesg = string.Empty;
+            if (IsSms)
+            {
+                UserDetail userDetail = dse.UserDetails.Where(x => x.UserId == UserId).FirstOrDefault();
+                string MobNumber = userDetail.Mobile==null?"":userDetail.Mobile;
+                if (MobNumber != "")
+                {
+                    string LotName = dse.Lots.Where(x=>x.LotId == LotId).Select(x=>x.LotName).FirstOrDefault();
+                    Random random = new Random();
+                    int randomNumber = random.Next(1000, 9999);
+                    obj.OTCode = randomNumber;
+                    SMSLogic smsLogic = new SMSLogic();
+                    smsLogic.SendPSMS("Lot(" + LotName + ") assigned to you. Please use one time password "+randomNumber.ToString()+" to accept Lot.", MobNumber);
+                }
+                else
+                    mesg = "No Mobile Number";
+            }
             try
             {
                 dse.LotUserMappings.AddObject(obj);
                 dse.SaveChanges();
+                msg = mesg;
                 return true;
             }
             catch (Exception ex)
             {
+                msg = "";
                 return false;
             }
         }

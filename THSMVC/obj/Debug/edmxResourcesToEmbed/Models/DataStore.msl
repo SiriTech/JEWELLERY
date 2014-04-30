@@ -311,6 +311,7 @@
     <EntitySetMapping Name="LotUserMappings">
       <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
         <MappingFragment StoreEntitySet="LotUserMapping">
+          <ScalarProperty Name="OTCode" ColumnName="OTCode" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
@@ -343,6 +344,51 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SMS" ColumnName="SMS" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSApis">
+      <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
+        <MappingFragment StoreEntitySet="SMSApi">
+          <ScalarProperty Name="ScheduleURL" ColumnName="ScheduleURL" />
+          <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
+          <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
+          <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSLogs">
+      <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
+        <MappingFragment StoreEntitySet="SMSLogs">
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

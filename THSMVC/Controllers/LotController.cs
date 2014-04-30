@@ -292,14 +292,15 @@ namespace THSMVC.Controllers
         public ActionResult AssignLot(int LotId, int UserId)
         {
             bool Result = false;
+            string msg = string.Empty;
             using (LotLogic logicLayer = new LotLogic())
             {
-                Result = logicLayer.AssignLot(LotId, UserId, 2);
+                Result = logicLayer.AssignLot(LotId, UserId, 2,out msg);
             }
             if (Result)
                 return Json(new { success = true, msg = "Successfully Lot Assinged." });
             else
-                return Json(new { success = false, msg = "Error while Assinging the Lot. Please try again." });
+                return Json(new { success = false, msg = msg==""?"Error while Assinging the Lot. Please try again.":msg });
         }
 
         private List<ProductGroup> GetProductGroupList()
