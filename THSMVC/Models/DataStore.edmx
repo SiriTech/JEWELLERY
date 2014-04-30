@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="THSMVCDataModelStoreContainer">
+          <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
@@ -30,15 +31,56 @@
           <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.Store.GetCompletedButNotSubmittedProducts" store:Type="Views" store:Schema="dbo" store:Name="GetCompletedButNotSubmittedProducts">
+            <DefiningQuery>SELECT 
+      [GetCompletedButNotSubmittedProducts].[BarcodeId] AS [BarcodeId], 
+      [GetCompletedButNotSubmittedProducts].[BarcodeNumber] AS [BarcodeNumber], 
+      [GetCompletedButNotSubmittedProducts].[LotId] AS [LotId], 
+      [GetCompletedButNotSubmittedProducts].[NetWeight] AS [NetWeight], 
+      [GetCompletedButNotSubmittedProducts].[NoOfPieces] AS [NoOfPieces], 
+      [GetCompletedButNotSubmittedProducts].[Notes] AS [Notes], 
+      [GetCompletedButNotSubmittedProducts].[Price] AS [Price], 
+      [GetCompletedButNotSubmittedProducts].[ProductId] AS [ProductId], 
+      [GetCompletedButNotSubmittedProducts].[WeightMeasure] AS [WeightMeasure], 
+      [GetCompletedButNotSubmittedProducts].[ProductName] AS [ProductName], 
+      [GetCompletedButNotSubmittedProducts].[GrossWeight] AS [GrossWeight], 
+      [GetCompletedButNotSubmittedProducts].[IsSubmitted] AS [IsSubmitted]
+      FROM [dbo].[GetCompletedButNotSubmittedProducts] AS [GetCompletedButNotSubmittedProducts]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="LotUserMappingView" EntityType="THSMVCDataModel.Store.LotUserMappingView" store:Type="Views" store:Schema="dbo" store:Name="LotUserMappingView">
             <DefiningQuery>SELECT 
       [LotUserMappingView].[LotId] AS [LotId], 
       [LotUserMappingView].[LotName] AS [LotName], 
       [LotUserMappingView].[UserName] AS [UserName], 
+      [LotUserMappingView].[UserId] AS [UserId], 
       [LotUserMappingView].[Status] AS [Status], 
+      [LotUserMappingView].[StatusId] AS [StatusId], 
       [LotUserMappingView].[InstanceId] AS [InstanceId]
       FROM [dbo].[LotUserMappingView] AS [LotUserMappingView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.Store.ViewLotDetails" store:Type="Views" store:Schema="dbo" store:Name="ViewLotDetails">
+            <DefiningQuery>SELECT 
+      [ViewLotDetails].[LotId] AS [LotId], 
+      [ViewLotDetails].[InstanceId] AS [InstanceId], 
+      [ViewLotDetails].[LotName] AS [LotName], 
+      [ViewLotDetails].[Weight] AS [Weight], 
+      [ViewLotDetails].[NoOfPieces] AS [NoOfPieces], 
+      [ViewLotDetails].[ProductGroupId] AS [ProductGroupId], 
+      [ViewLotDetails].[ProductGroup] AS [ProductGroup], 
+      [ViewLotDetails].[DealerId] AS [DealerId], 
+      [ViewLotDetails].[IsMRP] AS [IsMRP], 
+      [ViewLotDetails].[MRP] AS [MRP], 
+      [ViewLotDetails].[DiffAllowed] AS [DiffAllowed]
+      FROM [dbo].[ViewLotDetails] AS [ViewLotDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.Store.FK_Barcode_Lot">
+            <End Role="Lot" EntitySet="Lot" />
+            <End Role="Barcode" EntitySet="Barcode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.Store.FK_Barcode_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Barcode" EntitySet="Barcode" />
+          </AssociationSet>
           <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.Store.FK_LotUserMapping_Lot">
             <End Role="Lot" EntitySet="Lot" />
             <End Role="LotUserMapping" EntitySet="LotUserMapping" />
@@ -52,6 +94,22 @@
             <End Role="LotUserMapping" EntitySet="LotUserMapping" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+          </Key>
+          <Property Name="BarcodeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BarcodeNumber" Type="int" Nullable="false" />
+          <Property Name="LotId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="NoOfPieces" Type="int" Nullable="false" />
+          <Property Name="NetWeight" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="GrossWeight" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="WeightMeasure" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="Price" Type="decimal" Nullable="false" />
+          <Property Name="IsSubmitted" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Dealer">
           <Key>
             <PropertyRef Name="DealerId" />
@@ -394,6 +452,36 @@
           <Property Name="Status" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="GetCompletedButNotSubmittedProducts">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+            <PropertyRef Name="BarcodeNumber" />
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="NetWeight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="WeightMeasure" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="GrossWeight" />
+            <PropertyRef Name="IsSubmitted" />
+          </Key>
+          <Property Name="BarcodeId" Type="int" Nullable="false" />
+          <Property Name="BarcodeNumber" Type="int" Nullable="false" />
+          <Property Name="LotId" Type="int" Nullable="false" />
+          <Property Name="NetWeight" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="NoOfPieces" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="100" />
+          <Property Name="Price" Type="decimal" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" Nullable="false" />
+          <Property Name="WeightMeasure" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="GrossWeight" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="IsSubmitted" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
       warning 6002: The table/view 'PJ.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="LotUserMappingView">
@@ -401,15 +489,71 @@
             <PropertyRef Name="LotId" />
             <PropertyRef Name="LotName" />
             <PropertyRef Name="UserName" />
+            <PropertyRef Name="UserId" />
             <PropertyRef Name="Status" />
+            <PropertyRef Name="StatusId" />
             <PropertyRef Name="InstanceId" />
           </Key>
           <Property Name="LotId" Type="int" Nullable="false" />
           <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="InstanceId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ViewLotDetails">
+          <Key>
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="InstanceId" />
+            <PropertyRef Name="LotName" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="ProductGroupId" />
+            <PropertyRef Name="ProductGroup" />
+            <PropertyRef Name="IsMRP" />
+            <PropertyRef Name="MRP" />
+            <PropertyRef Name="DiffAllowed" />
+          </Key>
+          <Property Name="LotId" Type="int" Nullable="false" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
+          <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Weight" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="NoOfPieces" Type="int" Nullable="false" />
+          <Property Name="ProductGroupId" Type="int" Nullable="false" />
+          <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="DealerId" Type="int" />
+          <Property Name="IsMRP" Type="bit" Nullable="false" />
+          <Property Name="MRP" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="DiffAllowed" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Barcode_Lot">
+          <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
+          <End Role="Barcode" Type="THSMVCDataModel.Store.Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="LotId" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barcode_Product">
+          <End Role="Product" Type="THSMVCDataModel.Store.Product" Multiplicity="1" />
+          <End Role="Barcode" Type="THSMVCDataModel.Store.Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LotUserMapping_Lot">
           <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
           <End Role="LotUserMapping" Type="THSMVCDataModel.Store.LotUserMapping" Multiplicity="*" />
@@ -725,9 +869,23 @@
             <End Role="LotUserMapping" EntitySet="LotUserMappings" />
           </AssociationSet>
           <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
+<<<<<<< HEAD
           <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
           <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
           <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+=======
+          <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
+          <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
+          <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
+          <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="Barcode" EntitySet="Barcodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.FK_Barcode_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Barcode" EntitySet="Barcodes" />
+          </AssociationSet>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -1216,6 +1374,7 @@
           <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
           <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
           <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
         </EntityType>
         <EntityType Name="GoldRate">
           <Key>
@@ -1310,6 +1469,7 @@
           <Property Type="DateTime" Name="EditedDate" Precision="3" />
           <Property Type="Boolean" Name="Status" />
           <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Product" ToRole="Barcode" />
         </EntityType>
         <EntityType Name="ProductCategory">
           <Key>
@@ -1418,13 +1578,18 @@
             <PropertyRef Name="UserName" />
             <PropertyRef Name="Status" />
             <PropertyRef Name="InstanceId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StatusId" />
           </Key>
           <Property Type="Int32" Name="LotId" Nullable="false" />
           <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -1467,6 +1632,102 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" />
         </EntityType>
+=======
+        <EntityType Name="GetCompletedButNotSubmittedProduct">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+            <PropertyRef Name="BarcodeNumber" />
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="NetWeight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="WeightMeasure" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="GrossWeight" />
+            <PropertyRef Name="IsSubmitted" />
+          </Key>
+          <Property Type="Int32" Name="BarcodeId" Nullable="false" />
+          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int64" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewLotDetail">
+          <Key>
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="InstanceId" />
+            <PropertyRef Name="LotName" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="ProductGroupId" />
+            <PropertyRef Name="ProductGroup" />
+            <PropertyRef Name="IsMRP" />
+            <PropertyRef Name="MRP" />
+            <PropertyRef Name="DiffAllowed" />
+          </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="String" Name="ProductGroup" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DealerId" />
+          <Property Type="Boolean" Name="IsMRP" Nullable="false" />
+          <Property Type="Decimal" Name="MRP" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DiffAllowed" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+          </Key>
+          <Property Type="Int32" Name="BarcodeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
+          <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Barcode_Lot">
+          <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="LotId" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barcode_Product">
+          <End Type="THSMVCDataModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1811,6 +2072,8 @@
           <EntitySetMapping Name="LotUserMappingViews">
             <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
               <MappingFragment StoreEntitySet="LotUserMappingView">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -1819,6 +2082,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
@@ -1861,6 +2125,57 @@
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+=======
+          <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
+            <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
+              <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+                <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+                <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewLotDetails">
+            <EntityTypeMapping TypeName="THSMVCDataModel.ViewLotDetail">
+              <MappingFragment StoreEntitySet="ViewLotDetails">
+                <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="LotName" ColumnName="LotName" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barcodes">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
+              <MappingFragment StoreEntitySet="Barcode">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+                <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+                <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1907,8 +2222,8 @@
         <EntityTypeShape EntityType="THSMVCDataModel.LotUserMapping" Width="1.5" PointX="9.625" PointY="2.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="THSMVCDataModel.Stone" Width="1.5" PointX="10.375" PointY="6.75" Height="1.9802864583333388" />
         <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_Lot" >
-          <ConnectorPoint PointX="4.875" PointY="2.2208968098958333" />
-          <ConnectorPoint PointX="5.125" PointY="2.2208968098958333" />
+          <ConnectorPoint PointX="4.875" PointY="2.4131982421875" />
+          <ConnectorPoint PointX="5.125" PointY="2.4131982421875" />
           <ConnectorPoint PointX="5.125" PointY="0.5" />
           <ConnectorPoint PointX="10.375" PointY="0.5" />
           <ConnectorPoint PointX="10.375" PointY="2.75" />
@@ -1923,22 +2238,45 @@
           <ConnectorPoint PointX="9.625" PointY="4.5549189921874937" />
         </AssociationConnector>
         <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_User" >
-          <ConnectorPoint PointX="2" PointY="7.0790907968750023" />
-          <ConnectorPoint PointX="5.25" PointY="7.0790907968750023" />
-          <ConnectorPoint PointX="5.25" PointY="4.125" />
+          <ConnectorPoint PointX="1.25" PointY="4.375" />
+          <ConnectorPoint PointX="1.25" PointY="4.125" />
           <ConnectorPoint PointX="7.125" PointY="4.125" />
           <ConnectorPoint PointX="7.125" PointY="4.5186979166666674" />
-          <ConnectorPoint PointX="7.875" PointY="4.5186979166666674" />
-          <ConnectorPoint PointX="7.875" PointY="6.5" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="6.4999999999999991" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="6.5" />
-          <ConnectorPoint PointX="10.593752" PointY="6.5" />
-          <ConnectorPoint PointX="10.593752" PointY="5.1148893229166674" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="4.5186979166666665" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="4.5186979166666674" />
+          <ConnectorPoint PointX="9.25" PointY="4.5186979166666674" />
+          <ConnectorPoint PointX="9.25" PointY="3.9324446614583337" />
+          <ConnectorPoint PointX="9.625" PointY="3.9324446614583337" />
         </AssociationConnector>
         <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="7.8416569828249782" PointY="31.176742314909" />
+<<<<<<< HEAD
         <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
         <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
+=======
+        <EntityTypeShape EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" Width="1.5" PointX="11.375" PointY="10.75" Height="3.3263964843750102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ViewLotDetail" Width="1.5" PointX="0.75" PointY="13.75" Height="3.1340950520833246" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Barcode" Width="1.5" PointX="12.75" PointY="5" Height="3.5186979166666683" />
+        <AssociationConnector Association="THSMVCDataModel.FK_Barcode_Lot" >
+          <ConnectorPoint PointX="4.875" PointY="3.2760493632812504" />
+          <ConnectorPoint PointX="5.125" PointY="3.2760493632812504" />
+          <ConnectorPoint PointX="5.125" PointY="4.125" />
+          <ConnectorPoint PointX="7.25" PointY="4.125" />
+          <ConnectorPoint PointX="7.25" PointY="5.3648893229166674" />
+          <ConnectorPoint PointX="9.9166666666666661" PointY="5.3648893229166665" />
+          <ConnectorPoint PointX="10.083333333333334" PointY="5.3648893229166674" />
+          <ConnectorPoint PointX="12.5" PointY="5.3648893229166674" />
+          <ConnectorPoint PointX="12.5" PointY="4.75" />
+          <ConnectorPoint PointX="13.5" PointY="4.75" />
+          <ConnectorPoint PointX="13.5" PointY="5" />
+        </AssociationConnector>
+        <AssociationConnector Association="THSMVCDataModel.FK_Barcode_Product" >
+          <ConnectorPoint PointX="7" PointY="6.0886946614583337" />
+          <ConnectorPoint PointX="9.9166666666666661" PointY="6.0886946614583328" />
+          <ConnectorPoint PointX="10.083333333333334" PointY="6.0886946614583337" />
+          <ConnectorPoint PointX="12.75" PointY="6.0886946614583337" />
+        </AssociationConnector>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
       </Diagram>
     </Diagrams>
   </Designer>

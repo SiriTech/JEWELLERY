@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
+    <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
@@ -25,15 +26,56 @@
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.Store.GetCompletedButNotSubmittedProducts" store:Type="Views" store:Schema="dbo" store:Name="GetCompletedButNotSubmittedProducts">
+      <DefiningQuery>SELECT 
+      [GetCompletedButNotSubmittedProducts].[BarcodeId] AS [BarcodeId], 
+      [GetCompletedButNotSubmittedProducts].[BarcodeNumber] AS [BarcodeNumber], 
+      [GetCompletedButNotSubmittedProducts].[LotId] AS [LotId], 
+      [GetCompletedButNotSubmittedProducts].[NetWeight] AS [NetWeight], 
+      [GetCompletedButNotSubmittedProducts].[NoOfPieces] AS [NoOfPieces], 
+      [GetCompletedButNotSubmittedProducts].[Notes] AS [Notes], 
+      [GetCompletedButNotSubmittedProducts].[Price] AS [Price], 
+      [GetCompletedButNotSubmittedProducts].[ProductId] AS [ProductId], 
+      [GetCompletedButNotSubmittedProducts].[WeightMeasure] AS [WeightMeasure], 
+      [GetCompletedButNotSubmittedProducts].[ProductName] AS [ProductName], 
+      [GetCompletedButNotSubmittedProducts].[GrossWeight] AS [GrossWeight], 
+      [GetCompletedButNotSubmittedProducts].[IsSubmitted] AS [IsSubmitted]
+      FROM [dbo].[GetCompletedButNotSubmittedProducts] AS [GetCompletedButNotSubmittedProducts]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="LotUserMappingView" EntityType="THSMVCDataModel.Store.LotUserMappingView" store:Type="Views" store:Schema="dbo" store:Name="LotUserMappingView">
       <DefiningQuery>SELECT 
       [LotUserMappingView].[LotId] AS [LotId], 
       [LotUserMappingView].[LotName] AS [LotName], 
       [LotUserMappingView].[UserName] AS [UserName], 
+      [LotUserMappingView].[UserId] AS [UserId], 
       [LotUserMappingView].[Status] AS [Status], 
+      [LotUserMappingView].[StatusId] AS [StatusId], 
       [LotUserMappingView].[InstanceId] AS [InstanceId]
       FROM [dbo].[LotUserMappingView] AS [LotUserMappingView]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.Store.ViewLotDetails" store:Type="Views" store:Schema="dbo" store:Name="ViewLotDetails">
+      <DefiningQuery>SELECT 
+      [ViewLotDetails].[LotId] AS [LotId], 
+      [ViewLotDetails].[InstanceId] AS [InstanceId], 
+      [ViewLotDetails].[LotName] AS [LotName], 
+      [ViewLotDetails].[Weight] AS [Weight], 
+      [ViewLotDetails].[NoOfPieces] AS [NoOfPieces], 
+      [ViewLotDetails].[ProductGroupId] AS [ProductGroupId], 
+      [ViewLotDetails].[ProductGroup] AS [ProductGroup], 
+      [ViewLotDetails].[DealerId] AS [DealerId], 
+      [ViewLotDetails].[IsMRP] AS [IsMRP], 
+      [ViewLotDetails].[MRP] AS [MRP], 
+      [ViewLotDetails].[DiffAllowed] AS [DiffAllowed]
+      FROM [dbo].[ViewLotDetails] AS [ViewLotDetails]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.Store.FK_Barcode_Lot">
+      <End Role="Lot" EntitySet="Lot" />
+      <End Role="Barcode" EntitySet="Barcode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.Store.FK_Barcode_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Barcode" EntitySet="Barcode" />
+    </AssociationSet>
     <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.Store.FK_LotUserMapping_Lot">
       <End Role="Lot" EntitySet="Lot" />
       <End Role="LotUserMapping" EntitySet="LotUserMapping" />
@@ -47,6 +89,22 @@
       <End Role="LotUserMapping" EntitySet="LotUserMapping" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Barcode">
+    <Key>
+      <PropertyRef Name="BarcodeId" />
+    </Key>
+    <Property Name="BarcodeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BarcodeNumber" Type="int" Nullable="false" />
+    <Property Name="LotId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="NoOfPieces" Type="int" Nullable="false" />
+    <Property Name="NetWeight" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="GrossWeight" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="WeightMeasure" Type="char" Nullable="false" MaxLength="2" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="IsSubmitted" Type="bit" Nullable="false" />
+    <Property Name="Notes" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="Dealer">
     <Key>
       <PropertyRef Name="DealerId" />
@@ -389,6 +447,36 @@
     <Property Name="Status" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="GetCompletedButNotSubmittedProducts">
+    <Key>
+      <PropertyRef Name="BarcodeId" />
+      <PropertyRef Name="BarcodeNumber" />
+      <PropertyRef Name="LotId" />
+      <PropertyRef Name="NetWeight" />
+      <PropertyRef Name="NoOfPieces" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="WeightMeasure" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="GrossWeight" />
+      <PropertyRef Name="IsSubmitted" />
+    </Key>
+    <Property Name="BarcodeId" Type="int" Nullable="false" />
+    <Property Name="BarcodeNumber" Type="int" Nullable="false" />
+    <Property Name="LotId" Type="int" Nullable="false" />
+    <Property Name="NetWeight" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="NoOfPieces" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="varchar" MaxLength="100" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="WeightMeasure" Type="char" Nullable="false" MaxLength="2" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="GrossWeight" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="IsSubmitted" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
       warning 6002: The table/view 'PJ.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="LotUserMappingView">
@@ -396,15 +484,71 @@
       <PropertyRef Name="LotId" />
       <PropertyRef Name="LotName" />
       <PropertyRef Name="UserName" />
+      <PropertyRef Name="UserId" />
       <PropertyRef Name="Status" />
+      <PropertyRef Name="StatusId" />
       <PropertyRef Name="InstanceId" />
     </Key>
     <Property Name="LotId" Type="int" Nullable="false" />
     <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
     <Property Name="InstanceId" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="ViewLotDetails">
+    <Key>
+      <PropertyRef Name="LotId" />
+      <PropertyRef Name="InstanceId" />
+      <PropertyRef Name="LotName" />
+      <PropertyRef Name="Weight" />
+      <PropertyRef Name="NoOfPieces" />
+      <PropertyRef Name="ProductGroupId" />
+      <PropertyRef Name="ProductGroup" />
+      <PropertyRef Name="IsMRP" />
+      <PropertyRef Name="MRP" />
+      <PropertyRef Name="DiffAllowed" />
+    </Key>
+    <Property Name="LotId" Type="int" Nullable="false" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
+    <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Weight" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="NoOfPieces" Type="int" Nullable="false" />
+    <Property Name="ProductGroupId" Type="int" Nullable="false" />
+    <Property Name="ProductGroup" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="DealerId" Type="int" />
+    <Property Name="IsMRP" Type="bit" Nullable="false" />
+    <Property Name="MRP" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="DiffAllowed" Type="decimal" Nullable="false" Scale="2" />
+  </EntityType>
+  <Association Name="FK_Barcode_Lot">
+    <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
+    <End Role="Barcode" Type="THSMVCDataModel.Store.Barcode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="Barcode">
+        <PropertyRef Name="LotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Barcode_Product">
+    <End Role="Product" Type="THSMVCDataModel.Store.Product" Multiplicity="1" />
+    <End Role="Barcode" Type="THSMVCDataModel.Store.Barcode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Barcode">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_LotUserMapping_Lot">
     <End Role="Lot" Type="THSMVCDataModel.Store.Lot" Multiplicity="1" />
     <End Role="LotUserMapping" Type="THSMVCDataModel.Store.LotUserMapping" Multiplicity="*" />

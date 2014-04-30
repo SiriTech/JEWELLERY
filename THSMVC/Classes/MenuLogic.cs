@@ -59,7 +59,7 @@ namespace THSMVC.App_Code
         }
         internal IQueryable<LeftMenu> GetLeftMenu(string InstanceId, string MenuId)
         {
-            int Id= Convert.ToInt32(MenuId);
+            int Id = MenuId != null ? Convert.ToInt32(MenuId) : 0;
             if (InstanceId == "")
             {
                 List<LeftMenu> menu = (from d in dse.Menus join s in dse.MenuGroups on d.GroupId equals s.Id

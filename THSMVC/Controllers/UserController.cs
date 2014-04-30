@@ -115,6 +115,7 @@ namespace THSMVC.Controllers
                         group.InstanceId = Convert.ToInt32(Session["InstanceId"]);
                         group.IsApproved = true;
                         group.IsLockedOut = false;
+                        group.ChangePwdonLogin = false;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;
                         dse.AddToUsers(group);

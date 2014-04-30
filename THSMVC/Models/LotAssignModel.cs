@@ -11,5 +11,11 @@ namespace THSMVC.Models
         public int userId { set; get; }
         public List<Lot> LotList { set; get; }
         public int LotId { get; set; }
+
+        public string UserName { get; set; }
+        public string LotName { get; set; }
+        public string Status { get; set; }
+        public int StatusId { get; set; }
+        public string AcceptLink { get; set; }
     }
 }

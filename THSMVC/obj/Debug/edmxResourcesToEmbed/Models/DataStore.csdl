@@ -258,9 +258,23 @@
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
     <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
+<<<<<<< HEAD
     <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
     <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
     <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+=======
+    <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
+    <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
+    <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
+    <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
+      <End Role="Lot" EntitySet="Lots" />
+      <End Role="Barcode" EntitySet="Barcodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.FK_Barcode_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Barcode" EntitySet="Barcodes" />
+    </AssociationSet>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -749,6 +763,7 @@
     <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
     <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
     <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
   </EntityType>
   <EntityType Name="GoldRate">
     <Key>
@@ -843,6 +858,7 @@
     <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
     <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Product" ToRole="Barcode" />
   </EntityType>
   <EntityType Name="ProductCategory">
     <Key>
@@ -951,13 +967,88 @@
       <PropertyRef Name="UserName" />
       <PropertyRef Name="Status" />
       <PropertyRef Name="InstanceId" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="StatusId" />
     </Key>
     <Property Type="Int32" Name="LotId" Nullable="false" />
     <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int32" Name="StatusId" Nullable="false" />
   </EntityType>
+  <EntityType Name="GetCompletedButNotSubmittedProduct">
+    <Key>
+      <PropertyRef Name="BarcodeId" />
+      <PropertyRef Name="BarcodeNumber" />
+      <PropertyRef Name="LotId" />
+      <PropertyRef Name="NetWeight" />
+      <PropertyRef Name="NoOfPieces" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="WeightMeasure" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="GrossWeight" />
+      <PropertyRef Name="IsSubmitted" />
+    </Key>
+    <Property Type="Int32" Name="BarcodeId" Nullable="false" />
+    <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+    <Property Type="Int32" Name="LotId" Nullable="false" />
+    <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+    <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="Int64" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ViewLotDetail">
+    <Key>
+      <PropertyRef Name="LotId" />
+      <PropertyRef Name="InstanceId" />
+      <PropertyRef Name="LotName" />
+      <PropertyRef Name="Weight" />
+      <PropertyRef Name="NoOfPieces" />
+      <PropertyRef Name="ProductGroupId" />
+      <PropertyRef Name="ProductGroup" />
+      <PropertyRef Name="IsMRP" />
+      <PropertyRef Name="MRP" />
+      <PropertyRef Name="DiffAllowed" />
+    </Key>
+    <Property Type="Int32" Name="LotId" Nullable="false" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Weight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+    <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+    <Property Type="String" Name="ProductGroup" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="DealerId" />
+    <Property Type="Boolean" Name="IsMRP" Nullable="false" />
+    <Property Type="Decimal" Name="MRP" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiffAllowed" Nullable="false" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Barcode">
+    <Key>
+      <PropertyRef Name="BarcodeId" />
+    </Key>
+    <Property Type="Int32" Name="BarcodeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+    <Property Type="Int32" Name="LotId" Nullable="false" />
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+    <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+    <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
+    <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
+  </EntityType>
+<<<<<<< HEAD
   <EntityType Name="Setting">
     <Key>
       <PropertyRef Name="Id" />
@@ -1000,4 +1091,30 @@
     <Property Type="Int32" Name="EditedBy" />
     <Property Type="DateTime" Name="EditedDate" />
   </EntityType>
+=======
+  <Association Name="FK_Barcode_Lot">
+    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+    <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="Barcode">
+        <PropertyRef Name="LotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Barcode_Product">
+    <End Type="THSMVCDataModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Barcode">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
 </Schema>

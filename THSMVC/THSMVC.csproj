@@ -129,6 +129,7 @@
     <Compile Include="CustomActionResults\WordListResult.cs" />
     <Compile Include="CustomActionResults\WordResult.cs" />
     <Compile Include="Models\AdministrationModels.cs" />
+    <Compile Include="Models\CompletedBarcode.cs" />
     <Compile Include="Models\DataStore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +143,7 @@
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LotAssignModel.cs" />
+    <Compile Include="Models\LotDetailsModel.cs" />
     <Compile Include="Models\LotDropdownModel.cs" />
     <Compile Include="Models\LotModel.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
@@ -564,6 +566,8 @@
     <Content Include="Views\Dealer\DealerMaster.aspx" />
     <Content Include="Views\Home\ContactUS.aspx" />
     <Content Include="Views\Lot\AssignLot.aspx" />
+    <Content Include="Views\Lot\LotDetails.aspx" />
+    <Content Include="Views\Lot\LotsAssignedToUser.aspx" />
     <Content Include="Views\Lot\CreateLot.aspx" />
     <Content Include="Views\Lot\LotMaster.aspx" />
     <Content Include="Views\ProductCategory\AddEditProductCategory.aspx" />
