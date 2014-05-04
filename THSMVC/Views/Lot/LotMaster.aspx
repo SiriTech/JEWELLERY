@@ -42,7 +42,6 @@
             var IsMRP = $("#IsMRP").val();
             var MRP = $("#MRP").val();
             var DiffAllowed = $("#DiffAllowed").val();
-            debugger;
             if (LName == null || LName == '' || LName == undefined) {
                 error = error + "Lot name is missing. <br />";
             }

@@ -222,12 +222,12 @@ namespace THSMVC.Controllers
             }
         }
 
-        public ActionResult JsonCompletedLotCollection(GridSettings grid)
+        public ActionResult JsonCompletedLotCollection(GridSettings grid, int lotId)
         {
             try
             {
                 int instanceId = Convert.ToInt32(Session["InstanceId"]);
-                var context = GetAssignedLots();
+                var context = GetCompletedProducts(lotId).AsQueryable();
 
                 //sorting
                 //  context = context.OrderBy<LotMasterModel>(grid.SortColumn, grid.SortOrder);
@@ -248,12 +248,12 @@ namespace THSMVC.Controllers
                           from s in context
                           select new
                           {
-                              Id = s.LotId,
+                              Id = s.BarcodeId,
                               cell = new string[] {
-                                  s.LotId.ToString(),
-                            s.LotName,
-                            s.UserName,
-                            s.Status
+                                  s.BarcodeId.ToString(),
+                            s.ProductName,
+                            s.Edit,
+                            s.Delete
                         }
                           }).ToArray()
                 };
@@ -477,36 +477,105 @@ namespace THSMVC.Controllers
                 return Json(new { success = false });
         }
 
-        public ActionResult PrintBarcode(int productId, int lotId, int stoneId, double Weight, double stoneWeight, double stonePrice, int noOfStones, string notes)
+        public ActionResult PrintBarcode(int productId, int lotId, int stoneId, double Weight, double mrp, double stoneWeight, double stonePrice, int noOfStones, string notes)
         {
+            string respMsg = string.Empty;
+            int assignedCount = 0, completedCount = 0;
+
             //Todo Generate Barode Sequence.]
             List<CompletedBarcodeModel> CompletedList = new List<CompletedBarcodeModel>();
             Barcode barcode = new Barcode
             {
-                BarcodeNumber = 1000,
+                BarcodeNumber = 1000,//Todo : Need to generate the NUmber
                 IsSubmitted = false,
                 LotId = lotId,
                 NoOfPieces = 1,
                 Notes = notes,
-                Price = 100, //Need to Calculate
+                Price = (decimal)mrp, //Need to Calculate
                 ProductId = productId,
                 GrossWeight = (decimal)Weight, //ToDo: need to calculate
                 WeightMeasure = ""
             };
             bool result = false;
             LotLogic logicLayer = new LotLogic();
-            result = logicLayer.InsertBarcode(barcode);
+            result = logicLayer.InsertBarcode(barcode, out respMsg, out assignedCount, out completedCount);
 
-            //Todo: Orint barcode
+            //Todo: Print barcode
+           
             if (result)
-            {
-                CompletedList =GetCompletedProducts(lotId);
-            }
-
-            if (result)
-                return Json(new { success = true, model = CompletedList });
+                return Json(new { success = true, Message = respMsg, AssCount = assignedCount, CompCount = completedCount });
             else
-                return Json(new { success = false });
+                return Json(new { success = false, Message = respMsg, AssCount = assignedCount, CompCount = completedCount });
+        }
+
+        public ActionResult DeleteBarcode(int id)
+        {
+            bool result = false;
+            try
+            {
+                using (LotLogic logicLayer = new LotLogic())
+                {
+                    result = logicLayer.DeleteBarcode(id);
+                }
+                if(result)
+                    return Json(new { success = true, message = "Barcode deleted successfully" });
+                else
+                    return Json(new { success = false, message = "Sorry! Please try again later" });
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
+
+        public ActionResult GetAssinedAndCompletedCount(int lotId)
+        {
+            int assignedCount = 0, completedCount = 0;
+            using (LotLogic logicLayer = new LotLogic())
+            {
+                logicLayer.GetAssinedAndCompletedCount(lotId, out assignedCount, out completedCount);
+            }
+            return Json(new { AssCount = assignedCount, CompCount = completedCount });
+        }
+
+        public ActionResult SubmitLot(int lotId)
+        {
+            string respMsg = string.Empty;
+
+            bool result = false;
+            try
+            {
+                using (LotLogic logicLayer = new LotLogic())
+                {
+                    result = logicLayer.SubmitLot(lotId, out respMsg);
+                }
+
+                if (result)
+                    return Json(new { success = true, message = "Lot Submitted successfully" });
+                else
+                    return Json(new { success = false, message = respMsg });
+            }
+            catch (Exception ex) 
+            {
+                return Json(false);
+            }
+        }
+
+        public ActionResult EditBarcode(int id)
+        {
+            Barcode barcode = new Barcode();
+            try
+            {
+                using (LotLogic logicLayer = new LotLogic())
+                {
+                    barcode = logicLayer.GetBarcodeById(id);
+                    return Json(new { success = true, prdId = barcode.ProductId, isMRP = barcode.Price == 0 ? false : true, weightOrMRP = barcode.Price == 0 ? barcode.GrossWeight : barcode.Price, notes = barcode.Notes});
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
         }
 
         private List<StoneModel> GetStoneList()
@@ -516,6 +585,7 @@ namespace THSMVC.Controllers
                 return logicLayer.GetStoneList();
             }
         }
+
         private Product GetProduct(int productId)
         {
             Product product = new Product();
@@ -582,7 +652,7 @@ namespace THSMVC.Controllers
                            select new LotAssignModel 
                            {
                                LotId = l.LotId,
-                               LotName = "<a style='color:gray;font-weight:bold;' href='#' title='Click to see lot details' onclick='GotoLotDetails(" + l.LotId + ")'>" + l.LotName + "</a>", // l.LotName, 
+                               LotName = l.StatusId == 3 ? "<a style='color:gray;font-weight:bold;' href='#' title='Click to see lot details' onclick='GotoLotDetails(" + l.LotId + ")'>" + l.LotName + "</a>" : l.LotName, // l.LotName, 
                                StatusId = l.StatusId, 
                                userId = l.UserId, 
                                UserName = l.UserName, 

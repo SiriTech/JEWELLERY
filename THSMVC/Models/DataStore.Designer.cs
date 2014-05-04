@@ -7890,7 +7890,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8089,7 +8088,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -8119,7 +8117,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8270,7 +8267,6 @@ namespace THSMVC.Models
         partial void OnScheduleURLChanged();
 
         #endregion
-
     
     }
     
@@ -8306,7 +8302,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8625,7 +8620,6 @@ namespace THSMVC.Models
         partial void OnEditedDateChanged();
 
         #endregion
-
     
     }
     

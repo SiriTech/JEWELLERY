@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using THSMVC.Models;
+
+using System.Data.Objects.SqlClient;
+
 using THSMVC.Classes;
+
 
 namespace THSMVC.App_Code
 {
@@ -134,7 +138,7 @@ namespace THSMVC.App_Code
 
             try
             {
-                model = (from lot in dse.ViewLotDetails
+                model = (from lot in dse.ViewLotDetails where lot.LotId == lotId
                          select new LotDetailsModel
                          {
                              LotId = lot.LotId,
@@ -259,10 +263,10 @@ namespace THSMVC.App_Code
                             Notes = d.Notes,
                             Price = (double)d.Price,
                             ProductId = (int) d.ProductId,
-                            ProductName = d.ProductName,
+                            ProductName = d.ProductName, //"<a style='color:gray;font-weight:bold;text-decoration: underline; cursor: pointer;' title='Click to edit' onclick='EditBarcode(" + SqlFunctions.StringConvert((decimal?)d.BarcodeId) + ")'> " + d.ProductName + " </a>", // l.LotName,  d.ProductName,
                             WeightMeasure = d.WeightMeasure,
-                            Edit = "<a style='color:gray;font-weight:bold;' href='#' title='Click to edit' onclick='EditLot(" + d.BarcodeId + ")'> Edit </a>", // l.LotName, 
-                            Delete = "<a style='color:gray;font-weight:bold;' href='#' title='Click to Delete' onclick='DeleteLot(" + d.BarcodeId + ")'> Edit </a>" // l.LotName, 
+                            Edit = "<a style='color:gray;font-weight:bold;' href='#' title='Click to edit' onclick='EditLot(" + SqlFunctions.StringConvert((decimal?)d.BarcodeId) + ")'> Edit </a>", // l.LotName, 
+                            Delete = "<a style='color:gray;font-weight:bold;' href='#' title='Click to Delete' onclick='DeleteLot(" + SqlFunctions.StringConvert((decimal?)d.BarcodeId) + ")'> Delete </a>" // l.LotName, 
                         }).ToList();
             }
             catch (Exception ex)
@@ -272,17 +276,145 @@ namespace THSMVC.App_Code
             return list;
         }
 
+        public bool InsertBarcode(Barcode objBarcode, out string respMsg, out int assignedCount, out int completedCount)
+        {
+            respMsg = string.Empty;
+            assignedCount = 0;
+            completedCount = 0;
+            //int AssignedNoOfPieces = 0;
+            try
+            {
+                Lot lot = dse.Lots.Where(x=>x.LotId == objBarcode.LotId).FirstOrDefault();
+                if(lot != null)
+                    assignedCount = (int)lot.NoOfPieces;
+
+                List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x=>x.LotId == objBarcode.LotId).ToList();
+                completedCount = CompletedBarcodes.Count;
+
+                if (CompletedBarcodes.Count >= assignedCount)
+                {
+                    respMsg = "No Of pieces Count has been exceeded. Assigned Count : " + assignedCount + " , Completed products so far : " + CompletedBarcodes.Count;
+                    return false;
+                }
+                
+                //Todo : Need to check Count of the Assigned Quantity and Completed Quantity
+                dse.Barcodes.AddObject(objBarcode);
+                dse.SaveChanges();
+                CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == objBarcode.LotId).ToList();
+                completedCount = CompletedBarcodes.Count;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                respMsg = "Error while printing the barcode.";
+                return false;
+            }
+        }
+
         public bool InsertBarcode(Barcode objBarcode)
         {
             try
             {
-                dse.Barcodes.AddObject(objBarcode);
+                Barcode barcodeToUpdate = dse.Barcodes.Where(x => x.BarcodeId == objBarcode.BarcodeId).FirstOrDefault();
+                barcodeToUpdate.BarcodeNumber = objBarcode.BarcodeNumber;
+                barcodeToUpdate.GrossWeight = objBarcode.GrossWeight;
+                barcodeToUpdate.IsSubmitted = objBarcode.IsSubmitted;
+                barcodeToUpdate.LotId = objBarcode.LotId;
+                barcodeToUpdate.NetWeight = objBarcode.NetWeight;
+                barcodeToUpdate.NoOfPieces = objBarcode.NoOfPieces;
+                barcodeToUpdate.Notes = objBarcode.Notes;
+                barcodeToUpdate.Price = objBarcode.Price;
+                barcodeToUpdate.ProductId = objBarcode.ProductId;
+                barcodeToUpdate.WeightMeasure = objBarcode.WeightMeasure;
+
                 dse.SaveChanges();
                 return true;
             }
             catch (Exception ex)
             {
                 return false;
+            }
+
+        }
+
+        public bool DeleteBarcode(int barcodeId)
+        {
+            try
+            {
+                Barcode delete = dse.Barcodes.Where(x => x.BarcodeId == barcodeId).FirstOrDefault();
+                dse.Barcodes.DeleteObject(delete);
+                dse.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool SubmitLot(int lotId, out string respMsg)
+        {
+            respMsg = string.Empty;
+
+            bool result = false;
+            try
+            {
+                int assignedCount = 0;
+                int completedCount = 0;
+
+                Lot lot = dse.Lots.Where(x => x.LotId == lotId).FirstOrDefault();
+                if (lot != null)
+                    assignedCount = (int)lot.NoOfPieces;
+
+                List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == lotId).ToList();
+                completedCount = CompletedBarcodes.Count;
+
+                if (CompletedBarcodes.Count <= assignedCount)
+                {
+                    foreach (Barcode b in CompletedBarcodes)
+                    {
+                        b.IsSubmitted = true;
+                    }
+
+                    LotUserMapping lu = dse.LotUserMappings.Where(x => x.LotId == lotId).FirstOrDefault();
+                    lu.StatusId = 4;
+                    dse.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    respMsg = "Completed Products count is greater than Assigned Product Count. Please verify.";
+                    result = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public Barcode GetBarcodeById(int id)
+        {
+            return dse.Barcodes.Where(x => x.BarcodeId == id).FirstOrDefault();
+        }
+
+        public void GetAssinedAndCompletedCount(int lotId, out int assignedCount, out int completedCount)
+        {
+            assignedCount = 0;
+            completedCount = 0;
+            //int AssignedNoOfPieces = 0;
+            try
+            {
+                Lot lot = dse.Lots.Where(x => x.LotId == lotId).FirstOrDefault();
+                if (lot != null)
+                    assignedCount = (int)lot.NoOfPieces;
+
+                List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == lotId).ToList();
+                completedCount = CompletedBarcodes.Count;
+            }
+            catch (Exception ex)
+            {
             }
         }
 

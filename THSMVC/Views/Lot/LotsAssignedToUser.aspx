@@ -6,7 +6,6 @@
     <title>CreateUser</title>
     <script type="text/javascript">
         $(document).ready(function () {
-        debugger;
            GetAssingedLotsToUser()
         });
 
@@ -111,7 +110,6 @@
                        $('#LotId option[value!=""]').remove();
                    },
                    success: function (Result) {
-                       debugger;
                        $.each(Result.result, function (key, value) {
 
                            $("#LotId").append($("<option></option>").val
@@ -190,12 +188,11 @@
                     $.blockUI();   //this is great plugin - 'blockUI'
                 },
                 success: function (result) {
-                    debugger;
                     $("#Content").html(result);
+                    $("#hdnLotId").val(lotId);
                     $.unblockUI();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    debugger;
                     $.unblockUI();
                     Error(XMLHttpRequest, textStatus, errorThrown);
                 }
