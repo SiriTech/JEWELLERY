@@ -161,7 +161,6 @@
                            $('#LotId option[value!=""]').remove();
                        },
                        success: function (Result) {
-                           debugger;
                            $.each(Result.result, function (key, value) {
                              
                                $("#LotId").append($("<option></option>").val
