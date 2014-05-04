@@ -24,6 +24,9 @@
           <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Settings" EntityType="THSMVCDataModel.Store.Settings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SMSApi" EntityType="THSMVCDataModel.Store.SMSApi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.Store.SMSLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
@@ -196,6 +199,7 @@
           <Property Name="LotId" Type="int" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="OTCode" Type="int" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -333,6 +337,48 @@
           <Property Name="EditedBy" Type="int" />
           <Property Name="EditedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" />
+          <Property Name="SMS" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="SMSApi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
+          <Property Name="APIURL" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreditBalURL" Type="varchar(max)" />
+          <Property Name="DlvReportURL" Type="varchar(max)" />
+          <Property Name="ScheduleURL" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SMSLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InstanceId" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="500" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+          <Property Name="Numbers" Type="varchar(max)" Nullable="false" />
+          <Property Name="Response" Type="varchar(max)" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DlvStatus" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Stone">
           <Key>
@@ -823,6 +869,11 @@
             <End Role="LotUserMapping" EntitySet="LotUserMappings" />
           </AssociationSet>
           <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
+<<<<<<< HEAD
+          <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
+          <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
+          <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+=======
           <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
           <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
           <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
@@ -834,6 +885,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Barcode" EntitySet="Barcodes" />
           </AssociationSet>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
         </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -1465,6 +1517,7 @@
           <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
           <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
           <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
+          <Property Type="Int32" Name="OTCode" />
         </EntityType>
         <EntityType Name="Stone">
           <Key>
@@ -1536,6 +1589,50 @@
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="Int32" Name="StatusId" Nullable="false" />
         </EntityType>
+<<<<<<< HEAD
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="SMS" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="InstanceId" />
+        </EntityType>
+        <EntityType Name="SMSApi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ScheduleURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SMSLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="Category" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Numbers" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="GroupId" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="String" Name="DlvStatus" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+        </EntityType>
+=======
         <EntityType Name="GetCompletedButNotSubmittedProduct">
           <Key>
             <PropertyRef Name="BarcodeId" />
@@ -1630,6 +1727,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1946,6 +2044,7 @@
           <EntitySetMapping Name="LotUserMappings">
             <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
               <MappingFragment StoreEntitySet="LotUserMapping">
+                <ScalarProperty Name="OTCode" ColumnName="OTCode" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="LotId" ColumnName="LotId" />
@@ -1983,6 +2082,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SMS" ColumnName="SMS" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMSApis">
+            <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
+              <MappingFragment StoreEntitySet="SMSApi">
+                <ScalarProperty Name="ScheduleURL" ColumnName="ScheduleURL" />
+                <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
+                <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
+                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMSLogs">
+            <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
+              <MappingFragment StoreEntitySet="SMSLogs">
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+=======
           <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
             <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
               <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
@@ -2032,6 +2175,7 @@
                 <ScalarProperty Name="LotId" ColumnName="LotId" />
                 <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
                 <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2085,9 +2229,13 @@
           <ConnectorPoint PointX="10.375" PointY="2.75" />
         </AssociationConnector>
         <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_LotStatus" >
-          <ConnectorPoint PointX="8.875" PointY="13.922841796875002" />
-          <ConnectorPoint PointX="10" PointY="13.922841796875002" />
-          <ConnectorPoint PointX="10" PointY="5.1148893229166674" />
+          <ConnectorPoint PointX="8.125" PointY="13.125" />
+          <ConnectorPoint PointX="8.125" PointY="9.7494921875" />
+          <ConnectorPoint PointX="9.875" PointY="9.7494921875" />
+          <ConnectorPoint PointX="9.875" PointY="5.3648893229166674" />
+          <ConnectorPoint PointX="9.375" PointY="5.3648893229166674" />
+          <ConnectorPoint PointX="9.375" PointY="4.5549189921874937" />
+          <ConnectorPoint PointX="9.625" PointY="4.5549189921874937" />
         </AssociationConnector>
         <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_User" >
           <ConnectorPoint PointX="1.25" PointY="4.375" />
@@ -2101,6 +2249,11 @@
           <ConnectorPoint PointX="9.625" PointY="3.9324446614583337" />
         </AssociationConnector>
         <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="7.8416569828249782" PointY="31.176742314909" />
+<<<<<<< HEAD
+        <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
+=======
         <EntityTypeShape EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" Width="1.5" PointX="11.375" PointY="10.75" Height="3.3263964843750102" />
         <EntityTypeShape EntityType="THSMVCDataModel.ViewLotDetail" Width="1.5" PointX="0.75" PointY="13.75" Height="3.1340950520833246" />
         <EntityTypeShape EntityType="THSMVCDataModel.Barcode" Width="1.5" PointX="12.75" PointY="5" Height="3.5186979166666683" />
@@ -2123,6 +2276,7 @@
           <ConnectorPoint PointX="10.083333333333334" PointY="6.0886946614583337" />
           <ConnectorPoint PointX="12.75" PointY="6.0886946614583337" />
         </AssociationConnector>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
       </Diagram>
     </Diagrams>
   </Designer>

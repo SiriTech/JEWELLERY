@@ -100,6 +100,8 @@
     <Compile Include="Classes\ProductLogic.cs" />
     <Compile Include="Classes\RoleLogic.cs" />
     <Compile Include="Classes\SiteLogsLogic.cs" />
+    <Compile Include="Classes\SMSLogic.cs" />
+    <Compile Include="Classes\StoneLogic.cs" />
     <Compile Include="Classes\UserLogic.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DealerController.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Classes\InstanceLogic.cs" />
     <Compile Include="Classes\JsonDropdownData.cs" />
     <Compile Include="Classes\MenuLogic.cs" />
+    <Compile Include="Controllers\StoneController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CustomActionResults\ExcelControllerExtensions.cs" />
     <Compile Include="CustomActionResults\ExcelListControllerExtensions.cs" />
@@ -175,6 +178,20 @@
     <Compile Include="Models\Helpers\StringEnum.cs" />
     <Compile Include="Models\Helpers\WhereOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Stone\AddEditStone.aspx.cs">
+      <DependentUpon>AddEditStone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Stone\AddEditStone.aspx.designer.cs">
+      <DependentUpon>AddEditStone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stone\StoneMaster.aspx.cs">
+      <DependentUpon>StoneMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Stone\StoneMaster.aspx.designer.cs">
+      <DependentUpon>StoneMaster.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\basic.css" />
@@ -570,6 +587,8 @@
     <Content Include="Views\Shared\TimeoutExpired.aspx" />
     <Content Include="Views\Shared\UnAuthorized.aspx" />
     <Content Include="Views\Shared\ViewPage1.aspx" />
+    <Content Include="Views\Stone\AddEditStone.aspx" />
+    <Content Include="Views\Stone\StoneMaster.aspx" />
     <Content Include="Views\User\AddEditUser.aspx" />
     <Content Include="Views\User\UserMaster.aspx" />
     <Content Include="Web.config">

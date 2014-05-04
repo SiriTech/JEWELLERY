@@ -19,6 +19,9 @@
     <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Settings" EntityType="THSMVCDataModel.Store.Settings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SMSApi" EntityType="THSMVCDataModel.Store.SMSApi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.Store.SMSLogs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
@@ -191,6 +194,7 @@
     <Property Name="LotId" Type="int" Nullable="false" />
     <Property Name="StatusId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="OTCode" Type="int" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -328,6 +332,48 @@
     <Property Name="EditedBy" Type="int" />
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" />
+    <Property Name="SMS" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="SMSApi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
+    <Property Name="APIURL" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreditBalURL" Type="varchar(max)" />
+    <Property Name="DlvReportURL" Type="varchar(max)" />
+    <Property Name="ScheduleURL" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SMSLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
+    <Property Name="Category" Type="varchar" MaxLength="500" />
+    <Property Name="Message" Type="varchar(max)" Nullable="false" />
+    <Property Name="Numbers" Type="varchar(max)" Nullable="false" />
+    <Property Name="Response" Type="varchar(max)" />
+    <Property Name="GroupId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="DlvStatus" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Stone">
     <Key>

@@ -258,6 +258,11 @@
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
     <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
+<<<<<<< HEAD
+    <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
+    <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
+    <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+=======
     <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
     <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
     <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
@@ -269,6 +274,7 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="Barcode" EntitySet="Barcodes" />
     </AssociationSet>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -900,6 +906,7 @@
     <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
     <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
     <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
+    <Property Type="Int32" Name="OTCode" />
   </EntityType>
   <EntityType Name="Stone">
     <Key>
@@ -1041,6 +1048,50 @@
     <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
     <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
   </EntityType>
+<<<<<<< HEAD
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Boolean" Name="SMS" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="Boolean" Name="Status" />
+    <Property Type="Int32" Name="InstanceId" />
+  </EntityType>
+  <EntityType Name="SMSApi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ScheduleURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SMSLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="Category" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Numbers" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Response" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="GroupId" />
+    <Property Type="Int32" Name="UserId" />
+    <Property Type="String" Name="DlvStatus" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+  </EntityType>
+=======
   <Association Name="FK_Barcode_Lot">
     <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
     <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
@@ -1065,4 +1116,5 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+>>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
 </Schema>
