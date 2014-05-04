@@ -429,7 +429,6 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-<<<<<<< HEAD
         public ObjectSet<Setting> Settings
         {
             get
@@ -442,25 +441,10 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Setting> _Settings;
-=======
-        public ObjectSet<GetCompletedButNotSubmittedProduct> GetCompletedButNotSubmittedProducts
-        {
-            get
-            {
-                if ((_GetCompletedButNotSubmittedProducts == null))
-                {
-                    _GetCompletedButNotSubmittedProducts = base.CreateObjectSet<GetCompletedButNotSubmittedProduct>("GetCompletedButNotSubmittedProducts");
-                }
-                return _GetCompletedButNotSubmittedProducts;
-            }
-        }
-        private ObjectSet<GetCompletedButNotSubmittedProduct> _GetCompletedButNotSubmittedProducts;
->>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-<<<<<<< HEAD
         public ObjectSet<SMSApi> SMSApis
         {
             get
@@ -473,25 +457,10 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<SMSApi> _SMSApis;
-=======
-        public ObjectSet<ViewLotDetail> ViewLotDetails
-        {
-            get
-            {
-                if ((_ViewLotDetails == null))
-                {
-                    _ViewLotDetails = base.CreateObjectSet<ViewLotDetail>("ViewLotDetails");
-                }
-                return _ViewLotDetails;
-            }
-        }
-        private ObjectSet<ViewLotDetail> _ViewLotDetails;
->>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-<<<<<<< HEAD
         public ObjectSet<SMSLog> SMSLogs
         {
             get
@@ -504,7 +473,42 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<SMSLog> _SMSLogs;
-=======
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GetCompletedButNotSubmittedProduct> GetCompletedButNotSubmittedProducts
+        {
+            get
+            {
+                if ((_GetCompletedButNotSubmittedProducts == null))
+                {
+                    _GetCompletedButNotSubmittedProducts = base.CreateObjectSet<GetCompletedButNotSubmittedProduct>("GetCompletedButNotSubmittedProducts");
+                }
+                return _GetCompletedButNotSubmittedProducts;
+            }
+        }
+        private ObjectSet<GetCompletedButNotSubmittedProduct> _GetCompletedButNotSubmittedProducts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ViewLotDetail> ViewLotDetails
+        {
+            get
+            {
+                if ((_ViewLotDetails == null))
+                {
+                    _ViewLotDetails = base.CreateObjectSet<ViewLotDetail>("ViewLotDetails");
+                }
+                return _ViewLotDetails;
+            }
+        }
+        private ObjectSet<ViewLotDetail> _ViewLotDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Barcode> Barcodes
         {
             get
@@ -517,7 +521,6 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Barcode> _Barcodes;
->>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
 
         #endregion
         #region AddTo Methods
@@ -699,7 +702,6 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-<<<<<<< HEAD
         /// Deprecated Method for adding a new object to the Settings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSettings(Setting setting)
@@ -721,7 +723,9 @@ namespace THSMVC.Models
         public void AddToSMSLogs(SMSLog sMSLog)
         {
             base.AddObject("SMSLogs", sMSLog);
-=======
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the GetCompletedButNotSubmittedProducts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToGetCompletedButNotSubmittedProducts(GetCompletedButNotSubmittedProduct getCompletedButNotSubmittedProduct)
@@ -743,7 +747,6 @@ namespace THSMVC.Models
         public void AddToBarcodes(Barcode barcode)
         {
             base.AddObject("Barcodes", barcode);
->>>>>>> 59041385b5d507be50768dd8b257aa1ae8df9e4c
         }
 
         #endregion
@@ -7839,7 +7842,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8038,7 +8040,6 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -8068,7 +8069,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8219,7 +8219,6 @@ namespace THSMVC.Models
         partial void OnScheduleURLChanged();
 
         #endregion
-
     
     }
     
@@ -8255,7 +8254,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8574,7 +8572,6 @@ namespace THSMVC.Models
         partial void OnEditedDateChanged();
 
         #endregion
-
     
     }
     

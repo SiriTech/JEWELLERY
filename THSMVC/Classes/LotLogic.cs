@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using THSMVC.Models;
-<<<<<<< HEAD
+
 using System.Data.Objects.SqlClient;
-=======
+
 using THSMVC.Classes;
->>>>>>> dd58a6025255067f862b6669e9203fd38aab8ede
+
 
 namespace THSMVC.App_Code
 {
