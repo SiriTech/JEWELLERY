@@ -16,9 +16,6 @@ namespace THSMVC.Models
         public string ChkStoneWeightless { get; set; }
         public string BtnText { get; set; }
         public int StoneId { get; set; }
-<<<<<<< HEAD
-=======
 
->>>>>>> 81da96543e5565b7e8b4eb66d86f2a16ff28fe45
     }
 }

@@ -54,6 +54,7 @@
                 success: function (response) {
                     if (response.success) {
                         Success(response.message);
+                        setTimeout("Back();", 1000);
                     }
                     else
                         Failure(response.message);
@@ -77,6 +78,22 @@
                 <div class="clear">
                     
                     <div class="ContentdivBorder" id="divAddEditProduct">
+                    <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               <span class="ValidationSpan">*</span> Product Category
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.DropDownListFor(m => m.ProductCategoryId, Model.ProductCategories, "Select Category", new { title="Select Product Category from the list" })%>
+                            </div>
+                        </div>
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               <span class="ValidationSpan">*</span> Product Group
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.DropDownListFor(m => m.ProductGroupId, Model.ProductGroups, "Select Group", new { title="Select Product Group from the list" })%>
+                            </div>
+                        </div>
                         <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
                                 <span class="ValidationSpan">*</span> Product Name
@@ -150,22 +167,7 @@
                                 <%} %>
                             </div>
                         </div>
-                        <div class="clear">
-                            <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Product Category
-                            </div>
-                            <div class="editor-field" style="text-align: left;">
-                                <%= Html.DropDownListFor(m => m.ProductCategoryId, Model.ProductCategories, "Select Category", new { title="Select Product Category from the list" })%>
-                            </div>
-                        </div>
-                         <div class="clear">
-                            <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Product Group
-                            </div>
-                            <div class="editor-field" style="text-align: left;">
-                                <%= Html.DropDownListFor(m => m.ProductGroupId, Model.ProductGroups, "Select Group", new { title="Select Product Group from the list" })%>
-                            </div>
-                        </div>
+                        
                         <div id="divButtons" class="clear" style="margin-top: 10px; margin-bottom: 20px;">
                             <center>
                                 <input type="button" value="<%= Model.BtnText %>" class="rg_button_red" onclick="submitProduct(); return false;" />

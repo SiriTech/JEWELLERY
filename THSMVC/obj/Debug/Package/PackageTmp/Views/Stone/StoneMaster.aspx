@@ -3,37 +3,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadProductGroups();
+            LoadStones();
         });
         function Create() {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+            $("#divStoneMaster").hide();
+            $("#CreateStone").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndController('AddEditProductGroup', 'ProductGroup', 'Add/Edit Product Group', '#divCreateProductGroup');
+            $("#divCreateStone").show();
+            GetContentByActionAndController('AddEditStone', 'Stone', 'Add/Edit Stone', '#divCreateStone');
         }
-        function UpdateProductGroup(id) {
-            $("#divProductGroupMaster").hide();
-            $("#CreateProductGroup").hide();
+        function UpdateStone(id) {
+            $("#divStoneMaster").hide();
+            $("#CreateStone").hide();
             $("#backToList").show();
-            $("#divCreateProductGroup").show();
-            GetContentByActionAndControllerForEdit('EditProductGroup', 'ProductGroup', 'Add/Edit Product Group',id, '#divCreateProductGroup');
+            $("#divCreateStone").show();
+            GetContentByActionAndControllerForEdit('EditStone', 'Stone', 'Add/Edit Stone', id, '#divCreateStone');
         }
-        function LoadProductGroups() {
+        function LoadStones() {
             var gridDataUrl;
-            gridDataUrl = '/ProductGroup/JsonProductGroupCollection';
+            gridDataUrl = '/Stone/JsonStoneCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Group'],
+                colNames: ['Id', 'Stone', 'Stone Short Form', 'Stone Per Carat', 'Is Stone Weightless'],
                 colModel: [
-                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductGroup1', index: 'ProductGroup1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2} },
+                  { name: 'StoneName', index: 'StoneName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'StoneShortForm', index: 'StoneShortForm', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
+                  { name: 'StonePerCarat', index: 'StonePerCarat', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
+                  { name: 'IsStoneWeightless', index: 'IsStoneWeightless', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -41,10 +44,10 @@
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'ProductGroup1',
+                sortname: 'StoneName',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Product Groups",
+                caption: "Stones",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -72,7 +75,7 @@
               }
        }, // default settings for edit
        {
-           closeOnEscape: true, url: "/Administration/AddJsonSiteLogs", closeAfterAdd: false, width: 350, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in Add
+       closeOnEscape: true, url: "/Administration/AddJsonSiteLogs", closeAfterAdd: false, width: 350, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in Add
                function (response, postdata) {
                    var json = response.responseText; //in my case response text form server is "{sc:true,msg:''}"
                    if (json) {
@@ -85,40 +88,40 @@
                }
 
 
-       }, // default settings for add
+   }, // default settings for add
        {
-           url: "/ProductGroup/DelProductGroup",
-           onclickSubmit: function (params) {
-               var ajaxData = {};
-               var list = $("#list");
-               var selectedRow = list.getGridParam("selrow");
-               rowData = list.getRowData(selectedRow);
-               ajaxData = { id: rowData.Id };
-               return ajaxData;
-           },
-           afterComplete: function (response) {
-               var resp = $.parseJSON(response.responseText);
-               ClearMsg();
-               if (resp.success)
-                   Success(resp.message);
-               else
-                   Failure(resp.message);
-               var recs = parseInt($("#list").getGridParam("records"), 10);
-               if (recs == 0) {
-                   $("#gridWrapper").hide();
-                   EmptyGrid("#EmptyGridWrapper");
-                   $("#EmptyGridWrapper").show();
-               } else {
-                   $('#gridWrapper').show();
-                   $("#EmptyGridWrapper").hide();
-               }
+       url: "/Stone/DelStone",
+       onclickSubmit: function (params) {
+           var ajaxData = {};
+           var list = $("#list");
+           var selectedRow = list.getGridParam("selrow");
+           rowData = list.getRowData(selectedRow);
+           ajaxData = { id: rowData.Id };
+           return ajaxData;
+       },
+       afterComplete: function (response) {
+           var resp = $.parseJSON(response.responseText);
+           ClearMsg();
+           if (resp.success)
+               Success(resp.message);
+           else
+               Failure(resp.message);
+           var recs = parseInt($("#list").getGridParam("records"), 10);
+           if (recs == 0) {
+               $("#gridWrapper").hide();
+               EmptyGrid("#EmptyGridWrapper");
+               $("#EmptyGridWrapper").show();
+           } else {
+               $('#gridWrapper').show();
+               $("#EmptyGridWrapper").hide();
            }
+       }
 
 
 
-       }, // delete options
-       { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
-       { closeOnEscape: true, width: 350 } // view options
+   }, // delete options
+       {closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
+       {closeOnEscape: true, width: 350} // view options
     );
             $.extend($.jgrid.search, { Find: 'Search' });
 
@@ -129,16 +132,16 @@
      <div class="clear">
         
         <div style="float: left;">
-            <input type="button" id="CreateProductGroup" class="rg_button_red upper" title="Click to Create Product Group"
-                value="Create Product Group" onclick="Create()" />
+            <input type="button" id="CreateStone" class="rg_button_red upper" title="Click to Create Stone"
+                value="Create Stone" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product Group List"
+            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Stone List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divProductGroupMaster">
+    <div id="divStoneMaster">
         
         <div id="gridWrapper" style="width: 100%;">
            
@@ -152,7 +155,7 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateProductGroup">
+    <div id="divCreateStone">
     </div>
 </body>
 </html>

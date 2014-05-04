@@ -11548,10 +11548,10 @@ if (!Array.prototype.filter) {
 }
 
 })(jQuery, window, Handsontable);
-/* =============================================================
+/* tdtdtdtdtdtdtdtd=====
  * bootstrap-typeahead.js v2.3.1
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
- * =============================================================
+ * tdtdtdtdtdtdtdtd=====
  * Copyright 2012 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11565,7 +11565,7 @@ if (!Array.prototype.filter) {
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ============================================================ */
+ * tdtdtdtdtdtdtdtd==== */
 
 
 !function($){
@@ -11574,7 +11574,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD PUBLIC CLASS DEFINITION
-   * ================================= */
+   * tdtdtdtd===== */
 
   var Typeahead = function (element, options) {
     this.$element = $(element)
@@ -11839,7 +11839,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD PLUGIN DEFINITION
-   * =========================== */
+   * tdtdtd====== */
 
   var old = $.fn.typeahead
 
@@ -11865,7 +11865,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD NO CONFLICT
-   * =================== */
+   * tdtd===== */
 
   $.fn.typeahead.noConflict = function () {
     $.fn.typeahead = old
@@ -11874,7 +11874,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD DATA-API
-   * ================== */
+   * tdtd==== */
 
   $(document).on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
     var $this = $(this)
@@ -25637,10 +25637,10 @@ if (!Array.prototype.filter) {
 }
 
 })(jQuery, window, Handsontable);
-/* =============================================================
+/* tdtdtdtdtdtdtdtd=====
  * bootstrap-typeahead.js v2.3.1
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
- * =============================================================
+ * tdtdtdtdtdtdtdtd=====
  * Copyright 2012 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25654,7 +25654,7 @@ if (!Array.prototype.filter) {
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ============================================================ */
+ * tdtdtdtdtdtdtdtd==== */
 
 
 !function($){
@@ -25663,7 +25663,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD PUBLIC CLASS DEFINITION
-   * ================================= */
+   * tdtdtdtd===== */
 
   var Typeahead = function (element, options) {
     this.$element = $(element)
@@ -25928,7 +25928,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD PLUGIN DEFINITION
-   * =========================== */
+   * tdtdtd====== */
 
   var old = $.fn.typeahead
 
@@ -25954,7 +25954,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD NO CONFLICT
-   * =================== */
+   * tdtd===== */
 
   $.fn.typeahead.noConflict = function () {
     $.fn.typeahead = old
@@ -25963,7 +25963,7 @@ if (!Array.prototype.filter) {
 
 
   /* TYPEAHEAD DATA-API
-   * ================== */
+   * tdtd==== */
 
   $(document).on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
     var $this = $(this)

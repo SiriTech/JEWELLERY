@@ -3,37 +3,37 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadProducts();
+            LoadRoles();
         });
         function Create() {
-            $("#divProductMaster").hide();
-            $("#CreateProduct").hide();
+            $("#divRoleMaster").hide();
+            $("#CreateRole").hide();
             $("#backToList").show();
-            $("#divCreateProduct").show();
-            GetContentByActionAndController('AddEditProduct', 'Product', 'Add/Edit Product', '#divCreateProduct');
+            $("#divCreateRole").show();
+            GetContentByActionAndController('AddEditRole', 'Role', 'Add/Edit Role', '#divCreateRole');
         }
-        function UpdateProduct(id) {
-            $("#divProductMaster").hide();
-            $("#CreateProduct").hide();
+        function UpdateRole(id) {
+            $("#divRoleMaster").hide();
+            $("#CreateRole").hide();
             $("#backToList").show();
-            $("#divCreateProduct").show();
-            GetContentByActionAndControllerForEdit('EditProduct', 'Product', 'Add/Edit Product', id, '#divCreateProduct');
+            $("#divCreateRole").show();
+            GetContentByActionAndControllerForEdit('EditRole', 'Role', 'Add/Edit Role', id, '#divCreateRole');
         }
-        function LoadProducts() {
+        function LoadRoles() {
             var gridDataUrl;
-            gridDataUrl = '/Product/JsonProductCollection';
+            gridDataUrl = '/Role/JsonRoleCollection';
             jQuery("#list").jqGrid({
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Name'],
+                colNames: ['Id', 'Role'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductName', index: 'ProductName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -41,10 +41,10 @@
                 height: 'auto',
                 autowidth: true,
                 pager: jQuery('#pager'),
-                sortname: 'ProductName',
+                sortname: 'RoleName',
                 viewrecords: true,
                 sortorder: "asc",
-                caption: "Products",
+                caption: "Roles",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
                     if (recs == 0) {
@@ -87,7 +87,7 @@
 
        }, // default settings for add
        {
-           url: "/Product/DelProduct",
+           url: "/Role/DelRole",
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");
@@ -129,16 +129,16 @@
       <div class="clear">
         
         <div style="float: left;">
-            <input type="button" id="CreateProduct" class="rg_button_red upper" title="Click to Create Product"
-                value="Create Product" onclick="Create()" />
+            <input type="button" id="CreateRole" class="rg_button_red upper" title="Click to Create Role"
+                value="Create Role" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">
-            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Product List"
+            <input type="button" class="rg_button_red upper" style="display:none;" id="backToList" title="Back" value="Back To Role List"
                 onclick="Back()" />
         </div>
     </div>
-    <div id="divProductMaster">
+    <div id="divRoleMaster">
         
         <div id="gridWrapper" style="width: 100%;">
            
@@ -152,7 +152,7 @@
         <div id="EmptyGridWrapper">
         </div>
     </div>
-    <div id="divCreateProduct">
+    <div id="divCreateRole">
     </div>
 </body>
 </html>
