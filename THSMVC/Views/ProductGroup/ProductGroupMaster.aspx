@@ -35,6 +35,7 @@
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
                   { name: 'ProductGroup1', index: 'ProductGroup1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',

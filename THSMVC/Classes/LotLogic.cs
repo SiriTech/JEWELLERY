@@ -20,6 +20,9 @@ namespace THSMVC.App_Code
             
 
             List<LotMasterModel> Userinfo = (from d in dse.Lots
+                                             join pg in dse.ProductGroups on d.ProductGroupId equals pg.Id
+                                             join de in dse.Dealers on d.DealerId equals de.DealerId into lj
+                                             from lm in lj.DefaultIfEmpty()
                                              where d.InstanceId == inststanceId
                                              select new LotMasterModel()
                                              {
@@ -28,7 +31,12 @@ namespace THSMVC.App_Code
                                                 LotName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.LotName + "</a>",
                                                 ProductGroupId = d.ProductGroupId,
                                                 Qty = (double) d.NoOfPieces,
-                                                Weight = (double) d.Weight
+                                                Weight = (double) d.Weight,
+                                                IsMRP=d.IsMRP,
+                                                MRP=d.MRP,
+                                                DiffAllowed=d.DiffAllowed,
+                                                ProductGroup = pg.ProductGroup1,
+                                                Dealer=lm.DealerName
                                              }).ToList<LotMasterModel>();
             return Userinfo.AsQueryable();
         }
@@ -68,6 +76,9 @@ namespace THSMVC.App_Code
                 lot.NoOfPieces = (int)objLot.NoOfPieces;
                 lot.ProductGroupId = objLot.ProductGroupId;
                 lot.Weight = (int)objLot.Weight;
+                lot.IsMRP = objLot.IsMRP;
+                lot.MRP = objLot.MRP;
+                lot.DiffAllowed = objLot.DiffAllowed;
 
                 // dse.Lots.AddObject(objLot);
                 dse.SaveChanges();
@@ -88,11 +99,11 @@ namespace THSMVC.App_Code
                      select new LotMasterModel()
                      {
                          DealerId = lot.DealerId == null ? 0:  (int)lot.DealerId,
-                         DiffAllowed = lot.DiffAllowed == null ?0: (double)lot.DiffAllowed,
+                         DiffAllowed = lot.DiffAllowed == null ?0: (decimal)lot.DiffAllowed,
                          IsMRP = lot.IsMRP == null ? false : (bool)lot.IsMRP,
                          LotId = lot.LotId,
                          LotName = lot.LotName,
-                         MRP = lot.MRP == null ? 0 : (double)lot.MRP,
+                         MRP = lot.MRP == null ? 0 : (decimal)lot.MRP,
                          ProductGroupId = lot.ProductGroupId,
                          Qty = lot.NoOfPieces == null ? 0 : (double)lot.NoOfPieces,
                          Weight = lot.Weight == null ? 0 : (double)lot.Weight

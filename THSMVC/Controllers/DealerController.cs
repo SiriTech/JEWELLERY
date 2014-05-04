@@ -89,6 +89,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.Dealers.Where(p => p.DealerName == model.DealerName).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Dealer with the same name already exists." });
                         Dealer group = new Dealer();
                         group.InstanceId = inststanceId;
                         group.DealerName = model.DealerName;
@@ -107,6 +110,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.Dealers.Where(p => p.DealerName == model.DealerName && p.DealerId != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Dealer with the same name already exists." });
                         Dealer group = dse.Dealers.Where(p => p.DealerId == model.Id).FirstOrDefault();
                         group.DealerName = model.DealerName;
                         group.CompanyName = model.CompanyName;
@@ -191,8 +197,8 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.DealerName.ToString().Replace("$$$$","'UpdateDealer("+s.Id.ToString()+")'").Replace("****","href='#'"),
                             s.CompanyName.ToString(),
+                            s.DealerName.ToString().Replace("$$$$","'UpdateDealer("+s.Id.ToString()+")'").Replace("****","href='#'"),
                             s.CompanyShortForm==null?"":s.CompanyShortForm,
                             s.Address==null?"":s.Address,
                             s.City==null?"":s.City,

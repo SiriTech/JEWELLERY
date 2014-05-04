@@ -2,26 +2,25 @@ Lot Screen
 
 1. Lot Name Limit SHOULD BE 15 chars
 2. Put grms beside Weight textbox and Diffrerence allowed
-3. After point 3 decimols
+.3. After point 3 decimols
 4. If it is IsMRP , then hide difference allowed text box
 5. Diffallowed can be nagative or possitive
 6. MRP column is missing Lot List page
 7. Display cross mark under weight if it is MRP, wise versa for MRP
-8. One Lot for One USer only - and Give option to allot more than 2 lots settings based. Need to select user and configure the no of lots to assigned , .text box to enter number of lots to asigned (priority is single Lot for Single User, providing extra option can be done later)
+.8. One Lot for One USer only - and Give option to allot more than 2 lots settings based. Need to select user and configure the no of lots to assigned , .text box to enter number of lots to asigned (priority is single Lot for Single User, providing extra option can be done later)
 9. Assigned lot should not be in the lot dropdown
 10. Serial numbers in all list pages
 11. After succefull creation - go to List page in all pages 
-12. Names should not be same in all pages (need to add unique constraint )
-13. Delarer : add these fields - Mail Id, Mobile1, Mobile2, Mobile3,Mobile4 Ofc Number, Ofc Mobile Number
-14. Provide a option to add 2 or more mail ids(i'll get back to u after discussion with Srikanth)
-15. Provide Option to edit Column names (I said not possible)
-16. add one Text area with 200 characters to enter any thing
+12. Names should not be same in all pages (need to add unique constraint)
+
+13. Dealer : add these fields - Mail Id, Mobile1, Mobile2, Mobile3,Mobile4 Ofc Number, Ofc Mobile Number
+.14. Provide a option to add 2 or more mail ids(i'll get back to u after discussion with Srikanth)
+.15. Provide Option to edit Column names (I said not possible)
+.16. add one Text area with 200 characters to enter any thing
 17. Provide an option upload files max upto 10
-18. Provide Lists for State, City, Pin(pending, will see later)
+.18. Provide Lists for State, City, Pin(pending, will see later)
 19. Dealer List - display these fileds with same order - Cmpny Name, DealerName, ShortName, MobileNumber, TIN and other Mondatory info
 20. Enabe either Value Added By Percentage or Value Added Fixed, Making Charges per Gram or Fixed
 21. Display Usefull information in all grids, not applicable Values should have cross mark
 22. move catogory and Gropu ddls to top, enable all the fields only if these 2 are selected
 23. show all the lots with status in lots assigned list(not mandatory for now)
-
-

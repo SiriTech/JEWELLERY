@@ -90,6 +90,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.Roles.Where(p => p.Role1 == model.RoleName).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Role with the same name already exists." });
                         Role group = new Role();
                         group.InstanceId = inststanceId;
                         group.Role1 = model.RoleName;
@@ -101,6 +104,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.Roles.Where(p => p.Role1 == model.RoleName && p.Id != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Role with the same name already exists." });
                         Role group = dse.Roles.Where(p => p.Id == model.Id).FirstOrDefault();
                         group.Role1 = model.RoleName;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);

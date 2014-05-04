@@ -64,6 +64,12 @@ namespace THSMVC.Controllers
         public ActionResult CreateLot(LotMasterModel objLotMasterModel)
         {
             bool result = false;
+            using (DataStoreEntities dse = new DataStoreEntities())
+            {
+                var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName).ToList();
+                if (ch.Count > 0)
+                    return Json(new { success = false, message = "Lot with the same name already exists." });
+            }
             Lot lot = new Lot
             {
                 InstanceId = Convert.ToInt32(Session["InstanceId"]),
@@ -72,7 +78,10 @@ namespace THSMVC.Controllers
                 LotName = objLotMasterModel.LotName,
                 NoOfPieces = (int)objLotMasterModel.Qty,
                 ProductGroupId = objLotMasterModel.ProductGroupId,
-                Weight = (int)objLotMasterModel.Weight
+                Weight = Convert.ToBoolean(objLotMasterModel.IsMRP)?0:(decimal)objLotMasterModel.Weight,
+                DiffAllowed = objLotMasterModel.DiffAllowed,
+                MRP = Convert.ToBoolean(objLotMasterModel.IsMRP)?objLotMasterModel.MRP:0,
+                IsMRP = objLotMasterModel.IsMRP
             };
             using (LotLogic logicLayer = new LotLogic())
             {
@@ -88,6 +97,12 @@ namespace THSMVC.Controllers
         public ActionResult UpdateLot(LotMasterModel objLotMasterModel)
         {
             bool result = false;
+            using (DataStoreEntities dse = new DataStoreEntities())
+            {
+                var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName && p.LotId == objLotMasterModel.LotId).ToList();
+                if (ch.Count > 0)
+                    return Json(new { success = false, message = "Lot with the same name already exists." });
+            }
             Lot lot = new Lot
             {
                 DealerId = objLotMasterModel.DealerId,
@@ -95,7 +110,10 @@ namespace THSMVC.Controllers
                 LotName = objLotMasterModel.LotName,
                 NoOfPieces = (int)objLotMasterModel.Qty,
                 ProductGroupId = objLotMasterModel.ProductGroupId,
-                Weight = (int)objLotMasterModel.Weight
+                Weight = (int)objLotMasterModel.Weight,
+                IsMRP = objLotMasterModel.IsMRP,
+                MRP=objLotMasterModel.MRP,
+                DiffAllowed = objLotMasterModel.DiffAllowed
             };
             using (LotLogic logicLayer = new LotLogic())
             {
@@ -137,10 +155,11 @@ namespace THSMVC.Controllers
                               cell = new string[] {
                             s.LotId.ToString(), //s.LotName,
                             s.LotName.ToString().Replace("$$$$","'UpdateLot("+s.LotId.ToString()+")'").Replace("****","href='#'"),
-                            s.ProductGroupId.ToString(),
+                            s.ProductGroup.ToString(),
                             s.Qty.ToString(),
-                            s.Weight.ToString(),
-                            s.DealerId.ToString()
+                            Convert.ToBoolean(s.IsMRP)?"<img src='../../images/remove.png' />": s.Weight.ToString(),
+                            s.Dealer,
+                            Convert.ToBoolean(s.IsMRP)?s.MRP.ToString():"<img src='../../images/remove.png' />"
                         }
                           }).ToArray()
                 };

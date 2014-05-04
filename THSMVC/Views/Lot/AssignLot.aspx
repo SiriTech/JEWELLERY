@@ -74,6 +74,7 @@
                 { name: 'UserName', index: 'UserName', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '(*)', rowpos: 2, colpos: 2 } },
                 { name: 'Status', index: 'Status', width: 100, align: 'left', editable: true, edittype: 'text', editrules: { required: true }, formoptions: { elmsuffix: '(*)', rowpos: 3, colpos: 2 } }
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',

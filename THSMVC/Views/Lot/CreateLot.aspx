@@ -6,13 +6,16 @@
     <title>CreateUser</title>
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#LotName").focus();
             $('#IsMRP').change(function () {
                 if ($(this).is(':checked')) {
                     $("#divMRP").show();
                     $("#divWeight").hide();
+                    $("#divDiff").hide();
                 } else {
                     $("#divMRP").hide();
                     $("#divWeight").show();
+                    $("#divDiff").show();
                 }
             });
 
@@ -106,14 +109,13 @@
                 <div class="clear">
                     <div class="ContentdivBorder" id="divLotInfo">
                         <div class="clear">
-                            <%-- <div class="FloatLeft" style="width: 80%;">--%>
                             <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
                                             <span class="ValidationSpan">*</span> Lot Name
                                         </div>
                                         <div class="editor-field" style="text-align: left;">
-                                            <%= Html.TextBoxFor(m => m.LotName, new { maxlength = 10, autocomplete = "off", title="Type in Lot Name" })%>
+                                            <%= Html.TextBoxFor(m => m.LotName, new { maxlength = 15, autocomplete = "off", title="Type in Lot Name" })%>
                                         </div>
                                     </div>
                             </div>
@@ -123,7 +125,6 @@
                                             <span class="ValidationSpan">*</span> Product Group
                                         </div>
                                         <div class="editor-field" style="text-align: left;">
-                                            <%-- <%= Html.TextBoxFor(m => m.ProductGroupId, new { maxlength = 10, autocomplete = "off", title="Type in Lot Name" })%>--%>
                                              <%=  Html.DropDownListFor(model => model.ProductGroupId, Model.ProductGroupList.Select(x => new SelectListItem { Text = x.ProductGroup1.ToString(), Value = x.Id.ToString() }),"Select Product Group")%>
                                         </div>
                                     </div>
@@ -135,25 +136,32 @@
                                             Is MRP
                                         </div>
                                         <div class="editor-field" style="text-align: left;">
-                                             <%--<%= Html.TextBoxFor(m => m.Qty, new { maxlength = 10, autocomplete = "off", title="Type in Lot Name" })%>--%>
-                                           
                                              <%= Html.CheckBox("IsMRP", this.Model.IsMRP)%>
                                         </div>
                                     </div>
                             </div>
-
+                            <% if (!Convert.ToBoolean(Model.IsMRP))
+                               { %>
                             <div class="clear" id="divWeight">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
                                             <span class="ValidationSpan">*</span> Weight
                                         </div>
                                         <div class="editor-field" style="text-align: left;">
-                                             <%= Html.TextBoxFor(m => m.Weight, new { maxlength = 10, autocomplete = "off", title="Type in Lot Name" })%>
+                                             <%= Html.TextBoxFor(m => m.Weight, new { maxlength = 10, autocomplete = "off", title = "Type in Lot Name" })%> gms
                                         </div>
                                     </div>
                             </div>
-
-                            <div class="clear" id="divMRP" style="display:none">
+                            <%} %>
+                            <% if (Convert.ToBoolean(Model.IsMRP))
+                               { %>
+                               <div class="clear" id="divMRP">
+                               <%}
+                               else
+                               { %>
+                               <div class="clear" id="divMRP" style="display:none">
+                               <%} %>
+                            
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
                                           <span class="ValidationSpan">*</span>  MRP
@@ -188,14 +196,20 @@
                                         </div>
                                     </div>
                             </div>
-
-                             <div class="clear">
+                            <% if (Convert.ToBoolean(Model.IsMRP))
+                               { %>
+                             <div class="clear" id="divDiff" style="display:none;">
+                             <%}
+                               else
+                               { %>
+                               <div class="clear" id="divDiff">
+                             <%} %>
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
-                                            Difference allowed
+                                            Difference allowed(+/-)
                                         </div>
                                         <div class="editor-field" style="text-align: left;">
-                                             <%= Html.TextBoxFor(m => m.DiffAllowed, new { autocomplete = "off", title="Enter Difference allowed" })%>
+                                             <%= Html.TextBoxFor(m => m.DiffAllowed, new { autocomplete = "off", title="Enter Difference allowed" })%> gms
                                         </div>
                                     </div>
                             </div>

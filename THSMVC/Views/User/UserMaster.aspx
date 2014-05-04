@@ -49,6 +49,7 @@
                 { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
                 { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
