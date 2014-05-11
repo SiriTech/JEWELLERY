@@ -119,6 +119,7 @@
                                         </div>
                                     </div>
                             </div>
+                            
                             <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
@@ -183,8 +184,6 @@
                                     </div>
                             </div>
 
-                            
-
                             <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
@@ -196,6 +195,10 @@
                                         </div>
                                     </div>
                             </div>
+<<<<<<< HEAD
+
+                            <div class="clear">
+=======
                             <% if (Convert.ToBoolean(Model.IsMRP))
                                { %>
                              <div class="clear" id="divDiff" style="display:none;">
@@ -204,6 +207,7 @@
                                { %>
                                <div class="clear" id="divDiff">
                              <%} %>
+>>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
                                             Difference allowed(+/-)

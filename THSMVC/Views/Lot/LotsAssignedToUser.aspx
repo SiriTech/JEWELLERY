@@ -23,6 +23,7 @@
                 { name: 'Status', index: 'Status', width: 100, align: 'left', editable: true, edittype: 'text', editrules: { required: true }, formoptions: { elmsuffix: '(*)', rowpos: 3, colpos: 2} },
                 { name: 'AcceptLink', index: 'AcceptLink', width: 100, align: 'center', editable: true, edittype: 'text', editrules: { required: true }, formoptions: { elmsuffix: '(*)', rowpos: 3, colpos: 2} }
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',

@@ -143,9 +143,11 @@
       <DependentUpon>LoggerDataStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LotAssignModel.cs" />
+    <Compile Include="Models\LotCloseModel.cs" />
     <Compile Include="Models\LotDetailsModel.cs" />
     <Compile Include="Models\LotDropdownModel.cs" />
     <Compile Include="Models\LotModel.cs" />
+    <Compile Include="Models\LotUserMappingModel.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
     <Compile Include="Models\ProductGroupModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -566,6 +568,7 @@
     <Content Include="Views\Dealer\DealerMaster.aspx" />
     <Content Include="Views\Home\ContactUS.aspx" />
     <Content Include="Views\Lot\AssignLot.aspx" />
+    <Content Include="Views\Lot\CloseLot.aspx" />
     <Content Include="Views\Lot\LotDetails.aspx" />
     <Content Include="Views\Lot\LotsAssignedToUser.aspx" />
     <Content Include="Views\Lot\CreateLot.aspx" />

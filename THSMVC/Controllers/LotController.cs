@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -79,8 +79,13 @@ namespace THSMVC.Controllers
                 NoOfPieces = (int)objLotMasterModel.Qty,
                 ProductGroupId = objLotMasterModel.ProductGroupId,
                 Weight = Convert.ToBoolean(objLotMasterModel.IsMRP)?0:(decimal)objLotMasterModel.Weight,
+<<<<<<< HEAD
+                DiffAllowed = (decimal)objLotMasterModel.DiffAllowed,
+                MRP = Convert.ToBoolean(objLotMasterModel.IsMRP) ? (decimal)objLotMasterModel.MRP : 0,
+=======
                 DiffAllowed = objLotMasterModel.DiffAllowed,
                 MRP = Convert.ToBoolean(objLotMasterModel.IsMRP)?objLotMasterModel.MRP:0,
+>>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
                 IsMRP = objLotMasterModel.IsMRP
             };
             using (LotLogic logicLayer = new LotLogic())
@@ -112,8 +117,13 @@ namespace THSMVC.Controllers
                 ProductGroupId = objLotMasterModel.ProductGroupId,
                 Weight = (int)objLotMasterModel.Weight,
                 IsMRP = objLotMasterModel.IsMRP,
+<<<<<<< HEAD
+                MRP = (decimal)objLotMasterModel.MRP,
+                DiffAllowed = (decimal)objLotMasterModel.DiffAllowed
+=======
                 MRP=objLotMasterModel.MRP,
                 DiffAllowed = objLotMasterModel.DiffAllowed
+>>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
             };
             using (LotLogic logicLayer = new LotLogic())
             {
@@ -158,7 +168,11 @@ namespace THSMVC.Controllers
                             s.ProductGroup.ToString(),
                             s.Qty.ToString(),
                             Convert.ToBoolean(s.IsMRP)?"<img src='../../images/remove.png' />": s.Weight.ToString(),
+<<<<<<< HEAD
+                            s.DealerId.ToString(),
+=======
                             s.Dealer,
+>>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
                             Convert.ToBoolean(s.IsMRP)?s.MRP.ToString():"<img src='../../images/remove.png' />"
                         }
                           }).ToArray()
@@ -180,7 +194,8 @@ namespace THSMVC.Controllers
             try
             {
                 int instanceId = Convert.ToInt32(Session["InstanceId"]);
-                var context = GetAssignedLots();
+                LotLogic logicLayer = new LotLogic();
+                var context = logicLayer.GetAllAssignedLots().AsQueryable();
 
                 //sorting
                 //  context = context.OrderBy<LotMasterModel>(grid.SortColumn, grid.SortOrder);
@@ -481,6 +496,7 @@ namespace THSMVC.Controllers
         {
             string respMsg = string.Empty;
             int assignedCount = 0, completedCount = 0;
+            double assignedWeight = 0, completedWeight = 0, assignedMRP = 0, completedMRP = 0;
 
             //Todo Generate Barode Sequence.]
             List<CompletedBarcodeModel> CompletedList = new List<CompletedBarcodeModel>();
@@ -494,11 +510,12 @@ namespace THSMVC.Controllers
                 Price = (decimal)mrp, //Need to Calculate
                 ProductId = productId,
                 GrossWeight = (decimal)Weight, //ToDo: need to calculate
+                NetWeight =(decimal)(Weight - stoneWeight),
                 WeightMeasure = ""
             };
             bool result = false;
             LotLogic logicLayer = new LotLogic();
-            result = logicLayer.InsertBarcode(barcode, out respMsg, out assignedCount, out completedCount);
+            result = logicLayer.InsertBarcode(barcode, out respMsg, out assignedCount, out completedCount, out assignedWeight, out completedWeight, out assignedMRP, out completedMRP);
 
             //Todo: Print barcode
            
@@ -531,11 +548,12 @@ namespace THSMVC.Controllers
         public ActionResult GetAssinedAndCompletedCount(int lotId)
         {
             int assignedCount = 0, completedCount = 0;
+            double assignedWeight = 0, completedWeight = 0, assignedMRP = 0, completedMRP = 0;
             using (LotLogic logicLayer = new LotLogic())
             {
-                logicLayer.GetAssinedAndCompletedCount(lotId, out assignedCount, out completedCount);
+                logicLayer.GetAssinedAndCompletedCount(lotId, out assignedCount, out completedCount, out assignedWeight, out completedWeight, out assignedMRP, out completedMRP);
             }
-            return Json(new { AssCount = assignedCount, CompCount = completedCount });
+            return Json(new { AssCount = assignedCount, CompCount = completedCount, assWeight = assignedWeight, compWeight = completedWeight, assMRP = assignedMRP,compMRP = completedMRP });
         }
 
         public ActionResult SubmitLot(int lotId)
@@ -576,6 +594,41 @@ namespace THSMVC.Controllers
             {
                 return Json(false);
             }
+        }
+
+        public ActionResult CloseLot(int id)
+        {
+            LotCloseModel model = new LotCloseModel();
+            using (LotLogic logic = new LotLogic())
+            {
+                model = logic.GetCloseLotDetails(id);
+            }
+            return View(model);
+        }
+
+        public ActionResult CloseLotSubmit(int lotId)
+        {
+            bool result = false;
+            string respMsg = string.Empty;
+            using (LotLogic logic = new LotLogic())
+            {
+                result = logic.CloseLot(lotId, out respMsg);
+            }
+
+            if (result)
+                return Json(new { success = true, message = "Lot Closed successfully" });
+            else
+                return Json(new { success = false, message = respMsg });
+        }
+
+        public ActionResult GetCalculatedStonePrice(int stoneId, double weight)
+        {
+            double result = 0;
+            using (LotLogic logic = new LotLogic())
+            {
+                result = logic.GetCalculatedStonePrice(stoneId, weight);
+            }
+            return Json(new { success = true, data = result });
         }
 
         private List<StoneModel> GetStoneList()

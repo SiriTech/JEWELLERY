@@ -62,6 +62,11 @@
             $("select#userId").val('');
         }
 
+        function CloseLot(lotId) {
+            //  alert(lotId);
+            GetContentByActionAndControllerForEdit("CloseLot", "Lot", "Close Lot", lotId, '#Content');
+        }
+
         function GetAssingedLots() {
             jQuery("#Lotlist").jqGrid({
                 url: '/Lot/JsonAssignedLotCollection',

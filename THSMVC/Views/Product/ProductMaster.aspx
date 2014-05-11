@@ -8,6 +8,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             LoadProducts();
+            
         });
         function Create() {
             $("#divProductMaster").hide();

@@ -185,7 +185,11 @@
               { name: 'Dealer', index: 'Dealer', width: 100, align: 'left', editable: true },
               { name: 'MRP', index: 'MRP', width: 100, align: 'left', editable: true }
             ],
+<<<<<<< HEAD
+            rownumbers: true,
+=======
             rownumbers:true,
+>>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
             rowNum: 10,
             rowList: [10, 20, 30],
             height: 'auto',
