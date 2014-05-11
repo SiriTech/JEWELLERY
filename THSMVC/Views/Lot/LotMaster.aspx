@@ -183,6 +183,7 @@
               { name: 'Weight', index: 'Weight', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '    ', rowpos: 6, colpos: 2} },
               { name: 'DealerId', index: 'DealerId', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '    ', rowpos: 7, colpos: 2} }
             ],
+            rownumbers: true,
             rowNum: 10,
             rowList: [10, 20, 30],
             height: 'auto',

@@ -117,6 +117,7 @@
                                         </div>
                                     </div>
                             </div>
+                            
                             <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
@@ -175,8 +176,6 @@
                                     </div>
                             </div>
 
-                            
-
                             <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
@@ -189,7 +188,7 @@
                                     </div>
                             </div>
 
-                             <div class="clear">
+                            <div class="clear">
                                     <div class="clear">
                                         <div class="editor-label FloatLeft" style="width: 40%;">
                                             Difference allowed

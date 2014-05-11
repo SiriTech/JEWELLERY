@@ -1,0 +1,74 @@
+<html>
+<head>undefined</head>
+<body><title>The parameters dictionary contains a null entry for parameter 'lotId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult CloseLot(Int32)' in 'THSMVC.Controllers.LotController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.&lt;br&gt;Parameter name: parameters</title>
+
+<font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+
+            <b> Description: </b>An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.
+
+            <br><br>
+
+            <b> Exception Details: </b>System.ArgumentException: The parameters dictionary contains a null entry for parameter 'lotId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult CloseLot(Int32)' in 'THSMVC.Controllers.LotController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.<br>Parameter name: parameters<br><br>
+
+            <b>Source Error:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code>
+
+An unhandled exception was generated during the execution of the current web request. Information regarding the origin and location of the exception can be identified using the exception stack trace below.</code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <b>Stack Trace:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+[ArgumentException: The parameters dictionary contains a null entry for parameter 'lotId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult CloseLot(Int32)' in 'THSMVC.Controllers.LotController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters]
+   System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo) +799
+   System.Web.Mvc.&lt;&gt;c__DisplayClass1.&lt;Execute&gt;b__0(ParameterInfo parameterInfo) +69
+   System.Linq.WhereSelectArrayIterator`2.MoveNext() +136
+   System.Linq.Buffer`1..ctor(IEnumerable`1 source) +522
+   System.Linq.Enumerable.ToArray(IEnumerable`1 source) +144
+   System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters) +319
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +52
+   System.Web.Mvc.&lt;&gt;c__DisplayClassd.&lt;InvokeActionMethodWithFilters&gt;b__a() +127
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation) +436
+   System.Web.Mvc.&lt;&gt;c__DisplayClassf.&lt;InvokeActionMethodWithFilters&gt;b__c() +61
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +307
+   System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName) +831
+   System.Web.Mvc.Controller.ExecuteCore() +136
+   System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext) +112
+   System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext) +39
+   System.Web.Mvc.&lt;&gt;c__DisplayClass8.&lt;BeginProcessRequest&gt;b__4() +65
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0() +44
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _) +42
+   System.Web.Mvc.Async.WrappedAsyncResult`1.End() +142
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +54
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +40
+   System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult) +52
+   System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) +38
+   System.Web.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute() +690
+   System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously) +194
+</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <hr color="silver" size="1" width="100%">
+
+            <b>Version Information:</b>&nbsp;Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.0.30319.225
+
+            </font></body>
+</html>

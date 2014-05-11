@@ -219,7 +219,26 @@ namespace THSMVC.App_Code
 
         public List<LotUserMappingView> GetAssignedLots()
         {
-            return (from lotMapping in dse.LotUserMappingViews where lotMapping.InstanceId == inststanceId select lotMapping).ToList();
+            return (from lotMapping in dse.LotUserMappingViews 
+                    where lotMapping.InstanceId == inststanceId 
+                    select lotMapping
+                    ).ToList();
+        }
+
+        public List<LotUserMappingModel> GetAllAssignedLots()
+        {
+            return (from lotMapping in dse.LotUserMappingViews
+                    where lotMapping.InstanceId == inststanceId
+                    select new LotUserMappingModel
+                    {
+                        LotId = lotMapping.LotId,
+                        LotName = (lotMapping.StatusId == 3 || lotMapping.StatusId == 4) ? "<a style='color:gray;font-weight:bold;text-decoration: underline; cursor: pointer;' title='Click to edit' onclick='CloseLot(" + SqlFunctions.StringConvert((decimal?)lotMapping.LotId) + ")'> " + lotMapping.LotName + " </a>" : lotMapping.LotName, //lotMapping.LotName,
+                        Status = lotMapping.Status,
+                        StatusId = lotMapping.StatusId,
+                        UserId = lotMapping.UserId,
+                        UserName = lotMapping.UserName
+                    }
+                    ).ToList();
         }
 
         public List<StoneModel> GetStoneList()
@@ -265,24 +284,67 @@ namespace THSMVC.App_Code
             return list;
         }
 
-        public bool InsertBarcode(Barcode objBarcode, out string respMsg, out int assignedCount, out int completedCount)
+        public bool InsertBarcode(Barcode objBarcode, out string respMsg, out int assignedCount, out int completedCount, out double assignedWeight, out double completedWeight, out double assignedMrp, out double completedMRP)
         {
             respMsg = string.Empty;
             assignedCount = 0;
             completedCount = 0;
+            completedWeight = 0;
+            assignedWeight = 0;
+            double allowDiff = 0;
+            assignedMrp = 0;
+            completedMRP = 0;
             //int AssignedNoOfPieces = 0;
             try
             {
                 Lot lot = dse.Lots.Where(x=>x.LotId == objBarcode.LotId).FirstOrDefault();
-                if(lot != null)
-                    assignedCount = (int)lot.NoOfPieces;
+                if (lot != null)
+                {
+                    assignedCount = lot.NoOfPieces == null ? 0: (int)lot.NoOfPieces;
+                    assignedWeight = lot.Weight == null ? 0 : (double)lot.Weight;
+                    allowDiff = lot.DiffAllowed == null ? 0 : (double)lot.DiffAllowed;
+                    assignedMrp = lot.MRP == null ? 0 : (double)lot.MRP;
+                }
 
                 List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x=>x.LotId == objBarcode.LotId).ToList();
                 completedCount = CompletedBarcodes.Count;
 
+                foreach (Barcode b in CompletedBarcodes)
+                {
+                    completedWeight += (double)b.GrossWeight;
+                    completedMRP += (double)b.Price;
+                }
+
+                //Checking with the Lot Count and Completed Product Count
                 if (CompletedBarcodes.Count >= assignedCount)
                 {
                     respMsg = "No Of pieces Count has been exceeded. Assigned Count : " + assignedCount + " , Completed products so far : " + CompletedBarcodes.Count;
+                    return false;
+                }
+
+                //Checking with the Weight
+                if ((assignedWeight + allowDiff < completedWeight) || (assignedWeight - allowDiff < completedWeight))
+                {
+                    respMsg = "Weight has been exceeded. Lot Weightt : " + assignedWeight + " , Completed Products Weight so far : " + completedWeight;
+                    return false;
+                }
+
+                //Checking with Price
+                if (assignedMrp < completedMRP)
+                {
+                    respMsg = "MRP has been exceeded. Lot MRP : " + assignedMrp + " , Completed Products MRP so far : " + completedMRP;
+                    return false;
+                }
+
+                if ((assignedWeight + allowDiff < completedWeight + (double)objBarcode.GrossWeight) || (assignedWeight - allowDiff < completedWeight + (double)objBarcode.GrossWeight))
+                {
+                    respMsg = "Weight is going to be exceeded if you add this Product. Lot Weight : " + assignedWeight + " , Completed Products Weight so far : " + completedWeight;
+                    return false;
+                }
+
+                if (assignedMrp < completedMRP + (double)objBarcode.Price)
+                {
+                    respMsg = "MRP is going to be exceeded if you add this Product. Lot MRP : " + assignedMrp + " , Completed Products MRP so far : " + completedMRP;
                     return false;
                 }
                 
@@ -344,41 +406,91 @@ namespace THSMVC.App_Code
         public bool SubmitLot(int lotId, out string respMsg)
         {
             respMsg = string.Empty;
-
             bool result = false;
             try
             {
                 int assignedCount = 0;
                 int completedCount = 0;
+                double completedWeight = 0;
+                double lotWeight = 0;
+                double allowDiff = 0;
+                double lotMRP = 0;
+                double completedMRP = 0;
 
                 Lot lot = dse.Lots.Where(x => x.LotId == lotId).FirstOrDefault();
                 if (lot != null)
-                    assignedCount = (int)lot.NoOfPieces;
+                {
+                    assignedCount = lot.NoOfPieces == null ? 0 : (int)lot.NoOfPieces;
+                    lotWeight = lot.Weight == null ? 0 : (double)lot.Weight;
+                    allowDiff = lot.DiffAllowed == null ? 0 : (double)lot.DiffAllowed;
+                    lotMRP = lot.MRP == null ? 0 : (double)lot.MRP;
+                }
 
                 List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == lotId).ToList();
                 completedCount = CompletedBarcodes.Count;
 
-                if (CompletedBarcodes.Count <= assignedCount)
+                foreach (Barcode b in CompletedBarcodes)
                 {
-                    foreach (Barcode b in CompletedBarcodes)
-                    {
-                        b.IsSubmitted = true;
-                    }
+                    completedWeight += (double)b.GrossWeight;
+                    completedMRP += (double)b.Price;
+                    b.IsSubmitted = true;
+                }
 
-                    LotUserMapping lu = dse.LotUserMappings.Where(x => x.LotId == lotId).FirstOrDefault();
-                    lu.StatusId = 4;
-                    dse.SaveChanges();
-                    result = true;
-                }
-                else
+                //Checking with the Lot Count and Completed Product Count
+                if (CompletedBarcodes.Count > assignedCount)
                 {
-                    respMsg = "Completed Products count is greater than Assigned Product Count. Please verify.";
-                    result = false;
+                    respMsg = "No Of pieces Count has been exceeded. Assigned Count : " + assignedCount + " , Completed products so far : " + CompletedBarcodes.Count + "</br> Can not close the Lot";
+                    return false;
                 }
+
+                //Checking with the Weight
+                if ((lotWeight + allowDiff < completedWeight) || (lotWeight - allowDiff < completedWeight))
+                {
+                    respMsg = "Weight has been exceeded. Lot Weightt : " + lotWeight + " , Completed Products Weight so far : " + completedWeight + "</br> Can not close the Lot";
+                    return false;
+                }
+
+                //Checking with Price
+                if (lotMRP < completedMRP)
+                {
+                    respMsg = "MRP has been exceeded. Lot MRP : " + lotMRP + " , Completed Products MRP so far : " + completedMRP + "</br> Can not close the Lot";
+                    return false;
+                }
+
+                LotUserMapping lu = dse.LotUserMappings.Where(x => x.LotId == lotId).FirstOrDefault();
+                lu.StatusId = 4;
+                dse.SaveChanges();
+                result = true;
             }
             catch (Exception ex)
             {
                 result = false;
+                respMsg = "An Error occured while Submitting the Lot";
+            }
+            return result;
+        }
+
+        public bool CloseLot(int lotId, out string respMsg)
+        {
+            respMsg = string.Empty;
+
+            bool result = false;
+            try
+            {
+                LotUserMapping lu = dse.LotUserMappings.Where(x => x.LotId == lotId).FirstOrDefault();
+                if (lu != null && lu.StatusId == 5)
+                {
+                    respMsg = "This Lot is already Closed.";
+                    return false;
+                }
+                lu.StatusId = 5;
+                dse.SaveChanges();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+                respMsg = "An Error occured while Closing the Lot";
             }
             return result;
         }
@@ -388,23 +500,116 @@ namespace THSMVC.App_Code
             return dse.Barcodes.Where(x => x.BarcodeId == id).FirstOrDefault();
         }
 
-        public void GetAssinedAndCompletedCount(int lotId, out int assignedCount, out int completedCount)
+        public void GetAssinedAndCompletedCount(int lotId, out int assignedCount, out int completedCount, out double assignedWeight, out double completedWeight, out double assignedMrp, out double completedMRP)
         {
             assignedCount = 0;
             completedCount = 0;
+            completedWeight = 0;
+            assignedWeight = 0;
+            assignedMrp = 0;
+            completedMRP = 0;
             //int AssignedNoOfPieces = 0;
             try
             {
                 Lot lot = dse.Lots.Where(x => x.LotId == lotId).FirstOrDefault();
                 if (lot != null)
-                    assignedCount = (int)lot.NoOfPieces;
+                {
+                    assignedCount = lot.NoOfPieces == null ? 0 : (int)lot.NoOfPieces;
+                    assignedWeight = lot.Weight == null ? 0 : (double)lot.Weight;
+                    assignedMrp = lot.MRP == null ? 0 : (double)lot.MRP;
+                }
 
                 List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == lotId).ToList();
                 completedCount = CompletedBarcodes.Count;
+
+                foreach (Barcode b in CompletedBarcodes)
+                {
+                    completedWeight += (double)b.GrossWeight;
+                    completedMRP += (double)b.Price;
+                }
             }
             catch (Exception ex)
             {
             }
+        }
+
+        public LotCloseModel GetCloseLotDetails(int lotId)
+        {
+            LotCloseModel model = new LotCloseModel();
+
+            double ActualWeight = 0;
+            double WeightCompleted = 0;
+            decimal MRPCompleted = 0;
+            int NoOfPcsCompleted = 0;
+            int NoOfPcsPending = 0;
+            double WeightPending = 0;
+            double DiffAllowedActual = 0;
+
+            LotUserMappingView mapping = dse.LotUserMappingViews.Where(x=>x.LotId == lotId).FirstOrDefault();
+            if (mapping != null)
+            {
+                model.LotStatisID = mapping.StatusId;
+            }
+
+
+            LotDetailsModel lotDetials = GetLotDetailsById(lotId);
+            if (lotDetials != null)
+            {
+                model.DiffAllowed = lotDetials.DiffAllowed;
+                model.IsMRP = lotDetials.IsMRP;
+                model.LotId = lotDetials.LotId;
+                model.LotName = lotDetials.LotName;
+                model.MRP = lotDetials.MRP;
+                model.NoOfPcs = (int)lotDetials.NoOfPcs;
+                model.ProductGroupId = lotDetials.ProductGroupId;
+                model.ProductGroupName = lotDetials.ProductGroupName;
+                model.ProductId = lotDetials.ProductId;
+                model.Weight = lotDetials.Weight;
+            }
+
+            List<Barcode> CompletedBarcodes = dse.Barcodes.Where(x => x.LotId == lotId).ToList();
+           
+            foreach (Barcode b in CompletedBarcodes)
+            {
+                WeightCompleted = WeightCompleted + (double)b.GrossWeight;
+                MRPCompleted = MRPCompleted + b.Price;
+            }
+            NoOfPcsCompleted = CompletedBarcodes.Count;
+            NoOfPcsPending = model.NoOfPcs - NoOfPcsCompleted;
+            WeightPending = model.Weight - WeightCompleted;
+            DiffAllowedActual = model.Weight - WeightCompleted;
+
+            model.DiffAllowedActual = DiffAllowedActual;
+            model.MRPCompleted = (double)MRPCompleted;
+            model.NoOfPcsCompleted = NoOfPcsCompleted;
+            model.NoOfPcsPending = NoOfPcsPending;
+            model.WeightCompleted = WeightCompleted;
+            model.WeightPending = WeightPending;
+
+            return model;
+        }
+
+        public double GetCalculatedStonePrice(int stoneId, double weight)
+        {
+            
+            double result = 0;
+            int stonePerCarat = 0;
+
+            try
+            {
+                Stone stone = dse.Stones.Where(x => x.StoneId == stoneId).FirstOrDefault();
+                if (stone != null)
+                    stonePerCarat = (int)stone.StonePerCarat;
+
+                // 1grm = 5 carats
+                result = weight * 5 * stonePerCarat;
+            }
+            catch (Exception ex)
+            {
+                //Todo: Log Error
+                result = 0;
+            }
+            return result;
         }
 
         // Implement IDisposable.
