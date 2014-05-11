@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -523,6 +524,7 @@ namespace THSMVC.Models
         private ObjectSet<Barcode> _Barcodes;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -750,6 +752,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Function Imports
     
         /// <summary>
@@ -2524,11 +2527,11 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -2571,6 +2574,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2841,6 +2845,7 @@ namespace THSMVC.Models
         partial void OnNotesChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2921,6 +2926,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2955,6 +2961,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3321,6 +3328,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -3366,6 +3374,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3690,6 +3699,7 @@ namespace THSMVC.Models
         partial void OnIsSubmittedChanged();
 
         #endregion
+
     
     }
     
@@ -3719,6 +3729,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3797,6 +3808,7 @@ namespace THSMVC.Models
         partial void OnURLChanged();
 
         #endregion
+
     
     }
     
@@ -3836,6 +3848,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4034,6 +4047,7 @@ namespace THSMVC.Models
         partial void OnCreatedDateChanged();
 
         #endregion
+
     
     }
     
@@ -4063,6 +4077,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4381,6 +4396,7 @@ namespace THSMVC.Models
         partial void OnDomainChanged();
 
         #endregion
+
     
     }
     
@@ -4412,6 +4428,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4658,6 +4675,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -4706,6 +4724,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -4732,6 +4751,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4786,6 +4806,7 @@ namespace THSMVC.Models
         partial void OnEnumValueChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -4812,6 +4833,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -4842,6 +4864,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4968,6 +4991,7 @@ namespace THSMVC.Models
         partial void OnOTCodeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5086,6 +5110,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5122,6 +5147,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5314,6 +5340,7 @@ namespace THSMVC.Models
         partial void OnStatusIdChanged();
 
         #endregion
+
     
     }
     
@@ -5345,6 +5372,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5591,6 +5619,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -5620,6 +5649,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5722,6 +5752,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -5751,6 +5782,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5973,6 +6005,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6000,6 +6033,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6102,6 +6136,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6143,6 +6178,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6557,6 +6593,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6583,6 +6620,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6615,6 +6653,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6813,6 +6852,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -6846,6 +6886,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7044,6 +7085,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -7079,6 +7121,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7301,6 +7344,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7332,6 +7376,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7554,6 +7599,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7589,6 +7635,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7811,6 +7858,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7842,6 +7890,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8040,6 +8089,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -8069,6 +8119,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8219,6 +8270,7 @@ namespace THSMVC.Models
         partial void OnScheduleURLChanged();
 
         #endregion
+
     
     }
     
@@ -8254,6 +8306,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8572,6 +8625,7 @@ namespace THSMVC.Models
         partial void OnEditedDateChanged();
 
         #endregion
+
     
     }
     
@@ -8609,6 +8663,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8879,6 +8934,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -8916,6 +8972,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9354,6 +9411,7 @@ namespace THSMVC.Models
         partial void OnCommentChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -9380,6 +9438,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -9408,6 +9467,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9630,6 +9690,7 @@ namespace THSMVC.Models
         partial void OnPhoneChanged();
 
         #endregion
+
     
     }
     
@@ -9669,6 +9730,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9987,6 +10049,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -10030,6 +10093,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10327,10 +10391,12 @@ namespace THSMVC.Models
         partial void OnDiffAllowedChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     #region ComplexTypes
     
     /// <summary>
@@ -10355,6 +10421,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10430,6 +10497,7 @@ namespace THSMVC.Models
         partial void OnGroupIdChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -10460,6 +10528,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10847,6 +10916,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -10877,6 +10947,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11000,6 +11071,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11034,6 +11106,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11349,6 +11422,7 @@ namespace THSMVC.Models
         partial void OnDlvStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11377,6 +11451,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11476,6 +11551,7 @@ namespace THSMVC.Models
         partial void OnchkedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11504,6 +11580,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11675,6 +11752,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11703,6 +11781,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11874,6 +11953,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11900,6 +11980,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12095,6 +12176,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12127,6 +12209,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12298,6 +12381,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12328,6 +12412,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12451,6 +12536,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12481,6 +12567,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12604,6 +12691,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12634,6 +12722,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12757,6 +12846,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12787,6 +12877,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12934,6 +13025,7 @@ namespace THSMVC.Models
         partial void OnNoticeDocSizeChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12964,6 +13056,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13087,6 +13180,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13117,6 +13211,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13240,6 +13335,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13270,6 +13366,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13393,6 +13490,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13419,6 +13517,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13494,6 +13593,7 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13534,6 +13634,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13921,6 +14022,7 @@ namespace THSMVC.Models
         partial void OnSubCategoryChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13961,6 +14063,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14324,6 +14427,7 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14364,6 +14468,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14727,6 +14832,7 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14753,6 +14859,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14852,6 +14959,7 @@ namespace THSMVC.Models
         partial void OnPlannedLeaveChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14884,6 +14992,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15031,6 +15140,7 @@ namespace THSMVC.Models
         partial void OnDelegatedOnChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15085,6 +15195,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15472,6 +15583,7 @@ namespace THSMVC.Models
         partial void OnIsNotifierChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15502,6 +15614,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15721,6 +15834,7 @@ namespace THSMVC.Models
         partial void OnApproverChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15753,6 +15867,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15972,6 +16087,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16000,6 +16116,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -16315,6 +16432,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16343,6 +16461,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -16658,6 +16777,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16686,6 +16806,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17001,6 +17122,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17038,6 +17160,7 @@ namespace THSMVC.Models
         partial void OnAvailableFromDateChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17075,6 +17198,7 @@ namespace THSMVC.Models
         partial void OnAnswerChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17232,6 +17356,7 @@ namespace THSMVC.Models
         partial void OnGainedPointsChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17256,6 +17381,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17331,6 +17457,7 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17369,6 +17496,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17612,6 +17740,7 @@ namespace THSMVC.Models
         partial void OnPointsChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17656,6 +17785,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17995,8 +18125,10 @@ namespace THSMVC.Models
         partial void OnIsSMSSentChanged();
 
         #endregion
+
     }
 
     #endregion
+
     
 }

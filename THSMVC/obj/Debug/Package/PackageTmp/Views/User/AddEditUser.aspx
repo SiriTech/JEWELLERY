@@ -59,6 +59,7 @@
                 success: function (response) {
                     if (response.success) {
                         Success(response.message);
+                        setTimeout("Back();", 1000);
                     }
                     else
                         Failure(response.message);

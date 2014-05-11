@@ -394,6 +394,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SMSLogs">
+      <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
+        <MappingFragment StoreEntitySet="SMSLogs">
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
       <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
         <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">

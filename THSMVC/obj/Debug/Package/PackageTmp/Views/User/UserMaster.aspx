@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-    .ui-state-default .ui-icon-customtrash {
+    .ui-state-default .ui-icon-trash {
     background: url("../images/info.png");
     background-position: 0 0;
 
@@ -49,6 +49,7 @@
                 { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
                 { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
@@ -101,6 +102,13 @@
        }, // default settings for add
        {
            url: "/User/DelUser",
+           beforeShowForm: function ($form) {
+               $("td.delmsg", $form[0]).html("Do you want to activate/deactivate the selected user?");
+               $("td.DelButton a#dData").html("Yes <span class='ui-icon ui-icon-scissors'></span>");
+               $("td.DelButton a#eData").html("No <span class='ui-icon ui-icon-cancel'></span>");
+               
+           },
+           width:350,
            onclickSubmit: function (params) {
                var ajaxData = {};
                var list = $("#list");

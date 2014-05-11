@@ -870,6 +870,9 @@
           </AssociationSet>
           <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
 
+
+
+
           <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
           <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
           <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
@@ -1588,6 +1591,9 @@
           <Property Type="Int32" Name="StatusId" Nullable="false" />
         </EntityType>
 
+
+
+
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -2079,6 +2085,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
 
+
+
+
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
@@ -2106,6 +2115,27 @@
             </EntityTypeMapping>
           </EntitySetMapping>
 
+          <EntitySetMapping Name="SMSLogs">
+            <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
+              <MappingFragment StoreEntitySet="SMSLogs">
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+
 			<EntitySetMapping Name="SMSLogs">
 				<EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
 					<MappingFragment StoreEntitySet="SMSLogs">
@@ -2125,6 +2155,7 @@
 					</MappingFragment>
 				</EntityTypeMapping>
 			</EntitySetMapping>
+
           <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
             <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
               <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
@@ -2251,6 +2282,12 @@
         <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
         <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
+
+
+        <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
+
 
         <EntityTypeShape EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" Width="1.5" PointX="11.375" PointY="10.75" Height="3.3263964843750102" />
         <EntityTypeShape EntityType="THSMVCDataModel.ViewLotDetail" Width="1.5" PointX="0.75" PointY="13.75" Height="3.1340950520833246" />

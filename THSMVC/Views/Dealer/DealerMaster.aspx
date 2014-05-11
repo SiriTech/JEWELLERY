@@ -30,12 +30,13 @@
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Dealer Name','Company Name'],
+                colNames: ['Id', 'Company Name', 'Dealer Name'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'DealerName', index: 'DealerName', align: 'left', formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
-                  { name: 'CompanyName', index: 'CompanyName', align: 'left', formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } }
+                  { name: 'CompanyName', index: 'CompanyName', align: 'left'},
+                  { name: 'DealerName', index: 'DealerName', align: 'left' }
                 ],
+                rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',

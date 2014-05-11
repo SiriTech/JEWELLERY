@@ -91,6 +91,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.Products.Where(p => p.ProductName== model.ProductName).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Product with the same name already exists." });
                         Product group = new Product();
                         group.InstanceId = inststanceId;
                         group.ProductName = model.ProductName;
@@ -111,6 +114,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.Products.Where(p => p.ProductName == model.ProductName && p.Id != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Product with the same name already exists." });
                         Product group = dse.Products.Where(p => p.Id == model.Id).FirstOrDefault();
                         group.ProductName = model.ProductName;
                         group.ShortForm = model.ShortForm;

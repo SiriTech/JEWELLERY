@@ -81,6 +81,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.ProductGroups.Where(p => p.ProductGroup1 == model.ProductGroup1).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Product Group with the same name already exists." });
                         ProductGroup group = new ProductGroup();
                         group.InstanceId = inststanceId;
                         group.ProductGroup1 = model.ProductGroup1;
@@ -92,6 +95,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.ProductGroups.Where(p => p.ProductGroup1 == model.ProductGroup1 && p.Id != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Product Group with the same name already exists." });
                         ProductGroup group = dse.ProductGroups.Where(p => p.Id == model.Id).FirstOrDefault();
                         group.ProductGroup1 = model.ProductGroup1;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);

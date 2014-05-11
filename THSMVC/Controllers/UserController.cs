@@ -106,6 +106,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.Users.Where(p => p.UserName == model.Username).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "User with the same Username already exists." });
                         User group = new User();
                         group.InstanceId = inststanceId;
                         group.UserName = model.Username;
@@ -135,6 +138,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.Users.Where(p => p.UserName == model.Username && p.Id != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "User with the same Username already exists." });
                         User group = dse.Users.Where(p => p.Id == model.Id).FirstOrDefault();
                         group.UserName = model.Username;
                         group.Password = _encrypter.Encrypt(model.Password);

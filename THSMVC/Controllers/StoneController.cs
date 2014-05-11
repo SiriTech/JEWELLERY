@@ -85,6 +85,9 @@ namespace THSMVC.Controllers
                 {
                     if (model.Id == 0)
                     {
+                        var ch = dse.Stones.Where(p => p.StoneName== model.StoneName).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Stone with the same name already exists." });
                         Stone group = new Stone();
                         group.InstanceId = inststanceId;
                         group.StoneName = model.StoneName;
@@ -99,6 +102,9 @@ namespace THSMVC.Controllers
                     }
                     else
                     {
+                        var ch = dse.Stones.Where(p => p.StoneName == model.StoneName && p.StoneId != model.Id).ToList();
+                        if (ch.Count > 0)
+                            return Json(new { success = false, message = "Stone with the same name already exists." });
                         Stone group = dse.Stones.Where(p => p.StoneId == model.Id).FirstOrDefault();
                         group.StoneName = model.StoneName;
                         group.StoneShortForm = model.StoneShortForm;

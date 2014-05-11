@@ -42,7 +42,6 @@
             var IsMRP = $("#IsMRP").val();
             var MRP = $("#MRP").val();
             var DiffAllowed = $("#DiffAllowed").val();
-            debugger;
             if (LName == null || LName == '' || LName == undefined) {
                 error = error + "Lot name is missing. <br />";
             }
@@ -88,6 +87,7 @@
                         if (result.success) {
                             Success(result.msg);
                             clearForm();
+                            setTimeout("toggleSearch();", 1000);
                         }
                         else {
                             Failure(result.msg);
@@ -119,6 +119,8 @@
             }
 
         }
+
+       
        
     </script>
 </head>
@@ -173,15 +175,17 @@
             url: gridDataUrl,
             datatype: "json",
             mtype: 'POST',
-            colNames: ['LotId', 'LotName', 'ProductGroupId', 'Qty', 'Weight', 'DealerId'],
+            colNames: ['Lot Id', 'Lot Name', 'Product Group', 'Qty', 'Weight', 'Dealer', 'MRP'],
             colModel: [
-              { name: 'LotId', index: 'LotId', align: 'left', hidedlg: true, hidden: false, editable: true, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2} },
-               { name: 'LotName', index: 'LotName', width: 100, align: 'left', editable: true, viewable: true, hidden: false, formoptions: { elmsuffix: '(*)', rowpos: 2, colpos: 2} },
-              { name: 'ProductGroupId', index: 'ProductGroupId', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '(*)', rowpos: 4, colpos: 2} },
-              { name: 'Qty', index: 'Qty', width: 100, align: 'left', editable: true, edittype: 'text', editrules: { required: true }, formoptions: { elmsuffix: '(*)', rowpos: 5, colpos: 2} },
-              { name: 'Weight', index: 'Weight', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '    ', rowpos: 6, colpos: 2} },
-              { name: 'DealerId', index: 'DealerId', width: 100, align: 'left', editable: true, formoptions: { elmsuffix: '    ', rowpos: 7, colpos: 2} }
+              { name: 'LotId', index: 'LotId', align: 'left', hidedlg: true, hidden: false, editable: true, viewable: false},
+               { name: 'LotName', index: 'LotName', width: 100, align: 'left', editable: true, viewable: true, hidden: false},
+              { name: 'ProductGroup', index: 'ProductGroup', width: 100, align: 'left', editable: true },
+              { name: 'Qty', index: 'Qty', width: 100, align: 'left', editable: true, edittype: 'text' },
+              { name: 'Weight', index: 'Weight', width: 100, align: 'left', editable: true},
+              { name: 'Dealer', index: 'Dealer', width: 100, align: 'left', editable: true },
+              { name: 'MRP', index: 'MRP', width: 100, align: 'left', editable: true }
             ],
+            rownumbers:true,
             rowNum: 10,
             rowList: [10, 20, 30],
             height: 'auto',
