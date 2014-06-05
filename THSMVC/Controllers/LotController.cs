@@ -63,39 +63,42 @@ namespace THSMVC.Controllers
         [HttpPost]
         public ActionResult CreateLot(LotMasterModel objLotMasterModel)
         {
-            bool result = false;
-            using (DataStoreEntities dse = new DataStoreEntities())
+            try
             {
-                var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName).ToList();
-                if (ch.Count > 0)
-                    return Json(new { success = false, message = "Lot with the same name already exists." });
+                bool result = false;
+                using (DataStoreEntities dse = new DataStoreEntities())
+                {
+                    var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName).ToList();
+                    if (ch.Count > 0)
+                        return Json(new { success = false, message = "Lot with the same name already exists." });
+                }
+                Lot lot = new Lot
+                {
+                    InstanceId = Convert.ToInt32(Session["InstanceId"]),
+                    DealerId = objLotMasterModel.DealerId,
+                    LotId = objLotMasterModel.LotId,
+                    LotName = objLotMasterModel.LotName,
+                    NoOfPieces = (int)objLotMasterModel.Qty,
+                    ProductGroupId = objLotMasterModel.ProductGroupId,
+                    Weight = Convert.ToBoolean(objLotMasterModel.IsMRP) ? 0 : (decimal)objLotMasterModel.Weight,
+
+                    DiffAllowed = (decimal)objLotMasterModel.DiffAllowed,
+                    MRP = Convert.ToBoolean(objLotMasterModel.IsMRP) ? (decimal)objLotMasterModel.MRP : 0,
+                    IsMRP = objLotMasterModel.IsMRP
+                };
+                using (LotLogic logicLayer = new LotLogic())
+                {
+                    result = logicLayer.CreateLot(lot);
+                }
+                if (result)
+                    return Json(new { success = true, msg = "Successfully Lot is created." });
+                else
+                    return Json(new { success = false, msg = "Error while creating Lot. Please try again." });
             }
-            Lot lot = new Lot
+            catch (Exception ex)
             {
-                InstanceId = Convert.ToInt32(Session["InstanceId"]),
-                DealerId = objLotMasterModel.DealerId,
-                LotId = objLotMasterModel.LotId,
-                LotName = objLotMasterModel.LotName,
-                NoOfPieces = (int)objLotMasterModel.Qty,
-                ProductGroupId = objLotMasterModel.ProductGroupId,
-                Weight = Convert.ToBoolean(objLotMasterModel.IsMRP)?0:(decimal)objLotMasterModel.Weight,
-<<<<<<< HEAD
-                DiffAllowed = (decimal)objLotMasterModel.DiffAllowed,
-                MRP = Convert.ToBoolean(objLotMasterModel.IsMRP) ? (decimal)objLotMasterModel.MRP : 0,
-=======
-                DiffAllowed = objLotMasterModel.DiffAllowed,
-                MRP = Convert.ToBoolean(objLotMasterModel.IsMRP)?objLotMasterModel.MRP:0,
->>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
-                IsMRP = objLotMasterModel.IsMRP
-            };
-            using (LotLogic logicLayer = new LotLogic())
-            {
-                result = logicLayer.CreateLot(lot);
-            }
-            if (result)
-                return Json(new { success = true, msg = "Successfully Lot is created." });
-            else
                 return Json(new { success = false, msg = "Error while creating Lot. Please try again." });
+            }
         }
 
         [HttpPost]
@@ -117,13 +120,9 @@ namespace THSMVC.Controllers
                 ProductGroupId = objLotMasterModel.ProductGroupId,
                 Weight = (int)objLotMasterModel.Weight,
                 IsMRP = objLotMasterModel.IsMRP,
-<<<<<<< HEAD
+
                 MRP = (decimal)objLotMasterModel.MRP,
                 DiffAllowed = (decimal)objLotMasterModel.DiffAllowed
-=======
-                MRP=objLotMasterModel.MRP,
-                DiffAllowed = objLotMasterModel.DiffAllowed
->>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
             };
             using (LotLogic logicLayer = new LotLogic())
             {
@@ -168,11 +167,11 @@ namespace THSMVC.Controllers
                             s.ProductGroup.ToString(),
                             s.Qty.ToString(),
                             Convert.ToBoolean(s.IsMRP)?"<img src='../../images/remove.png' />": s.Weight.ToString(),
-<<<<<<< HEAD
-                            s.DealerId.ToString(),
-=======
+
+                           // s.DealerId.ToString(),
+
                             s.Dealer,
->>>>>>> 442496e6dd2b6d96f59a44490a83b112eb51b249
+
                             Convert.ToBoolean(s.IsMRP)?s.MRP.ToString():"<img src='../../images/remove.png' />"
                         }
                           }).ToArray()

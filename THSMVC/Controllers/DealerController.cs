@@ -44,7 +44,13 @@ namespace THSMVC.Controllers
                              PinCode = p.PinCode,
                              CompanyName = p.CompanyName,
                              CompanyShortForm = p.CompanyShortForm,
-                             TinNo = p.CompanyVATOrTinNo
+                             TinNo = p.CompanyVATOrTinNo,
+                             MobileNUmber1 = (int)p.MobileNumber1,
+                             MobileNUmber4 = (int)p.MobileNumber4,
+                             MobileNUmber2 = (int)p.MobileNumber2,
+                             MobileNUmber3 = (int)p.MobileNumber3,
+                             Email1 = p.Email1,
+                             Email2 = p.Email2
                          }).FirstOrDefault();
             }
             model.BtnText = "Update";
@@ -104,6 +110,12 @@ namespace THSMVC.Controllers
                         group.CompanyVATOrTinNo = model.TinNo;
                         group.CreatedBy = Convert.ToInt32(Session["UserId"]);
                         group.CreatedDate = DateTime.Now;
+                        group.MobileNumber1 = model.MobileNUmber1;
+                        group.MobileNumber2 = model.MobileNUmber2;
+                        group.MobileNumber3 = model.MobileNUmber3;
+                        group.MobileNumber4 = model.MobileNUmber4;
+                        group.Email1 = model.Email1;
+                        group.Email2 = model.Email2;
                         dse.AddToDealers(group);
                         dse.SaveChanges();
                         return Json(new { success = true, message = "Dealer created successfuly" });
@@ -122,6 +134,12 @@ namespace THSMVC.Controllers
                         group.State = model.State;
                         group.PinCode = model.PinCode;
                         group.CompanyVATOrTinNo = model.TinNo;
+                        group.MobileNumber1 = model.MobileNUmber1;
+                        group.MobileNumber2 = model.MobileNUmber2;
+                        group.MobileNumber3 = model.MobileNUmber3;
+                        group.MobileNumber4 = model.MobileNUmber4;
+                        group.Email1 = model.Email1;
+                        group.Email2 = model.Email2;
                         group.EditedBy = Convert.ToInt32(Session["UserId"]);
                         group.EditedDate = DateTime.Now;
                         dse.SaveChanges();

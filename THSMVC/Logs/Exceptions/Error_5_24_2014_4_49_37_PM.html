@@ -1,0 +1,75 @@
+<html>
+<head>undefined</head>
+<body><title>The view 'EmployeeMaster' or its master was not found. The following locations were searched:&lt;br&gt;~/Views/Employee/EmployeeMaster.aspx&lt;br&gt;~/Views/Employee/EmployeeMaster.ascx&lt;br&gt;~/Views/Shared/EmployeeMaster.aspx&lt;br&gt;~/Views/Shared/EmployeeMaster.ascx</title>
+
+<font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+
+            <b> Description: </b>An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.
+
+            <br><br>
+
+            <b> Exception Details: </b>System.InvalidOperationException: The view 'EmployeeMaster' or its master was not found. The following locations were searched:<br>~/Views/Employee/EmployeeMaster.aspx<br>~/Views/Employee/EmployeeMaster.ascx<br>~/Views/Shared/EmployeeMaster.aspx<br>~/Views/Shared/EmployeeMaster.ascx<br><br>
+
+            <b>Source Error:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code>
+
+An unhandled exception was generated during the execution of the current web request. Information regarding the origin and location of the exception can be identified using the exception stack trace below.</code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <b>Stack Trace:</b> <br><br>
+
+            <table bgcolor="#ffffcc" width="100%">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+[InvalidOperationException: The view 'EmployeeMaster' or its master was not found. The following locations were searched:
+~/Views/Employee/EmployeeMaster.aspx
+~/Views/Employee/EmployeeMaster.ascx
+~/Views/Shared/EmployeeMaster.aspx
+~/Views/Shared/EmployeeMaster.ascx]
+   System.Web.Mvc.ViewResult.FindView(ControllerContext context) +497
+   System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context) +209
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult) +39
+   System.Web.Mvc.&lt;&gt;c__DisplayClass14.&lt;InvokeActionResultWithFilters&gt;b__11() +60
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation) +391
+   System.Web.Mvc.&lt;&gt;c__DisplayClass16.&lt;InvokeActionResultWithFilters&gt;b__13() +61
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation) +391
+   System.Web.Mvc.&lt;&gt;c__DisplayClass16.&lt;InvokeActionResultWithFilters&gt;b__13() +61
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult) +285
+   System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName) +831
+   System.Web.Mvc.Controller.ExecuteCore() +136
+   System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext) +112
+   System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext) +39
+   System.Web.Mvc.&lt;&gt;c__DisplayClass8.&lt;BeginProcessRequest&gt;b__4() +65
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0() +44
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _) +42
+   System.Web.Mvc.Async.WrappedAsyncResult`1.End() +142
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +54
+   System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag) +40
+   System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult) +52
+   System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) +38
+   System.Web.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute() +690
+   System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously) +194
+</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <hr color="silver" size="1" width="100%">
+
+            <b>Version Information:</b>&nbsp;Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.0.30319.225
+
+            </font></body>
+</html>

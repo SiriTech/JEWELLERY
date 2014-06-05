@@ -7,6 +7,20 @@
     <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="THSMVCDataModelStoreContainer">
           <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="THSMVCDataModel.Store.Customer" store:Type="Tables" store:Schema="dbo" store:Name="Customer">
+            <DefiningQuery>SELECT 
+      [Customer].[Id] AS [Id], 
+      [Customer].[Name] AS [Name], 
+      [Customer].[CustomerNumber] AS [CustomerNumber], 
+      [Customer].[Address] AS [Address], 
+      [Customer].[City] AS [City], 
+      [Customer].[State] AS [State], 
+      [Customer].[Pin] AS [Pin], 
+      [Customer].[MobileNumber] AS [MobileNumber], 
+      [Customer].[PhoneNumber] AS [PhoneNumber], 
+      [Customer].[EmailAddress] AS [EmailAddress]
+      FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
@@ -24,7 +38,6 @@
           <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Settings" EntityType="THSMVCDataModel.Store.Settings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SMSApi" EntityType="THSMVCDataModel.Store.SMSApi" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.Store.SMSLogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
@@ -110,6 +123,26 @@
           <Property Name="IsSubmitted" Type="bit" Nullable="false" />
           <Property Name="Notes" Type="varchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CustomerNumber" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="CustomerNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Pin" Type="int" />
+          <Property Name="MobileNumber" Type="int" />
+          <Property Name="PhoneNumber" Type="int" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Dealer">
           <Key>
             <PropertyRef Name="DealerId" />
@@ -129,6 +162,12 @@
           <Property Name="EditedBy" Type="int" />
           <Property Name="EditedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="MobileNumber1" Type="int" />
+          <Property Name="MobileNumber2" Type="int" />
+          <Property Name="MobileNumber3" Type="int" />
+          <Property Name="MobileNumber4" Type="int" />
+          <Property Name="Email1" Type="varchar" MaxLength="100" />
+          <Property Name="Email2" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="GoldRates">
           <Key>
@@ -338,19 +377,6 @@
           <Property Name="EditedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
         </EntityType>
-        <EntityType Name="Settings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="InstanceId" Type="int" />
-          <Property Name="SMS" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="EditedBy" Type="int" />
-          <Property Name="EditedDate" Type="datetime" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
         <EntityType Name="SMSApi">
           <Key>
             <PropertyRef Name="Id" />
@@ -360,7 +386,6 @@
           <Property Name="APIURL" Type="varchar(max)" Nullable="false" />
           <Property Name="CreditBalURL" Type="varchar(max)" />
           <Property Name="DlvReportURL" Type="varchar(max)" />
-          <Property Name="ScheduleURL" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="SMSLogs">
           <Key>
@@ -596,6 +621,10 @@
           <Parameter Name="MenuItems" Type="varchar(max)" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
         </Function>
+        <Function Name="stp_Assign_Remove_MenuItems_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InstanceId" Type="int" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
         <Function Name="stp_Get_Menuitems_By_Role_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="InstanceId" Type="int" Mode="In" />
           <Parameter Name="RoleId" Type="int" Mode="In" />
@@ -607,6 +636,13 @@
           <Parameter Name="FromDate" Type="date" Mode="In" />
           <Parameter Name="Todate" Type="date" Mode="In" />
         </Function>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'PJ.dbo.Setting' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="Setting">
+        <Property Name="InstanceId" Type="int" />
+        <Property Name="SMS" Type="bit" />
+      </EntityType>-->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -835,27 +871,39 @@
           <FunctionImport Name="stp_LMS_Get_DelegateLeavesList" ReturnType="Collection(THSMVCDataModel.stp_LMS_Get_DelegateLeavesList_Result)">
           <Parameter Name="InstanceId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
+          <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
+          <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
+          <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
+          <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
+          <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
+          <EntitySet Name="LotStatus" EntityType="THSMVCDataModel.LotStatu" />
+          <EntitySet Name="LotUserMappings" EntityType="THSMVCDataModel.LotUserMapping" />
           <EntitySet Name="Menus" EntityType="THSMVCDataModel.Menu" />
           <EntitySet Name="MenuAccessRights" EntityType="THSMVCDataModel.MenuAccessRight" />
           <EntitySet Name="MenuGroups" EntityType="THSMVCDataModel.MenuGroup" />
           <EntitySet Name="MenuRights" EntityType="THSMVCDataModel.MenuRight" />
+          <EntitySet Name="Products" EntityType="THSMVCDataModel.Product" />
+          <EntitySet Name="ProductCategories" EntityType="THSMVCDataModel.ProductCategory" />
+          <EntitySet Name="ProductGroups" EntityType="THSMVCDataModel.ProductGroup" />
           <EntitySet Name="Rights" EntityType="THSMVCDataModel.Right" />
           <EntitySet Name="Roles" EntityType="THSMVCDataModel.Role" />
           <EntitySet Name="RoleMenus" EntityType="THSMVCDataModel.RoleMenu" />
-          <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
-          <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
-          <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
-          <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
-          <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
-          <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
-          <EntitySet Name="ProductGroups" EntityType="THSMVCDataModel.ProductGroup" />
-          <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
-          <EntitySet Name="Products" EntityType="THSMVCDataModel.Product" />
-          <EntitySet Name="ProductCategories" EntityType="THSMVCDataModel.ProductCategory" />
-          <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.UserDetail" />
-          <EntitySet Name="LotStatus" EntityType="THSMVCDataModel.LotStatu" />
-          <EntitySet Name="LotUserMappings" EntityType="THSMVCDataModel.LotUserMapping" />
           <EntitySet Name="Stones" EntityType="THSMVCDataModel.Stone" />
+          <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
+          <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.UserDetail" />
+          <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
+          <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
+          <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
+          <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
+          <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="Barcode" EntitySet="Barcodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.FK_Barcode_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Barcode" EntitySet="Barcodes" />
+          </AssociationSet>
           <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.FK_LotUserMapping_Lot">
             <End Role="Lot" EntitySet="Lots" />
             <End Role="LotUserMapping" EntitySet="LotUserMappings" />
@@ -868,26 +916,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="LotUserMapping" EntitySet="LotUserMappings" />
           </AssociationSet>
-          <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
-
-
-
-
-          <EntitySet Name="Settings" EntityType="THSMVCDataModel.Setting" />
           <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
           <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
-          <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
-          <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
-          <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
-          <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
-            <End Role="Lot" EntitySet="Lots" />
-            <End Role="Barcode" EntitySet="Barcodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.FK_Barcode_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Barcode" EntitySet="Barcodes" />
-          </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
+          </EntityContainer>
         <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
           <Property Type="Int32" Name="Usercount" Nullable="true" />
           <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
@@ -1229,6 +1261,127 @@
           <Property Type="DateTime" Name="ToDate" Nullable="true" />
           <Property Type="DateTime" Name="DelegatedOn" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+          </Key>
+          <Property Type="Int32" Name="BarcodeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
+          <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="MobileNumber1" />
+          <Property Type="Int32" Name="MobileNumber2" />
+          <Property Type="Int32" Name="MobileNumber3" />
+          <Property Type="Int32" Name="MobileNumber4" />
+          <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GoldRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GoldCity" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GoldRatesManual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GoldWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ParentInstance" />
+          <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LicenseStartDate" />
+          <Property Type="DateTime" Name="LicenseEndDate" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Int32" Name="GoldCityId" />
+          <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Lot">
+          <Key>
+            <PropertyRef Name="LotId" />
+          </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Weight" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="Int32" Name="DealerId" />
+          <Property Type="Boolean" Name="IsMRP" />
+          <Property Type="Decimal" Name="MRP" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
+          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
+          <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
+        </EntityType>
+        <EntityType Name="LotStatu">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Type="Int32" Name="StatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="EnumValue" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotStatu" ToRole="LotUserMapping" />
+        </EntityType>
+        <EntityType Name="LotUserMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
+          <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
+          <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
+          <Property Type="Int32" Name="OTCode" />
+        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -1262,9 +1415,9 @@
           <Property Type="String" Name="GroupName" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="GroupShortName" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
         <EntityType Name="MenuRight">
@@ -1276,6 +1429,55 @@
           <Property Type="String" Name="MenuRightDescription" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShortForm" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValueAddedByPerc" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="ValueAddedFixed" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="MakingChargesPerGram" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="MakingChargesFixed" Precision="18" Scale="3" />
+          <Property Type="Boolean" Name="IsStone" Nullable="false" />
+          <Property Type="Boolean" Name="IsWeightless" Nullable="false" />
+          <Property Type="Int32" Name="ProductCategoryId" Nullable="false" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Product" ToRole="Barcode" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="ProductCategory1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
         <EntityType Name="Right">
           <Key>
             <PropertyRef Name="Id" />
@@ -1285,9 +1487,9 @@
           <Property Type="Boolean" Name="Flag" Nullable="false" />
           <Property Type="Int32" Name="UserMenuId" Nullable="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
         <EntityType Name="Role">
@@ -1299,9 +1501,9 @@
           <Property Type="String" Name="Role1" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="RoleDesc" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
         <EntityType Name="RoleMenu">
@@ -1313,9 +1515,25 @@
           <Property Type="Int32" Name="RoleId" Nullable="false" />
           <Property Type="Int32" Name="MenuId" Nullable="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="Stone">
+          <Key>
+            <PropertyRef Name="StoneId" />
+          </Key>
+          <Property Type="Int32" Name="StoneId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="StoneName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StoneShortForm" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="StonePerCarat" />
+          <Property Type="Boolean" Name="IsStoneWeightless" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="EditedBy" />
+          <Property Type="DateTime" Name="EditedDate" />
           <Property Type="Boolean" Name="Status" />
         </EntityType>
         <EntityType Name="User">
@@ -1331,159 +1549,16 @@
           <Property Type="Boolean" Name="IsApproved" Nullable="false" />
           <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="DateTime" Name="LastLoginDate" Precision="3" />
-          <Property Type="DateTime" Name="LastPasswordChangedDate" Precision="3" />
-          <Property Type="DateTime" Name="LastLockedOutDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
+          <Property Type="DateTime" Name="LastLoginDate" />
+          <Property Type="DateTime" Name="LastPasswordChangedDate" />
+          <Property Type="DateTime" Name="LastLockedOutDate" />
           <Property Type="Int32" Name="FailedPasswordAttemptCount" />
           <Property Type="Boolean" Name="ChangePwdonLogin" />
           <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="User" ToRole="LotUserMapping" />
-        </EntityType>
-        <EntityType Name="UserMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Int32" Name="RoleId" Nullable="false" />
-          <Property Type="Int32" Name="MenuId" Nullable="false" />
-          <Property Type="DateTime" Name="FromDate" Precision="3" />
-          <Property Type="DateTime" Name="ToDate" Precision="3" />
-          <Property Type="Boolean" Name="Flag" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="Boolean" Name="Status" />
-        </EntityType>
-        <EntityType Name="Lot">
-          <Key>
-            <PropertyRef Name="LotId" />
-          </Key>
-          <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="Weight" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="NoOfPieces" />
-          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
-          <Property Type="Int32" Name="DealerId" />
-          <Property Type="Boolean" Name="IsMRP" />
-          <Property Type="Decimal" Name="MRP" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
-          <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
-        </EntityType>
-        <EntityType Name="GoldRate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="GoldCity" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="URL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="GoldRatesManual">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <Property Type="String" Name="City" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="GoldWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Instance">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="ParentInstance" />
-          <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
-          <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="GoldCityId" />
-          <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ProductGroup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Dealer">
-          <Key>
-            <PropertyRef Name="DealerId" />
-          </Key>
-          <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ShortForm" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="ValueAddedByPerc" Precision="18" Scale="3" />
-          <Property Type="Decimal" Name="ValueAddedFixed" Precision="18" Scale="3" />
-          <Property Type="Decimal" Name="MakingChargesPerGram" Precision="18" Scale="3" />
-          <Property Type="Decimal" Name="MakingChargesFixed" Precision="18" Scale="3" />
-          <Property Type="Boolean" Name="IsStone" Nullable="false" />
-          <Property Type="Boolean" Name="IsWeightless" Nullable="false" />
-          <Property Type="Int32" Name="ProductCategoryId" Nullable="false" />
-          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Product" ToRole="Barcode" />
-        </EntityType>
-        <EntityType Name="ProductCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ProductCategory1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -1499,43 +1574,118 @@
           <Property Type="String" Name="Mobile" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="LotStatu">
-          <Key>
-            <PropertyRef Name="StatusId" />
-          </Key>
-          <Property Type="Int32" Name="StatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="EnumValue" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotStatu" ToRole="LotUserMapping" />
-        </EntityType>
-        <EntityType Name="LotUserMapping">
+        <EntityType Name="UserMenu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="LotId" Nullable="false" />
-          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
-          <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
-          <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
-          <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
-          <Property Type="Int32" Name="OTCode" />
-        </EntityType>
-        <EntityType Name="Stone">
-          <Key>
-            <PropertyRef Name="StoneId" />
-          </Key>
-          <Property Type="Int32" Name="StoneId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="StoneName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="StoneShortForm" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="StonePerCarat" />
-          <Property Type="Boolean" Name="IsStoneWeightless" Nullable="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="Int32" Name="MenuId" Nullable="false" />
+          <Property Type="DateTime" Name="FromDate" />
+          <Property Type="DateTime" Name="ToDate" />
+          <Property Type="Boolean" Name="Flag" Nullable="false" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" Precision="3" />
+          <Property Type="DateTime" Name="EditedDate" />
           <Property Type="Boolean" Name="Status" />
+        </EntityType>
+        <EntityType Name="GetCompletedButNotSubmittedProduct">
+          <Key>
+            <PropertyRef Name="BarcodeId" />
+            <PropertyRef Name="BarcodeNumber" />
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="NetWeight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="WeightMeasure" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="GrossWeight" />
+            <PropertyRef Name="IsSubmitted" />
+          </Key>
+          <Property Type="Int32" Name="BarcodeId" Nullable="false" />
+          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int64" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LotUserMappingView">
+          <Key>
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="LotName" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StatusId" />
+            <PropertyRef Name="InstanceId" />
+          </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
           <Property Type="Int32" Name="InstanceId" Nullable="false" />
         </EntityType>
+        <EntityType Name="ViewLotDetail">
+          <Key>
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="InstanceId" />
+            <PropertyRef Name="LotName" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="NoOfPieces" />
+            <PropertyRef Name="ProductGroupId" />
+            <PropertyRef Name="ProductGroup" />
+            <PropertyRef Name="IsMRP" />
+            <PropertyRef Name="MRP" />
+            <PropertyRef Name="DiffAllowed" />
+          </Key>
+          <Property Type="Int32" Name="LotId" Nullable="false" />
+          <Property Type="Int32" Name="InstanceId" Nullable="false" />
+          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
+          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+          <Property Type="String" Name="ProductGroup" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DealerId" />
+          <Property Type="Boolean" Name="IsMRP" Nullable="false" />
+          <Property Type="Decimal" Name="MRP" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DiffAllowed" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Barcode_Lot">
+          <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="LotId" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barcode_Product">
+          <End Type="THSMVCDataModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LotUserMapping_Lot">
           <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
           <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
@@ -1572,41 +1722,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="LotUserMappingView">
-          <Key>
-            <PropertyRef Name="LotId" />
-            <PropertyRef Name="LotName" />
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="InstanceId" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="StatusId" />
-          </Key>
-          <Property Type="Int32" Name="LotId" Nullable="false" />
-          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Int32" Name="StatusId" Nullable="false" />
-        </EntityType>
-
-
-
-
-        <EntityType Name="Setting">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="SMS" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-          <Property Type="Int32" Name="EditedBy" />
-          <Property Type="DateTime" Name="EditedDate" />
-          <Property Type="Boolean" Name="Status" />
-          <Property Type="Int32" Name="InstanceId" />
-        </EntityType>
         <EntityType Name="SMSApi">
           <Key>
             <PropertyRef Name="Id" />
@@ -1616,7 +1731,6 @@
           <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ScheduleURL" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SMSLog">
           <Key>
@@ -1636,100 +1750,23 @@
           <Property Type="Int32" Name="EditedBy" />
           <Property Type="DateTime" Name="EditedDate" />
         </EntityType>
-        <EntityType Name="GetCompletedButNotSubmittedProduct">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="BarcodeId" />
-            <PropertyRef Name="BarcodeNumber" />
-            <PropertyRef Name="LotId" />
-            <PropertyRef Name="NetWeight" />
-            <PropertyRef Name="NoOfPieces" />
-            <PropertyRef Name="Price" />
-            <PropertyRef Name="ProductId" />
-            <PropertyRef Name="WeightMeasure" />
-            <PropertyRef Name="ProductName" />
-            <PropertyRef Name="GrossWeight" />
-            <PropertyRef Name="IsSubmitted" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CustomerNumber" />
           </Key>
-          <Property Type="Int32" Name="BarcodeId" Nullable="false" />
-          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
-          <Property Type="Int32" Name="LotId" Nullable="false" />
-          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
-          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int64" Name="ProductId" Nullable="false" />
-          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CustomerNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Pin" />
+          <Property Type="Int32" Name="MobileNumber" />
+          <Property Type="Int32" Name="PhoneNumber" />
+          <Property Type="String" Name="EmailAddress" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ViewLotDetail">
-          <Key>
-            <PropertyRef Name="LotId" />
-            <PropertyRef Name="InstanceId" />
-            <PropertyRef Name="LotName" />
-            <PropertyRef Name="Weight" />
-            <PropertyRef Name="NoOfPieces" />
-            <PropertyRef Name="ProductGroupId" />
-            <PropertyRef Name="ProductGroup" />
-            <PropertyRef Name="IsMRP" />
-            <PropertyRef Name="MRP" />
-            <PropertyRef Name="DiffAllowed" />
-          </Key>
-          <Property Type="Int32" Name="LotId" Nullable="false" />
-          <Property Type="Int32" Name="InstanceId" Nullable="false" />
-          <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="Weight" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
-          <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
-          <Property Type="String" Name="ProductGroup" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="DealerId" />
-          <Property Type="Boolean" Name="IsMRP" Nullable="false" />
-          <Property Type="Decimal" Name="MRP" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="DiffAllowed" Nullable="false" Precision="18" Scale="2" />
-        </EntityType>
-        <EntityType Name="Barcode">
-          <Key>
-            <PropertyRef Name="BarcodeId" />
-          </Key>
-          <Property Type="Int32" Name="BarcodeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="BarcodeNumber" Nullable="false" />
-          <Property Type="Int32" Name="LotId" Nullable="false" />
-          <Property Type="Int32" Name="ProductId" Nullable="false" />
-          <Property Type="Int32" Name="NoOfPieces" Nullable="false" />
-          <Property Type="Decimal" Name="NetWeight" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="GrossWeight" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="String" Name="WeightMeasure" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
-          <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
-          <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Barcode_Lot">
-          <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
-          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lot">
-              <PropertyRef Name="LotId" />
-            </Principal>
-            <Dependent Role="Barcode">
-              <PropertyRef Name="LotId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Barcode_Product">
-          <End Type="THSMVCDataModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Barcode">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1751,6 +1788,127 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="stp_Assign_Remove_MenuItems_Role" FunctionName="THSMVCDataModel.Store.stp_Assign_Remove_MenuItems_Role" />
           <FunctionImportMapping FunctionImportName="stp_Intial_Menus_For_Admin" FunctionName="THSMVCDataModel.Store.stp_Intial_Menus_For_Admin" />
+          <EntitySetMapping Name="Barcodes">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
+              <MappingFragment StoreEntitySet="Barcode">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+                <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+                <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
+                <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
+                <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
+                <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldRates">
+            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
+              <MappingFragment StoreEntitySet="GoldRates">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldRatesManuals">
+            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
+              <MappingFragment StoreEntitySet="GoldRatesManual">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
+                <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
+                <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
+                <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instances">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
+              <MappingFragment StoreEntitySet="Instance">
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
+                <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lots">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
+              <MappingFragment StoreEntitySet="Lot">
+                <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="LotName" ColumnName="LotName" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LotStatus">
+            <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
+              <MappingFragment StoreEntitySet="LotStatus">
+                <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LotUserMappings">
+            <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
+              <MappingFragment StoreEntitySet="LotUserMapping">
+                <ScalarProperty Name="OTCode" ColumnName="OTCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="THSMVCDataModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
@@ -1802,6 +1960,57 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+                <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
+                <ScalarProperty Name="IsWeightless" ColumnName="IsWeightless" />
+                <ScalarProperty Name="IsStone" ColumnName="IsStone" />
+                <ScalarProperty Name="MakingChargesFixed" ColumnName="MakingChargesFixed" />
+                <ScalarProperty Name="MakingChargesPerGram" ColumnName="MakingChargesPerGram" />
+                <ScalarProperty Name="ValueAddedFixed" ColumnName="ValueAddedFixed" />
+                <ScalarProperty Name="ValueAddedByPerc" ColumnName="ValueAddedByPerc" />
+                <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductCategory1" ColumnName="ProductCategory" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductGroups">
+            <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
+              <MappingFragment StoreEntitySet="ProductGroup">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductGroup1" ColumnName="ProductGroup" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rights">
             <EntityTypeMapping TypeName="THSMVCDataModel.Right">
               <MappingFragment StoreEntitySet="Right">
@@ -1847,6 +2056,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Stones">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
+              <MappingFragment StoreEntitySet="Stone">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
+                <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
+                <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
+                <ScalarProperty Name="StoneName" ColumnName="StoneName" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="StoneId" ColumnName="StoneId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="THSMVCDataModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -1871,6 +2097,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserMenus">
             <EntityTypeMapping TypeName="THSMVCDataModel.UserMenu">
               <MappingFragment StoreEntitySet="UserMenu">
@@ -1890,272 +2131,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Lots">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
-              <MappingFragment StoreEntitySet="Lot">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
-                <ScalarProperty Name="MRP" ColumnName="MRP" />
-                <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
-                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="LotName" ColumnName="LotName" />
-                <ScalarProperty Name="LotId" ColumnName="LotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GoldRates">
-            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
-              <MappingFragment StoreEntitySet="GoldRates">
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GoldRatesManuals">
-            <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
-              <MappingFragment StoreEntitySet="GoldRatesManual">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
-                <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
-                <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
-                <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Instances">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
-              <MappingFragment StoreEntitySet="Instance">
-                <ScalarProperty Name="Domain" ColumnName="Domain" />
-                <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
-                <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="PIN" ColumnName="PIN" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductGroups">
-            <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
-              <MappingFragment StoreEntitySet="ProductGroup">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProductGroup1" ColumnName="ProductGroup" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Dealers">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
-              <MappingFragment StoreEntitySet="Dealer">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
-                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-                <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
-                <ScalarProperty Name="IsWeightless" ColumnName="IsWeightless" />
-                <ScalarProperty Name="IsStone" ColumnName="IsStone" />
-                <ScalarProperty Name="MakingChargesFixed" ColumnName="MakingChargesFixed" />
-                <ScalarProperty Name="MakingChargesPerGram" ColumnName="MakingChargesPerGram" />
-                <ScalarProperty Name="ValueAddedFixed" ColumnName="ValueAddedFixed" />
-                <ScalarProperty Name="ValueAddedByPerc" ColumnName="ValueAddedByPerc" />
-                <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategories">
-            <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
-              <MappingFragment StoreEntitySet="ProductCategory">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProductCategory1" ColumnName="ProductCategory" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LotStatus">
-            <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
-              <MappingFragment StoreEntitySet="LotStatus">
-                <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LotUserMappings">
-            <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
-              <MappingFragment StoreEntitySet="LotUserMapping">
-                <ScalarProperty Name="OTCode" ColumnName="OTCode" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LotId" ColumnName="LotId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stones">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
-              <MappingFragment StoreEntitySet="Stone">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
-                <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
-                <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
-                <ScalarProperty Name="StoneName" ColumnName="StoneName" />
-                <ScalarProperty Name="StoneId" ColumnName="StoneId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LotUserMappingViews">
-            <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
-              <MappingFragment StoreEntitySet="LotUserMappingView">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LotName" ColumnName="LotName" />
-                <ScalarProperty Name="LotId" ColumnName="LotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-
-
-
-
-          <EntitySetMapping Name="Settings">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
-              <MappingFragment StoreEntitySet="Settings">
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="SMS" ColumnName="SMS" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SMSApis">
-            <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
-              <MappingFragment StoreEntitySet="SMSApi">
-                <ScalarProperty Name="ScheduleURL" ColumnName="ScheduleURL" />
-                <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
-                <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
-                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-
-          <EntitySetMapping Name="SMSLogs">
-            <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
-              <MappingFragment StoreEntitySet="SMSLogs">
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="Response" ColumnName="Response" />
-                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-
-
-			<EntitySetMapping Name="SMSLogs">
-				<EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
-					<MappingFragment StoreEntitySet="SMSLogs">
-						<ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-						<ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-						<ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-						<ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-						<ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
-						<ScalarProperty Name="UserId" ColumnName="UserId" />
-						<ScalarProperty Name="GroupId" ColumnName="GroupId" />
-						<ScalarProperty Name="Response" ColumnName="Response" />
-						<ScalarProperty Name="Numbers" ColumnName="Numbers" />
-						<ScalarProperty Name="Message" ColumnName="Message" />
-						<ScalarProperty Name="Category" ColumnName="Category" />
-						<ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-						<ScalarProperty Name="Id" ColumnName="Id" />
-					</MappingFragment>
-				</EntityTypeMapping>
-			</EntitySetMapping>
-
           <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
             <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
               <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
@@ -2171,6 +2146,19 @@
                 <ScalarProperty Name="LotId" ColumnName="LotId" />
                 <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
                 <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LotUserMappingViews">
+            <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
+              <MappingFragment StoreEntitySet="LotUserMappingView">
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LotName" ColumnName="LotName" />
+                <ScalarProperty Name="LotId" ColumnName="LotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2191,24 +2179,53 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Barcodes">
-            <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
-              <MappingFragment StoreEntitySet="Barcode">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
-                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
-                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
-                <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="LotId" ColumnName="LotId" />
-                <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
-                <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+          <EntitySetMapping Name="SMSApis">
+            <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
+              <MappingFragment StoreEntitySet="SMSApi">
+                <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
+                <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
+                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="SMSLogs">
+            <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
+              <MappingFragment StoreEntitySet="SMSLogs">
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -2229,88 +2246,62 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="DataStore" ShowGrid="true" DisplayType="false" ZoomLevel="83">
-        <EntityTypeShape EntityType="THSMVCDataModel.Menu" Width="1.5" PointX="9.5754055201892765" PointY="21.5580836932911" />
-        <EntityTypeShape EntityType="THSMVCDataModel.MenuAccessRight" Width="1.5" PointX="11.860801711613686" PointY="2.0346771637139272" />
-        <EntityTypeShape EntityType="THSMVCDataModel.MenuGroup" Width="1.5" PointX="5.1893715789492116" PointY="8.7495851110432223" />
-        <EntityTypeShape EntityType="THSMVCDataModel.MenuRight" Width="1.5" PointX="3.8687865957006751" PointY="21.489446351998229" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Right" Width="1.5" PointX="2.2921456295494669" PointY="18.3036090667842" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Role" Width="1.5" PointX="8.1320450734961991" PointY="6.7795098604538993" />
-        <EntityTypeShape EntityType="THSMVCDataModel.RoleMenu" Width="1.5" PointX="0.76783353871099347" PointY="1.0138680045557524" />
-        <EntityTypeShape EntityType="THSMVCDataModel.User" Width="1.5" PointX="0.070038143578003226" PointY="4.4193572273568051" />
-        <EntityTypeShape EntityType="THSMVCDataModel.UserMenu" Width="1.5" PointX="4.1149656121223073" PointY="17.237555437366272" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Lot" Width="1.5" PointX="3.375" PointY="0.75" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="3" PointY="4.5" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="5.375" PointY="0.75" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="7.375" PointY="0.75" Height="3.5186979166666674" />
-        <EntityTypeShape EntityType="THSMVCDataModel.ProductGroup" Width="1.5" PointX="0.75" PointY="9.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Dealer" Width="1.5" PointX="5.1408718587555331" PointY="13.881910434869077" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Product" Width="1.5" PointX="5.4562039568350666" PointY="4.4005081078039989" />
-        <EntityTypeShape EntityType="THSMVCDataModel.ProductCategory" Width="1.5" PointX="0.44551337531093194" PointY="27.911644322756512" />
-        <EntityTypeShape EntityType="THSMVCDataModel.UserDetail" Width="1.5" PointX="3.1210813257475762" PointY="21.468304957015583" />
-        <EntityTypeShape EntityType="THSMVCDataModel.LotStatu" Width="1.5" PointX="7.375" PointY="13.125" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMapping" Width="1.5" PointX="9.625" PointY="2.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Stone" Width="1.5" PointX="10.375" PointY="6.75" Height="1.9802864583333388" />
-        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_Lot" >
-          <ConnectorPoint PointX="4.875" PointY="2.4131982421875" />
-          <ConnectorPoint PointX="5.125" PointY="2.4131982421875" />
-          <ConnectorPoint PointX="5.125" PointY="0.5" />
-          <ConnectorPoint PointX="10.375" PointY="0.5" />
-          <ConnectorPoint PointX="10.375" PointY="2.75" />
-        </AssociationConnector>
-        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_LotStatus" >
-          <ConnectorPoint PointX="8.125" PointY="13.125" />
-          <ConnectorPoint PointX="8.125" PointY="9.7494921875" />
-          <ConnectorPoint PointX="9.875" PointY="9.7494921875" />
-          <ConnectorPoint PointX="9.875" PointY="5.3648893229166674" />
-          <ConnectorPoint PointX="9.375" PointY="5.3648893229166674" />
-          <ConnectorPoint PointX="9.375" PointY="4.5549189921874937" />
-          <ConnectorPoint PointX="9.625" PointY="4.5549189921874937" />
-        </AssociationConnector>
-        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_User" >
-          <ConnectorPoint PointX="1.25" PointY="4.375" />
-          <ConnectorPoint PointX="1.25" PointY="4.125" />
-          <ConnectorPoint PointX="7.125" PointY="4.125" />
-          <ConnectorPoint PointX="7.125" PointY="4.5186979166666674" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="4.5186979166666665" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="4.5186979166666674" />
-          <ConnectorPoint PointX="9.25" PointY="4.5186979166666674" />
-          <ConnectorPoint PointX="9.25" PointY="3.9324446614583337" />
-          <ConnectorPoint PointX="9.625" PointY="3.9324446614583337" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="7.8416569828249782" PointY="31.176742314909" />
-
-        <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
-        <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
-
-
-        <EntityTypeShape EntityType="THSMVCDataModel.Setting" Width="1.5" PointX="9.375" PointY="10.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="11.375" PointY="10.75" Height="2.1725878906250102" />
-        <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="12.375" PointY="4.75" Height="3.5186979166666674" />
-
-
-        <EntityTypeShape EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" Width="1.5" PointX="11.375" PointY="10.75" Height="3.3263964843750102" />
-        <EntityTypeShape EntityType="THSMVCDataModel.ViewLotDetail" Width="1.5" PointX="0.75" PointY="13.75" Height="3.1340950520833246" />
-        <EntityTypeShape EntityType="THSMVCDataModel.Barcode" Width="1.5" PointX="12.75" PointY="5" Height="3.5186979166666683" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Barcode" Width="1.5" PointX="3" PointY="3.5" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Dealer" Width="1.5" PointX="5.75" PointY="7.5" Height="5.05710937500001" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GoldRate" Width="1.5" PointX="5.75" PointY="1.5" Height="1.5956835937500102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GoldRatesManual" Width="1.5" PointX="7.75" PointY="7.5" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Instance" Width="1.5" PointX="8.75" PointY="1.5" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Lot" Width="1.5" PointX="0.75" PointY="3.625" Height="3.3263964843750102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.LotStatu" Width="1.5" PointX="3.75" PointY="0.75" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMapping" Width="1.5" PointX="6" PointY="4.125" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Menu" Width="1.5" PointX="9.75" PointY="6.5" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.MenuAccessRight" Width="1.5" PointX="9.75" PointY="10.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.MenuGroup" Width="1.5" PointX="10.75" PointY="1.5" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.MenuRight" Width="1.5" PointX="11.75" PointY="5.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Product" Width="1.5" PointX="0.75" PointY="9" Height="4.480205078124996" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ProductCategory" Width="1.5" PointX="11.75" PointY="8.5" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ProductGroup" Width="1.5" PointX="11.75" PointY="12.5" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Right" Width="1.5" PointX="12.75" PointY="1.5" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Role" Width="1.5" PointX="2.75" PointY="13.5" Height="2.7494921874999836" />
+        <EntityTypeShape EntityType="THSMVCDataModel.RoleMenu" Width="1.5" PointX="4.75" PointY="13.5" Height="2.7494921874999836" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Stone" Width="1.5" PointX="6.75" PointY="13.5" Height="3.1340950520833264" />
+        <EntityTypeShape EntityType="THSMVCDataModel.User" Width="1.5" PointX="3.75" PointY="8.125" Height="4.6725065104166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.UserDetail" Width="1.5" PointX="8.75" PointY="13.5" Height="2.7494921874999836" />
+        <EntityTypeShape EntityType="THSMVCDataModel.UserMenu" Width="1.5" PointX="13.75" PointY="5.5" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" Width="1.5" PointX="13.75" PointY="10.5" Height="3.3263964843749818" />
+        <EntityTypeShape EntityType="THSMVCDataModel.LotUserMappingView" Width="1.5" PointX="14.75" PointY="1.5" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.ViewLotDetail" Width="1.5" PointX="13.75" PointY="15.5" Height="3.1340950520833264" />
         <AssociationConnector Association="THSMVCDataModel.FK_Barcode_Lot" >
-          <ConnectorPoint PointX="4.875" PointY="3.2760493632812504" />
-          <ConnectorPoint PointX="5.125" PointY="3.2760493632812504" />
-          <ConnectorPoint PointX="5.125" PointY="4.125" />
-          <ConnectorPoint PointX="7.25" PointY="4.125" />
-          <ConnectorPoint PointX="7.25" PointY="5.3648893229166674" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="5.3648893229166665" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="5.3648893229166674" />
-          <ConnectorPoint PointX="12.5" PointY="5.3648893229166674" />
-          <ConnectorPoint PointX="12.5" PointY="4.75" />
-          <ConnectorPoint PointX="13.5" PointY="4.75" />
-          <ConnectorPoint PointX="13.5" PointY="5" />
+          <ConnectorPoint PointX="2.25" PointY="5.2881982421875051" />
+          <ConnectorPoint PointX="3" PointY="5.2881982421875051" />
         </AssociationConnector>
         <AssociationConnector Association="THSMVCDataModel.FK_Barcode_Product" >
-          <ConnectorPoint PointX="7" PointY="6.0886946614583337" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="6.0886946614583328" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="6.0886946614583337" />
-          <ConnectorPoint PointX="12.75" PointY="6.0886946614583337" />
+          <ConnectorPoint PointX="2.625" PointY="13.170105794270832" />
+          <ConnectorPoint PointX="3.71875" PointY="7.0186979166666674" />
+          <ConnectorPoint PointX="3.71875" PointY="13.170105794270832" />
         </AssociationConnector>
+        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_Lot" >
+          <ConnectorPoint PointX="1.5" PointY="6.95139648437501" />
+          <ConnectorPoint PointX="1.5" PointY="7.25" />
+          <ConnectorPoint PointX="3.6354166666666665" PointY="7.2499999999999991" />
+          <ConnectorPoint PointX="3.8020833333333335" PointY="7.25" />
+          <ConnectorPoint PointX="5.625" PointY="7.25" />
+          <ConnectorPoint PointX="5.625" PointY="5.4035953776041659" />
+          <ConnectorPoint PointX="6" PointY="5.4035953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_LotStatus" >
+          <ConnectorPoint PointX="5.25" PointY="1.09375" />
+          <ConnectorPoint PointX="7.40625" PointY="1.09375" />
+          <ConnectorPoint PointX="7.40625" PointY="4.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="THSMVCDataModel.FK_LotUserMapping_User" >
+          <ConnectorPoint PointX="5.25" PointY="12.708557942708339" />
+          <ConnectorPoint PointX="7.40625" PointY="12.708557942708339" />
+          <ConnectorPoint PointX="7.40625" PointY="6.6821907552083326" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSApi" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="THSMVCDataModel.SMSLog" Width="1.5" PointX="16.75" PointY="4.75" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="THSMVCDataModel.Customer" Width="1.5" PointX="16.375" PointY="9.75" Height="2.9417936197916674" />
       </Diagram>
     </Diagrams>
   </Designer>

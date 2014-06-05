@@ -17,5 +17,13 @@ namespace THSMVC.Models
         public string PinCode { get; set; }
         public string TinNo { get; set; }
         public string BtnText { get; set; }
+
+        public int MobileNUmber1 { get; set; }
+        public int MobileNUmber2 { get; set; }
+        public int MobileNUmber3 { get; set; }
+        public int MobileNUmber4 { get; set; }
+
+        public string Email1 { get; set; }
+        public string Email2 { get; set; }
     }
 }

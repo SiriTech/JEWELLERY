@@ -2,6 +2,20 @@
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
     <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customer" EntityType="THSMVCDataModel.Store.Customer" store:Type="Tables" store:Schema="dbo" store:Name="Customer">
+      <DefiningQuery>SELECT 
+      [Customer].[Id] AS [Id], 
+      [Customer].[Name] AS [Name], 
+      [Customer].[CustomerNumber] AS [CustomerNumber], 
+      [Customer].[Address] AS [Address], 
+      [Customer].[City] AS [City], 
+      [Customer].[State] AS [State], 
+      [Customer].[Pin] AS [Pin], 
+      [Customer].[MobileNumber] AS [MobileNumber], 
+      [Customer].[PhoneNumber] AS [PhoneNumber], 
+      [Customer].[EmailAddress] AS [EmailAddress]
+      FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
@@ -19,7 +33,6 @@
     <EntitySet Name="Right" EntityType="THSMVCDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="THSMVCDataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleMenu" EntityType="THSMVCDataModel.Store.RoleMenu" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Settings" EntityType="THSMVCDataModel.Store.Settings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SMSApi" EntityType="THSMVCDataModel.Store.SMSApi" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.Store.SMSLogs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
@@ -105,6 +118,26 @@
     <Property Name="IsSubmitted" Type="bit" Nullable="false" />
     <Property Name="Notes" Type="varchar" MaxLength="100" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'PJ.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CustomerNumber" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="CustomerNumber" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Pin" Type="int" />
+    <Property Name="MobileNumber" Type="int" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Dealer">
     <Key>
       <PropertyRef Name="DealerId" />
@@ -124,6 +157,12 @@
     <Property Name="EditedBy" Type="int" />
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
+    <Property Name="MobileNumber1" Type="int" />
+    <Property Name="MobileNumber2" Type="int" />
+    <Property Name="MobileNumber3" Type="int" />
+    <Property Name="MobileNumber4" Type="int" />
+    <Property Name="Email1" Type="varchar" MaxLength="100" />
+    <Property Name="Email2" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="GoldRates">
     <Key>
@@ -333,19 +372,6 @@
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
   </EntityType>
-  <EntityType Name="Settings">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="InstanceId" Type="int" />
-    <Property Name="SMS" Type="bit" Nullable="false" />
-    <Property Name="CreatedBy" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="EditedBy" Type="int" />
-    <Property Name="EditedDate" Type="datetime" />
-    <Property Name="Status" Type="bit" />
-  </EntityType>
   <EntityType Name="SMSApi">
     <Key>
       <PropertyRef Name="Id" />
@@ -355,7 +381,6 @@
     <Property Name="APIURL" Type="varchar(max)" Nullable="false" />
     <Property Name="CreditBalURL" Type="varchar(max)" />
     <Property Name="DlvReportURL" Type="varchar(max)" />
-    <Property Name="ScheduleURL" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="SMSLogs">
     <Key>
@@ -591,6 +616,10 @@
     <Parameter Name="MenuItems" Type="varchar(max)" Mode="In" />
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
   </Function>
+  <Function Name="stp_Assign_Remove_MenuItems_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InstanceId" Type="int" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
   <Function Name="stp_Get_Menuitems_By_Role_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
     <Parameter Name="RoleId" Type="int" Mode="In" />
@@ -602,4 +631,11 @@
     <Parameter Name="FromDate" Type="date" Mode="In" />
     <Parameter Name="Todate" Type="date" Mode="In" />
   </Function>
+  <!--Errors Found During Generation:
+      warning 6013: The table/view 'PJ.dbo.Setting' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="Setting">
+        <Property Name="InstanceId" Type="int" />
+        <Property Name="SMS" Type="bit" />
+      </EntityType>-->
 </Schema>

@@ -1,0 +1,51 @@
+11-05-2014
+----------
+1. Admin Should be able to do BarCode. Admin should be able to assign lot to Himself.
+2. 
+
+16-05-2014
+------------
+1. new lot create avvatam ledu - Fixed
+2. dealer and mrp interchanged in lot details list - fixed
+3. redirect to homepage after password change
+4. Show/hide for list, for those which r having above 2 colomns
+5. Delar page : mobile numbers 4 nd 2 emailsids - fixed
+6. Dealer Bank details
+		bankname, branchname, acnumber, ifsc code, comments
+		(should be able to add more than one)
+7. image upload  options (3 files)
+8. Settings page
+9. Roles : should be ale to edit role
+10. Login Tracks and page events, delete nd Updates.
+
+19-05-2014
+----------
+
+1. Employee PAGE :
+parents number, mothers number, upload(proofs. max 6, bond, signature), address, contaCT DETAILS, education details, preveous exp details, 
+previous salary, increment date, incrementment percent, designation, temp address, permant number, adarnumber.
+
+2. Staff register - for attendance ()
+
+20-05-2014
+-----------
+1. Customer Page - - fixed
+
+Name
+Customer Number
+Mobile Number
+PHONE NUMBER
+Email Address
+Address
+CITY
+STATE
+PIN
+
+SMSLOgs
+SMSAPI - 1 row
+Settings -- sms(bit), instanceid(int) - 1
+LotMapping
+
+
+
+

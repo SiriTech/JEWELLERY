@@ -121,6 +121,16 @@
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        { closeOnEscape: true, width: 350 } // view options
     );
+       //jQuery("#list").jqGrid('sortableRows');
+
+       jQuery("#list").jqGrid(
+    'sortableRows',
+    { update: function (e, ui) {
+        alert("The row with the id=" + ui.item[0].id +
+            " is moved. New row index is " + ui.item[0].rowIndex);
+    }
+});
+
             $.extend($.jgrid.search, { Find: 'Search' });
 
         }

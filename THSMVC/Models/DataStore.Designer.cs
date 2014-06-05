@@ -8,22 +8,21 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Product), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.LotStatu), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
-[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
-[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Product), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
 
 #endregion
 
@@ -74,6 +73,134 @@ namespace THSMVC.Models
         #endregion
     
         #region ObjectSet Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Barcode> Barcodes
+        {
+            get
+            {
+                if ((_Barcodes == null))
+                {
+                    _Barcodes = base.CreateObjectSet<Barcode>("Barcodes");
+                }
+                return _Barcodes;
+            }
+        }
+        private ObjectSet<Barcode> _Barcodes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Dealer> Dealers
+        {
+            get
+            {
+                if ((_Dealers == null))
+                {
+                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
+                }
+                return _Dealers;
+            }
+        }
+        private ObjectSet<Dealer> _Dealers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GoldRate> GoldRates
+        {
+            get
+            {
+                if ((_GoldRates == null))
+                {
+                    _GoldRates = base.CreateObjectSet<GoldRate>("GoldRates");
+                }
+                return _GoldRates;
+            }
+        }
+        private ObjectSet<GoldRate> _GoldRates;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GoldRatesManual> GoldRatesManuals
+        {
+            get
+            {
+                if ((_GoldRatesManuals == null))
+                {
+                    _GoldRatesManuals = base.CreateObjectSet<GoldRatesManual>("GoldRatesManuals");
+                }
+                return _GoldRatesManuals;
+            }
+        }
+        private ObjectSet<GoldRatesManual> _GoldRatesManuals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Instance> Instances
+        {
+            get
+            {
+                if ((_Instances == null))
+                {
+                    _Instances = base.CreateObjectSet<Instance>("Instances");
+                }
+                return _Instances;
+            }
+        }
+        private ObjectSet<Instance> _Instances;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Lot> Lots
+        {
+            get
+            {
+                if ((_Lots == null))
+                {
+                    _Lots = base.CreateObjectSet<Lot>("Lots");
+                }
+                return _Lots;
+            }
+        }
+        private ObjectSet<Lot> _Lots;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LotStatu> LotStatus
+        {
+            get
+            {
+                if ((_LotStatus == null))
+                {
+                    _LotStatus = base.CreateObjectSet<LotStatu>("LotStatus");
+                }
+                return _LotStatus;
+            }
+        }
+        private ObjectSet<LotStatu> _LotStatus;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                if ((_LotUserMappings == null))
+                {
+                    _LotUserMappings = base.CreateObjectSet<LotUserMapping>("LotUserMappings");
+                }
+                return _LotUserMappings;
+            }
+        }
+        private ObjectSet<LotUserMapping> _LotUserMappings;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -142,6 +269,54 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Product> Products
+        {
+            get
+            {
+                if ((_Products == null))
+                {
+                    _Products = base.CreateObjectSet<Product>("Products");
+                }
+                return _Products;
+            }
+        }
+        private ObjectSet<Product> _Products;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductCategory> ProductCategories
+        {
+            get
+            {
+                if ((_ProductCategories == null))
+                {
+                    _ProductCategories = base.CreateObjectSet<ProductCategory>("ProductCategories");
+                }
+                return _ProductCategories;
+            }
+        }
+        private ObjectSet<ProductCategory> _ProductCategories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProductGroup> ProductGroups
+        {
+            get
+            {
+                if ((_ProductGroups == null))
+                {
+                    _ProductGroups = base.CreateObjectSet<ProductGroup>("ProductGroups");
+                }
+                return _ProductGroups;
+            }
+        }
+        private ObjectSet<ProductGroup> _ProductGroups;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Right> Rights
         {
             get
@@ -190,6 +365,22 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Stone> Stones
+        {
+            get
+            {
+                if ((_Stones == null))
+                {
+                    _Stones = base.CreateObjectSet<Stone>("Stones");
+                }
+                return _Stones;
+            }
+        }
+        private ObjectSet<Stone> _Stones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<User> Users
         {
             get
@@ -202,150 +393,6 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<User> _Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserMenu> UserMenus
-        {
-            get
-            {
-                if ((_UserMenus == null))
-                {
-                    _UserMenus = base.CreateObjectSet<UserMenu>("UserMenus");
-                }
-                return _UserMenus;
-            }
-        }
-        private ObjectSet<UserMenu> _UserMenus;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Lot> Lots
-        {
-            get
-            {
-                if ((_Lots == null))
-                {
-                    _Lots = base.CreateObjectSet<Lot>("Lots");
-                }
-                return _Lots;
-            }
-        }
-        private ObjectSet<Lot> _Lots;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<GoldRate> GoldRates
-        {
-            get
-            {
-                if ((_GoldRates == null))
-                {
-                    _GoldRates = base.CreateObjectSet<GoldRate>("GoldRates");
-                }
-                return _GoldRates;
-            }
-        }
-        private ObjectSet<GoldRate> _GoldRates;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<GoldRatesManual> GoldRatesManuals
-        {
-            get
-            {
-                if ((_GoldRatesManuals == null))
-                {
-                    _GoldRatesManuals = base.CreateObjectSet<GoldRatesManual>("GoldRatesManuals");
-                }
-                return _GoldRatesManuals;
-            }
-        }
-        private ObjectSet<GoldRatesManual> _GoldRatesManuals;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Instance> Instances
-        {
-            get
-            {
-                if ((_Instances == null))
-                {
-                    _Instances = base.CreateObjectSet<Instance>("Instances");
-                }
-                return _Instances;
-            }
-        }
-        private ObjectSet<Instance> _Instances;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProductGroup> ProductGroups
-        {
-            get
-            {
-                if ((_ProductGroups == null))
-                {
-                    _ProductGroups = base.CreateObjectSet<ProductGroup>("ProductGroups");
-                }
-                return _ProductGroups;
-            }
-        }
-        private ObjectSet<ProductGroup> _ProductGroups;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Dealer> Dealers
-        {
-            get
-            {
-                if ((_Dealers == null))
-                {
-                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
-                }
-                return _Dealers;
-            }
-        }
-        private ObjectSet<Dealer> _Dealers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Product> Products
-        {
-            get
-            {
-                if ((_Products == null))
-                {
-                    _Products = base.CreateObjectSet<Product>("Products");
-                }
-                return _Products;
-            }
-        }
-        private ObjectSet<Product> _Products;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProductCategory> ProductCategories
-        {
-            get
-            {
-                if ((_ProductCategories == null))
-                {
-                    _ProductCategories = base.CreateObjectSet<ProductCategory>("ProductCategories");
-                }
-                return _ProductCategories;
-            }
-        }
-        private ObjectSet<ProductCategory> _ProductCategories;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -366,50 +413,34 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<LotStatu> LotStatus
+        public ObjectSet<UserMenu> UserMenus
         {
             get
             {
-                if ((_LotStatus == null))
+                if ((_UserMenus == null))
                 {
-                    _LotStatus = base.CreateObjectSet<LotStatu>("LotStatus");
+                    _UserMenus = base.CreateObjectSet<UserMenu>("UserMenus");
                 }
-                return _LotStatus;
+                return _UserMenus;
             }
         }
-        private ObjectSet<LotStatu> _LotStatus;
+        private ObjectSet<UserMenu> _UserMenus;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<LotUserMapping> LotUserMappings
+        public ObjectSet<GetCompletedButNotSubmittedProduct> GetCompletedButNotSubmittedProducts
         {
             get
             {
-                if ((_LotUserMappings == null))
+                if ((_GetCompletedButNotSubmittedProducts == null))
                 {
-                    _LotUserMappings = base.CreateObjectSet<LotUserMapping>("LotUserMappings");
+                    _GetCompletedButNotSubmittedProducts = base.CreateObjectSet<GetCompletedButNotSubmittedProduct>("GetCompletedButNotSubmittedProducts");
                 }
-                return _LotUserMappings;
+                return _GetCompletedButNotSubmittedProducts;
             }
         }
-        private ObjectSet<LotUserMapping> _LotUserMappings;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Stone> Stones
-        {
-            get
-            {
-                if ((_Stones == null))
-                {
-                    _Stones = base.CreateObjectSet<Stone>("Stones");
-                }
-                return _Stones;
-            }
-        }
-        private ObjectSet<Stone> _Stones;
+        private ObjectSet<GetCompletedButNotSubmittedProduct> _GetCompletedButNotSubmittedProducts;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -430,18 +461,18 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Setting> Settings
+        public ObjectSet<ViewLotDetail> ViewLotDetails
         {
             get
             {
-                if ((_Settings == null))
+                if ((_ViewLotDetails == null))
                 {
-                    _Settings = base.CreateObjectSet<Setting>("Settings");
+                    _ViewLotDetails = base.CreateObjectSet<ViewLotDetail>("ViewLotDetails");
                 }
-                return _Settings;
+                return _ViewLotDetails;
             }
         }
-        private ObjectSet<Setting> _Settings;
+        private ObjectSet<ViewLotDetail> _ViewLotDetails;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -478,54 +509,85 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<GetCompletedButNotSubmittedProduct> GetCompletedButNotSubmittedProducts
+        public ObjectSet<Customer> Customers
         {
             get
             {
-                if ((_GetCompletedButNotSubmittedProducts == null))
+                if ((_Customers == null))
                 {
-                    _GetCompletedButNotSubmittedProducts = base.CreateObjectSet<GetCompletedButNotSubmittedProduct>("GetCompletedButNotSubmittedProducts");
+                    _Customers = base.CreateObjectSet<Customer>("Customers");
                 }
-                return _GetCompletedButNotSubmittedProducts;
+                return _Customers;
             }
         }
-        private ObjectSet<GetCompletedButNotSubmittedProduct> _GetCompletedButNotSubmittedProducts;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ViewLotDetail> ViewLotDetails
-        {
-            get
-            {
-                if ((_ViewLotDetails == null))
-                {
-                    _ViewLotDetails = base.CreateObjectSet<ViewLotDetail>("ViewLotDetails");
-                }
-                return _ViewLotDetails;
-            }
-        }
-        private ObjectSet<ViewLotDetail> _ViewLotDetails;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Barcode> Barcodes
-        {
-            get
-            {
-                if ((_Barcodes == null))
-                {
-                    _Barcodes = base.CreateObjectSet<Barcode>("Barcodes");
-                }
-                return _Barcodes;
-            }
-        }
-        private ObjectSet<Barcode> _Barcodes;
+        private ObjectSet<Customer> _Customers;
 
         #endregion
-
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Barcodes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBarcodes(Barcode barcode)
+        {
+            base.AddObject("Barcodes", barcode);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDealers(Dealer dealer)
+        {
+            base.AddObject("Dealers", dealer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GoldRates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGoldRates(GoldRate goldRate)
+        {
+            base.AddObject("GoldRates", goldRate);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GoldRatesManuals EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGoldRatesManuals(GoldRatesManual goldRatesManual)
+        {
+            base.AddObject("GoldRatesManuals", goldRatesManual);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Instances EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToInstances(Instance instance)
+        {
+            base.AddObject("Instances", instance);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Lots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLots(Lot lot)
+        {
+            base.AddObject("Lots", lot);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LotStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLotStatus(LotStatu lotStatu)
+        {
+            base.AddObject("LotStatus", lotStatu);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LotUserMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLotUserMappings(LotUserMapping lotUserMapping)
+        {
+            base.AddObject("LotUserMappings", lotUserMapping);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Menus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -560,6 +622,30 @@ namespace THSMVC.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Products EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProducts(Product product)
+        {
+            base.AddObject("Products", product);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductCategories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductCategories(ProductCategory productCategory)
+        {
+            base.AddObject("ProductCategories", productCategory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProductGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductGroups(ProductGroup productGroup)
+        {
+            base.AddObject("ProductGroups", productGroup);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Rights EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToRights(Right right)
@@ -584,83 +670,19 @@ namespace THSMVC.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Stones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStones(Stone stone)
+        {
+            base.AddObject("Stones", stone);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserMenus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserMenus(UserMenu userMenu)
-        {
-            base.AddObject("UserMenus", userMenu);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Lots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLots(Lot lot)
-        {
-            base.AddObject("Lots", lot);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the GoldRates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToGoldRates(GoldRate goldRate)
-        {
-            base.AddObject("GoldRates", goldRate);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the GoldRatesManuals EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToGoldRatesManuals(GoldRatesManual goldRatesManual)
-        {
-            base.AddObject("GoldRatesManuals", goldRatesManual);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Instances EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToInstances(Instance instance)
-        {
-            base.AddObject("Instances", instance);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProductGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProductGroups(ProductGroup productGroup)
-        {
-            base.AddObject("ProductGroups", productGroup);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDealers(Dealer dealer)
-        {
-            base.AddObject("Dealers", dealer);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Products EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProducts(Product product)
-        {
-            base.AddObject("Products", product);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProductCategories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProductCategories(ProductCategory productCategory)
-        {
-            base.AddObject("ProductCategories", productCategory);
         }
     
         /// <summary>
@@ -672,27 +694,19 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the LotStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the UserMenus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToLotStatus(LotStatu lotStatu)
+        public void AddToUserMenus(UserMenu userMenu)
         {
-            base.AddObject("LotStatus", lotStatu);
+            base.AddObject("UserMenus", userMenu);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the LotUserMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the GetCompletedButNotSubmittedProducts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToLotUserMappings(LotUserMapping lotUserMapping)
+        public void AddToGetCompletedButNotSubmittedProducts(GetCompletedButNotSubmittedProduct getCompletedButNotSubmittedProduct)
         {
-            base.AddObject("LotUserMappings", lotUserMapping);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Stones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStones(Stone stone)
-        {
-            base.AddObject("Stones", stone);
+            base.AddObject("GetCompletedButNotSubmittedProducts", getCompletedButNotSubmittedProduct);
         }
     
         /// <summary>
@@ -704,11 +718,11 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Settings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the ViewLotDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSettings(Setting setting)
+        public void AddToViewLotDetails(ViewLotDetail viewLotDetail)
         {
-            base.AddObject("Settings", setting);
+            base.AddObject("ViewLotDetails", viewLotDetail);
         }
     
         /// <summary>
@@ -728,31 +742,14 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the GetCompletedButNotSubmittedProducts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Customers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToGetCompletedButNotSubmittedProducts(GetCompletedButNotSubmittedProduct getCompletedButNotSubmittedProduct)
+        public void AddToCustomers(Customer customer)
         {
-            base.AddObject("GetCompletedButNotSubmittedProducts", getCompletedButNotSubmittedProduct);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ViewLotDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToViewLotDetails(ViewLotDetail viewLotDetail)
-        {
-            base.AddObject("ViewLotDetails", viewLotDetail);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Barcodes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBarcodes(Barcode barcode)
-        {
-            base.AddObject("Barcodes", barcode);
+            base.AddObject("Customers", customer);
         }
 
         #endregion
-
         #region Function Imports
     
         /// <summary>
@@ -2527,11 +2524,11 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -2574,7 +2571,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2845,7 +2841,6 @@ namespace THSMVC.Models
         partial void OnNotesChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2926,7 +2921,287 @@ namespace THSMVC.Models
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Customer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Customer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Customer object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="customerNumber">Initial value of the CustomerNumber property.</param>
+        public static Customer CreateCustomer(global::System.Int32 id, global::System.String name, global::System.String customerNumber)
+        {
+            Customer customer = new Customer();
+            customer.Id = id;
+            customer.Name = name;
+            customer.CustomerNumber = customerNumber;
+            return customer;
+        }
 
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (_Name != value)
+                {
+                    OnNameChanging(value);
+                    ReportPropertyChanging("Name");
+                    _Name = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Name");
+                    OnNameChanged();
+                }
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CustomerNumber
+        {
+            get
+            {
+                return _CustomerNumber;
+            }
+            set
+            {
+                if (_CustomerNumber != value)
+                {
+                    OnCustomerNumberChanging(value);
+                    ReportPropertyChanging("CustomerNumber");
+                    _CustomerNumber = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("CustomerNumber");
+                    OnCustomerNumberChanged();
+                }
+            }
+        }
+        private global::System.String _CustomerNumber;
+        partial void OnCustomerNumberChanging(global::System.String value);
+        partial void OnCustomerNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String City
+        {
+            get
+            {
+                return _City;
+            }
+            set
+            {
+                OnCityChanging(value);
+                ReportPropertyChanging("City");
+                _City = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("City");
+                OnCityChanged();
+            }
+        }
+        private global::System.String _City;
+        partial void OnCityChanging(global::System.String value);
+        partial void OnCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.String _State;
+        partial void OnStateChanging(global::System.String value);
+        partial void OnStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Pin
+        {
+            get
+            {
+                return _Pin;
+            }
+            set
+            {
+                OnPinChanging(value);
+                ReportPropertyChanging("Pin");
+                _Pin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Pin");
+                OnPinChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Pin;
+        partial void OnPinChanging(Nullable<global::System.Int32> value);
+        partial void OnPinChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MobileNumber
+        {
+            get
+            {
+                return _MobileNumber;
+            }
+            set
+            {
+                OnMobileNumberChanging(value);
+                ReportPropertyChanging("MobileNumber");
+                _MobileNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MobileNumber");
+                OnMobileNumberChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MobileNumber;
+        partial void OnMobileNumberChanging(Nullable<global::System.Int32> value);
+        partial void OnMobileNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+            set
+            {
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PhoneNumber;
+        partial void OnPhoneNumberChanging(Nullable<global::System.Int32> value);
+        partial void OnPhoneNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
+
+        #endregion
+    
     }
     
     /// <summary>
@@ -2943,25 +3218,24 @@ namespace THSMVC.Models
         /// Create a new Dealer object.
         /// </summary>
         /// <param name="dealerId">Initial value of the DealerId property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="dealerName">Initial value of the DealerName property.</param>
         /// <param name="companyName">Initial value of the CompanyName property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static Dealer CreateDealer(global::System.Int32 dealerId, global::System.String dealerName, global::System.String companyName, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
+        public static Dealer CreateDealer(global::System.Int32 dealerId, global::System.Int32 instanceId, global::System.String dealerName, global::System.String companyName, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             Dealer dealer = new Dealer();
             dealer.DealerId = dealerId;
+            dealer.InstanceId = instanceId;
             dealer.DealerName = dealerName;
             dealer.CompanyName = companyName;
             dealer.CreatedBy = createdBy;
             dealer.CreatedDate = createdDate;
-            dealer.InstanceId = instanceId;
             return dealer;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2990,6 +3264,30 @@ namespace THSMVC.Models
         private global::System.Int32 _DealerId;
         partial void OnDealerIdChanging(global::System.Int32 value);
         partial void OnDealerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3306,29 +3604,148 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
+        public Nullable<global::System.Int32> MobileNumber1
         {
             get
             {
-                return _InstanceId;
+                return _MobileNumber1;
             }
             set
             {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
+                OnMobileNumber1Changing(value);
+                ReportPropertyChanging("MobileNumber1");
+                _MobileNumber1 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MobileNumber1");
+                OnMobileNumber1Changed();
             }
         }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
+        private Nullable<global::System.Int32> _MobileNumber1;
+        partial void OnMobileNumber1Changing(Nullable<global::System.Int32> value);
+        partial void OnMobileNumber1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MobileNumber2
+        {
+            get
+            {
+                return _MobileNumber2;
+            }
+            set
+            {
+                OnMobileNumber2Changing(value);
+                ReportPropertyChanging("MobileNumber2");
+                _MobileNumber2 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MobileNumber2");
+                OnMobileNumber2Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _MobileNumber2;
+        partial void OnMobileNumber2Changing(Nullable<global::System.Int32> value);
+        partial void OnMobileNumber2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MobileNumber3
+        {
+            get
+            {
+                return _MobileNumber3;
+            }
+            set
+            {
+                OnMobileNumber3Changing(value);
+                ReportPropertyChanging("MobileNumber3");
+                _MobileNumber3 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MobileNumber3");
+                OnMobileNumber3Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _MobileNumber3;
+        partial void OnMobileNumber3Changing(Nullable<global::System.Int32> value);
+        partial void OnMobileNumber3Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MobileNumber4
+        {
+            get
+            {
+                return _MobileNumber4;
+            }
+            set
+            {
+                OnMobileNumber4Changing(value);
+                ReportPropertyChanging("MobileNumber4");
+                _MobileNumber4 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MobileNumber4");
+                OnMobileNumber4Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _MobileNumber4;
+        partial void OnMobileNumber4Changing(Nullable<global::System.Int32> value);
+        partial void OnMobileNumber4Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email1
+        {
+            get
+            {
+                return _Email1;
+            }
+            set
+            {
+                OnEmail1Changing(value);
+                ReportPropertyChanging("Email1");
+                _Email1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email1");
+                OnEmail1Changed();
+            }
+        }
+        private global::System.String _Email1;
+        partial void OnEmail1Changing(global::System.String value);
+        partial void OnEmail1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email2
+        {
+            get
+            {
+                return _Email2;
+            }
+            set
+            {
+                OnEmail2Changing(value);
+                ReportPropertyChanging("Email2");
+                _Email2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email2");
+                OnEmail2Changed();
+            }
+        }
+        private global::System.String _Email2;
+        partial void OnEmail2Changing(global::System.String value);
+        partial void OnEmail2Changed();
 
         #endregion
-
     
     }
     
@@ -3374,7 +3791,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3699,7 +4115,6 @@ namespace THSMVC.Models
         partial void OnIsSubmittedChanged();
 
         #endregion
-
     
     }
     
@@ -3729,7 +4144,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3808,7 +4222,6 @@ namespace THSMVC.Models
         partial void OnURLChanged();
 
         #endregion
-
     
     }
     
@@ -3848,7 +4261,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4047,7 +4459,6 @@ namespace THSMVC.Models
         partial void OnCreatedDateChanged();
 
         #endregion
-
     
     }
     
@@ -4077,7 +4488,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4396,7 +4806,6 @@ namespace THSMVC.Models
         partial void OnDomainChanged();
 
         #endregion
-
     
     }
     
@@ -4414,21 +4823,20 @@ namespace THSMVC.Models
         /// Create a new Lot object.
         /// </summary>
         /// <param name="lotId">Initial value of the LotId property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="lotName">Initial value of the LotName property.</param>
         /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static Lot CreateLot(global::System.Int32 lotId, global::System.String lotName, global::System.Int32 productGroupId, global::System.Int32 instanceId)
+        public static Lot CreateLot(global::System.Int32 lotId, global::System.Int32 instanceId, global::System.String lotName, global::System.Int32 productGroupId)
         {
             Lot lot = new Lot();
             lot.LotId = lotId;
+            lot.InstanceId = instanceId;
             lot.LotName = lotName;
             lot.ProductGroupId = productGroupId;
-            lot.InstanceId = instanceId;
             return lot;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4457,6 +4865,30 @@ namespace THSMVC.Models
         private global::System.Int32 _LotId;
         partial void OnLotIdChanging(global::System.Int32 value);
         partial void OnLotIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4649,57 +5081,10 @@ namespace THSMVC.Models
         private Nullable<global::System.Decimal> _DiffAllowed;
         partial void OnDiffAllowedChanging(Nullable<global::System.Decimal> value);
         partial void OnDiffAllowedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "LotUserMapping")]
-        public EntityCollection<LotUserMapping> LotUserMappings
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4722,9 +5107,30 @@ namespace THSMVC.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "LotUserMapping")]
+        public EntityCollection<LotUserMapping> LotUserMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LotUserMapping>("THSMVCDataModel.FK_LotUserMapping_Lot", "LotUserMapping", value);
+                }
+            }
+        }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4751,7 +5157,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4806,7 +5211,6 @@ namespace THSMVC.Models
         partial void OnEnumValueChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4833,7 +5237,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -4864,7 +5267,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -4991,7 +5393,6 @@ namespace THSMVC.Models
         partial void OnOTCodeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -5110,7 +5511,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -5129,25 +5529,24 @@ namespace THSMVC.Models
         /// <param name="lotId">Initial value of the LotId property.</param>
         /// <param name="lotName">Initial value of the LotName property.</param>
         /// <param name="userName">Initial value of the UserName property.</param>
-        /// <param name="status">Initial value of the Status property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
         /// <param name="statusId">Initial value of the StatusId property.</param>
-        public static LotUserMappingView CreateLotUserMappingView(global::System.Int32 lotId, global::System.String lotName, global::System.String userName, global::System.String status, global::System.Int32 instanceId, global::System.Int32 userId, global::System.Int32 statusId)
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static LotUserMappingView CreateLotUserMappingView(global::System.Int32 lotId, global::System.String lotName, global::System.String userName, global::System.Int32 userId, global::System.String status, global::System.Int32 statusId, global::System.Int32 instanceId)
         {
             LotUserMappingView lotUserMappingView = new LotUserMappingView();
             lotUserMappingView.LotId = lotId;
             lotUserMappingView.LotName = lotName;
             lotUserMappingView.UserName = userName;
-            lotUserMappingView.Status = status;
-            lotUserMappingView.InstanceId = instanceId;
             lotUserMappingView.UserId = userId;
+            lotUserMappingView.Status = status;
             lotUserMappingView.StatusId = statusId;
+            lotUserMappingView.InstanceId = instanceId;
             return lotUserMappingView;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5236,60 +5635,6 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Status
-        {
-            get
-            {
-                return _Status;
-            }
-            set
-            {
-                if (_Status != value)
-                {
-                    OnStatusChanging(value);
-                    ReportPropertyChanging("Status");
-                    _Status = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Status");
-                    OnStatusChanged();
-                }
-            }
-        }
-        private global::System.String _Status;
-        partial void OnStatusChanging(global::System.String value);
-        partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                if (_InstanceId != value)
-                {
-                    OnInstanceIdChanging(value);
-                    ReportPropertyChanging("InstanceId");
-                    _InstanceId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("InstanceId");
-                    OnInstanceIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 UserId
         {
             get
@@ -5317,6 +5662,33 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                if (_Status != value)
+                {
+                    OnStatusChanging(value);
+                    ReportPropertyChanging("Status");
+                    _Status = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Status");
+                    OnStatusChanged();
+                }
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 StatusId
         {
             get
@@ -5338,9 +5710,35 @@ namespace THSMVC.Models
         private global::System.Int32 _StatusId;
         partial void OnStatusIdChanging(global::System.Int32 value);
         partial void OnStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                if (_InstanceId != value)
+                {
+                    OnInstanceIdChanging(value);
+                    ReportPropertyChanging("InstanceId");
+                    _InstanceId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("InstanceId");
+                    OnInstanceIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -5372,7 +5770,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5619,7 +6016,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -5649,7 +6045,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -5752,7 +6147,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -5782,7 +6176,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6005,7 +6398,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -6033,7 +6425,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6136,7 +6527,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -6154,6 +6544,7 @@ namespace THSMVC.Models
         /// Create a new Product object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="productName">Initial value of the ProductName property.</param>
         /// <param name="isStone">Initial value of the IsStone property.</param>
         /// <param name="isWeightless">Initial value of the IsWeightless property.</param>
@@ -6161,11 +6552,11 @@ namespace THSMVC.Models
         /// <param name="productGroupId">Initial value of the ProductGroupId property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static Product CreateProduct(global::System.Int32 id, global::System.String productName, global::System.Boolean isStone, global::System.Boolean isWeightless, global::System.Int32 productCategoryId, global::System.Int32 productGroupId, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
+        public static Product CreateProduct(global::System.Int32 id, global::System.Int32 instanceId, global::System.String productName, global::System.Boolean isStone, global::System.Boolean isWeightless, global::System.Int32 productCategoryId, global::System.Int32 productGroupId, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             Product product = new Product();
             product.Id = id;
+            product.InstanceId = instanceId;
             product.ProductName = productName;
             product.IsStone = isStone;
             product.IsWeightless = isWeightless;
@@ -6173,12 +6564,10 @@ namespace THSMVC.Models
             product.ProductGroupId = productGroupId;
             product.CreatedBy = createdBy;
             product.CreatedDate = createdDate;
-            product.InstanceId = instanceId;
             return product;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6207,6 +6596,30 @@ namespace THSMVC.Models
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6567,33 +6980,8 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -6620,7 +7008,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -6637,23 +7024,22 @@ namespace THSMVC.Models
         /// Create a new ProductCategory object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="productCategory1">Initial value of the ProductCategory1 property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static ProductCategory CreateProductCategory(global::System.Int32 id, global::System.String productCategory1, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
+        public static ProductCategory CreateProductCategory(global::System.Int32 id, global::System.Int32 instanceId, global::System.String productCategory1, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             ProductCategory productCategory = new ProductCategory();
             productCategory.Id = id;
+            productCategory.InstanceId = instanceId;
             productCategory.ProductCategory1 = productCategory1;
             productCategory.CreatedBy = createdBy;
             productCategory.CreatedDate = createdDate;
-            productCategory.InstanceId = instanceId;
             return productCategory;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6682,6 +7068,30 @@ namespace THSMVC.Models
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6826,33 +7236,8 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -6870,23 +7255,22 @@ namespace THSMVC.Models
         /// Create a new ProductGroup object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="productGroup1">Initial value of the ProductGroup1 property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static ProductGroup CreateProductGroup(global::System.Int32 id, global::System.String productGroup1, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
+        public static ProductGroup CreateProductGroup(global::System.Int32 id, global::System.Int32 instanceId, global::System.String productGroup1, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             ProductGroup productGroup = new ProductGroup();
             productGroup.Id = id;
+            productGroup.InstanceId = instanceId;
             productGroup.ProductGroup1 = productGroup1;
             productGroup.CreatedBy = createdBy;
             productGroup.CreatedDate = createdDate;
-            productGroup.InstanceId = instanceId;
             return productGroup;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -6915,6 +7299,30 @@ namespace THSMVC.Models
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7059,33 +7467,8 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -7121,7 +7504,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7344,7 +7726,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -7376,7 +7757,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7599,7 +7979,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -7635,7 +8014,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -7858,238 +8236,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="Setting")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Setting : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Setting object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="sMS">Initial value of the SMS property.</param>
-        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static Setting CreateSetting(global::System.Int32 id, global::System.Boolean sMS, global::System.Int32 createdBy, global::System.DateTime createdDate)
-        {
-            Setting setting = new Setting();
-            setting.Id = id;
-            setting.SMS = sMS;
-            setting.CreatedBy = createdBy;
-            setting.CreatedDate = createdDate;
-            return setting;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean SMS
-        {
-            get
-            {
-                return _SMS;
-            }
-            set
-            {
-                OnSMSChanging(value);
-                ReportPropertyChanging("SMS");
-                _SMS = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SMS");
-                OnSMSChanged();
-            }
-        }
-        private global::System.Boolean _SMS;
-        partial void OnSMSChanging(global::System.Boolean value);
-        partial void OnSMSChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedBy
-        {
-            get
-            {
-                return _CreatedBy;
-            }
-            set
-            {
-                OnCreatedByChanging(value);
-                ReportPropertyChanging("CreatedBy");
-                _CreatedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedBy");
-                OnCreatedByChanged();
-            }
-        }
-        private global::System.Int32 _CreatedBy;
-        partial void OnCreatedByChanging(global::System.Int32 value);
-        partial void OnCreatedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
-        {
-            get
-            {
-                return _CreatedDate;
-            }
-            set
-            {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
-            }
-        }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> EditedBy
-        {
-            get
-            {
-                return _EditedBy;
-            }
-            set
-            {
-                OnEditedByChanging(value);
-                ReportPropertyChanging("EditedBy");
-                _EditedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EditedBy");
-                OnEditedByChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _EditedBy;
-        partial void OnEditedByChanging(Nullable<global::System.Int32> value);
-        partial void OnEditedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EditedDate
-        {
-            get
-            {
-                return _EditedDate;
-            }
-            set
-            {
-                OnEditedDateChanging(value);
-                ReportPropertyChanging("EditedDate");
-                _EditedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EditedDate");
-                OnEditedDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _EditedDate;
-        partial void OnEditedDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnEditedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Status
-        {
-            get
-            {
-                return _Status;
-            }
-            set
-            {
-                OnStatusChanging(value);
-                ReportPropertyChanging("Status");
-                _Status = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Status");
-                OnStatusChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _Status;
-        partial void OnStatusChanging(Nullable<global::System.Boolean> value);
-        partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _InstanceId;
-        partial void OnInstanceIdChanging(Nullable<global::System.Int32> value);
-        partial void OnInstanceIdChanged();
-
-        #endregion
-
     
     }
     
@@ -8119,7 +8265,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8244,33 +8389,8 @@ namespace THSMVC.Models
         private global::System.String _DlvReportURL;
         partial void OnDlvReportURLChanging(global::System.String value);
         partial void OnDlvReportURLChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ScheduleURL
-        {
-            get
-            {
-                return _ScheduleURL;
-            }
-            set
-            {
-                OnScheduleURLChanging(value);
-                ReportPropertyChanging("ScheduleURL");
-                _ScheduleURL = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ScheduleURL");
-                OnScheduleURLChanged();
-            }
-        }
-        private global::System.String _ScheduleURL;
-        partial void OnScheduleURLChanging(global::System.String value);
-        partial void OnScheduleURLChanged();
 
         #endregion
-
     
     }
     
@@ -8306,7 +8426,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8625,7 +8744,6 @@ namespace THSMVC.Models
         partial void OnEditedDateChanged();
 
         #endregion
-
     
     }
     
@@ -8643,27 +8761,26 @@ namespace THSMVC.Models
         /// Create a new Stone object.
         /// </summary>
         /// <param name="stoneId">Initial value of the StoneId property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
         /// <param name="stoneName">Initial value of the StoneName property.</param>
         /// <param name="stoneShortForm">Initial value of the StoneShortForm property.</param>
         /// <param name="isStoneWeightless">Initial value of the IsStoneWeightless property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="instanceId">Initial value of the InstanceId property.</param>
-        public static Stone CreateStone(global::System.Int32 stoneId, global::System.String stoneName, global::System.String stoneShortForm, global::System.Boolean isStoneWeightless, global::System.Int32 createdBy, global::System.DateTime createdDate, global::System.Int32 instanceId)
+        public static Stone CreateStone(global::System.Int32 stoneId, global::System.Int32 instanceId, global::System.String stoneName, global::System.String stoneShortForm, global::System.Boolean isStoneWeightless, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             Stone stone = new Stone();
             stone.StoneId = stoneId;
+            stone.InstanceId = instanceId;
             stone.StoneName = stoneName;
             stone.StoneShortForm = stoneShortForm;
             stone.IsStoneWeightless = isStoneWeightless;
             stone.CreatedBy = createdBy;
             stone.CreatedDate = createdDate;
-            stone.InstanceId = instanceId;
             return stone;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -8692,6 +8809,30 @@ namespace THSMVC.Models
         private global::System.Int32 _StoneId;
         partial void OnStoneIdChanging(global::System.Int32 value);
         partial void OnStoneIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8908,33 +9049,8 @@ namespace THSMVC.Models
         private Nullable<global::System.Boolean> _Status;
         partial void OnStatusChanging(Nullable<global::System.Boolean> value);
         partial void OnStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InstanceId
-        {
-            get
-            {
-                return _InstanceId;
-            }
-            set
-            {
-                OnInstanceIdChanging(value);
-                ReportPropertyChanging("InstanceId");
-                _InstanceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InstanceId");
-                OnInstanceIdChanged();
-            }
-        }
-        private global::System.Int32 _InstanceId;
-        partial void OnInstanceIdChanging(global::System.Int32 value);
-        partial void OnInstanceIdChanged();
 
         #endregion
-
     
     }
     
@@ -8972,7 +9088,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9411,7 +9526,6 @@ namespace THSMVC.Models
         partial void OnCommentChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -9438,7 +9552,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -9467,7 +9580,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -9690,7 +9802,6 @@ namespace THSMVC.Models
         partial void OnPhoneChanged();
 
         #endregion
-
     
     }
     
@@ -9730,7 +9841,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10049,7 +10159,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     
     }
     
@@ -10093,7 +10202,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10391,12 +10499,10 @@ namespace THSMVC.Models
         partial void OnDiffAllowedChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     #region ComplexTypes
     
     /// <summary>
@@ -10421,7 +10527,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10497,7 +10602,6 @@ namespace THSMVC.Models
         partial void OnGroupIdChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10528,7 +10632,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -10916,7 +11019,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -10947,7 +11049,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11071,7 +11172,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11106,7 +11206,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11422,7 +11521,6 @@ namespace THSMVC.Models
         partial void OnDlvStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11451,7 +11549,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11551,7 +11648,6 @@ namespace THSMVC.Models
         partial void OnchkedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11580,7 +11676,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11752,7 +11847,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11781,7 +11875,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -11953,7 +12046,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -11980,7 +12072,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12176,7 +12267,6 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12209,7 +12299,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12381,7 +12470,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12412,7 +12500,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12536,7 +12623,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12567,7 +12653,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12691,7 +12776,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12722,7 +12806,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -12846,7 +12929,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -12877,7 +12959,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13025,7 +13106,6 @@ namespace THSMVC.Models
         partial void OnNoticeDocSizeChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13056,7 +13136,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13180,7 +13259,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13211,7 +13289,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13335,7 +13412,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13366,7 +13442,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13490,7 +13565,6 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13517,7 +13591,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -13593,7 +13666,6 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -13634,7 +13706,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14022,7 +14093,6 @@ namespace THSMVC.Models
         partial void OnSubCategoryChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14063,7 +14133,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14427,7 +14496,6 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14468,7 +14536,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14832,7 +14899,6 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14859,7 +14925,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -14959,7 +15024,6 @@ namespace THSMVC.Models
         partial void OnPlannedLeaveChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -14992,7 +15056,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15140,7 +15203,6 @@ namespace THSMVC.Models
         partial void OnDelegatedOnChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15195,7 +15257,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15583,7 +15644,6 @@ namespace THSMVC.Models
         partial void OnIsNotifierChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15614,7 +15674,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -15834,7 +15893,6 @@ namespace THSMVC.Models
         partial void OnApproverChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -15867,7 +15925,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -16087,7 +16144,6 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -16116,7 +16172,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -16432,7 +16487,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -16461,7 +16515,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -16777,7 +16830,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -16806,7 +16858,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -17122,7 +17173,6 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17160,7 +17210,6 @@ namespace THSMVC.Models
         partial void OnAvailableFromDateChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17198,7 +17247,6 @@ namespace THSMVC.Models
         partial void OnAnswerChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17356,7 +17404,6 @@ namespace THSMVC.Models
         partial void OnGainedPointsChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17381,7 +17428,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -17457,7 +17503,6 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17496,7 +17541,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -17740,7 +17784,6 @@ namespace THSMVC.Models
         partial void OnPointsChanged();
 
         #endregion
-
     }
     
     /// <summary>
@@ -17785,7 +17828,6 @@ namespace THSMVC.Models
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -18125,10 +18167,8 @@ namespace THSMVC.Models
         partial void OnIsSMSSentChanged();
 
         #endregion
-
     }
 
     #endregion
-
     
 }

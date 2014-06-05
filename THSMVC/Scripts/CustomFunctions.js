@@ -534,6 +534,8 @@ function submitChangePwd() {
                 },
                 success: function (result) {
                     if (result.success) {
+                        //PopulateMenuWithContent('Home', 'Welcome', 'Admin', '12');
+                        
                         Success(result.message);
                     }
                     else {

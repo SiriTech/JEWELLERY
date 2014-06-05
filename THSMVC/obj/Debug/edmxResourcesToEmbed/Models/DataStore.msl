@@ -16,6 +16,127 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="stp_Assign_Remove_MenuItems_Role" FunctionName="THSMVCDataModel.Store.stp_Assign_Remove_MenuItems_Role" />
     <FunctionImportMapping FunctionImportName="stp_Intial_Menus_For_Admin" FunctionName="THSMVCDataModel.Store.stp_Intial_Menus_For_Admin" />
+    <EntitySetMapping Name="Barcodes">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
+        <MappingFragment StoreEntitySet="Barcode">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dealers">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
+        <MappingFragment StoreEntitySet="Dealer">
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
+          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
+          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
+          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldRates">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
+        <MappingFragment StoreEntitySet="GoldRates">
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldRatesManuals">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
+        <MappingFragment StoreEntitySet="GoldRatesManual">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
+          <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
+          <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
+          <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instances">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
+        <MappingFragment StoreEntitySet="Instance">
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
+          <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PIN" ColumnName="PIN" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lots">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
+        <MappingFragment StoreEntitySet="Lot">
+          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="LotName" ColumnName="LotName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LotStatus">
+      <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
+        <MappingFragment StoreEntitySet="LotStatus">
+          <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LotUserMappings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
+        <MappingFragment StoreEntitySet="LotUserMapping">
+          <ScalarProperty Name="OTCode" ColumnName="OTCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Menus">
       <EntityTypeMapping TypeName="THSMVCDataModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
@@ -67,6 +188,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+          <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
+          <ScalarProperty Name="IsWeightless" ColumnName="IsWeightless" />
+          <ScalarProperty Name="IsStone" ColumnName="IsStone" />
+          <ScalarProperty Name="MakingChargesFixed" ColumnName="MakingChargesFixed" />
+          <ScalarProperty Name="MakingChargesPerGram" ColumnName="MakingChargesPerGram" />
+          <ScalarProperty Name="ValueAddedFixed" ColumnName="ValueAddedFixed" />
+          <ScalarProperty Name="ValueAddedByPerc" ColumnName="ValueAddedByPerc" />
+          <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCategories">
+      <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
+        <MappingFragment StoreEntitySet="ProductCategory">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ProductCategory1" ColumnName="ProductCategory" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductGroups">
+      <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
+        <MappingFragment StoreEntitySet="ProductGroup">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ProductGroup1" ColumnName="ProductGroup" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Rights">
       <EntityTypeMapping TypeName="THSMVCDataModel.Right">
         <MappingFragment StoreEntitySet="Right">
@@ -112,6 +284,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Stones">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
+        <MappingFragment StoreEntitySet="Stone">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
+          <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
+          <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
+          <ScalarProperty Name="StoneName" ColumnName="StoneName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="StoneId" ColumnName="StoneId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="THSMVCDataModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -136,6 +325,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UserMenus">
       <EntityTypeMapping TypeName="THSMVCDataModel.UserMenu">
         <MappingFragment StoreEntitySet="UserMenu">
@@ -155,218 +359,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Lots">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
-        <MappingFragment StoreEntitySet="Lot">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
-          <ScalarProperty Name="MRP" ColumnName="MRP" />
-          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="LotName" ColumnName="LotName" />
-          <ScalarProperty Name="LotId" ColumnName="LotId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GoldRates">
-      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
-        <MappingFragment StoreEntitySet="GoldRates">
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="GoldCity" ColumnName="GoldCity" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GoldRatesManuals">
-      <EntityTypeMapping TypeName="THSMVCDataModel.GoldRatesManual">
-        <MappingFragment StoreEntitySet="GoldRatesManual">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="SilverPrice" ColumnName="SilverPrice" />
-          <ScalarProperty Name="SilverWeight" ColumnName="SilverWeight" />
-          <ScalarProperty Name="GoldPrice" ColumnName="GoldPrice" />
-          <ScalarProperty Name="GoldWeight" ColumnName="GoldWeight" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Instances">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Instance">
-        <MappingFragment StoreEntitySet="Instance">
-          <ScalarProperty Name="Domain" ColumnName="Domain" />
-          <ScalarProperty Name="GoldCityId" ColumnName="GoldCityId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="LicenseEndDate" ColumnName="LicenseEndDate" />
-          <ScalarProperty Name="LicenseStartDate" ColumnName="LicenseStartDate" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="PIN" ColumnName="PIN" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="ParentInstance" ColumnName="ParentInstance" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductGroups">
-      <EntityTypeMapping TypeName="THSMVCDataModel.ProductGroup">
-        <MappingFragment StoreEntitySet="ProductGroup">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ProductGroup1" ColumnName="ProductGroup" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Dealers">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
-        <MappingFragment StoreEntitySet="Dealer">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
-          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-          <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
-          <ScalarProperty Name="IsWeightless" ColumnName="IsWeightless" />
-          <ScalarProperty Name="IsStone" ColumnName="IsStone" />
-          <ScalarProperty Name="MakingChargesFixed" ColumnName="MakingChargesFixed" />
-          <ScalarProperty Name="MakingChargesPerGram" ColumnName="MakingChargesPerGram" />
-          <ScalarProperty Name="ValueAddedFixed" ColumnName="ValueAddedFixed" />
-          <ScalarProperty Name="ValueAddedByPerc" ColumnName="ValueAddedByPerc" />
-          <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+    <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
+      <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
+        <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
+          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductCategories">
-      <EntityTypeMapping TypeName="THSMVCDataModel.ProductCategory">
-        <MappingFragment StoreEntitySet="ProductCategory">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ProductCategory1" ColumnName="ProductCategory" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserDetails">
-      <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
-        <MappingFragment StoreEntitySet="UserDetails">
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LotStatus">
-      <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
-        <MappingFragment StoreEntitySet="LotStatus">
-          <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LotUserMappings">
-      <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMapping">
-        <MappingFragment StoreEntitySet="LotUserMapping">
-          <ScalarProperty Name="OTCode" ColumnName="OTCode" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Stones">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Stone">
-        <MappingFragment StoreEntitySet="Stone">
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="IsStoneWeightless" ColumnName="IsStoneWeightless" />
-          <ScalarProperty Name="StonePerCarat" ColumnName="StonePerCarat" />
-          <ScalarProperty Name="StoneShortForm" ColumnName="StoneShortForm" />
-          <ScalarProperty Name="StoneName" ColumnName="StoneName" />
-          <ScalarProperty Name="StoneId" ColumnName="StoneId" />
+          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LotUserMappingViews">
       <EntityTypeMapping TypeName="THSMVCDataModel.LotUserMappingView">
         <MappingFragment StoreEntitySet="LotUserMappingView">
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Settings">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Setting">
-        <MappingFragment StoreEntitySet="Settings">
+    <EntitySetMapping Name="ViewLotDetails">
+      <EntityTypeMapping TypeName="THSMVCDataModel.ViewLotDetail">
+        <MappingFragment StoreEntitySet="ViewLotDetails">
+          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="SMS" ColumnName="SMS" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SMSApis">
       <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
         <MappingFragment StoreEntitySet="SMSApi">
-          <ScalarProperty Name="ScheduleURL" ColumnName="ScheduleURL" />
           <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
           <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
           <ScalarProperty Name="APIURL" ColumnName="APIURL" />
@@ -394,74 +437,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SMSLogs">
-      <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
-        <MappingFragment StoreEntitySet="SMSLogs">
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="DlvStatus" ColumnName="DlvStatus" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-          <ScalarProperty Name="Response" ColumnName="Response" />
-          <ScalarProperty Name="Numbers" ColumnName="Numbers" />
-          <ScalarProperty Name="Message" ColumnName="Message" />
-          <ScalarProperty Name="Category" ColumnName="Category" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Pin" ColumnName="Pin" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GetCompletedButNotSubmittedProducts">
-      <EntityTypeMapping TypeName="THSMVCDataModel.GetCompletedButNotSubmittedProduct">
-        <MappingFragment StoreEntitySet="GetCompletedButNotSubmittedProducts">
-          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
-          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
-          <ScalarProperty Name="LotId" ColumnName="LotId" />
-          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
-          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ViewLotDetails">
-      <EntityTypeMapping TypeName="THSMVCDataModel.ViewLotDetail">
-        <MappingFragment StoreEntitySet="ViewLotDetails">
-          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
-          <ScalarProperty Name="MRP" ColumnName="MRP" />
-          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-          <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
-          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="LotName" ColumnName="LotName" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="LotId" ColumnName="LotId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Barcodes">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Barcode">
-        <MappingFragment StoreEntitySet="Barcode">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="WeightMeasure" ColumnName="WeightMeasure" />
-          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
-          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
-          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="LotId" ColumnName="LotId" />
-          <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
-          <ScalarProperty Name="BarcodeId" ColumnName="BarcodeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
