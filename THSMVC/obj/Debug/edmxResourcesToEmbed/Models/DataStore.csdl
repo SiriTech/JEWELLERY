@@ -225,7 +225,6 @@
       <Parameter Name="InstanceId" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Barcodes" EntityType="THSMVCDataModel.Barcode" />
-    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
     <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
     <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
@@ -269,9 +268,16 @@
       <End Role="User" EntitySet="Users" />
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
-    <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
     <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+    <EntitySet Name="UserMappings" EntityType="THSMVCDataModel.UserMapping" />
+    <AssociationSet Name="FK_UserMapping_User" Association="THSMVCDataModel.FK_UserMapping_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserMapping" EntitySet="UserMappings" />
+    </AssociationSet>
+    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
+    <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
     <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
+    <EntitySet Name="AppSettings" EntityType="THSMVCDataModel.AppSetting" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -632,32 +638,6 @@
     <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
     <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
   </EntityType>
-  <EntityType Name="Dealer">
-    <Key>
-      <PropertyRef Name="DealerId" />
-    </Key>
-    <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-    <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
-    <Property Type="Boolean" Name="Status" />
-    <Property Type="Int32" Name="MobileNumber1" />
-    <Property Type="Int32" Name="MobileNumber2" />
-    <Property Type="Int32" Name="MobileNumber3" />
-    <Property Type="Int32" Name="MobileNumber4" />
-    <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="GoldRate">
     <Key>
       <PropertyRef Name="Id" />
@@ -912,6 +892,7 @@
     <Property Type="Boolean" Name="ChangePwdonLogin" />
     <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="User" ToRole="LotUserMapping" />
+    <NavigationProperty Name="UserMappings" Relationship="THSMVCDataModel.FK_UserMapping_User" FromRole="User" ToRole="UserMapping" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>
@@ -1075,16 +1056,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="SMSApi">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="SMSLog">
     <Key>
       <PropertyRef Name="Id" />
@@ -1103,13 +1074,83 @@
     <Property Type="Int32" Name="EditedBy" />
     <Property Type="DateTime" Name="EditedDate" />
   </EntityType>
+  <EntityType Name="UserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int32" Name="FatherPhonenumber" />
+    <Property Type="Int32" Name="MotherPhoneNumber" />
+    <Property Type="Int32" Name="Mobile2" />
+    <Property Type="Int32" Name="Mobile3" />
+    <Property Type="Int32" Name="Mobile4" />
+    <Property Type="String" Name="Email1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EducationQualification" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Designation" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AdharNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PANNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TempAddress" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TempCity" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TempState" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="TempPin" />
+    <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_UserMapping_User" FromRole="UserMapping" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserMapping_User">
+    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
+    <End Type="THSMVCDataModel.UserMapping" Role="UserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Dealer">
+    <Key>
+      <PropertyRef Name="DealerId" />
+    </Key>
+    <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="Boolean" Name="Status" />
+    <Property Type="Int32" Name="MobileNumber1" />
+    <Property Type="Int32" Name="MobileNumber2" />
+    <Property Type="Int32" Name="MobileNumber3" />
+    <Property Type="Int32" Name="MobileNumber4" />
+    <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SMSApi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ScheduleUrl" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="CustomerNumber" />
     </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="CustomerNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1119,5 +1160,13 @@
     <Property Type="Int32" Name="MobileNumber" />
     <Property Type="Int32" Name="PhoneNumber" />
     <Property Type="String" Name="EmailAddress" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AppSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="Boolean" Name="SMS" />
   </EntityType>
 </Schema>

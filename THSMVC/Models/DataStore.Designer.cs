@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -23,6 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.LotStatu), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_UserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "UserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.UserMapping), true)]
 
 #endregion
 
@@ -89,22 +91,6 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Barcode> _Barcodes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Dealer> Dealers
-        {
-            get
-            {
-                if ((_Dealers == null))
-                {
-                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
-                }
-                return _Dealers;
-            }
-        }
-        private ObjectSet<Dealer> _Dealers;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -477,22 +463,6 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SMSApi> SMSApis
-        {
-            get
-            {
-                if ((_SMSApis == null))
-                {
-                    _SMSApis = base.CreateObjectSet<SMSApi>("SMSApis");
-                }
-                return _SMSApis;
-            }
-        }
-        private ObjectSet<SMSApi> _SMSApis;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SMSLog> SMSLogs
         {
             get
@@ -509,6 +479,54 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<UserMapping> UserMappings
+        {
+            get
+            {
+                if ((_UserMappings == null))
+                {
+                    _UserMappings = base.CreateObjectSet<UserMapping>("UserMappings");
+                }
+                return _UserMappings;
+            }
+        }
+        private ObjectSet<UserMapping> _UserMappings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Dealer> Dealers
+        {
+            get
+            {
+                if ((_Dealers == null))
+                {
+                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
+                }
+                return _Dealers;
+            }
+        }
+        private ObjectSet<Dealer> _Dealers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SMSApi> SMSApis
+        {
+            get
+            {
+                if ((_SMSApis == null))
+                {
+                    _SMSApis = base.CreateObjectSet<SMSApi>("SMSApis");
+                }
+                return _SMSApis;
+            }
+        }
+        private ObjectSet<SMSApi> _SMSApis;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Customer> Customers
         {
             get
@@ -521,8 +539,25 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Customer> _Customers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AppSetting> AppSettings
+        {
+            get
+            {
+                if ((_AppSettings == null))
+                {
+                    _AppSettings = base.CreateObjectSet<AppSetting>("AppSettings");
+                }
+                return _AppSettings;
+            }
+        }
+        private ObjectSet<AppSetting> _AppSettings;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -531,14 +566,6 @@ namespace THSMVC.Models
         public void AddToBarcodes(Barcode barcode)
         {
             base.AddObject("Barcodes", barcode);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDealers(Dealer dealer)
-        {
-            base.AddObject("Dealers", dealer);
         }
     
         /// <summary>
@@ -726,19 +753,35 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SMSApis EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSMSApis(SMSApi sMSApi)
-        {
-            base.AddObject("SMSApis", sMSApi);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SMSLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSMSLogs(SMSLog sMSLog)
         {
             base.AddObject("SMSLogs", sMSLog);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserMappings(UserMapping userMapping)
+        {
+            base.AddObject("UserMappings", userMapping);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDealers(Dealer dealer)
+        {
+            base.AddObject("Dealers", dealer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SMSApis EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSMSApis(SMSApi sMSApi)
+        {
+            base.AddObject("SMSApis", sMSApi);
         }
     
         /// <summary>
@@ -748,8 +791,17 @@ namespace THSMVC.Models
         {
             base.AddObject("Customers", customer);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AppSettings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAppSettings(AppSetting appSetting)
+        {
+            base.AddObject("AppSettings", appSetting);
+        }
 
         #endregion
+
         #region Function Imports
     
         /// <summary>
@@ -2524,12 +2576,119 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="AppSetting")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AppSetting : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AppSetting object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="instanceId">Initial value of the InstanceId property.</param>
+        public static AppSetting CreateAppSetting(global::System.Int32 id, global::System.Int32 instanceId)
+        {
+            AppSetting appSetting = new AppSetting();
+            appSetting.Id = id;
+            appSetting.InstanceId = instanceId;
+            return appSetting;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstanceId
+        {
+            get
+            {
+                return _InstanceId;
+            }
+            set
+            {
+                OnInstanceIdChanging(value);
+                ReportPropertyChanging("InstanceId");
+                _InstanceId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceId");
+                OnInstanceIdChanged();
+            }
+        }
+        private global::System.Int32 _InstanceId;
+        partial void OnInstanceIdChanging(global::System.Int32 value);
+        partial void OnInstanceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> SMS
+        {
+            get
+            {
+                return _SMS;
+            }
+            set
+            {
+                OnSMSChanging(value);
+                ReportPropertyChanging("SMS");
+                _SMS = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SMS");
+                OnSMSChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _SMS;
+        partial void OnSMSChanging(Nullable<global::System.Boolean> value);
+        partial void OnSMSChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -2571,6 +2730,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2841,6 +3001,7 @@ namespace THSMVC.Models
         partial void OnNotesChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2921,6 +3082,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2949,6 +3111,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2981,7 +3144,7 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Name
         {
@@ -2991,14 +3154,11 @@ namespace THSMVC.Models
             }
             set
             {
-                if (_Name != value)
-                {
-                    OnNameChanging(value);
-                    ReportPropertyChanging("Name");
-                    _Name = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Name");
-                    OnNameChanged();
-                }
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
         private global::System.String _Name;
@@ -3008,7 +3168,7 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String CustomerNumber
         {
@@ -3018,14 +3178,11 @@ namespace THSMVC.Models
             }
             set
             {
-                if (_CustomerNumber != value)
-                {
-                    OnCustomerNumberChanging(value);
-                    ReportPropertyChanging("CustomerNumber");
-                    _CustomerNumber = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("CustomerNumber");
-                    OnCustomerNumberChanged();
-                }
+                OnCustomerNumberChanging(value);
+                ReportPropertyChanging("CustomerNumber");
+                _CustomerNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CustomerNumber");
+                OnCustomerNumberChanged();
             }
         }
         private global::System.String _CustomerNumber;
@@ -3201,6 +3358,7 @@ namespace THSMVC.Models
         partial void OnEmailAddressChanged();
 
         #endregion
+
     
     }
     
@@ -3236,6 +3394,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3746,6 +3905,7 @@ namespace THSMVC.Models
         partial void OnEmail2Changed();
 
         #endregion
+
     
     }
     
@@ -3791,6 +3951,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4115,6 +4276,7 @@ namespace THSMVC.Models
         partial void OnIsSubmittedChanged();
 
         #endregion
+
     
     }
     
@@ -4144,6 +4306,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4222,6 +4385,7 @@ namespace THSMVC.Models
         partial void OnURLChanged();
 
         #endregion
+
     
     }
     
@@ -4261,6 +4425,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4459,6 +4624,7 @@ namespace THSMVC.Models
         partial void OnCreatedDateChanged();
 
         #endregion
+
     
     }
     
@@ -4488,6 +4654,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4806,6 +4973,7 @@ namespace THSMVC.Models
         partial void OnDomainChanged();
 
         #endregion
+
     
     }
     
@@ -4837,6 +5005,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5083,6 +5252,7 @@ namespace THSMVC.Models
         partial void OnDiffAllowedChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5131,6 +5301,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5157,6 +5328,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5211,6 +5383,7 @@ namespace THSMVC.Models
         partial void OnEnumValueChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5237,6 +5410,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5267,6 +5441,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5393,6 +5568,7 @@ namespace THSMVC.Models
         partial void OnOTCodeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5511,6 +5687,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5547,6 +5724,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5739,6 +5917,7 @@ namespace THSMVC.Models
         partial void OnInstanceIdChanged();
 
         #endregion
+
     
     }
     
@@ -5770,6 +5949,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6016,6 +6196,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6045,6 +6226,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6147,6 +6329,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6176,6 +6359,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6398,6 +6582,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6425,6 +6610,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6527,6 +6713,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -6568,6 +6755,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6982,6 +7170,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -7008,6 +7197,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7040,6 +7230,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7238,6 +7429,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7271,6 +7463,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7469,6 +7662,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7504,6 +7698,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7726,6 +7921,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -7757,6 +7953,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7979,6 +8176,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -8014,6 +8212,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8236,6 +8435,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -8265,6 +8465,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8389,8 +8590,33 @@ namespace THSMVC.Models
         private global::System.String _DlvReportURL;
         partial void OnDlvReportURLChanging(global::System.String value);
         partial void OnDlvReportURLChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ScheduleUrl
+        {
+            get
+            {
+                return _ScheduleUrl;
+            }
+            set
+            {
+                OnScheduleUrlChanging(value);
+                ReportPropertyChanging("ScheduleUrl");
+                _ScheduleUrl = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ScheduleUrl");
+                OnScheduleUrlChanged();
+            }
+        }
+        private global::System.String _ScheduleUrl;
+        partial void OnScheduleUrlChanging(global::System.String value);
+        partial void OnScheduleUrlChanged();
 
         #endregion
+
     
     }
     
@@ -8426,6 +8652,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8744,6 +8971,7 @@ namespace THSMVC.Models
         partial void OnEditedDateChanged();
 
         #endregion
+
     
     }
     
@@ -8781,6 +9009,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9051,6 +9280,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -9088,6 +9318,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9526,6 +9757,7 @@ namespace THSMVC.Models
         partial void OnCommentChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -9550,8 +9782,31 @@ namespace THSMVC.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_UserMapping_User", "UserMapping")]
+        public EntityCollection<UserMapping> UserMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserMapping>("THSMVCDataModel.FK_UserMapping_User", "UserMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserMapping>("THSMVCDataModel.FK_UserMapping_User", "UserMapping", value);
+                }
+            }
+        }
 
         #endregion
+
     }
     
     /// <summary>
@@ -9580,6 +9835,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -9802,7 +10058,493 @@ namespace THSMVC.Models
         partial void OnPhoneChanged();
 
         #endregion
+
     
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="UserMapping")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserMapping : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserMapping object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        public static UserMapping CreateUserMapping(global::System.Int32 id, global::System.Int32 userId)
+        {
+            UserMapping userMapping = new UserMapping();
+            userMapping.Id = id;
+            userMapping.UserId = userId;
+            return userMapping;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> FatherPhonenumber
+        {
+            get
+            {
+                return _FatherPhonenumber;
+            }
+            set
+            {
+                OnFatherPhonenumberChanging(value);
+                ReportPropertyChanging("FatherPhonenumber");
+                _FatherPhonenumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FatherPhonenumber");
+                OnFatherPhonenumberChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _FatherPhonenumber;
+        partial void OnFatherPhonenumberChanging(Nullable<global::System.Int32> value);
+        partial void OnFatherPhonenumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MotherPhoneNumber
+        {
+            get
+            {
+                return _MotherPhoneNumber;
+            }
+            set
+            {
+                OnMotherPhoneNumberChanging(value);
+                ReportPropertyChanging("MotherPhoneNumber");
+                _MotherPhoneNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MotherPhoneNumber");
+                OnMotherPhoneNumberChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MotherPhoneNumber;
+        partial void OnMotherPhoneNumberChanging(Nullable<global::System.Int32> value);
+        partial void OnMotherPhoneNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Mobile2
+        {
+            get
+            {
+                return _Mobile2;
+            }
+            set
+            {
+                OnMobile2Changing(value);
+                ReportPropertyChanging("Mobile2");
+                _Mobile2 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Mobile2");
+                OnMobile2Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _Mobile2;
+        partial void OnMobile2Changing(Nullable<global::System.Int32> value);
+        partial void OnMobile2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Mobile3
+        {
+            get
+            {
+                return _Mobile3;
+            }
+            set
+            {
+                OnMobile3Changing(value);
+                ReportPropertyChanging("Mobile3");
+                _Mobile3 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Mobile3");
+                OnMobile3Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _Mobile3;
+        partial void OnMobile3Changing(Nullable<global::System.Int32> value);
+        partial void OnMobile3Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Mobile4
+        {
+            get
+            {
+                return _Mobile4;
+            }
+            set
+            {
+                OnMobile4Changing(value);
+                ReportPropertyChanging("Mobile4");
+                _Mobile4 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Mobile4");
+                OnMobile4Changed();
+            }
+        }
+        private Nullable<global::System.Int32> _Mobile4;
+        partial void OnMobile4Changing(Nullable<global::System.Int32> value);
+        partial void OnMobile4Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email1
+        {
+            get
+            {
+                return _Email1;
+            }
+            set
+            {
+                OnEmail1Changing(value);
+                ReportPropertyChanging("Email1");
+                _Email1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email1");
+                OnEmail1Changed();
+            }
+        }
+        private global::System.String _Email1;
+        partial void OnEmail1Changing(global::System.String value);
+        partial void OnEmail1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email2
+        {
+            get
+            {
+                return _Email2;
+            }
+            set
+            {
+                OnEmail2Changing(value);
+                ReportPropertyChanging("Email2");
+                _Email2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email2");
+                OnEmail2Changed();
+            }
+        }
+        private global::System.String _Email2;
+        partial void OnEmail2Changing(global::System.String value);
+        partial void OnEmail2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EducationQualification
+        {
+            get
+            {
+                return _EducationQualification;
+            }
+            set
+            {
+                OnEducationQualificationChanging(value);
+                ReportPropertyChanging("EducationQualification");
+                _EducationQualification = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EducationQualification");
+                OnEducationQualificationChanged();
+            }
+        }
+        private global::System.String _EducationQualification;
+        partial void OnEducationQualificationChanging(global::System.String value);
+        partial void OnEducationQualificationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Designation
+        {
+            get
+            {
+                return _Designation;
+            }
+            set
+            {
+                OnDesignationChanging(value);
+                ReportPropertyChanging("Designation");
+                _Designation = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Designation");
+                OnDesignationChanged();
+            }
+        }
+        private global::System.String _Designation;
+        partial void OnDesignationChanging(global::System.String value);
+        partial void OnDesignationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AdharNumber
+        {
+            get
+            {
+                return _AdharNumber;
+            }
+            set
+            {
+                OnAdharNumberChanging(value);
+                ReportPropertyChanging("AdharNumber");
+                _AdharNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AdharNumber");
+                OnAdharNumberChanged();
+            }
+        }
+        private global::System.String _AdharNumber;
+        partial void OnAdharNumberChanging(global::System.String value);
+        partial void OnAdharNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PANNumber
+        {
+            get
+            {
+                return _PANNumber;
+            }
+            set
+            {
+                OnPANNumberChanging(value);
+                ReportPropertyChanging("PANNumber");
+                _PANNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PANNumber");
+                OnPANNumberChanged();
+            }
+        }
+        private global::System.String _PANNumber;
+        partial void OnPANNumberChanging(global::System.String value);
+        partial void OnPANNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TempAddress
+        {
+            get
+            {
+                return _TempAddress;
+            }
+            set
+            {
+                OnTempAddressChanging(value);
+                ReportPropertyChanging("TempAddress");
+                _TempAddress = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TempAddress");
+                OnTempAddressChanged();
+            }
+        }
+        private global::System.String _TempAddress;
+        partial void OnTempAddressChanging(global::System.String value);
+        partial void OnTempAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TempCity
+        {
+            get
+            {
+                return _TempCity;
+            }
+            set
+            {
+                OnTempCityChanging(value);
+                ReportPropertyChanging("TempCity");
+                _TempCity = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TempCity");
+                OnTempCityChanged();
+            }
+        }
+        private global::System.String _TempCity;
+        partial void OnTempCityChanging(global::System.String value);
+        partial void OnTempCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TempState
+        {
+            get
+            {
+                return _TempState;
+            }
+            set
+            {
+                OnTempStateChanging(value);
+                ReportPropertyChanging("TempState");
+                _TempState = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TempState");
+                OnTempStateChanged();
+            }
+        }
+        private global::System.String _TempState;
+        partial void OnTempStateChanging(global::System.String value);
+        partial void OnTempStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TempPin
+        {
+            get
+            {
+                return _TempPin;
+            }
+            set
+            {
+                OnTempPinChanging(value);
+                ReportPropertyChanging("TempPin");
+                _TempPin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TempPin");
+                OnTempPinChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TempPin;
+        partial void OnTempPinChanging(Nullable<global::System.Int32> value);
+        partial void OnTempPinChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_UserMapping_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_UserMapping_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_UserMapping_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("THSMVCDataModel.FK_UserMapping_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("THSMVCDataModel.FK_UserMapping_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -9841,6 +10583,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10159,6 +10902,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     
     }
     
@@ -10202,6 +10946,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10499,10 +11244,12 @@ namespace THSMVC.Models
         partial void OnDiffAllowedChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     #region ComplexTypes
     
     /// <summary>
@@ -10527,6 +11274,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -10602,6 +11350,7 @@ namespace THSMVC.Models
         partial void OnGroupIdChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -10632,6 +11381,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11019,6 +11769,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11049,6 +11800,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11172,6 +11924,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11206,6 +11959,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11521,6 +12275,7 @@ namespace THSMVC.Models
         partial void OnDlvStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11549,6 +12304,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11648,6 +12404,7 @@ namespace THSMVC.Models
         partial void OnchkedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11676,6 +12433,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -11847,6 +12605,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -11875,6 +12634,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12046,6 +12806,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12072,6 +12833,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12267,6 +13029,7 @@ namespace THSMVC.Models
         partial void OnDefaultFlagChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12299,6 +13062,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12470,6 +13234,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12500,6 +13265,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12623,6 +13389,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12653,6 +13420,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12776,6 +13544,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12806,6 +13575,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -12929,6 +13699,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -12959,6 +13730,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13106,6 +13878,7 @@ namespace THSMVC.Models
         partial void OnNoticeDocSizeChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13136,6 +13909,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13259,6 +14033,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13289,6 +14064,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13412,6 +14188,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13442,6 +14219,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13565,6 +14343,7 @@ namespace THSMVC.Models
         partial void OncheckedChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13591,6 +14370,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -13666,6 +14446,7 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -13706,6 +14487,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14093,6 +14875,7 @@ namespace THSMVC.Models
         partial void OnSubCategoryChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14133,6 +14916,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14496,6 +15280,7 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14536,6 +15321,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -14899,6 +15685,7 @@ namespace THSMVC.Models
         partial void OnRoleNameChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -14925,6 +15712,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15024,6 +15812,7 @@ namespace THSMVC.Models
         partial void OnPlannedLeaveChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15056,6 +15845,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15203,6 +15993,7 @@ namespace THSMVC.Models
         partial void OnDelegatedOnChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15257,6 +16048,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15644,6 +16436,7 @@ namespace THSMVC.Models
         partial void OnIsNotifierChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15674,6 +16467,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -15893,6 +16687,7 @@ namespace THSMVC.Models
         partial void OnApproverChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -15925,6 +16720,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -16144,6 +16940,7 @@ namespace THSMVC.Models
         partial void OnStatusChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16172,6 +16969,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -16487,6 +17285,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16515,6 +17314,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -16830,6 +17630,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -16858,6 +17659,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17173,6 +17975,7 @@ namespace THSMVC.Models
         partial void OnPassMarkChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17210,6 +18013,7 @@ namespace THSMVC.Models
         partial void OnAvailableFromDateChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17247,6 +18051,7 @@ namespace THSMVC.Models
         partial void OnAnswerChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17404,6 +18209,7 @@ namespace THSMVC.Models
         partial void OnGainedPointsChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17428,6 +18234,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17503,6 +18310,7 @@ namespace THSMVC.Models
         partial void OnMobilePhoneChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17541,6 +18349,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -17784,6 +18593,7 @@ namespace THSMVC.Models
         partial void OnPointsChanged();
 
         #endregion
+
     }
     
     /// <summary>
@@ -17828,6 +18638,7 @@ namespace THSMVC.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -18167,8 +18978,10 @@ namespace THSMVC.Models
         partial void OnIsSMSSentChanged();
 
         #endregion
+
     }
 
     #endregion
+
     
 }

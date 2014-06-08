@@ -1,21 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="THSMVCDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="THSMVCDataModelStoreContainer">
+    <EntitySet Name="AppSetting" EntityType="THSMVCDataModel.Store.AppSetting" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Customer" EntityType="THSMVCDataModel.Store.Customer" store:Type="Tables" store:Schema="dbo" store:Name="Customer">
-      <DefiningQuery>SELECT 
-      [Customer].[Id] AS [Id], 
-      [Customer].[Name] AS [Name], 
-      [Customer].[CustomerNumber] AS [CustomerNumber], 
-      [Customer].[Address] AS [Address], 
-      [Customer].[City] AS [City], 
-      [Customer].[State] AS [State], 
-      [Customer].[Pin] AS [Pin], 
-      [Customer].[MobileNumber] AS [MobileNumber], 
-      [Customer].[PhoneNumber] AS [PhoneNumber], 
-      [Customer].[EmailAddress] AS [EmailAddress]
-      FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="Customer" EntityType="THSMVCDataModel.Store.Customer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
@@ -38,6 +26,7 @@
     <EntitySet Name="Stone" EntityType="THSMVCDataModel.Store.Stone" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="THSMVCDataModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserMapping" EntityType="THSMVCDataModel.Store.UserMapping" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserMenu" EntityType="THSMVCDataModel.Store.UserMenu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.Store.GetCompletedButNotSubmittedProducts" store:Type="Views" store:Schema="dbo" store:Name="GetCompletedButNotSubmittedProducts">
       <DefiningQuery>SELECT 
@@ -101,7 +90,19 @@
       <End Role="User" EntitySet="User" />
       <End Role="LotUserMapping" EntitySet="LotUserMapping" />
     </AssociationSet>
+    <AssociationSet Name="FK_UserMapping_User" Association="THSMVCDataModel.Store.FK_UserMapping_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMapping" EntitySet="UserMapping" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="AppSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceId" Type="int" Nullable="false" />
+    <Property Name="SMS" Type="bit" />
+  </EntityType>
   <EntityType Name="Barcode">
     <Key>
       <PropertyRef Name="BarcodeId" />
@@ -118,16 +119,11 @@
     <Property Name="IsSubmitted" Type="bit" Nullable="false" />
     <Property Name="Notes" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="CustomerNumber" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
     <Property Name="CustomerNumber" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="Address" Type="varchar" MaxLength="50" />
@@ -381,6 +377,7 @@
     <Property Name="APIURL" Type="varchar(max)" Nullable="false" />
     <Property Name="CreditBalURL" Type="varchar(max)" />
     <Property Name="DlvReportURL" Type="varchar(max)" />
+    <Property Name="ScheduleUrl" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="SMSLogs">
     <Key>
@@ -452,6 +449,28 @@
     <Property Name="PinCode" Type="varchar" MaxLength="10" />
     <Property Name="Mobile" Type="varchar" MaxLength="20" />
     <Property Name="Phone" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FatherPhonenumber" Type="int" />
+    <Property Name="MotherPhoneNumber" Type="int" />
+    <Property Name="Mobile2" Type="int" />
+    <Property Name="Mobile3" Type="int" />
+    <Property Name="Mobile4" Type="int" />
+    <Property Name="Email1" Type="varchar" MaxLength="50" />
+    <Property Name="Email2" Type="varchar" MaxLength="50" />
+    <Property Name="EducationQualification" Type="varchar" MaxLength="50" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+    <Property Name="AdharNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PANNumber" Type="varchar" MaxLength="50" />
+    <Property Name="TempAddress" Type="varchar" MaxLength="50" />
+    <Property Name="TempCity" Type="varchar" MaxLength="50" />
+    <Property Name="TempState" Type="varchar" MaxLength="50" />
+    <Property Name="TempPin" Type="int" />
   </EntityType>
   <EntityType Name="UserMenu">
     <Key>
@@ -610,6 +629,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserMapping_User">
+    <End Role="User" Type="THSMVCDataModel.Store.User" Multiplicity="1" />
+    <End Role="UserMapping" Type="THSMVCDataModel.Store.UserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="stp_Assign_Remove_MenuItems_Role" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
     <Parameter Name="RoleId" Type="int" Mode="In" />
@@ -631,11 +662,4 @@
     <Parameter Name="FromDate" Type="date" Mode="In" />
     <Parameter Name="Todate" Type="date" Mode="In" />
   </Function>
-  <!--Errors Found During Generation:
-      warning 6013: The table/view 'PJ.dbo.Setting' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="Setting">
-        <Property Name="InstanceId" Type="int" />
-        <Property Name="SMS" Type="bit" />
-      </EntityType>-->
 </Schema>

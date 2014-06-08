@@ -33,33 +33,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Dealers">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
-        <MappingFragment StoreEntitySet="Dealer">
-          <ScalarProperty Name="Email2" ColumnName="Email2" />
-          <ScalarProperty Name="Email1" ColumnName="Email1" />
-          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
-          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
-          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
-          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
-          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GoldRates">
       <EntityTypeMapping TypeName="THSMVCDataModel.GoldRate">
         <MappingFragment StoreEntitySet="GoldRates">
@@ -407,17 +380,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SMSApis">
-      <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
-        <MappingFragment StoreEntitySet="SMSApi">
-          <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
-          <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
-          <ScalarProperty Name="APIURL" ColumnName="APIURL" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SMSLogs">
       <EntityTypeMapping TypeName="THSMVCDataModel.SMSLog">
         <MappingFragment StoreEntitySet="SMSLogs">
@@ -437,6 +399,68 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserMappings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.UserMapping">
+        <MappingFragment StoreEntitySet="UserMapping">
+          <ScalarProperty Name="TempPin" ColumnName="TempPin" />
+          <ScalarProperty Name="TempState" ColumnName="TempState" />
+          <ScalarProperty Name="TempCity" ColumnName="TempCity" />
+          <ScalarProperty Name="TempAddress" ColumnName="TempAddress" />
+          <ScalarProperty Name="PANNumber" ColumnName="PANNumber" />
+          <ScalarProperty Name="AdharNumber" ColumnName="AdharNumber" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="EducationQualification" ColumnName="EducationQualification" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="Mobile4" ColumnName="Mobile4" />
+          <ScalarProperty Name="Mobile3" ColumnName="Mobile3" />
+          <ScalarProperty Name="Mobile2" ColumnName="Mobile2" />
+          <ScalarProperty Name="MotherPhoneNumber" ColumnName="MotherPhoneNumber" />
+          <ScalarProperty Name="FatherPhonenumber" ColumnName="FatherPhonenumber" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dealers">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
+        <MappingFragment StoreEntitySet="Dealer">
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
+          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
+          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
+          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSApis">
+      <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
+        <MappingFragment StoreEntitySet="SMSApi">
+          <ScalarProperty Name="ScheduleUrl" ColumnName="ScheduleUrl" />
+          <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
+          <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
+          <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -449,6 +473,15 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppSettings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.AppSetting">
+        <MappingFragment StoreEntitySet="AppSetting">
+          <ScalarProperty Name="SMS" ColumnName="SMS" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

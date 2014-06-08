@@ -196,7 +196,7 @@ namespace THSMVC.App_Code
                 StatusId = StatusId
             };
             int InstanceID = Convert.ToInt32(HttpContext.Current.Session["InstanceId"]);
-            bool IsSms = dse.Settings.Where(x => x.InstanceId == inststanceId).Select(x => x.SMS).FirstOrDefault();
+            bool IsSms = (bool)dse.AppSettings.Where(x => x.InstanceId == inststanceId).Select(x => x.SMS).FirstOrDefault();
             string mesg = string.Empty;
             if (IsSms)
             {
