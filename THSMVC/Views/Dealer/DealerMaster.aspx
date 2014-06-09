@@ -121,6 +121,15 @@
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        { closeOnEscape: true, width: 350 } // view options
     );
+       jQuery("#list").jqGrid('navButtonAdd', '#pager', {
+           caption: "Show/Hide",
+           buttonicon: "ui-icon-newwin",
+           title: "Show/Hide Columns",
+           onClickButton: function () {
+               jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+               return false;
+           }
+       });
        //jQuery("#list").jqGrid('sortableRows');
 
        jQuery("#list").jqGrid(

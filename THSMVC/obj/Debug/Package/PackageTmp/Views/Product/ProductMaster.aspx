@@ -8,6 +8,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             LoadProducts();
+            
         });
         function Create() {
             $("#divProductMaster").hide();
@@ -120,6 +121,7 @@
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        { closeOnEscape: true, width: 350 } // view options
     );
+
             $.extend($.jgrid.search, { Find: 'Search' });
 
         }

@@ -90,6 +90,9 @@ html, body {
                 }
             });
 
+            $("#txtStoneWeight").blur(function(){
+               GetCalculatedStonePrice();
+              });
             
         });
 
@@ -155,6 +158,8 @@ html, body {
                             },
                             success: function (Result) {
                                 if (Result.success) {
+                                    //Todo: Redirect to List Page
+                                    LoadFirstContent('166', 'Lots Assigned');
                                     Success(Result.message);
                                 }
                                 else {
@@ -192,11 +197,44 @@ html, body {
                     $("#lblAssignedCount").html(Result.AssCount);
                     $("#lblCompletedCount").html(Result.CompCount);
                     $("#lblPendingCount").html(Result.AssCount - Result.CompCount);
+
+                    $("#lblAssWeight").html(Result.assWeight + ' grms');
+                    $("#lblCmpWeight").html(Result.compWeight + ' grms');
+                    $("#lblPenWeight").html((Result.assWeight - Result.compWeight) + ' grms');
+
+                    $("#lblAssPrice").html('Rs. '+Result.assMRP);
+                    $("#lblCmpPrice").html('Rs. ' + Result.compMRP);
+                    $("#lblPenPrice").html('Rs. ' +( Result.assMRP - Result.compMRP));
                 },
                 error: function (Result) {
                     alert("Error");
                 }
             });
+        }
+
+        function GetCalculatedStonePrice() {
+            var lotId = $("#hdnLotId").val();
+            var stoneId = $('#ddlStone').val();
+            var stoneWeight = $('#txtStoneWeight').val();
+            if (stoneWeight == '' || stoneWeight == null || stoneWeight == undefined) {
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "Lot/GetCalculatedStonePrice",
+                    data: { stoneId: stoneId, weight: stoneWeight },
+                    dataType: "json",
+                    beforeSend: function () {
+                        //$('#ddlStone option[value!=""]').remove();
+                    },
+                    success: function (Result) {
+                        $('#txtStonePrice').val(Result.data);
+                    },
+                    error: function (Result) {
+                        alert("Error");
+                    }
+                });
+            }
         }
 
         function CheckIsStonedAndGetStonesList(prdctId) {
@@ -272,9 +310,7 @@ html, body {
                 if (stoneWeight == '' || stoneWeight == null || stoneWeight == undefined) {
                     errorMsg = errorMsg + 'Please enter Stone Weight <br/>';
                 }
-                if (noOfStones == '' || noOfStones == null || noOfStones == undefined) {
-                    errorMsg = errorMsg + 'Please enter no of stones <br/>';
-                }
+                
                 if (stonePrice == '' || stonePrice == null || stonePrice == undefined) {
                     errorMsg = errorMsg + 'Please enter Stone Price. <br/>';
                 }
@@ -624,6 +660,52 @@ html, body {
                                     </th>
                                     <th>
                                         <label id="lblPendingCount"></label>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        Assigned Weight
+                                    </th>
+                                    <th>
+                                        <label id="lblAssWeight"></label>
+                                    </th>
+
+                                    <th>
+                                        Completed Weight
+                                    </th>
+                                    <th>
+                                        <label id="lblCmpWeight"></label>
+                                    </th>
+
+                                    <th>
+                                        Pending Weight
+                                    </th>
+                                    <th>
+                                        <label id="lblPenWeight"></label>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        Assigned Price
+                                    </th>
+                                    <th>
+                                        <label id="lblAssPrice"></label>
+                                    </th>
+
+                                    <th>
+                                        Completed Price
+                                    </th>
+                                    <th>
+                                        <label id="lblCmpPrice"></label>
+                                    </th>
+
+                                    <th>
+                                        Pending Price
+                                    </th>
+                                    <th>
+                                        <label id="lblPenPrice"></label>
                                     </th>
                                 </tr>
                                  

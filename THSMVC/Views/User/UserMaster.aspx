@@ -40,14 +40,14 @@
                 colNames: ['Id', 'Name', 'Address', 'City', 'State', 'PinCode', 'Mobile', 'RoleName', 'Active'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'Name', index: 'Name', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
-                  { name: 'Address', index: 'Address', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
-                { name: 'City', index: 'City', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
-                { name: 'State', index: 'State', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
-                { name: 'PinCode', index: 'PinCode', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
-                { name: 'Mobile', index: 'Mobile', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
-                { name: 'RoleName', index: 'RoleName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
-                { name: 'Active', index: 'Active', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
+                  { name: 'Name', index: 'Name', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
+                  { name: 'Address', index: 'Address', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
+                { name: 'City', index: 'City', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
+                { name: 'State', index: 'State', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
+                { name: 'PinCode', index: 'PinCode', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
+                { name: 'Mobile', index: 'Mobile', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
+                { name: 'RoleName', index: 'RoleName', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
+                { name: 'Active', index: 'Active', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -141,6 +141,15 @@
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        { closeOnEscape: true, width: 350 } // view options
     );
+       jQuery("#list").jqGrid('navButtonAdd', '#pager', {
+           caption: "Show/Hide",
+           buttonicon: "ui-icon-newwin",
+           title: "Show/Hide Columns",
+           onClickButton: function () {
+               jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+               return false;
+           }
+       });
             $.extend($.jgrid.search, { Find: 'Search' });
             $.extend($.jgrid.navGrid, { delicon: 'ui-icon-customtrash' });
             //$("#list").jqGrid("navGrid", "#pager", { delicon: "ui-icon-customtrash" });

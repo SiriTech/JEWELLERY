@@ -39,9 +39,14 @@
             var Weight =  $("#Weight").val();
             var Qty = $("#Qty").val();
             var DId = $("#DealerId").val();
-            var IsMRP = $("#IsMRP").val();
+            var IsMRP = $('#IsMRP').is(':checked'); //  $("#IsMRP").val();
             var MRP = $("#MRP").val();
             var DiffAllowed = $("#DiffAllowed").val();
+
+            if (DiffAllowed == null || DiffAllowed == '' || DiffAllowed == undefined) {
+                DiffAllowed = 0;
+            }
+
             if (LName == null || LName == '' || LName == undefined) {
                 error = error + "Lot name is missing. <br />";
             }
@@ -185,7 +190,7 @@
               { name: 'Dealer', index: 'Dealer', width: 100, align: 'left', editable: true },
               { name: 'MRP', index: 'MRP', width: 100, align: 'left', editable: true }
             ],
-            rownumbers:true,
+            rownumbers: true,
             rowNum: 10,
             rowList: [10, 20, 30],
             height: 'auto',

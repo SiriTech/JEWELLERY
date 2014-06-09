@@ -7,15 +7,15 @@
 ------------
 1. new lot create avvatam ledu - Fixed
 2. dealer and mrp interchanged in lot details list - fixed
-3. redirect to homepage after password change
-4. Show/hide for list, for those which r having above 2 colomns
+3. redirect to homepage after password change - fixed
+4. Show/hide for list, for those which r having above 2 colomns - fixed
 5. Delar page : mobile numbers 4 nd 2 emailsids - fixed
 6. Dealer Bank details
 		bankname, branchname, acnumber, ifsc code, comments
 		(should be able to add more than one)
 7. image upload  options (3 files)
 8. Settings page
-9. Roles : should be ale to edit role
+9. Roles : should be ale to edit role - cannot be done.
 10. Login Tracks and page events, delete nd Updates.
 
 19-05-2014

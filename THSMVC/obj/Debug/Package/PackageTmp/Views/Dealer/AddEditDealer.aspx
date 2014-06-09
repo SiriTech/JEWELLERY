@@ -40,7 +40,13 @@
                      City: $("#City").val(),
                      State: $("#State").val(),
                      PinCode: $("#PinCode").val(),
-                     TinNo: $("#TinNo").val()
+                     TinNo: $("#TinNo").val(),
+                     MobileNUmber1: $("#MobileNUmber1").val(),
+                     MobileNUmber2: $("#MobileNUmber2").val(),
+                     MobileNUmber3: $("#MobileNUmber3").val(),
+                     MobileNUmber4: $("#MobileNUmber4").val(),
+                     Email1: $("#Email1").val(),
+                     Email2: $("#Email2").val()
                  },
                  dataType: "json",
                  beforeSend: function () {
@@ -136,6 +142,60 @@
                                 <%= Html.TextBoxFor(m => m.TinNo, new { maxlength = 100, autocomplete = "off", title="Type in Company VAT or TIN no." })%>
                             </div>
                         </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Mobile Number1
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.MobileNUmber1, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Mobile Number2
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.MobileNUmber2, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Mobile Number3
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.MobileNUmber3, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+                            </div>
+                        </div>
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Mobile Number4
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.MobileNUmber4, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Email Address1
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Email1, new { maxlength = 100, autocomplete = "off", title="Type in Email Address." })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Email Address2
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Email2, new { maxlength = 100, autocomplete = "off", title="Type in Email Address." })%>
+                            </div>
+                        </div>
+
                         <div id="divButtons" class="clear" style="margin-top: 10px; margin-bottom: 20px;">
                             <center>
                                 <input type="button" value="<%= Model.BtnText %>" class="rg_button_red" onclick="submitDealer(); return false;" />

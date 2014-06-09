@@ -6,7 +6,112 @@
 <head runat="server">
     <title></title>
     <script type="text/javascript">
-        $(document).ready(function () { $("#ProductName").focus(); });
+        $(document).ready(function () {
+            $("#ProductName").focus();
+
+            $("#ValueAddedByPerc").blur(function () {
+                DisableOrEnableVAPer();
+            });
+            $("#ValueAddedFixed").blur(function () {
+                DisableOrEnableVAFixed();
+            });
+            $("#MakingChargesPerGram").blur(function () {
+                DisableOrEnableMkngChrgPerGra();
+            });
+            $("#MakingChargesFixed").blur(function () {
+                DisableOrEnableMkngChrgFixed();
+            });
+
+        });
+
+        
+
+        function DisableOrEnableMkngChrgFixed() {
+            var MkngCrgsFixed = $("#MakingChargesFixed").val();
+            if (MkngCrgsFixed == '' || MkngCrgsFixed == null || MkngCrgsFixed == undefined) {
+                $("#MakingChargesFixed").attr("disabled", "disabled");
+                $("#MakingChargesPerGram").removeAttr("disabled");
+            } else {
+                $("#MakingChargesPerGram").attr("disabled", "disabled");
+                $("#MakingChargesFixed").removeAttr("disabled");
+            }
+        }
+
+        function DisableOrEnableMkngChrgPerGra() {
+            var MkngChrgs = $("#MakingChargesPerGram").val();
+            if (MkngChrgs == '' || MkngChrgs == null || MkngChrgs == undefined) {
+                $("#MakingChargesPerGram").attr("disabled", "disabled");
+                $("#MakingChargesFixed").removeAttr("disabled");
+            } else {
+                $("#MakingChargesFixed").attr("disabled", "disabled");
+                $("#MakingChargesPerGram").removeAttr("disabled");
+            }
+        }
+
+
+        function DisableOrEnableVAPer() {
+            var ValueAdPerc = $("#ValueAddedByPerc").val();
+            if (ValueAdPerc == '' || ValueAdPerc == null || ValueAdPerc == undefined) {
+                $("#ValueAddedByPerc").attr("disabled", "disabled");
+                $("#ValueAddedFixed").removeAttr("disabled");
+            } else {
+                $("#ValueAddedFixed").attr("disabled", "disabled");
+                $("#ValueAddedByPerc").removeAttr("disabled");
+            }
+        }
+
+        function DisableOrEnableVAFixed() {
+            var ValueAdFixed = $("#ValueAddedFixed").val();
+            if (ValueAdFixed == '' || ValueAdFixed == null || ValueAdFixed == undefined) {
+                $("#ValueAddedFixed").attr("disabled", "disabled");
+                $("#ValueAddedByPerc").removeAttr("disabled");
+            } else {
+                $("#ValueAddedByPerc").attr("disabled", "disabled");
+                $("#ValueAddedFixed").removeAttr("disabled");
+            }
+        }
+
+        function EnableOrDisableTextBoxes() {
+            debugger;
+            var ValueAdFixed = $("#ValueAddedFixed").val();
+            var ValueAdPerc = $("#ValueAddedByPerc").val();
+            var MkngChrgs = $("#MakingChargesPerGram").val();
+            var MkngCrgsFixed = $("#MakingChargesFixed").val();
+
+            if (ValueAdFixed == '' || ValueAdFixed == null || ValueAdFixed == undefined) {
+                $("#ValueAddedFixed").attr("disabled", "disabled");
+                $("#ValueAddedByPerc").removeAttr("disabled");
+            } else {
+                $("#ValueAddedByPerc").attr("disabled", "disabled");
+                $("#ValueAddedFixed").removeAttr("disabled");
+            }
+
+            if (ValueAdPerc == '' || ValueAdPerc == null || ValueAdPerc == undefined) {
+                $("#ValueAddedByPerc").attr("disabled", "disabled");
+                $("#ValueAddedFixed").removeAttr("disabled");
+            } else {
+                $("#ValueAddedFixed").attr("disabled", "disabled");
+                $("#ValueAddedByPerc").removeAttr("disabled");
+            }
+
+
+            if (MkngChrgs == '' || MkngChrgs == null || MkngChrgs == undefined) {
+                $("#MakingChargesPerGram").attr("disabled", "disabled");
+                $("#MakingChargesFixed").removeAttr("disabled");
+            } else {
+                $("#MakingChargesFixed").attr("disabled", "disabled");
+                $("#MakingChargesPerGram").removeAttr("disabled");
+            }
+
+            if (MkngCrgsFixed == '' || MkngCrgsFixed == null || MkngCrgsFixed == undefined) {
+                $("#MakingChargesFixed").attr("disabled", "disabled");
+                $("#MakingChargesPerGram").removeAttr("disabled");
+            } else {
+                $("#MakingChargesPerGram").attr("disabled", "disabled");
+                $("#MakingChargesFixed").removeAttr("disabled");
+            }
+        }
+
         function Back() {
             ClearMsg();
             $("#divProductMaster").show();
