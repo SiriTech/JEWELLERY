@@ -12,7 +12,7 @@
 5. Delar page : mobile numbers 4 nd 2 emailsids - fixed
 6. Dealer Bank details
 		bankname, branchname, acnumber, ifsc code, comments
-		(should be able to add more than one)
+		(should be able to add more than one) - fixed
 7. image upload  options (3 files)
 8. Settings page
 9. Roles : should be ale to edit role - cannot be done.

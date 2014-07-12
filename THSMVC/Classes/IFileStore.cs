@@ -7,7 +7,7 @@ namespace THSMVC.App_Code
 {
     public interface IFileStore
     {
-        string SaveUploadedFile(HttpPostedFileBase fileBase,string InstanceId);
+        string SaveUploadedFile(HttpPostedFileBase fileBase,int InstanceId);
         string SaveNoticeUploadedFile(HttpPostedFileBase httpPostedFileBase, string InstanceID);
         string SaveAttendanceUploadedFile(HttpPostedFileBase httpPostedFileBase, string InstanceID);
     }

@@ -274,30 +274,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="THSMVCDataModel.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="ChangePwdonLogin" ColumnName="ChangePwdonLogin" />
-          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
-          <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
-          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
-          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
-          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserDetails">
       <EntityTypeMapping TypeName="THSMVCDataModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetails">
@@ -422,6 +398,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SMSApis">
+      <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
+        <MappingFragment StoreEntitySet="SMSApi">
+          <ScalarProperty Name="ScheduleUrl" ColumnName="ScheduleUrl" />
+          <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
+          <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
+          <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppSettings">
+      <EntityTypeMapping TypeName="THSMVCDataModel.AppSetting">
+        <MappingFragment StoreEntitySet="AppSetting">
+          <ScalarProperty Name="SMS" ColumnName="SMS" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerBankDetails">
+      <EntityTypeMapping TypeName="THSMVCDataModel.DealerBankDetail">
+        <MappingFragment StoreEntitySet="DealerBankDetails">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Dealers">
       <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
         <MappingFragment StoreEntitySet="Dealer">
@@ -449,21 +464,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SMSApis">
-      <EntityTypeMapping TypeName="THSMVCDataModel.SMSApi">
-        <MappingFragment StoreEntitySet="SMSApi">
-          <ScalarProperty Name="ScheduleUrl" ColumnName="ScheduleUrl" />
-          <ScalarProperty Name="DlvReportURL" ColumnName="DlvReportURL" />
-          <ScalarProperty Name="CreditBalURL" ColumnName="CreditBalURL" />
-          <ScalarProperty Name="APIURL" ColumnName="APIURL" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="stp_Delete_Dealer_BankDetails_By_Id" FunctionName="THSMVCDataModel.Store.stp_Delete_Dealer_BankDetails_By_Id" />
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="File3" ColumnName="File3" />
+          <ScalarProperty Name="File2" ColumnName="File2" />
+          <ScalarProperty Name="File1" ColumnName="File1" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
@@ -473,15 +485,31 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InstanceID" ColumnName="InstanceID" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AppSettings">
-      <EntityTypeMapping TypeName="THSMVCDataModel.AppSetting">
-        <MappingFragment StoreEntitySet="AppSetting">
-          <ScalarProperty Name="SMS" ColumnName="SMS" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="THSMVCDataModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ChangePwdonLogin" ColumnName="ChangePwdonLogin" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
           <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -9,14 +9,14 @@ namespace THSMVC.App_Code
 {
     public class DiskFileStore:IFileStore
     {
-        private string _uploadsFolder = HostingEnvironment.MapPath("~/StudentPhotos/");
+        private string _uploadsFolder = HostingEnvironment.MapPath("~/CustomerDocs/");
         private string _niticeuploadsFolder = HostingEnvironment.MapPath("~/NoticeDocs/");
         private string _attendanceSMSuploadsFolder = HostingEnvironment.MapPath("~/AttendanceSMSDocs/");
-        public string SaveUploadedFile(HttpPostedFileBase fileBase,string InstanceId)
+        public string SaveUploadedFile(HttpPostedFileBase fileBase,int InstanceId)
         {
             var identifier = Guid.NewGuid();
-            fileBase.SaveAs(GetDiskLocation(identifier.ToString() + fileBase.FileName.ToString().Substring(fileBase.FileName.ToString().Length-4),InstanceId));
-            return identifier.ToString() + fileBase.FileName.ToString().Substring(fileBase.FileName.ToString().Length - 4);
+            fileBase.SaveAs(GetDiskLocation(identifier.ToString() + fileBase.FileName.ToString().Substring(fileBase.FileName.ToString().Length-4),InstanceId.ToString()));
+            return fileBase.FileName.ToString()+"$$"+ identifier.ToString() + fileBase.FileName.ToString().Substring(fileBase.FileName.ToString().Length - 4);
         }
 
         private string GetDiskLocation(string identifier, string InstanceId)

@@ -21,14 +21,14 @@
             if ($("#Name").val() == '') {
                 msg = 'Please enter Name<br/>';
             }
-            if ($("#Username").val() == '') {
-                msg += 'Please enter Username<br/>';
-            }
-            if ($("#Password").val() == '') {
-                msg += 'Please enter Password<br/>';
-            }
+//            if ($("#Username").val() == '') {
+//                msg += 'Please enter Username<br/>';
+//            }
+//            if ($("#Password").val() == '') {
+//                msg += 'Please enter Password<br/>';
+//            }
             if ($("#RoleId").val() == '') {
-                msg += 'Please enter RoleId<br/>';
+                msg += 'Please select Role<br/>';
             }
             
             if (msg != "") {
@@ -50,7 +50,23 @@
                     Email: $("#Email").val(),
                     Username: $("#Username").val(),
                     Password: $("#Password").val(),
-                    RoleId: $("#RoleId").val()
+                    RoleId: $("#RoleId").val(),
+
+                    Mobile2: $("#Mobile2").val(),
+                    Mobile3: $("#Mobile3").val(),
+                    Mobile4: $("#Mobile4").val(),
+                    Email1: $("#Email1").val(),
+                    Email2: $("#Email2").val(),
+                    EducationQualiication: $("#EducationQualiication").val(),
+                    Designation: $("#Designation").val(),
+                    TempAddress: $("#TempAddress").val(),
+                    TempCity: $("#TempCity").val(),
+                    TempState: $("#TempState").val(),
+                    TempPin: $("#TempPin").val(),
+                    FatherPhone: $("#FatherPhone").val(),
+                    MotherPhone: $("#MotherPhone").val(),
+                    AdharNo: $("#AdharNo").val(),
+                    PANNo: $("#PANNo").val()
                 },
                 dataType: "json",
                 beforeSend: function () {
@@ -130,6 +146,34 @@
                                 <%= Html.TextBoxFor(m => m.Mobile, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
                             </div>
                         </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Mobile 2
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Mobile2, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Mobile 3
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Mobile3, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Mobile 4
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Mobile4, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
                          <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
                                Phone
@@ -146,9 +190,118 @@
                                 <%= Html.TextBoxFor(m => m.Email, new { maxlength = 100, autocomplete = "off", title="Type in Email" })%>
                             </div>
                         </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Email 2
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Email1, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Email 3
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Email2, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               EducationQualiication
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.EducationQualiication, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Designation
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.Designation, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Temp Address
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.TempAddress, new { maxlength = 100, autocomplete = "off", title="Type in Address" })%>
+                            </div>
+                        </div>
+                       
                          <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Username
+                               Temp City
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.TempCity, new { maxlength = 100, autocomplete = "off", title="Type in City" })%>
+                            </div>
+                        </div>
+                       
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Temp State
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.TempState, new { maxlength = 100, autocomplete = "off", title="Type in State" })%>
+                            </div>
+                        </div>
+                       
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Temp Pin
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.TempPin, new { maxlength = 7, autocomplete = "off", title="Type in Pin" })%>
+                            </div>
+                        </div>
+                        
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Father Contact Number
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.FatherPhone, new { maxlength = 15, autocomplete = "off", title="Type in Father Mobile Number" })%>
+                            </div>
+                        </div>
+                        
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Mother Contact Number
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.MotherPhone, new { maxlength = 15, autocomplete = "off", title="Type in Mother contact number" })%>
+                            </div>
+                        </div>
+                        
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               Adhar Numner
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.AdharNo, new { maxlength = 50, autocomplete = "off", title="Type in Adhar Number" })%>
+                            </div>
+                        </div>
+                        
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                               PAN Number
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.TextBoxFor(m => m.PANNo, new { maxlength = 30, autocomplete = "off", title="Type in PAN Number" })%>
+                            </div>
+                        </div>
+
+                         <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                Username
                             </div>
                             <div class="editor-field" style="text-align: left;">
                                 <%= Html.TextBoxFor(m => m.Username, new { maxlength = 100, autocomplete = "off", title="Type in Username" })%>
@@ -156,7 +309,7 @@
                         </div>
                          <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Password
+                                Password
                             </div>
                             <div class="editor-field" style="text-align: left;">
                                 <%= Html.TextBoxFor(m => m.Password, new { maxlength = 100, autocomplete = "off", title="Type in Password" })%>

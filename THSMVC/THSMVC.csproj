@@ -105,7 +105,6 @@
     <Compile Include="Classes\StoneLogic.cs" />
     <Compile Include="Classes\UserLogic.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DealerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -133,6 +132,7 @@
     <Compile Include="CustomActionResults\WordListResult.cs" />
     <Compile Include="CustomActionResults\WordResult.cs" />
     <Compile Include="Models\AdministrationModels.cs" />
+    <Compile Include="Models\BankModel.cs" />
     <Compile Include="Models\CompletedBarcode.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DataStore.Designer.cs">
@@ -569,7 +569,6 @@
     <Content Include="Views\Admin\SiteLog.aspx" />
     <Content Include="Views\Admin\UpdateInstance.aspx" />
     <Content Include="Views\Admin\Welcome.aspx" />
-    <Content Include="Views\Bank\BankDetails.aspx" />
     <Content Include="Views\Customer\AddEditCustomer.aspx" />
     <Content Include="Views\Customer\CustomerMaster.aspx" />
     <Content Include="Views\Employee\EmployeeMaster.aspx" />

@@ -33,10 +33,10 @@
                 colNames: ['Id', 'Stone', 'Stone Short Form', 'Stone Per Carat', 'Is Stone Weightless'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2} },
-                  { name: 'StoneName', index: 'StoneName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'StoneShortForm', index: 'StoneShortForm', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
-                  { name: 'StonePerCarat', index: 'StonePerCarat', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
-                  { name: 'IsStoneWeightless', index: 'IsStoneWeightless', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} }
+                  { name: 'StoneName', index: 'StoneName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'StoneShortForm', index: 'StoneShortForm', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
+                  { name: 'StonePerCarat', index: 'StonePerCarat', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
+                  { name: 'IsStoneWeightless', index: 'IsStoneWeightless', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -123,6 +123,15 @@
        {closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        {closeOnEscape: true, width: 350} // view options
     );
+   jQuery("#list").jqGrid('navButtonAdd', '#pager', {
+       caption: "Show/Hide",
+       buttonicon: "ui-icon-newwin",
+       title: "Show/Hide Columns",
+       onClickButton: function () {
+           jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+           return false;
+       }
+   });
             $.extend($.jgrid.search, { Find: 'Search' });
 
         }

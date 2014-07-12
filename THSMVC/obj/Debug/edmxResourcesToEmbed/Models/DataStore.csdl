@@ -242,7 +242,6 @@
     <EntitySet Name="Roles" EntityType="THSMVCDataModel.Role" />
     <EntitySet Name="RoleMenus" EntityType="THSMVCDataModel.RoleMenu" />
     <EntitySet Name="Stones" EntityType="THSMVCDataModel.Stone" />
-    <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
     <EntitySet Name="UserDetails" EntityType="THSMVCDataModel.UserDetail" />
     <EntitySet Name="UserMenus" EntityType="THSMVCDataModel.UserMenu" />
     <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
@@ -264,20 +263,25 @@
       <End Role="LotStatu" EntitySet="LotStatus" />
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
+    <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
+    <EntitySet Name="UserMappings" EntityType="THSMVCDataModel.UserMapping" />
+    <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
+    <EntitySet Name="AppSettings" EntityType="THSMVCDataModel.AppSetting" />
+    <EntitySet Name="DealerBankDetails" EntityType="THSMVCDataModel.DealerBankDetail" />
+    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
+    <FunctionImport Name="stp_Delete_Dealer_BankDetails_By_Id" ReturnType="Collection(Int32)">
+      <Parameter Name="DealerId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
+    <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
     <AssociationSet Name="FK_LotUserMapping_User" Association="THSMVCDataModel.FK_LotUserMapping_User">
       <End Role="User" EntitySet="Users" />
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
-    <EntitySet Name="SMSLogs" EntityType="THSMVCDataModel.SMSLog" />
-    <EntitySet Name="UserMappings" EntityType="THSMVCDataModel.UserMapping" />
     <AssociationSet Name="FK_UserMapping_User" Association="THSMVCDataModel.FK_UserMapping_User">
       <End Role="User" EntitySet="Users" />
       <End Role="UserMapping" EntitySet="UserMappings" />
     </AssociationSet>
-    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
-    <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
-    <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
-    <EntitySet Name="AppSettings" EntityType="THSMVCDataModel.AppSetting" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -712,8 +716,8 @@
     <Property Type="Int32" Name="UserId" Nullable="false" />
     <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
     <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
-    <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
     <Property Type="Int32" Name="OTCode" />
+    <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -869,31 +873,6 @@
     <Property Type="DateTime" Name="EditedDate" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="RoleId" />
-    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="InstanceId" />
-    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
-    <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
-    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-    <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
-    <Property Type="DateTime" Name="LastLoginDate" />
-    <Property Type="DateTime" Name="LastPasswordChangedDate" />
-    <Property Type="DateTime" Name="LastLockedOutDate" />
-    <Property Type="Int32" Name="FailedPasswordAttemptCount" />
-    <Property Type="Boolean" Name="ChangePwdonLogin" />
-    <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="User" ToRole="LotUserMapping" />
-    <NavigationProperty Name="UserMappings" Relationship="THSMVCDataModel.FK_UserMapping_User" FromRole="User" ToRole="UserMapping" />
-  </EntityType>
   <EntityType Name="UserDetail">
     <Key>
       <PropertyRef Name="Id" />
@@ -1044,18 +1023,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_LotUserMapping_User">
-    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
-    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LotUserMapping">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="SMSLog">
     <Key>
       <PropertyRef Name="Id" />
@@ -1097,18 +1064,42 @@
     <Property Type="Int32" Name="TempPin" />
     <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_UserMapping_User" FromRole="UserMapping" ToRole="User" />
   </EntityType>
-  <Association Name="FK_UserMapping_User">
-    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
-    <End Type="THSMVCDataModel.UserMapping" Role="UserMapping" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserMapping">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="SMSApi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ScheduleUrl" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AppSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="Boolean" Name="SMS" />
+  </EntityType>
+  <EntityType Name="DealerBankDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="DealerId" Nullable="false" />
+    <Property Type="String" Name="BankName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BranchName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AccountNumber" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IFSCCode" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Comments" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
   <EntityType Name="Dealer">
     <Key>
       <PropertyRef Name="DealerId" />
@@ -1128,29 +1119,19 @@
     <Property Type="Int32" Name="EditedBy" />
     <Property Type="DateTime" Name="EditedDate" />
     <Property Type="Boolean" Name="Status" />
-    <Property Type="Int32" Name="MobileNumber1" />
-    <Property Type="Int32" Name="MobileNumber2" />
-    <Property Type="Int32" Name="MobileNumber3" />
-    <Property Type="Int32" Name="MobileNumber4" />
+    <Property Type="String" Name="MobileNumber1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber4" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="SMSApi">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="String" Name="APIURL" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CreditBalURL" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="DlvReportURL" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ScheduleUrl" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceID" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="CustomerNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1160,13 +1141,62 @@
     <Property Type="Int32" Name="MobileNumber" />
     <Property Type="Int32" Name="PhoneNumber" />
     <Property Type="String" Name="EmailAddress" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File1" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File2" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File3" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="Boolean" Name="Status" />
   </EntityType>
-  <EntityType Name="AppSetting">
+  <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="Boolean" Name="SMS" />
+    <Property Type="String" Name="UserName" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RoleId" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="InstanceId" />
+    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+    <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="LastLoginDate" />
+    <Property Type="DateTime" Name="LastPasswordChangedDate" />
+    <Property Type="DateTime" Name="LastLockedOutDate" />
+    <Property Type="Int32" Name="FailedPasswordAttemptCount" />
+    <Property Type="Boolean" Name="ChangePwdonLogin" />
+    <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="User" ToRole="LotUserMapping" />
+    <NavigationProperty Name="UserMappings" Relationship="THSMVCDataModel.FK_UserMapping_User" FromRole="User" ToRole="UserMapping" />
   </EntityType>
+  <Association Name="FK_LotUserMapping_User">
+    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
+    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMapping_User">
+    <End Type="THSMVCDataModel.User" Role="User" Multiplicity="1" />
+    <End Type="THSMVCDataModel.UserMapping" Role="UserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

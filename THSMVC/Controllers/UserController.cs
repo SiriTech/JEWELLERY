@@ -36,6 +36,7 @@ namespace THSMVC.Controllers
             {
                 model = (from p in dse.Users
                          join d in dse.UserDetails on p.Id equals d.UserId
+                         join um in dse.UserMappings on p.Id equals um.UserId
                          join r in dse.Roles on p.RoleId equals r.Id
                          where p.Id == Id
                          select new UserModel
@@ -52,10 +53,30 @@ namespace THSMVC.Controllers
                              Username=p.UserName,
                              Password = p.Password,
                              RoleId=r.Id,
-                             RoleName=r.Role1
+                             RoleName=r.Role1,
+                             AdharNo = um.AdharNumber,
+                             Designation = um.Designation,
+                             EducationQualiication = um.EducationQualification,
+                             Email1 = um.Email1,
+                             Email2 = um.Email2,
+                             Mobile2 = um.Mobile2 == null ? 0 : (int) um.Mobile2,
+                             Mobile3 = um.Mobile3 == null ? 0 : (int)um.Mobile3,
+                             Mobile4 = um.Mobile4 == null ? 0 : (int)um.Mobile4,
+                             FatherPhone = um.FatherPhonenumber == null ? 0: (int)um.FatherPhonenumber,
+                             MotherPhone = um.MotherPhoneNumber == null ? 0 : (int) um.MotherPhoneNumber,
+                             PANNo = um.PANNumber,
+                             TempAddress = um.TempAddress,
+                             TempCity = um.TempCity,
+                             TempPin = um.TempPin == null ? 0 : (int)um.TempPin,
+                             TempState = um.TempState
+
+
                          }).FirstOrDefault();
             }
-            model.Password = _encrypter.Decrypt(model.Password);
+            if (model.Password != "" && model.Password != null)
+                model.Password = _encrypter.Decrypt(model.Password);
+            else
+                model.Password = "";
             model.BtnText = "Update";
             return View("AddEditUser", model);
         }
@@ -123,6 +144,7 @@ namespace THSMVC.Controllers
                         group.CreatedDate = DateTime.Now;
                         dse.AddToUsers(group);
                         dse.SaveChanges();
+
                         UserDetail detail = new UserDetail();
                         detail.Name = model.Name;
                         detail.Address = model.Address;
@@ -134,6 +156,29 @@ namespace THSMVC.Controllers
                         detail.UserId = group.Id;
                         dse.AddToUserDetails(detail);
                         dse.SaveChanges();
+
+                        UserMapping mapping = new UserMapping();
+
+                        mapping.AdharNumber = model.AdharNo;
+                        mapping.Designation = model.Designation;
+                        mapping.EducationQualification = model.EducationQualiication;
+                        mapping.Email1 = model.Email1;
+                        mapping.Email2 = model.Email2;
+                        mapping.Mobile2 = model.Mobile2;
+                        mapping.Mobile3 = model.Mobile3;
+                        mapping.Mobile4 = model.Mobile4;
+                        mapping.FatherPhonenumber = model.FatherPhone;
+                        mapping.MotherPhoneNumber = model.MotherPhone;
+                        mapping.PANNumber = model.PANNo;
+                        mapping.TempAddress = model.TempAddress;
+                        mapping.TempCity = model.TempCity;
+                        mapping.TempPin = model.TempPin;
+                        mapping.TempState = model.TempState;
+                        mapping.UserId = group.Id;
+
+                        dse.AddToUserMappings(mapping);
+                        dse.SaveChanges();
+
                         return Json(new { success = true, message = "User created successfuly" });
                     }
                     else
@@ -159,6 +204,30 @@ namespace THSMVC.Controllers
                         detail.Phone = model.Phone;
                         detail.UserId = group.Id;
                         dse.SaveChanges();
+
+                        UserMapping mapping = dse.UserMappings.Where(p => p.UserId == model.Id).FirstOrDefault();
+                        if (mapping != null)
+                        {
+                            mapping.AdharNumber = model.AdharNo;
+
+                            mapping.Designation = model.Designation;
+                            mapping.EducationQualification = model.EducationQualiication;
+                            mapping.Email1 = model.Email1;
+                            mapping.Email2 = model.Email2;
+
+                            mapping.Mobile2 = model.Mobile2;
+                            mapping.Mobile3 = model.Mobile3;
+                            mapping.Mobile4 = model.Mobile4;
+                            mapping.FatherPhonenumber = model.FatherPhone;
+                            mapping.MotherPhoneNumber = model.MotherPhone;
+                            mapping.PANNumber = model.PANNo;
+                            mapping.TempAddress = model.TempAddress;
+                            mapping.TempCity = model.TempCity;
+                            mapping.TempPin = model.TempPin;
+                            mapping.TempState = model.TempState;
+                            mapping.UserId = group.Id;
+                            dse.SaveChanges();
+                        }
                         return Json(new { success = true, message = "User updated successfuly" });
                     }
                 }

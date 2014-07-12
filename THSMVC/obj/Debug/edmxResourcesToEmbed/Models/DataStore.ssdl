@@ -5,6 +5,7 @@
     <EntitySet Name="Barcode" EntityType="THSMVCDataModel.Store.Barcode" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Customer" EntityType="THSMVCDataModel.Store.Customer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Dealer" EntityType="THSMVCDataModel.Store.Dealer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DealerBankDetails" EntityType="THSMVCDataModel.Store.DealerBankDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.Store.GoldRates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GoldRatesManual" EntityType="THSMVCDataModel.Store.GoldRatesManual" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Instance" EntityType="THSMVCDataModel.Store.Instance" store:Type="Tables" Schema="dbo" />
@@ -124,6 +125,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstanceID" Type="int" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
     <Property Name="CustomerNumber" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="Address" Type="varchar" MaxLength="50" />
@@ -133,6 +135,14 @@
     <Property Name="MobileNumber" Type="int" />
     <Property Name="PhoneNumber" Type="int" />
     <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="File1" Type="varchar" MaxLength="500" />
+    <Property Name="File2" Type="varchar" MaxLength="500" />
+    <Property Name="File3" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="Dealer">
     <Key>
@@ -153,12 +163,29 @@
     <Property Name="EditedBy" Type="int" />
     <Property Name="EditedDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
-    <Property Name="MobileNumber1" Type="int" />
-    <Property Name="MobileNumber2" Type="int" />
-    <Property Name="MobileNumber3" Type="int" />
-    <Property Name="MobileNumber4" Type="int" />
+    <Property Name="MobileNumber1" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber2" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber3" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber4" Type="varchar" MaxLength="50" />
     <Property Name="Email1" Type="varchar" MaxLength="100" />
     <Property Name="Email2" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DealerBankDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DealerId" Type="int" Nullable="false" />
+    <Property Name="BankName" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="BranchName" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="AccountNumber" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="IFSCCode" Type="varchar" MaxLength="50" />
+    <Property Name="Comments" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="int" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="GoldRates">
     <Key>
@@ -418,8 +445,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
-    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Password" Type="nvarchar" MaxLength="500" />
     <Property Name="RoleId" Type="int" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="InstanceId" Type="int" />
@@ -650,6 +677,9 @@
   <Function Name="stp_Assign_Remove_MenuItems_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="stp_Delete_Dealer_BankDetails_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DealerId" Type="int" Mode="In" />
   </Function>
   <Function Name="stp_Get_Menuitems_By_Role_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InstanceId" Type="int" Mode="In" />

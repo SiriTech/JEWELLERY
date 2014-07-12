@@ -367,22 +367,6 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<User> Users
-        {
-            get
-            {
-                if ((_Users == null))
-                {
-                    _Users = base.CreateObjectSet<User>("Users");
-                }
-                return _Users;
-            }
-        }
-        private ObjectSet<User> _Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<UserDetail> UserDetails
         {
             get
@@ -495,22 +479,6 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Dealer> Dealers
-        {
-            get
-            {
-                if ((_Dealers == null))
-                {
-                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
-                }
-                return _Dealers;
-            }
-        }
-        private ObjectSet<Dealer> _Dealers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SMSApi> SMSApis
         {
             get
@@ -523,6 +491,54 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<SMSApi> _SMSApis;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AppSetting> AppSettings
+        {
+            get
+            {
+                if ((_AppSettings == null))
+                {
+                    _AppSettings = base.CreateObjectSet<AppSetting>("AppSettings");
+                }
+                return _AppSettings;
+            }
+        }
+        private ObjectSet<AppSetting> _AppSettings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DealerBankDetail> DealerBankDetails
+        {
+            get
+            {
+                if ((_DealerBankDetails == null))
+                {
+                    _DealerBankDetails = base.CreateObjectSet<DealerBankDetail>("DealerBankDetails");
+                }
+                return _DealerBankDetails;
+            }
+        }
+        private ObjectSet<DealerBankDetail> _DealerBankDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Dealer> Dealers
+        {
+            get
+            {
+                if ((_Dealers == null))
+                {
+                    _Dealers = base.CreateObjectSet<Dealer>("Dealers");
+                }
+                return _Dealers;
+            }
+        }
+        private ObjectSet<Dealer> _Dealers;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -543,18 +559,18 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<AppSetting> AppSettings
+        public ObjectSet<User> Users
         {
             get
             {
-                if ((_AppSettings == null))
+                if ((_Users == null))
                 {
-                    _AppSettings = base.CreateObjectSet<AppSetting>("AppSettings");
+                    _Users = base.CreateObjectSet<User>("Users");
                 }
-                return _AppSettings;
+                return _Users;
             }
         }
-        private ObjectSet<AppSetting> _AppSettings;
+        private ObjectSet<User> _Users;
 
         #endregion
 
@@ -705,14 +721,6 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUsers(User user)
-        {
-            base.AddObject("Users", user);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUserDetails(UserDetail userDetail)
@@ -769,19 +777,35 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDealers(Dealer dealer)
-        {
-            base.AddObject("Dealers", dealer);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SMSApis EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSMSApis(SMSApi sMSApi)
         {
             base.AddObject("SMSApis", sMSApi);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AppSettings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAppSettings(AppSetting appSetting)
+        {
+            base.AddObject("AppSettings", appSetting);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DealerBankDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDealerBankDetails(DealerBankDetail dealerBankDetail)
+        {
+            base.AddObject("DealerBankDetails", dealerBankDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Dealers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDealers(Dealer dealer)
+        {
+            base.AddObject("Dealers", dealer);
         }
     
         /// <summary>
@@ -793,11 +817,11 @@ namespace THSMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the AppSettings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToAppSettings(AppSetting appSetting)
+        public void AddToUsers(User user)
         {
-            base.AddObject("AppSettings", appSetting);
+            base.AddObject("Users", user);
         }
 
         #endregion
@@ -2574,6 +2598,25 @@ namespace THSMVC.Models
     
             return base.ExecuteFunction<stp_LMS_Get_DelegateLeavesList_Result>("stp_LMS_Get_DelegateLeavesList", instanceIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="dealerId">No Metadata Documentation available.</param>
+        public ObjectResult<Nullable<global::System.Int32>> stp_Delete_Dealer_BankDetails_By_Id(Nullable<global::System.Int32> dealerId)
+        {
+            ObjectParameter dealerIdParameter;
+            if (dealerId.HasValue)
+            {
+                dealerIdParameter = new ObjectParameter("DealerId", dealerId);
+            }
+            else
+            {
+                dealerIdParameter = new ObjectParameter("DealerId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Nullable<global::System.Int32>>("stp_Delete_Dealer_BankDetails_By_Id", dealerIdParameter);
+        }
 
         #endregion
 
@@ -3101,12 +3144,16 @@ namespace THSMVC.Models
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="customerNumber">Initial value of the CustomerNumber property.</param>
-        public static Customer CreateCustomer(global::System.Int32 id, global::System.String name, global::System.String customerNumber)
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static Customer CreateCustomer(global::System.Int32 id, global::System.String name, global::System.String customerNumber, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             Customer customer = new Customer();
             customer.Id = id;
             customer.Name = name;
             customer.CustomerNumber = customerNumber;
+            customer.CreatedBy = createdBy;
+            customer.CreatedDate = createdDate;
             return customer;
         }
 
@@ -3140,6 +3187,30 @@ namespace THSMVC.Models
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> InstanceID
+        {
+            get
+            {
+                return _InstanceID;
+            }
+            set
+            {
+                OnInstanceIDChanging(value);
+                ReportPropertyChanging("InstanceID");
+                _InstanceID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstanceID");
+                OnInstanceIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _InstanceID;
+        partial void OnInstanceIDChanging(Nullable<global::System.Int32> value);
+        partial void OnInstanceIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3356,6 +3427,198 @@ namespace THSMVC.Models
         private global::System.String _EmailAddress;
         partial void OnEmailAddressChanging(global::System.String value);
         partial void OnEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String File1
+        {
+            get
+            {
+                return _File1;
+            }
+            set
+            {
+                OnFile1Changing(value);
+                ReportPropertyChanging("File1");
+                _File1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("File1");
+                OnFile1Changed();
+            }
+        }
+        private global::System.String _File1;
+        partial void OnFile1Changing(global::System.String value);
+        partial void OnFile1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String File2
+        {
+            get
+            {
+                return _File2;
+            }
+            set
+            {
+                OnFile2Changing(value);
+                ReportPropertyChanging("File2");
+                _File2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("File2");
+                OnFile2Changed();
+            }
+        }
+        private global::System.String _File2;
+        partial void OnFile2Changing(global::System.String value);
+        partial void OnFile2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String File3
+        {
+            get
+            {
+                return _File3;
+            }
+            set
+            {
+                OnFile3Changing(value);
+                ReportPropertyChanging("File3");
+                _File3 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("File3");
+                OnFile3Changed();
+            }
+        }
+        private global::System.String _File3;
+        partial void OnFile3Changing(global::System.String value);
+        partial void OnFile3Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> EditedBy
+        {
+            get
+            {
+                return _EditedBy;
+            }
+            set
+            {
+                OnEditedByChanging(value);
+                ReportPropertyChanging("EditedBy");
+                _EditedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedBy");
+                OnEditedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _EditedBy;
+        partial void OnEditedByChanging(Nullable<global::System.Int32> value);
+        partial void OnEditedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> EditedDate
+        {
+            get
+            {
+                return _EditedDate;
+            }
+            set
+            {
+                OnEditedDateChanging(value);
+                ReportPropertyChanging("EditedDate");
+                _EditedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedDate");
+                OnEditedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _EditedDate;
+        partial void OnEditedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEditedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnStatusChanged();
 
         #endregion
 
@@ -3765,7 +4028,7 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MobileNumber1
+        public global::System.String MobileNumber1
         {
             get
             {
@@ -3775,13 +4038,13 @@ namespace THSMVC.Models
             {
                 OnMobileNumber1Changing(value);
                 ReportPropertyChanging("MobileNumber1");
-                _MobileNumber1 = StructuralObject.SetValidValue(value);
+                _MobileNumber1 = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MobileNumber1");
                 OnMobileNumber1Changed();
             }
         }
-        private Nullable<global::System.Int32> _MobileNumber1;
-        partial void OnMobileNumber1Changing(Nullable<global::System.Int32> value);
+        private global::System.String _MobileNumber1;
+        partial void OnMobileNumber1Changing(global::System.String value);
         partial void OnMobileNumber1Changed();
     
         /// <summary>
@@ -3789,7 +4052,7 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MobileNumber2
+        public global::System.String MobileNumber2
         {
             get
             {
@@ -3799,13 +4062,13 @@ namespace THSMVC.Models
             {
                 OnMobileNumber2Changing(value);
                 ReportPropertyChanging("MobileNumber2");
-                _MobileNumber2 = StructuralObject.SetValidValue(value);
+                _MobileNumber2 = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MobileNumber2");
                 OnMobileNumber2Changed();
             }
         }
-        private Nullable<global::System.Int32> _MobileNumber2;
-        partial void OnMobileNumber2Changing(Nullable<global::System.Int32> value);
+        private global::System.String _MobileNumber2;
+        partial void OnMobileNumber2Changing(global::System.String value);
         partial void OnMobileNumber2Changed();
     
         /// <summary>
@@ -3813,7 +4076,7 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MobileNumber3
+        public global::System.String MobileNumber3
         {
             get
             {
@@ -3823,13 +4086,13 @@ namespace THSMVC.Models
             {
                 OnMobileNumber3Changing(value);
                 ReportPropertyChanging("MobileNumber3");
-                _MobileNumber3 = StructuralObject.SetValidValue(value);
+                _MobileNumber3 = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MobileNumber3");
                 OnMobileNumber3Changed();
             }
         }
-        private Nullable<global::System.Int32> _MobileNumber3;
-        partial void OnMobileNumber3Changing(Nullable<global::System.Int32> value);
+        private global::System.String _MobileNumber3;
+        partial void OnMobileNumber3Changing(global::System.String value);
         partial void OnMobileNumber3Changed();
     
         /// <summary>
@@ -3837,7 +4100,7 @@ namespace THSMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MobileNumber4
+        public global::System.String MobileNumber4
         {
             get
             {
@@ -3847,13 +4110,13 @@ namespace THSMVC.Models
             {
                 OnMobileNumber4Changing(value);
                 ReportPropertyChanging("MobileNumber4");
-                _MobileNumber4 = StructuralObject.SetValidValue(value);
+                _MobileNumber4 = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MobileNumber4");
                 OnMobileNumber4Changed();
             }
         }
-        private Nullable<global::System.Int32> _MobileNumber4;
-        partial void OnMobileNumber4Changing(Nullable<global::System.Int32> value);
+        private global::System.String _MobileNumber4;
+        partial void OnMobileNumber4Changing(global::System.String value);
         partial void OnMobileNumber4Changed();
     
         /// <summary>
@@ -3903,6 +4166,339 @@ namespace THSMVC.Models
         private global::System.String _Email2;
         partial void OnEmail2Changing(global::System.String value);
         partial void OnEmail2Changed();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="THSMVCDataModel", Name="DealerBankDetail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DealerBankDetail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DealerBankDetail object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="dealerId">Initial value of the DealerId property.</param>
+        /// <param name="bankName">Initial value of the BankName property.</param>
+        /// <param name="branchName">Initial value of the BranchName property.</param>
+        /// <param name="accountNumber">Initial value of the AccountNumber property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static DealerBankDetail CreateDealerBankDetail(global::System.Int32 id, global::System.Int32 dealerId, global::System.String bankName, global::System.String branchName, global::System.String accountNumber, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        {
+            DealerBankDetail dealerBankDetail = new DealerBankDetail();
+            dealerBankDetail.Id = id;
+            dealerBankDetail.DealerId = dealerId;
+            dealerBankDetail.BankName = bankName;
+            dealerBankDetail.BranchName = branchName;
+            dealerBankDetail.AccountNumber = accountNumber;
+            dealerBankDetail.CreatedBy = createdBy;
+            dealerBankDetail.CreatedDate = createdDate;
+            return dealerBankDetail;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DealerId
+        {
+            get
+            {
+                return _DealerId;
+            }
+            set
+            {
+                OnDealerIdChanging(value);
+                ReportPropertyChanging("DealerId");
+                _DealerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DealerId");
+                OnDealerIdChanged();
+            }
+        }
+        private global::System.Int32 _DealerId;
+        partial void OnDealerIdChanging(global::System.Int32 value);
+        partial void OnDealerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BankName
+        {
+            get
+            {
+                return _BankName;
+            }
+            set
+            {
+                OnBankNameChanging(value);
+                ReportPropertyChanging("BankName");
+                _BankName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BankName");
+                OnBankNameChanged();
+            }
+        }
+        private global::System.String _BankName;
+        partial void OnBankNameChanging(global::System.String value);
+        partial void OnBankNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String BranchName
+        {
+            get
+            {
+                return _BranchName;
+            }
+            set
+            {
+                OnBranchNameChanging(value);
+                ReportPropertyChanging("BranchName");
+                _BranchName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("BranchName");
+                OnBranchNameChanged();
+            }
+        }
+        private global::System.String _BranchName;
+        partial void OnBranchNameChanging(global::System.String value);
+        partial void OnBranchNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AccountNumber
+        {
+            get
+            {
+                return _AccountNumber;
+            }
+            set
+            {
+                OnAccountNumberChanging(value);
+                ReportPropertyChanging("AccountNumber");
+                _AccountNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("AccountNumber");
+                OnAccountNumberChanged();
+            }
+        }
+        private global::System.String _AccountNumber;
+        partial void OnAccountNumberChanging(global::System.String value);
+        partial void OnAccountNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String IFSCCode
+        {
+            get
+            {
+                return _IFSCCode;
+            }
+            set
+            {
+                OnIFSCCodeChanging(value);
+                ReportPropertyChanging("IFSCCode");
+                _IFSCCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("IFSCCode");
+                OnIFSCCodeChanged();
+            }
+        }
+        private global::System.String _IFSCCode;
+        partial void OnIFSCCodeChanging(global::System.String value);
+        partial void OnIFSCCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Comments
+        {
+            get
+            {
+                return _Comments;
+            }
+            set
+            {
+                OnCommentsChanging(value);
+                ReportPropertyChanging("Comments");
+                _Comments = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Comments");
+                OnCommentsChanged();
+            }
+        }
+        private global::System.String _Comments;
+        partial void OnCommentsChanging(global::System.String value);
+        partial void OnCommentsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> EditedBy
+        {
+            get
+            {
+                return _EditedBy;
+            }
+            set
+            {
+                OnEditedByChanging(value);
+                ReportPropertyChanging("EditedBy");
+                _EditedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedBy");
+                OnEditedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _EditedBy;
+        partial void OnEditedByChanging(Nullable<global::System.Int32> value);
+        partial void OnEditedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> EditedDate
+        {
+            get
+            {
+                return _EditedDate;
+            }
+            set
+            {
+                OnEditedDateChanging(value);
+                ReportPropertyChanging("EditedDate");
+                _EditedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EditedDate");
+                OnEditedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _EditedDate;
+        partial void OnEditedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEditedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnStatusChanged();
 
         #endregion
 
@@ -9298,18 +9894,14 @@ namespace THSMVC.Models
         /// Create a new User object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="userName">Initial value of the UserName property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
         /// <param name="isLockedOut">Initial value of the IsLockedOut property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String userName, global::System.String password, global::System.Boolean isApproved, global::System.Boolean isLockedOut, global::System.Int32 createdBy, global::System.DateTime createdDate)
+        public static User CreateUser(global::System.Int32 id, global::System.Boolean isApproved, global::System.Boolean isLockedOut, global::System.Int32 createdBy, global::System.DateTime createdDate)
         {
             User user = new User();
             user.Id = id;
-            user.UserName = userName;
-            user.Password = password;
             user.IsApproved = isApproved;
             user.IsLockedOut = isLockedOut;
             user.CreatedBy = createdBy;
@@ -9351,7 +9943,7 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String UserName
         {
@@ -9363,7 +9955,7 @@ namespace THSMVC.Models
             {
                 OnUserNameChanging(value);
                 ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
+                _UserName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("UserName");
                 OnUserNameChanged();
             }
@@ -9375,7 +9967,7 @@ namespace THSMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Password
         {
@@ -9387,7 +9979,7 @@ namespace THSMVC.Models
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
+                _Password = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }

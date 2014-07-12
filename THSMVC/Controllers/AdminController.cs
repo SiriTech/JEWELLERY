@@ -634,5 +634,10 @@ namespace THSMVC.Controllers
             ViewData["EmailQuery"] = Query;
             return View();
         }
+        public string AsyncUpload(string InstanceID)
+        {
+            int InstanceId = Convert.ToInt32(Session["InstanceId"]);
+            return _fileStore.SaveUploadedFile(Request.Files[0], InstanceId);
+        }
     }
 }

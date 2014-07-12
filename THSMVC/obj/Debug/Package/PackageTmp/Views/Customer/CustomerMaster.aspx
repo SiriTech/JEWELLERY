@@ -5,11 +5,10 @@
 <head id="Head1" runat="server">
     <title>CreateUser</title>
     <!-- CSS goes in the document HEAD or added to your external stylesheet -->
-
     <script type="text/javascript">
         $(document).ready(function () {
             LoadCustomers();
-            
+
         });
 
         function UpdateCustomer(id) {
@@ -35,9 +34,9 @@
                   { name: 'Customer Number', index: 'CustometNumber', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
                   { name: 'Address', index: 'Address', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
                   { name: 'City', index: 'City', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'State', index: 'State', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'State', index: 'State', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
                   { name: 'Mobile', index: 'Mobile', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'PhoneNumber', index: 'PhoneNumber', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'PhoneNumber', index: 'PhoneNumber', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
                   { name: 'EmailAddress', index: 'EmailAddress', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} }
                 ],
                 rownumbers: true,
@@ -159,7 +158,6 @@
 </head>
 <body>
     <div id="divCustDetails" style="clear: both; width: 100%; display: block;">
-
         <div class="clear">
             <div style="float: left;">
                 <input type="button" id="CreateCustomer" class="rg_button_red upper" title="Click to Create Customer"
@@ -170,29 +168,24 @@
                     title="Back" value="Back To Customer List" onclick="BackToList()" />
             </div>
         </div>
-
         <div class="clear">
-            <div class="clear">
-                <div class="ContentdivBorder" id="divLotInfo">
-                    <div id="divCustomerMaster">
-                        <div id="gridWrapper" style="width: 100%;">
-                            <div>
-                                <table id="list" class="scroll" cellpadding="0" cellspacing="0">
-                                </table>
-                                <div id="pager" class="scroll" style="text-align: center;">
-                                </div>
+            <div class="ContentdivBorder" id="divLotInfo">
+                <div id="divCustomerMaster">
+                    <div id="gridWrapper" style="width: 100%;">
+                        <div>
+                            <table id="list" class="scroll" cellpadding="0" cellspacing="0">
+                            </table>
+                            <div id="pager" class="scroll" style="text-align: center;">
                             </div>
                         </div>
-                        <div id="EmptyGridWrapper">
-                        </div>
+                    </div>
+                    <div id="EmptyGridWrapper">
                     </div>
                 </div>
             </div>
         </div>
-
-         <div id="divCreateCustomer">
+        <div id="divCreateCustomer">
         </div>
-
     </div>
 </body>
 </html>

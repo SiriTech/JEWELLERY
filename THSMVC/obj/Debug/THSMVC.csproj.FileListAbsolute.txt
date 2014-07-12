@@ -117,3 +117,14 @@ E:\Work\PJ_New\JEWELLERY\THSMVC\bin\System.Web.Mvc.xml
 E:\Work\PJ_New\JEWELLERY\THSMVC\obj\Debug\ResolveAssemblyReference.cache
 E:\Work\PJ_New\JEWELLERY\THSMVC\obj\Debug\THSMVC.dll
 E:\Work\PJ_New\JEWELLERY\THSMVC\obj\Debug\THSMVC.pdb
+D:\temp\PJ\JEWELLERY\THSMVC\bin\THSMVC.dll
+D:\temp\PJ\JEWELLERY\THSMVC\bin\THSMVC.pdb
+D:\temp\PJ\JEWELLERY\THSMVC\bin\PagedList.dll
+D:\temp\PJ\JEWELLERY\THSMVC\bin\System.Web.Mvc.dll
+D:\temp\PJ\JEWELLERY\THSMVC\bin\Newtonsoft.Json.pdb
+D:\temp\PJ\JEWELLERY\THSMVC\bin\Newtonsoft.Json.xml
+D:\temp\PJ\JEWELLERY\THSMVC\bin\PagedList.xml
+D:\temp\PJ\JEWELLERY\THSMVC\bin\System.Web.Mvc.xml
+D:\temp\PJ\JEWELLERY\THSMVC\obj\Debug\THSMVC.csprojResolveAssemblyReference.cache
+D:\temp\PJ\JEWELLERY\THSMVC\obj\Debug\THSMVC.dll
+D:\temp\PJ\JEWELLERY\THSMVC\obj\Debug\THSMVC.pdb

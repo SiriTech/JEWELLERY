@@ -5,13 +5,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script src="../../Scripts/jquery-asyncUpload-0.1.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            
-
+            $(".upload").makeAsyncUploader({
+                upload_url: "/Admin/AsyncUpload?InstanceID=" + $("#hdnInstanceID").val(),
+                flash_url: '/Scripts/swfupload.swf',
+                button_image_url: '/Images/UploadButton_2.jpg',
+                disableDuringUpload: 'INPUT[type="button"]',
+                file_size_limit: "1 MB",
+                file_types: "*"
+            });
         });
 
-        
+        function LoadPhotoPreview(name, size, id) {
+            var docName = name.split("$$")[0];
+            var docGuidName=name.split("$$")[1];
+            var InstanceId = '<%=Model.InstanceId %>';
+            $("#div" + id + "Preview").html("<a target='_blank' href='CustomerDocs/" + $("#hdnInstanceID").val() + "/" + docGuidName + "'>" + docName + "</a>&nbsp;<a href='javascript:void(0);' onclick='Removedoc(\""+id+"\");'>X</a>");
+            $("#hdn"+id+"Name").val(name);
+        }
+        function Removedoc(id) {
+            $("#div" + id + "Preview").html("<input type='file' id='" + id + "' class='upload' />");
+            $("#hdn" + id + "Name").val('');
+            $(".upload").makeAsyncUploader({
+                upload_url: "/Admin/AsyncUpload?InstanceID=" + $("#hdnInstanceID").val(),
+                flash_url: '/Scripts/swfupload.swf',
+                button_image_url: '/Images/UploadButton_2.jpg',
+                disableDuringUpload: 'INPUT[type="button"]',
+                file_size_limit: "1 MB",
+                file_types: "*"
+            });
+        }
         function Back() {
             ClearMsg();
             $("#divCustomerMaster").show();
@@ -45,7 +70,10 @@
                     Pin: $("#Pin").val(),
                     Mobile: $('#Mobile').val(),
                     PhoneNumber: $("#PhoneNumber").val(),
-                    EmailAddress: $("#EmailAddress").val()
+                    EmailAddress: $("#EmailAddress").val(),
+                    File1:$("#hdnfile1Name").val(),
+                    File2:$("#hdnfile2Name").val(),
+                    File3:$("#hdnfile3Name").val()
                 },
                 dataType: "json",
                 beforeSend: function () {
@@ -142,12 +170,52 @@
                                 <%= Html.TextBoxFor(m => m.EmailAddress, new { maxlength = 50, autocomplete = "off", title="Type in E-Mail Address" })%>
                             </div>
                         </div>
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                File1
+                                <input type="hidden" id="hdnfile1Name" />
+                            </div>
+                            <div class="editor-field" style="text-align: left;" id="divfile1Preview">
+                            <% if(Model.Isfile1Exists){ %>
+                            <a href="CustomerDocs/<%= Model.InstanceId %>/<%= Model.File1Guid %>" target="_blank"><%= Model.File1 %></a>&nbsp;<a href="javascript:void(0);" onclick="Removedoc('file1');">X</a>
+                            <%}else{ %>
+                                <input type="file" id="file1" name="file1" class="upload" />
+                                <%} %>
+                            </div>
+                        </div>
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                File2
+                                <input type="hidden" id="hdnfile2Name" />
+                            </div>
+                            <div class="editor-field" style="text-align: left;" id="divfile2Preview">
+                            <% if(Model.Isfile2Exists){ %>
+                            <a href="CustomerDocs/<%= Model.InstanceId %>/<%= Model.File2Guid %>" target="_blank"><%= Model.File2 %></a>&nbsp;<a href="javascript:void(0);" onclick="Removedoc('file2');">X</a>
+                            <%}else{ %>
+                                <input type="file" id="file2" name="file2" class="upload" />
+                                <%} %>
+                            </div>
+                        </div>
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                File3
+                                <input type="hidden" id="hdnfile3Name" />
+                            </div>
+                            <div class="editor-field" style="text-align: left;" id="divfile3Preview">
+                            <% if(Model.Isfile3Exists){ %>
+                            <a href="CustomerDocs/<%= Model.InstanceId %>/<%= Model.File3Guid %>" target="_blank"><%= Model.File3 %></a>&nbsp;<a href="javascript:void(0);" onclick="Removedoc('file3');">X</a>
+                            <%}else{ %>
+                                <input type="file" id="file3" name="file3" class="upload" />
+                                <%} %>
+                            </div>
+                        </div>
                         <div id="divButtons" class="clear" style="margin-top: 10px; margin-bottom: 20px;">
                             <center>
                                 <input type="button" value="<%= Model.BtnText %>" class="rg_button_red" onclick="submitCustomer(); return false;" />
                                 <input type="button" value="Clear" class="rg_button" onclick="clearForm(); return false;" />
                                 <%= Html.HiddenFor(m => m.Id, new { id = "hdnID"})%>
                             </center>
+                            <input type="hidden" id="hdnInstanceID" value="<%= Model.InstanceId %>" />
                         </div>
                     </div>
                 </div>

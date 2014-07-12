@@ -1,0 +1,29 @@
+1)no of lot creation per day must be unlimited per day.
+2in manage lot change the title to "create new lot."
+3in delears update is working but wrong mes is coming.
+4*in dealer mobile no  characters must me max 11 DIGITS.
+6* after creating a new dealer wrong info is showing that sorry plz try again later.
+7*after entering a bank name or account no in dealer every coloum must be filled SHOULD BE MANDETATORY  except comments
+7*in dealer show/hide option dealer comp name ,delear name ,mob no(1st one),tin  no ,bank details  email 1st one all must show in same way as shown here.
+8* entire soft must be in capital letters and data we enter must also to be saved in capital letters.
+9*in product ,first product group must come and 2 nd category then product.
+
+5* in mobile num option just give one mob number and beside that add more numbers option .and for every  new box of entering mob no,  besides there must be a box for entering text.and same for emails also.
+6*add a comment box after email in dealer.
+
+ 
+
+10*in value add ( by percentage) max caracters must be three only. and in value add by fixed  beside box gms must be there.and for value add fix after decimal 3 digits shouls be allowed.
+11* remove weightless option in product.
+12* in product show/hide all the things present in product creation m,ust come such as name ,short,group,category,value add,makingcharge, stone item.
+13*upload files option in user (seperate for photo) and other files,and order must be in this way
+1)name,fathers name,mother name,temp add,permanant add,mobile no ,email ,pan no, aadhar no ,ration no,voter id no,ref name,ref add,ref mob no,username,password,role
+14*check boxes for user for activate and de activation n of users
+15*need more clarification in cust profile and seperate upload for cust pic. eg mr ,mrs ,miss and first name ,middle name,last name,cust dad name etc
+16* in entire soft weight must be in three digits after decimal and in assign lot and barcode print make the changes what we  have discussed on chat.
+17 image add option must come either when adding a product soon after barcode print or a option to add image and just by entering a barcode no we can upload image ...decide  as suits best..
+ouestion
+
+1)what will happen about the lots on next day?
+**i have told you for gallery 
+**reports also

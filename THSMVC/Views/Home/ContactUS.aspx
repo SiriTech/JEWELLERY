@@ -81,15 +81,15 @@
                     <div class="clear">
                         <div style="width: 50%; float: left; font-family: Helvetica, Arial, Verdana, sans-serif;
                             line-height: 20px; padding-top: 15px; padding-left: 15px;">
-                            <strong>K. Srikanth Reddy</strong>
-                            <br />
+                            <strong>Dinesh</strong>
+                            <%--<br />
                             B-4, Sai Saptagiri Residency<br />
                             Opp. Sanathnagar main bus stand.<br />
                             Sanathnagar. Hyderabad.<br />
                             Andhra Pradesh, India.<br />
                             <br />
                             Ph : +91 9603682175<br />
-                            Email : <a href="mailto:kollisreekanth@gmail.com">kollisreekanth@gmail.com</a><br />
+                            Email : <a href="mailto:kollisreekanth@gmail.com">kollisreekanth@gmail.com</a><br />--%>
                         </div>
                         <div style="float: right; width: 40%; padding-top: 15px;">
                             <img src="../../images/contactus.jpg" height="150px" width="100%" />

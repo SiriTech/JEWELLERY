@@ -134,7 +134,7 @@
         
         <div style="float: left;">
             <input type="button" id="CreateUser" class="rg_button_red upper" title="Click to Create Lot"
-                value="Create a Lot" onclick="Create()" />
+                value="Create New Lot" onclick="Create()" />
         </div>
       
         <div id="divbackToSearch" style="float: right;">

@@ -11,7 +11,7 @@
             var container = $("<span id='spnctl" + id + "' class='asyncUploader'/>");
             container.append($("<div class='ProgressBar' style='border:1px solid gray;height:12px;width:250px;'> <div style='background-color:green;height:10px;margin:1px;text-align:center;font-size:9px;color:white;font-family:arial;font-weight:bold;'>&nbsp;</div> </div>"));
             container.append($("<span id='" + id + "_completedMessage'/>"));
-            container.append($("<span id='" + id + "_uploading'>Uploading... <input type='button' value='Cancel'/></span>"));
+            //container.append($("<span id='" + id + "_uploading'>Uploading... <input type='button' value='Cancel'/></span>"));
             container.append($("<span id='" + id + "_swf'/>"));
             container.append($("<input type='hidden' name='" + id + "_filename'/>"));
             container.append($("<input type='hidden' name='" + id + "_guid'/>"));
@@ -57,7 +57,7 @@
                     $("input[name$=_filename]", container).val("");
                     $("input[name$=_guid]", container).val("");
                     $("div.ProgressBar div", container).css("width", "0px");
-                    $("div.ProgressBar", container).show();
+                    $("div.ProgressBar", container).hide();
                     // $("span[id$=_uploading]", container).show();
                     $("span[id$=_completedMessage]", container).html("").hide();
 
@@ -82,8 +82,10 @@
                         swfu.setButtonDimensions(width, height);
                     }
                     else {
-                        LoadPhotoPreview(response, file.size);
-                        $("span[id$=_completedMessage]", container).html(" <input type='button' id='RemovePhoto' class='rg_button_red' onclick='RemovePhoto();' value='Remove Photo'></input>");
+                        LoadPhotoPreview(response, file.size, id);
+                        //$("span[id$=_completedMessage]", container).html(" <input type='button' id='RemoveDoc' class='rg_button_red' onclick='RemoveDoc();' value='Remove Document'></input>");
+                        if (options.disableDuringUpload)
+                            $(options.disableDuringUpload).removeAttr("disabled");
                     }
                     $("div.ProgressBar", container).hide();
                     //$("span[id$=completeSpan]").text("Done");

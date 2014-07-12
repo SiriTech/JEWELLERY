@@ -27,6 +27,7 @@ namespace THSMVC.Controllers
         public ActionResult AddEditCustomer()
         {
             CustomerModel model = new CustomerModel();
+            model.InstanceId = Convert.ToInt32(Session["InstanceId"]);
             model.BtnText = "Create";
             return View(model);
         }
@@ -34,6 +35,7 @@ namespace THSMVC.Controllers
         [LogsRequest]
         public ActionResult EditCustomer(int Id)
         {
+            
             CustomerModel model = new CustomerModel();
             using (DataStoreEntities dse = new DataStoreEntities())
             {
@@ -49,10 +51,34 @@ namespace THSMVC.Controllers
                                 Name = p.Name,
                                 PhoneNumber = p.PhoneNumber == null ? 0 : (int)p.PhoneNumber,
                                 Pin = p.Pin == null ? 0 : (int)p.Pin,
-                                State = p.State
+                                State = p.State,
+                                File1=p.File1,
+                                File2=p.File2,
+                                File3=p.File3
                                
                             }).FirstOrDefault();
             }
+            char[] delimiters = new char[] { '$', '$' };
+            if (model.File1 != "" && model.File1 != null)
+            {
+                model.Isfile1Exists = true;
+                model.File1Guid = model.File1.ToString().Split(delimiters)[2];
+                model.File1 = model.File1.ToString().Split(delimiters)[0];
+            }
+            if (model.File2 != "" && model.File2 != null)
+            {
+                model.Isfile2Exists = true;
+                model.File2Guid = model.File2.ToString().Split(delimiters)[2];
+                model.File2 = model.File2.ToString().Split(delimiters)[0];
+            }
+            if (model.File3 != "" && model.File3 != null)
+            {
+                model.Isfile3Exists = true;
+                model.File3Guid = model.File3.ToString().Split(delimiters)[2];
+                model.File3 = model.File3.ToString().Split(delimiters)[0];
+            }
+
+            model.InstanceId = Convert.ToInt32(Session["InstanceId"]);
             model.BtnText = "Update";
             return View("AddEditCustomer", model);
         }
@@ -67,21 +93,40 @@ namespace THSMVC.Controllers
                 int inststanceId = Convert.ToInt32(Session["InstanceId"]);
                 using (DataStoreEntities dse = new DataStoreEntities())
                 {
+                    string custNumber = "";
+                    var cnt = (from s in dse.Customers 
+                                   where s.InstanceID == inststanceId
+                                   select s).ToList();
+                    if ((cnt.Count + 1).ToString().Length == 1)
+                        custNumber = "Cust000" + (cnt.Count + 1).ToString();
+                    if ((cnt.Count + 1).ToString().Length == 2)
+                        custNumber = "Cust00" + (cnt.Count + 1).ToString();
+                    if ((cnt.Count + 1).ToString().Length == 3)
+                        custNumber = "Cust0" + (cnt.Count + 1).ToString();
+                    if ((cnt.Count + 1).ToString().Length == 4)
+                        custNumber = "Cust" + (cnt.Count + 1).ToString();
+
                     if (model.Id == 0)
                     {
                         var ch = dse.Customers.Where(p => p.Name.Equals(model.Name)).ToList();
                         if (ch.Count > 0)
                             return Json(new { success = false, message = "Customer with the same name already exists." });
                         Customer cust = new Customer();
+                        cust.InstanceID = inststanceId;
                         cust.Address = model.Address;
                         cust.City = model.City;
-                        //cust.CustomerNumber = model.CustometNumber;
+                        cust.CustomerNumber = custNumber;
                         cust.EmailAddress =  model.EmailAddress;
                         cust.MobileNumber = model.Mobile;
                         cust.Name = model.Name;
                         cust.PhoneNumber = model.PhoneNumber;
                         cust.Pin = model.Pin;
                         cust.State = model.State;
+                        cust.File1 = model.File1;
+                        cust.File2 = model.File2;
+                        cust.File3 = model.File3;
+                        cust.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                        cust.CreatedDate = DateTime.Now;
                         dse.AddToCustomers(cust);
                         dse.SaveChanges();
                         return Json(new { success = true, message = "Customer created successfuly" });
@@ -92,15 +137,21 @@ namespace THSMVC.Controllers
                         if (ch.Count > 0)
                             return Json(new { success = false, message = "Customer with the same name already exists." });
                         Customer cust = dse.Customers.Where(p => p.Id == model.Id).FirstOrDefault();
+                        cust.InstanceID = inststanceId;
                         cust.Address = model.Address;
                         cust.City = model.City;
-                        //cust.CustomerNumber = model.CustometNumber;
+                        cust.CustomerNumber = custNumber;
                         cust.EmailAddress = model.EmailAddress;
                         cust.MobileNumber = model.Mobile;
                         cust.Name = model.Name;
                         cust.PhoneNumber = model.PhoneNumber;
                         cust.Pin = model.Pin;
                         cust.State = model.State;
+                        cust.File1 = model.File1;
+                        cust.File2 = model.File2;
+                        cust.File3 = model.File3;
+                        cust.EditedBy = Convert.ToInt32(Session["UserId"]);
+                        cust.EditedDate = DateTime.Now;
                         //cust.EditedBy = Convert.ToInt32(Session["UserId"]);
                         //cust.EditedDate = DateTime.Now;
                         dse.SaveChanges();
@@ -179,6 +230,7 @@ namespace THSMVC.Controllers
                               cell = new string[] {
                             s.Id.ToString(),
                             s.Name.ToString().Replace("$$$$","'UpdateCustomer("+s.Id.ToString()+")'").Replace("****","href='#'"),
+                            s.CustometNumber.ToString(),
                             s.Address,
                             s.City,
                             s.CustometNumber,
