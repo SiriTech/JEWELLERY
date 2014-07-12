@@ -21,6 +21,17 @@
                 DisableOrEnableMkngChrgFixed();
             });
 
+            $("#ValueAddedFixed").keypress(function (event) {
+                var valuesAddedFixed = $("#ValueAddedFixed").val();
+
+                var arr = valuesAddedFixed.split('.');
+                if (arr.length > 0) {
+                    if (arr[1].length > 2) {
+                        event.preventDefault();
+                    }
+                } 
+            });
+
         });
 
 
@@ -218,7 +229,7 @@
                                 Value Added By Percentage
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.ValueAddedByPerc, new { maxlength = 100, autocomplete = "off", title="Type in Value Added By Percentage" })%>
+                                <%= Html.TextBoxFor(m => m.ValueAddedByPerc, new { maxlength = 3, autocomplete = "off", title="Type in Value Added By Percentage" })%>
                             </div>
                         </div>
                         <div class="clear">
@@ -226,7 +237,7 @@
                                 Value Added Fixed
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.ValueAddedFixed, new { maxlength = 100, autocomplete = "off", title="Type in Value Added Fixed" })%>
+                                <%= Html.TextBoxFor(m => m.ValueAddedFixed, new { maxlength = 100, autocomplete = "off", title="Type in Value Added Fixed" })%>  Gms
                             </div>
                         </div>
                         <div class="clear">
@@ -260,18 +271,18 @@
                                 <%} %>
                             </div>
                         </div>
-                        <div class="clear">
+                        <div class="clear" style="display:none;">
                             <div class="editor-label FloatLeft" style="width: 40%;">
                                 Is Weightless
                             </div>
                             <div class="editor-field" style="text-align: left;">
                                 <% if (Model.IsWeightless)
                                    { %>
-                                <input type="checkbox" id="chkIsWeightLess" checked="checked" />
+                                <input type="checkbox" id="chkIsWeightLess" checked="checked" style="display:none;" />
                                 <%}
                                    else
                                    { %>
-                                <input type="checkbox" id="chkIsWeightLess" />
+                                <input type="checkbox" id="chkIsWeightLess" style="display:none;"/>
                                 <%} %>
                             </div>
                         </div>

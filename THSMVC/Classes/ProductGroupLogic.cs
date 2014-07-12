@@ -24,6 +24,7 @@ namespace THSMVC.Classes
                                                     }).ToList<ProductGroupModel>();
             return ProductGroup.AsQueryable();
         }
+
         public IQueryable<ProductGroupModel> GetProductGroupsList()
         {
             List<ProductGroupModel> ProductGroup = (from d in dse.ProductGroups

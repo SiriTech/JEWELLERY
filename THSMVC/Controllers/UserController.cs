@@ -81,31 +81,52 @@ namespace THSMVC.Controllers
             return View("AddEditUser", model);
         }
         [LogsRequest]
-        public ActionResult DelUser(int id)
+        public ActionResult DelUser(string id)
         {
             try
             {
+               string seletedIds = id.TrimStart(',');
+               List<int> idsList = seletedIds.Split(',').Select(int.Parse).ToList();
                 using (var db = new DataStoreEntities())
                 {
                     var query = from s in db.Users
-                                where s.Id.Equals(id)
+                                where idsList.Contains(s.Id)
                                 select s;
                     if (query.Count() > 0)
                     {
-                        var User = query.First();
-                        if (User.IsLockedOut)
+                        foreach (var u in query)
                         {
-                            User.IsLockedOut = false;
-                            db.SaveChanges();
-                            return Json(new { success = true, message = "User activated successfully" });
+                            if (u.IsLockedOut)
+                            {
+                                u.IsLockedOut = false;
+                                //db.SaveChanges();
+                                //return Json(new { success = true, message = "User activated successfully" });
+                            }
+                            else
+                            {
+                                u.IsLockedOut = true;
+                                u.LastLockedOutDate = DateTime.Now;
+                                //db.SaveChanges();
+                                
+                            }
+                            
                         }
-                        else
-                        {
-                            User.IsLockedOut = true;
-                            User.LastLockedOutDate = DateTime.Now;
-                            db.SaveChanges();
-                            return Json(new { success = true, message = "User deactivated successfully" });
-                        }
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "User(s) deactivated/Acivated successfully" });
+                        //var User = query.First();
+                        //if (User.IsLockedOut)
+                        //{
+                        //    User.IsLockedOut = false;
+                        //    db.SaveChanges();
+                        //    return Json(new { success = true, message = "User activated successfully" });
+                        //}
+                        //else
+                        //{
+                        //    User.IsLockedOut = true;
+                        //    User.LastLockedOutDate = DateTime.Now;
+                        //    db.SaveChanges();
+                        //    return Json(new { success = true, message = "User deactivated successfully" });
+                        //}
                     }
                     else
                         return Json(new { success = false, message = "Sorry! Please try again later" });
