@@ -107,7 +107,7 @@ namespace THSMVC.Controllers
             bool result = false;
             using (DataStoreEntities dse = new DataStoreEntities())
             {
-                var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName && p.LotId == objLotMasterModel.LotId).ToList();
+                var ch = dse.Lots.Where(p => p.LotName == objLotMasterModel.LotName && p.LotId != objLotMasterModel.LotId).ToList();
                 if (ch.Count > 0)
                     return Json(new { success = false, message = "Lot with the same name already exists." });
             }
@@ -118,7 +118,7 @@ namespace THSMVC.Controllers
                 LotName = objLotMasterModel.LotName,
                 NoOfPieces = (int)objLotMasterModel.Qty,
                 ProductGroupId = objLotMasterModel.ProductGroupId,
-                Weight = (int)objLotMasterModel.Weight,
+                Weight = (decimal)objLotMasterModel.Weight,
                 IsMRP = objLotMasterModel.IsMRP,
 
                 MRP = (decimal)objLotMasterModel.MRP,

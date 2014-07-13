@@ -228,7 +228,6 @@
     <EntitySet Name="GoldRates" EntityType="THSMVCDataModel.GoldRate" />
     <EntitySet Name="GoldRatesManuals" EntityType="THSMVCDataModel.GoldRatesManual" />
     <EntitySet Name="Instances" EntityType="THSMVCDataModel.Instance" />
-    <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
     <EntitySet Name="LotStatus" EntityType="THSMVCDataModel.LotStatu" />
     <EntitySet Name="LotUserMappings" EntityType="THSMVCDataModel.LotUserMapping" />
     <EntitySet Name="Menus" EntityType="THSMVCDataModel.Menu" />
@@ -247,17 +246,9 @@
     <EntitySet Name="GetCompletedButNotSubmittedProducts" EntityType="THSMVCDataModel.GetCompletedButNotSubmittedProduct" />
     <EntitySet Name="LotUserMappingViews" EntityType="THSMVCDataModel.LotUserMappingView" />
     <EntitySet Name="ViewLotDetails" EntityType="THSMVCDataModel.ViewLotDetail" />
-    <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
-      <End Role="Lot" EntitySet="Lots" />
-      <End Role="Barcode" EntitySet="Barcodes" />
-    </AssociationSet>
     <AssociationSet Name="FK_Barcode_Product" Association="THSMVCDataModel.FK_Barcode_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="Barcode" EntitySet="Barcodes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.FK_LotUserMapping_Lot">
-      <End Role="Lot" EntitySet="Lots" />
-      <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
     <AssociationSet Name="FK_LotUserMapping_LotStatus" Association="THSMVCDataModel.FK_LotUserMapping_LotStatus">
       <End Role="LotStatu" EntitySet="LotStatus" />
@@ -281,6 +272,15 @@
     <AssociationSet Name="FK_UserMapping_User" Association="THSMVCDataModel.FK_UserMapping_User">
       <End Role="User" EntitySet="Users" />
       <End Role="UserMapping" EntitySet="UserMappings" />
+    </AssociationSet>
+    <EntitySet Name="Lots" EntityType="THSMVCDataModel.Lot" />
+    <AssociationSet Name="FK_Barcode_Lot" Association="THSMVCDataModel.FK_Barcode_Lot">
+      <End Role="Lot" EntitySet="Lots" />
+      <End Role="Barcode" EntitySet="Barcodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LotUserMapping_Lot" Association="THSMVCDataModel.FK_LotUserMapping_Lot">
+      <End Role="Lot" EntitySet="Lots" />
+      <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
@@ -639,8 +639,8 @@
     <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
     <Property Type="Boolean" Name="IsSubmitted" Nullable="false" />
     <Property Type="String" Name="Notes" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
     <NavigationProperty Name="Product" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Barcode" ToRole="Product" />
+    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Barcode" ToRole="Lot" />
   </EntityType>
   <EntityType Name="GoldRate">
     <Key>
@@ -681,23 +681,6 @@
     <Property Type="Int32" Name="GoldCityId" />
     <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Lot">
-    <Key>
-      <PropertyRef Name="LotId" />
-    </Key>
-    <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="Weight" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="NoOfPieces" />
-    <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
-    <Property Type="Int32" Name="DealerId" />
-    <Property Type="Boolean" Name="IsMRP" />
-    <Property Type="Decimal" Name="MRP" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="2" />
-    <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
-    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
-  </EntityType>
   <EntityType Name="LotStatu">
     <Key>
       <PropertyRef Name="StatusId" />
@@ -714,10 +697,10 @@
     <Property Type="Int32" Name="LotId" Nullable="false" />
     <Property Type="Int32" Name="StatusId" Nullable="false" />
     <Property Type="Int32" Name="UserId" Nullable="false" />
-    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
     <NavigationProperty Name="LotStatu" Relationship="THSMVCDataModel.FK_LotUserMapping_LotStatus" FromRole="LotUserMapping" ToRole="LotStatu" />
     <Property Type="Int32" Name="OTCode" />
     <NavigationProperty Name="User" Relationship="THSMVCDataModel.FK_LotUserMapping_User" FromRole="LotUserMapping" ToRole="User" />
+    <NavigationProperty Name="Lot" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="LotUserMapping" ToRole="Lot" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -975,18 +958,6 @@
     <Property Type="Decimal" Name="MRP" Nullable="false" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="DiffAllowed" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
-  <Association Name="FK_Barcode_Lot">
-    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
-    <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Lot">
-        <PropertyRef Name="LotId" />
-      </Principal>
-      <Dependent Role="Barcode">
-        <PropertyRef Name="LotId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Barcode_Product">
     <End Type="THSMVCDataModel.Product" Role="Product" Multiplicity="1" />
     <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
@@ -996,18 +967,6 @@
       </Principal>
       <Dependent Role="Barcode">
         <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LotUserMapping_Lot">
-    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
-    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Lot">
-        <PropertyRef Name="LotId" />
-      </Principal>
-      <Dependent Role="LotUserMapping">
-        <PropertyRef Name="LotId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1196,6 +1155,47 @@
       </Principal>
       <Dependent Role="UserMapping">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Lot">
+    <Key>
+      <PropertyRef Name="LotId" />
+    </Key>
+    <Property Type="Int32" Name="LotId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="LotName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Weight" Precision="18" Scale="3" />
+    <Property Type="Int32" Name="NoOfPieces" />
+    <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
+    <Property Type="Int32" Name="DealerId" />
+    <Property Type="Boolean" Name="IsMRP" />
+    <Property Type="Decimal" Name="MRP" Precision="18" Scale="3" />
+    <Property Type="Decimal" Name="DiffAllowed" Precision="18" Scale="3" />
+    <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Lot" FromRole="Lot" ToRole="Barcode" />
+    <NavigationProperty Name="LotUserMappings" Relationship="THSMVCDataModel.FK_LotUserMapping_Lot" FromRole="Lot" ToRole="LotUserMapping" />
+  </EntityType>
+  <Association Name="FK_Barcode_Lot">
+    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+    <End Type="THSMVCDataModel.Barcode" Role="Barcode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="Barcode">
+        <PropertyRef Name="LotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LotUserMapping_Lot">
+    <End Type="THSMVCDataModel.Lot" Role="Lot" Multiplicity="1" />
+    <End Type="THSMVCDataModel.LotUserMapping" Role="LotUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lot">
+        <PropertyRef Name="LotId" />
+      </Principal>
+      <Dependent Role="LotUserMapping">
+        <PropertyRef Name="LotId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

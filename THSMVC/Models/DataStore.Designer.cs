@@ -19,12 +19,12 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Product), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
-[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.LotStatu), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 [assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_UserMapping_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.User), "UserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.UserMapping), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "Barcode", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.Barcode), true)]
+[assembly: EdmRelationshipAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(THSMVC.Models.Lot), "LotUserMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(THSMVC.Models.LotUserMapping), true)]
 
 #endregion
 
@@ -139,22 +139,6 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<Instance> _Instances;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Lot> Lots
-        {
-            get
-            {
-                if ((_Lots == null))
-                {
-                    _Lots = base.CreateObjectSet<Lot>("Lots");
-                }
-                return _Lots;
-            }
-        }
-        private ObjectSet<Lot> _Lots;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -571,6 +555,22 @@ namespace THSMVC.Models
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Lot> Lots
+        {
+            get
+            {
+                if ((_Lots == null))
+                {
+                    _Lots = base.CreateObjectSet<Lot>("Lots");
+                }
+                return _Lots;
+            }
+        }
+        private ObjectSet<Lot> _Lots;
 
         #endregion
 
@@ -606,14 +606,6 @@ namespace THSMVC.Models
         public void AddToInstances(Instance instance)
         {
             base.AddObject("Instances", instance);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Lots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLots(Lot lot)
-        {
-            base.AddObject("Lots", lot);
         }
     
         /// <summary>
@@ -822,6 +814,14 @@ namespace THSMVC.Models
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Lots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLots(Lot lot)
+        {
+            base.AddObject("Lots", lot);
         }
 
         #endregion
@@ -3054,44 +3054,6 @@ namespace THSMVC.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot")]
-        public Lot Lot
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Lot> LotReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Product", "Product")]
         public Product Product
         {
@@ -3120,6 +3082,44 @@ namespace THSMVC.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Product>("THSMVCDataModel.FK_Barcode_Product", "Product", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_Barcode_Lot", "Lot")]
+        public Lot Lot
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Lot> LotReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_Barcode_Lot", "Lot", value);
                 }
             }
         }
@@ -6174,44 +6174,6 @@ namespace THSMVC.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot")]
-        public Lot Lot
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Lot> LotReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_LotStatus", "LotStatu")]
         public LotStatu LotStatu
         {
@@ -6278,6 +6240,44 @@ namespace THSMVC.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("THSMVCDataModel.FK_LotUserMapping_User", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("THSMVCDataModel", "FK_LotUserMapping_Lot", "Lot")]
+        public Lot Lot
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Lot> LotReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Lot>("THSMVCDataModel.FK_LotUserMapping_Lot", "Lot", value);
                 }
             }
         }

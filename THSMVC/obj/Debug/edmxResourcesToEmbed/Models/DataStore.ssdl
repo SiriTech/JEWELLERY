@@ -233,13 +233,13 @@
     <Property Name="LotId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="InstanceId" Type="int" Nullable="false" />
     <Property Name="LotName" Type="varchar" Nullable="false" MaxLength="10" />
-    <Property Name="Weight" Type="decimal" Scale="2" />
+    <Property Name="Weight" Type="decimal" Scale="3" />
     <Property Name="NoOfPieces" Type="int" />
     <Property Name="ProductGroupId" Type="int" Nullable="false" />
     <Property Name="DealerId" Type="int" />
     <Property Name="IsMRP" Type="bit" />
-    <Property Name="MRP" Type="decimal" Scale="2" />
-    <Property Name="DiffAllowed" Type="decimal" Scale="2" />
+    <Property Name="MRP" Type="decimal" Scale="3" />
+    <Property Name="DiffAllowed" Type="decimal" Scale="3" />
   </EntityType>
   <EntityType Name="LotStatus">
     <Key>
@@ -518,7 +518,7 @@
     <Property Name="Status" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ_New.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="GetCompletedButNotSubmittedProducts">
     <Key>
@@ -548,7 +548,7 @@
     <Property Name="IsSubmitted" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ_New.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="LotUserMappingView">
     <Key>
@@ -569,7 +569,7 @@
     <Property Name="InstanceId" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ_New.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="ViewLotDetails">
     <Key>

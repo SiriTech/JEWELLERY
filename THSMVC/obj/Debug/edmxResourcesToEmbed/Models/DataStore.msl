@@ -75,22 +75,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Lots">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
-        <MappingFragment StoreEntitySet="Lot">
-          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
-          <ScalarProperty Name="MRP" ColumnName="MRP" />
-          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="LotName" ColumnName="LotName" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="LotId" ColumnName="LotId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LotStatus">
       <EntityTypeMapping TypeName="THSMVCDataModel.LotStatu">
         <MappingFragment StoreEntitySet="LotStatus">
@@ -511,6 +495,22 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lots">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Lot">
+        <MappingFragment StoreEntitySet="Lot">
+          <ScalarProperty Name="DiffAllowed" ColumnName="DiffAllowed" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="IsMRP" ColumnName="IsMRP" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
+          <ScalarProperty Name="NoOfPieces" ColumnName="NoOfPieces" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="LotName" ColumnName="LotName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="LotId" ColumnName="LotId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
