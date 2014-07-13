@@ -203,7 +203,13 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.ProductName.ToString().Replace("$$$$","'UpdateProduct("+s.Id.ToString()+")'").Replace("****","href='#'")
+                            s.ProductName.ToString().Replace("$$$$","'UpdateProduct("+s.Id.ToString()+")'").Replace("****","href='#'"),
+                            s.IsStone.ToString(),
+                            s.MakingChargesFixed.ToString(),
+                            s.MakingChargesPerGram.ToString(),
+                            s.ShortForm,
+                            s.ValueAddedByPerc.ToString(),
+                            s.ValueAddedFixed.ToString()
                         }
                           }).ToArray()
                 };

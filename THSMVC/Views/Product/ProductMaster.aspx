@@ -31,10 +31,16 @@
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Name'],
+                colNames: ['Id', 'Product Name', 'IsStone', 'MakingChargesFixed', 'MakingChargesPerGram', 'ShortForm', 'ValueAddedByPerc', 'ValueAddedFixed'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductName', index: 'ProductName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'ProductName', index: 'ProductName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'IsStone', index: 'IsStone', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ShortForm', index: 'ShortForm', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ValueAddedFixed', index: 'ValueAddedFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} }
                 ],
                 rownumbers: true,
                 rowNum: 10,

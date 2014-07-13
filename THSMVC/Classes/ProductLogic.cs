@@ -20,7 +20,13 @@ namespace THSMVC.Classes
                                                     select new ProductModel
                                                     {
                                                         Id = d.Id,
-                                                        ProductName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.ProductName + "</a>"
+                                                        ProductName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.ProductName + "</a>",
+                                                        IsStone = d.IsStone,
+                                                       MakingChargesFixed = d.MakingChargesFixed,
+                                                       MakingChargesPerGram = d.MakingChargesPerGram,
+                                                       ShortForm = d.ShortForm,
+                                                       ValueAddedByPerc = d.ValueAddedByPerc,
+                                                       ValueAddedFixed = d.ValueAddedFixed
                                                     }).ToList<ProductModel>();
             return Product.AsQueryable();
         }

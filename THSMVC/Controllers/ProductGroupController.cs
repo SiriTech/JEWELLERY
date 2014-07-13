@@ -175,7 +175,8 @@ namespace THSMVC.Controllers
                               i = s.Id,
                               cell = new string[] {
                             s.Id.ToString(),
-                            s.ProductGroup1.ToString().Replace("$$$$","'UpdateProductGroup("+s.Id.ToString()+")'").Replace("****","href='#'")
+                            s.ProductGroup1.ToString().Replace("$$$$","'UpdateProductGroup("+s.Id.ToString()+")'").Replace("****","href='#'"),
+                            
                         }
                           }).ToArray()
                 };
