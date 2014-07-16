@@ -22,6 +22,7 @@ namespace THSMVC.Classes
                                                         Id = d.Id,
                                                         ProductName = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.ProductName + "</a>",
                                                         IsStone = d.IsStone,
+                                                        IsStoneStr = d.IsStone == true ? "<img src='../../images/remove.png' />" : "<img src='../../images/tick.png' />",
                                                        MakingChargesFixed = d.MakingChargesFixed,
                                                        MakingChargesPerGram = d.MakingChargesPerGram,
                                                        ShortForm = d.ShortForm,

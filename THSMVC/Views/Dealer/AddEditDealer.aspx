@@ -72,9 +72,44 @@
 			});
 		};
 		$(document).ready(function () {
-			//	$("#DealerName").focus();
-			$('#divDealerBankDetails').focus();
+		    //	$("#DealerName").focus();
+		    $('#divDealerBankDetails').focus();
 
+		    $("#PinCode").keydown(function (event) {
+		        if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+		        } else {
+		            event.preventDefault();
+		        }
+		    });
+		    $("#MobileNUmber1").keydown(function (event) {
+		        if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+		        } else {
+		            event.preventDefault();
+		        }
+		    });
+		    $("#MobileNUmber2").keydown(function (event) {
+		        if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+		        } else {
+		            event.preventDefault();
+		        }
+		    });
+		    $("#MobileNUmber3").keydown(function (event) {
+		        if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+		        } else {
+		            event.preventDefault();
+		        }
+		    });
+		    $("#MobileNUmber4").keydown(function (event) {
+		        if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+		        } else {
+		            event.preventDefault();
+		        }
+		    });
 		});
 		function Back() {
 			ClearMsg();
@@ -201,7 +236,7 @@
 								PIN Code
 							</div>
 							<div class="editor-field" style="text-align: left;">
-								<%= Html.TextBoxFor(m => m.PinCode, new { maxlength = 100, autocomplete = "off", title="Type in Pin Code" })%>
+								<%= Html.TextBoxFor(m => m.PinCode, new { maxlength = 6, autocomplete = "off", title="Type in Pin Code" })%>
 							</div>
 						</div>
 						<div class="clear">

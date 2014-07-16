@@ -31,16 +31,16 @@
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Name', 'IsStone', 'MakingChargesFixed', 'MakingChargesPerGram', 'ShortForm', 'ValueAddedByPerc', 'ValueAddedFixed'],
+                colNames: ['Id', 'Product Name', 'ShortForm', 'ValueAddedByPerc', 'ValueAddedFixed', 'MakingChargesPerGram', 'MakingChargesFixed', 'IsStone'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductName', index: 'ProductName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'IsStone', index: 'IsStone', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'ShortForm', index: 'ShortForm', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'ValueAddedFixed', index: 'ValueAddedFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} }
+                  { name: 'ProductName', index: 'ProductName', width:50, align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ShortForm', index: 'ShortForm', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
+                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
+                  { name: 'ValueAddedFixed', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} },
+                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7} },
+                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8} },
+                  { name: 'IsStoneStr', index: 'IsStoneStr', align: 'center', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9} }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -64,7 +64,7 @@
                 },
 
                 hidegrid: true //To show/hide the button in the caption bar to hide/show the grid.
-            }).navGrid('#pager', { search: false, view: false, edit: false, add: false, del: true, searchtext: "" },
+            }).navGrid('#pager', { search: false, view: false, edit: false, add: false, del: false, searchtext: "" },
        {
            closeOnEscape: true, url: "/Administration/EditJsonSiteLogs", closeAfterEdit: false, width: 350, checkOnSubmit: false, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in edit
               function (response, postdata) {

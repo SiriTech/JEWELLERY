@@ -1,0 +1,27 @@
+not changed the title in manage "lot" to "create lot" -- Fixed
+
+*the following should not have delete option
+any group should notget deleted-- Fixed
+any category must not get deleted if once it is used-- Fixed
+any product should not get deleted if once it got used-- Fixed
+
+* in mobile num option just give one mob number and beside that add more numbers option .and for every  new box of entering mob no,  besides there must be a box for entering text.and same for emails also.(pending)
+
+*pincodes must only be in num,mob no must only be in num-- Fixed
+
+*comment box not inserted in dealer
+
+*bank details is not added in show hide option in dealer
+
+*after adding product,in selecting all in show hide option allignment is not coming 
+
+*and green tik mark or red cross mark should come instead of true and false -- Fixed
+
+*and not selected options and in show hide list must me in this way..product name, shortform, va per,va fixed,making per ,making fixd,is stoneless.  - Fixed
+
+*and in products page give a filtration option of groups and category.
+
+*no changes has been done in user
+
+* no changes done in cust
+add filtrations wherever you feel necessery.

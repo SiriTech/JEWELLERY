@@ -6,7 +6,39 @@
 <head runat="server">
     <title></title>
     <script type="text/javascript">
-        $(document).ready(function () { $("#Name").focus(); });
+        $(document).ready(function () {
+            $("#Name").focus();
+
+            $("#Mobile").keydown(function (event) {
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+            });
+            $("#Mobile2").keydown(function (event) {
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+            });
+            $("#Mobile3").keydown(function (event) {
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+            });
+            $("#Mobile4").keydown(function (event) {
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+            });
+
+        });
         function Back() {
             ClearMsg();
             $("#divUserMaster").show();
@@ -140,7 +172,7 @@
                                 Pin Code
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.PinCode, new { maxlength = 100, autocomplete = "off", title="Type in Pin Code" })%>
+                                <%= Html.TextBoxFor(m => m.PinCode, new { maxlength = 6, autocomplete = "off", title="Type in Pin Code" })%>
                             </div>
                         </div>
                         
@@ -176,7 +208,7 @@
                                Temp Pin
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.TempPin, new { maxlength = 7, autocomplete = "off", title="Type in Pin" })%>
+                                <%= Html.TextBoxFor(m => m.TempPin, new { maxlength = 6, autocomplete = "off", title="Type in Pin" })%>
                             </div>
                         </div>
 
@@ -185,7 +217,7 @@
                                Mobile
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.Mobile, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                                <%= Html.TextBoxFor(m => m.Mobile, new { maxlength = 12, autocomplete = "off", title="Type in Mobile" })%>
                             </div>
                         </div>
 
@@ -194,7 +226,7 @@
                                Mobile 2
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.Mobile2, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                                <%= Html.TextBoxFor(m => m.Mobile2, new { maxlength = 12, autocomplete = "off", title="Type in Mobile" })%>
                             </div>
                         </div>
 
@@ -203,7 +235,7 @@
                                Mobile 3
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.Mobile3, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                                <%= Html.TextBoxFor(m => m.Mobile3, new { maxlength = 12, autocomplete = "off", title="Type in Mobile" })%>
                             </div>
                         </div>
 
@@ -212,7 +244,7 @@
                                Mobile 4
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.Mobile4, new { maxlength = 100, autocomplete = "off", title="Type in Mobile" })%>
+                                <%= Html.TextBoxFor(m => m.Mobile4, new { maxlength = 12, autocomplete = "off", title="Type in Mobile" })%>
                             </div>
                         </div>
 
@@ -221,7 +253,7 @@
                                Phone
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.Phone, new { maxlength = 100, autocomplete = "off", title="Type in Phone" })%>
+                                <%= Html.TextBoxFor(m => m.Phone, new { maxlength = 12, autocomplete = "off", title="Type in Phone" })%>
                             </div>
                         </div>
 
