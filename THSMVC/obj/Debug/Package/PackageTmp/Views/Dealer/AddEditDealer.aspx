@@ -8,61 +8,63 @@
 		type="text/css" />
 	<script src="../../Scripts/ExcelPlugin/jquery.handsontable.full.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		$(document).ready(function () {
-			$.ajax({
-				type: "POST",
-				url: "Dealer/DealerBankDetails",
-				data: { Id: $("#hdnID").val() },
-				dataType: "json",
-				async: false,
-				beforeSend: function () {
-					$.blockUI();   //this is great plugin - 'blockUI'
-				},
-				success: function (result) {
-					if (result.success) {
-						data = result.data;
-						ColHeaders = result.colheaders;
-						hdata = result.hdata;
-						hColHeaders = result.hcolheaders;
-						var MaxCols = '6';
-						debugger;
-						$('#divDealerBankDetails').handsontable({
-							data: data,
-							minRows: 0,
-							minCols: parseInt(MaxCols, 0),
-							minSpareRows: 0,
-							colHeaders: ColHeaders,
-							autoWrapRow: true,
-							contextMenu: false,
-							fixedColumnsLeft: 1,
-							width: $("#Content").innerWidth(),
-							cells: function (row, col, prop) {
-								var cellProperties = {};
-								if (col === 0) {
-									cellProperties.readOnly = true;
-									cellProperties.renderer = ReadOnlyRenderer;
-								}
+	    $(document).ready(function () {
+	        $.ajax({
+	            type: "POST",
+	            url: "Dealer/DealerBankDetails",
+	            data: { Id: $("#hdnID").val() },
+	            dataType: "json",
+	            async: false,
+	            beforeSend: function () {
+	                $.blockUI();   //this is great plugin - 'blockUI'
+	            },
+	            success: function (result) {
+	                if (result.success) {
+	                    data = result.data;
+	                    ColHeaders = result.colheaders;
+	                    hdata = result.hdata;
+	                    hColHeaders = result.hcolheaders;
+	                    var MaxCols = '6';
+	                    debugger;
+	                    $('#divDealerBankDetails').handsontable({
+	                        data: data,
+	                        minRows: 0,
+	                        minCols: parseInt(MaxCols, 0),
+	                        minSpareRows: 0,
+	                        colHeaders: ColHeaders,
+	                        autoWrapRow: true,
+	                        contextMenu: false,
+	                        fixedColumnsLeft: 1,
+	                        width: $("#Content").innerWidth(),
+	                        cells: function (row, col, prop) {
+	                            var cellProperties = {};
+	                            if (col === 0) {
+	                                if ($("#hdnID").val() != 0) {
+	                                    cellProperties.readOnly = true;
+	                                    cellProperties.renderer = ReadOnlyRenderer;
+	                                }
+	                            }
 
-								return cellProperties;
-							}
-						});
-						var hot = $('#divDealerBankDetails').handsontable('getInstance');
-						hot.updateSettings({
-							colHeaders: hColHeaders,
-							columns: hdata
-						});
-					}
-					else {
-						alert('error');
-					}
-					$.unblockUI();
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					debugger;
-					Error(XMLHttpRequest, textStatus, errorThrown);
-				}
-			});
-		});
+	                            return cellProperties;
+	                        }
+	                    });
+	                    var hot = $('#divDealerBankDetails').handsontable('getInstance');
+	                    hot.updateSettings({
+	                        colHeaders: hColHeaders,
+	                        columns: hdata
+	                    });
+	                }
+	                else {
+	                    alert('error');
+	                }
+	                $.unblockUI();
+	            },
+	            error: function (XMLHttpRequest, textStatus, errorThrown) {
+	                debugger;
+	                Error(XMLHttpRequest, textStatus, errorThrown);
+	            }
+	        });
+	    });
 		function ReadOnlyRenderer(instance, td, row, col, prop, value, cellProperties) {
 			Handsontable.TextCell.renderer.apply(this, arguments);
 			$(td).css({
@@ -215,7 +217,7 @@
 								Mobile Number1
 							</div>
 							<div class="editor-field" style="text-align: left;">
-								<%= Html.TextBoxFor(m => m.MobileNUmber1, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+								<%= Html.TextBoxFor(m => m.MobileNUmber1, new { maxlength = 11, autocomplete = "off", title="Type in mobile no." })%>
 							</div>
 						</div>
 						<div class="clear">
@@ -223,7 +225,7 @@
 								Mobile Number2
 							</div>
 							<div class="editor-field" style="text-align: left;">
-								<%= Html.TextBoxFor(m => m.MobileNUmber2, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+								<%= Html.TextBoxFor(m => m.MobileNUmber2, new { maxlength = 11, autocomplete = "off", title="Type in mobile no." })%>
 							</div>
 						</div>
 						<div class="clear">
@@ -231,7 +233,7 @@
 								Mobile Number3
 							</div>
 							<div class="editor-field" style="text-align: left;">
-								<%= Html.TextBoxFor(m => m.MobileNUmber3, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+								<%= Html.TextBoxFor(m => m.MobileNUmber3, new { maxlength = 11, autocomplete = "off", title="Type in mobile no." })%>
 							</div>
 						</div>
 						<div class="clear">
@@ -239,7 +241,7 @@
 								Mobile Number4
 							</div>
 							<div class="editor-field" style="text-align: left;">
-								<%= Html.TextBoxFor(m => m.MobileNUmber4, new { maxlength = 15, autocomplete = "off", title="Type in mobile no." })%>
+								<%= Html.TextBoxFor(m => m.MobileNUmber4, new { maxlength = 11, autocomplete = "off", title="Type in mobile no." })%>
 							</div>
 						</div>
 						<div class="clear">

@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<THSMVC.Models.ProductModel>" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -22,9 +21,20 @@
                 DisableOrEnableMkngChrgFixed();
             });
 
+            $("#ValueAddedFixed").keypress(function (event) {
+                var valuesAddedFixed = $("#ValueAddedFixed").val();
+
+                var arr = valuesAddedFixed.split('.');
+                if (arr.length > 0) {
+                    if (arr[1].length > 2) {
+                        event.preventDefault();
+                    }
+                } 
+            });
+
         });
 
-        
+
 
         function DisableOrEnableMkngChrgFixed() {
             var MkngCrgsFixed = $("#MakingChargesFixed").val();
@@ -174,29 +184,28 @@
     </script>
 </head>
 <body>
-   <div class="clear">
+    <div class="clear">
         <div id="AddEditProduct">
             <div class="clear">
                 <div class="ContentdivHead" onclick="toggleContentDivHead(this,'#divAddEditProduct');">
                     <span class="divHeading">Product</span>
                 </div>
                 <div class="clear">
-                    
                     <div class="ContentdivBorder" id="divAddEditProduct">
-                    <div class="clear">
+                        <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Product Category
-                            </div>
-                            <div class="editor-field" style="text-align: left;">
-                                <%= Html.DropDownListFor(m => m.ProductCategoryId, Model.ProductCategories, "Select Category", new { title="Select Product Category from the list" })%>
-                            </div>
-                        </div>
-                         <div class="clear">
-                            <div class="editor-label FloatLeft" style="width: 40%;">
-                               <span class="ValidationSpan">*</span> Product Group
+                                <span class="ValidationSpan">*</span> Product Group
                             </div>
                             <div class="editor-field" style="text-align: left;">
                                 <%= Html.DropDownListFor(m => m.ProductGroupId, Model.ProductGroups, "Select Group", new { title="Select Product Group from the list" })%>
+                            </div>
+                        </div>
+                        <div class="clear">
+                            <div class="editor-label FloatLeft" style="width: 40%;">
+                                <span class="ValidationSpan">*</span> Product Category
+                            </div>
+                            <div class="editor-field" style="text-align: left;">
+                                <%= Html.DropDownListFor(m => m.ProductCategoryId, Model.ProductCategories, "Select Category", new { title="Select Product Category from the list" })%>
                             </div>
                         </div>
                         <div class="clear">
@@ -217,18 +226,18 @@
                         </div>
                         <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
-                                 Value Added By Percentage
+                                Value Added By Percentage
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.ValueAddedByPerc, new { maxlength = 100, autocomplete = "off", title="Type in Value Added By Percentage" })%>
+                                <%= Html.TextBoxFor(m => m.ValueAddedByPerc, new { maxlength = 3, autocomplete = "off", title="Type in Value Added By Percentage" })%>
                             </div>
                         </div>
-                         <div class="clear">
+                        <div class="clear">
                             <div class="editor-label FloatLeft" style="width: 40%;">
                                 Value Added Fixed
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <%= Html.TextBoxFor(m => m.ValueAddedFixed, new { maxlength = 100, autocomplete = "off", title="Type in Value Added Fixed" })%>
+                                <%= Html.TextBoxFor(m => m.ValueAddedFixed, new { maxlength = 100, autocomplete = "off", title="Type in Value Added Fixed" })%>  Gms
                             </div>
                         </div>
                         <div class="clear">
@@ -252,27 +261,31 @@
                                 Is Stone
                             </div>
                             <div class="editor-field" style="text-align: left;">
-                                <% if(Model.IsStone){ %>
+                                <% if (Model.IsStone)
+                                   { %>
                                 <input type="checkbox" id="chkIsStone" checked="checked" />
-                                <%}else{ %>
+                                <%}
+                                   else
+                                   { %>
                                 <input type="checkbox" id="chkIsStone" />
                                 <%} %>
                             </div>
                         </div>
-                        <div class="clear">
+                        <div class="clear" style="display:none;">
                             <div class="editor-label FloatLeft" style="width: 40%;">
-                               Is Weightless
+                                Is Weightless
                             </div>
                             <div class="editor-field" style="text-align: left;">
                                 <% if (Model.IsWeightless)
                                    { %>
-                                <input type="checkbox" id="chkIsWeightLess" checked="checked" />
-                                <%}else{ %>
-                                <input type="checkbox" id="chkIsWeightLess" />
+                                <input type="checkbox" id="chkIsWeightLess" checked="checked" style="display:none;" />
+                                <%}
+                                   else
+                                   { %>
+                                <input type="checkbox" id="chkIsWeightLess" style="display:none;"/>
                                 <%} %>
                             </div>
                         </div>
-                        
                         <div id="divButtons" class="clear" style="margin-top: 10px; margin-bottom: 20px;">
                             <center>
                                 <input type="button" value="<%= Model.BtnText %>" class="rg_button_red" onclick="submitProduct(); return false;" />

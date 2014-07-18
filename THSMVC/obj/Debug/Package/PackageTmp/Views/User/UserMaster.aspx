@@ -39,15 +39,15 @@
                 mtype: 'POST',
                 colNames: ['Id', 'Name', 'Address', 'City', 'State', 'PinCode', 'Mobile', 'RoleName', 'Active'],
                 colModel: [
-                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'Name', index: 'Name', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } },
-                  { name: 'Address', index: 'Address', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4 } },
-                { name: 'City', index: 'City', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5 } },
-                { name: 'State', index: 'State', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6 } },
-                { name: 'PinCode', index: 'PinCode', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7 } },
-                { name: 'Mobile', index: 'Mobile', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8 } },
-                { name: 'RoleName', index: 'RoleName', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9 } },
-                { name: 'Active', index: 'Active', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10 } },
+                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2} },
+                  { name: 'Name', index: 'Name', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'Address', index: 'Address', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
+                { name: 'City', index: 'City', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
+                { name: 'State', index: 'State', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} },
+                { name: 'PinCode', index: 'PinCode', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7} },
+                { name: 'Mobile', index: 'Mobile', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8} },
+                { name: 'RoleName', index: 'RoleName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9} },
+                { name: 'Active', index: 'Active', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 10} },
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -58,6 +58,7 @@
                 sortname: 'Name',
                 viewrecords: true,
                 sortorder: "asc",
+                multiselect: true,
                 caption: "Users",
                 gridComplete: function () {
                     var recs = parseInt($("#list").getGridParam("records"), 10);
@@ -86,7 +87,7 @@
               }
        }, // default settings for edit
        {
-           closeOnEscape: true, url: "/Administration/AddJsonSiteLogs", closeAfterAdd: false, width: 350, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in Add
+       closeOnEscape: true, url: "/Administration/AddJsonSiteLogs", closeAfterAdd: false, width: 350, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in Add
                function (response, postdata) {
                    var json = response.responseText; //in my case response text form server is "{sc:true,msg:''}"
                    if (json) {
@@ -99,47 +100,54 @@
                }
 
 
-       }, // default settings for add
+   }, // default settings for add
        {
-           url: "/User/DelUser",
-           beforeShowForm: function ($form) {
-               $("td.delmsg", $form[0]).html("Do you want to activate/deactivate the selected user?");
-               $("td.DelButton a#dData").html("Yes <span class='ui-icon ui-icon-scissors'></span>");
-               $("td.DelButton a#eData").html("No <span class='ui-icon ui-icon-cancel'></span>");
-               
-           },
-           width:350,
-           onclickSubmit: function (params) {
-               var ajaxData = {};
-               var list = $("#list");
-               var selectedRow = list.getGridParam("selrow");
-               rowData = list.getRowData(selectedRow);
-               ajaxData = { id: rowData.Id };
-               return ajaxData;
-           },
-           afterComplete: function (response) {
-               var resp = $.parseJSON(response.responseText);
-               ClearMsg();
-               if (resp.success)
-                   Success(resp.message);
-               else
-                   Failure(resp.message);
-               var recs = parseInt($("#list").getGridParam("records"), 10);
-               if (recs == 0) {
-                   $("#gridWrapper").hide();
-                   EmptyGrid("#EmptyGridWrapper");
-                   $("#EmptyGridWrapper").show();
-               } else {
-                   $('#gridWrapper').show();
-                   $("#EmptyGridWrapper").hide();
-               }
+       url: "/User/DelUser",
+       beforeShowForm: function ($form) {
+           $("td.delmsg", $form[0]).html("Do you want to activate/deactivate the selected user?");
+           $("td.DelButton a#dData").html("Yes <span class='ui-icon ui-icon-scissors'></span>");
+           $("td.DelButton a#eData").html("No <span class='ui-icon ui-icon-cancel'></span>");
+
+       },
+       width: 350,
+       onclickSubmit: function (params) {
+           debugger;
+           var ajaxData = {};
+           var rowD = '';
+           var rowData = '';
+           var list = $("#list");
+           var selectedRow = list.jqGrid('getGridParam', 'selarrrow');
+           jQuery.each(selectedRow, function (i, val) {
+               rowD = list.getRowData(val);
+               rowData = rowData + ',' + rowD.Id;
+           });
+
+           ajaxData = { id: rowData };
+           return ajaxData;
+       },
+       afterComplete: function (response) {
+           var resp = $.parseJSON(response.responseText);
+           ClearMsg();
+           if (resp.success)
+               Success(resp.message);
+           else
+               Failure(resp.message);
+           var recs = parseInt($("#list").getGridParam("records"), 10);
+           if (recs == 0) {
+               $("#gridWrapper").hide();
+               EmptyGrid("#EmptyGridWrapper");
+               $("#EmptyGridWrapper").show();
+           } else {
+               $('#gridWrapper').show();
+               $("#EmptyGridWrapper").hide();
            }
+       }
 
 
 
-       }, // delete options
-       { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
-       { closeOnEscape: true, width: 350 } // view options
+   }, // delete options
+       {closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
+       {closeOnEscape: true, width: 350} // view options
     );
        jQuery("#list").jqGrid('navButtonAdd', '#pager', {
            caption: "Show/Hide",

@@ -33,7 +33,7 @@
                 colNames: ['Id', 'Product Category'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductCategory1', index: 'ProductCategory1', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'ProductCategory1', index: 'ProductCategory1', align: 'left',  hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -122,6 +122,24 @@
     );
 
             $.extend($.jgrid.search, { Find: 'Search' });
+            jQuery("#list").jqGrid('navButtonAdd', '#pager', {
+                caption: "Show/Hide",
+                buttonicon: "ui-icon-newwin",
+                title: "Show/Hide Columns",
+                onClickButton: function () {
+                    jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+                    return false;
+                }
+            });
+            //jQuery("#list").jqGrid('sortableRows');
+
+            jQuery("#list").jqGrid(
+    'sortableRows',
+    { update: function (e, ui) {
+        alert("The row with the id=" + ui.item[0].id +
+            " is moved. New row index is " + ui.item[0].rowIndex);
+    }
+    });
 
         }
     </script>

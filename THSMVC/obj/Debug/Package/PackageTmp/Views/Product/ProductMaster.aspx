@@ -31,10 +31,16 @@
                 url: gridDataUrl,
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Product Name'],
+                colNames: ['Id', 'Product Name', 'IsStone', 'MakingChargesFixed', 'MakingChargesPerGram', 'ShortForm', 'ValueAddedByPerc', 'ValueAddedFixed'],
                 colModel: [
                   { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductName', index: 'ProductName', align: 'left', hidedlg: true, hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3 } }
+                  { name: 'ProductName', index: 'ProductName', align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'IsStone', index: 'IsStone', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ShortForm', index: 'ShortForm', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
+                  { name: 'ValueAddedFixed', index: 'ValueAddedFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} }
                 ],
                 rownumbers: true,
                 rowNum: 10,
@@ -121,6 +127,24 @@
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
        { closeOnEscape: true, width: 350 } // view options
     );
+       jQuery("#list").jqGrid('navButtonAdd', '#pager', {
+           caption: "Show/Hide",
+           buttonicon: "ui-icon-newwin",
+           title: "Show/Hide Columns",
+           onClickButton: function () {
+               jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+               return false;
+           }
+       });
+       //jQuery("#list").jqGrid('sortableRows');
+
+       jQuery("#list").jqGrid(
+    'sortableRows',
+    { update: function (e, ui) {
+        alert("The row with the id=" + ui.item[0].id +
+            " is moved. New row index is " + ui.item[0].rowIndex);
+    }
+    });
 
             $.extend($.jgrid.search, { Find: 'Search' });
 
