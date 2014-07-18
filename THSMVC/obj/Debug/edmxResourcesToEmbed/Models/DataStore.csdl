@@ -259,11 +259,9 @@
     <EntitySet Name="SMSApis" EntityType="THSMVCDataModel.SMSApi" />
     <EntitySet Name="AppSettings" EntityType="THSMVCDataModel.AppSetting" />
     <EntitySet Name="DealerBankDetails" EntityType="THSMVCDataModel.DealerBankDetail" />
-    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
     <FunctionImport Name="stp_Delete_Dealer_BankDetails_By_Id" ReturnType="Collection(Int32)">
       <Parameter Name="DealerId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
     <EntitySet Name="Users" EntityType="THSMVCDataModel.User" />
     <AssociationSet Name="FK_LotUserMapping_User" Association="THSMVCDataModel.FK_LotUserMapping_User">
       <End Role="User" EntitySet="Users" />
@@ -282,6 +280,8 @@
       <End Role="Lot" EntitySet="Lots" />
       <End Role="LotUserMapping" EntitySet="LotUserMappings" />
     </AssociationSet>
+    <EntitySet Name="Dealers" EntityType="THSMVCDataModel.Dealer" />
+    <EntitySet Name="Customers" EntityType="THSMVCDataModel.Customer" />
   </EntityContainer>
   <ComplexType Name="stp_get_OnlineTestAuthRoles_Result">
     <Property Type="Int32" Name="Usercount" Nullable="true" />
@@ -661,7 +661,7 @@
     <Property Type="String" Name="GoldPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="SilverWeight" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="SilverPrice" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Instance">
     <Key>
@@ -674,9 +674,9 @@
     <Property Type="String" Name="PIN" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Mobile" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-    <Property Type="DateTime" Name="LicenseStartDate" />
-    <Property Type="DateTime" Name="LicenseEndDate" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="LicenseStartDate" Precision="0" />
+    <Property Type="DateTime" Name="LicenseEndDate" Precision="0" />
     <Property Type="Boolean" Name="Status" />
     <Property Type="Int32" Name="GoldCityId" />
     <Property Type="String" Name="Domain" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -735,9 +735,9 @@
     <Property Type="String" Name="GroupName" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="GroupShortName" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="MenuRight">
@@ -766,9 +766,9 @@
     <Property Type="Int32" Name="ProductCategoryId" Nullable="false" />
     <Property Type="Int32" Name="ProductGroupId" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
     <NavigationProperty Name="Barcodes" Relationship="THSMVCDataModel.FK_Barcode_Product" FromRole="Product" ToRole="Barcode" />
   </EntityType>
@@ -780,9 +780,9 @@
     <Property Type="Int32" Name="InstanceId" Nullable="false" />
     <Property Type="String" Name="ProductCategory1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="ProductGroup">
@@ -793,9 +793,9 @@
     <Property Type="Int32" Name="InstanceId" Nullable="false" />
     <Property Type="String" Name="ProductGroup1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="Right">
@@ -807,9 +807,9 @@
     <Property Type="Boolean" Name="Flag" Nullable="false" />
     <Property Type="Int32" Name="UserMenuId" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="Role">
@@ -821,9 +821,9 @@
     <Property Type="String" Name="Role1" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="RoleDesc" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="RoleMenu">
@@ -835,9 +835,9 @@
     <Property Type="Int32" Name="RoleId" Nullable="false" />
     <Property Type="Int32" Name="MenuId" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="Stone">
@@ -851,9 +851,9 @@
     <Property Type="Int32" Name="StonePerCarat" />
     <Property Type="Boolean" Name="IsStoneWeightless" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="UserDetail">
@@ -879,13 +879,13 @@
     <Property Type="Int32" Name="UserId" Nullable="false" />
     <Property Type="Int32" Name="RoleId" Nullable="false" />
     <Property Type="Int32" Name="MenuId" Nullable="false" />
-    <Property Type="DateTime" Name="FromDate" />
-    <Property Type="DateTime" Name="ToDate" />
+    <Property Type="DateTime" Name="FromDate" Precision="3" />
+    <Property Type="DateTime" Name="ToDate" Precision="3" />
     <Property Type="Boolean" Name="Flag" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="GetCompletedButNotSubmittedProduct">
@@ -996,9 +996,9 @@
     <Property Type="Int32" Name="UserId" />
     <Property Type="String" Name="DlvStatus" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
   </EntityType>
   <EntityType Name="UserMapping">
     <Key>
@@ -1054,59 +1054,9 @@
     <Property Type="String" Name="IFSCCode" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Comments" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
-    <Property Type="Boolean" Name="Status" />
-  </EntityType>
-  <EntityType Name="Dealer">
-    <Key>
-      <PropertyRef Name="DealerId" />
-    </Key>
-    <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceId" Nullable="false" />
-    <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-    <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
-    <Property Type="Boolean" Name="Status" />
-    <Property Type="String" Name="MobileNumber1" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNumber2" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNumber3" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="MobileNumber4" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="InstanceID" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CustomerNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Pin" />
-    <Property Type="Int32" Name="MobileNumber" />
-    <Property Type="Int32" Name="PhoneNumber" />
-    <Property Type="String" Name="EmailAddress" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="File1" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="File2" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="File3" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-    <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
     <Property Type="Boolean" Name="Status" />
   </EntityType>
   <EntityType Name="User">
@@ -1122,12 +1072,12 @@
     <Property Type="Boolean" Name="IsApproved" Nullable="false" />
     <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
     <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
     <Property Type="Int32" Name="EditedBy" />
-    <Property Type="DateTime" Name="EditedDate" />
-    <Property Type="DateTime" Name="LastLoginDate" />
-    <Property Type="DateTime" Name="LastPasswordChangedDate" />
-    <Property Type="DateTime" Name="LastLockedOutDate" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="DateTime" Name="LastLoginDate" Precision="3" />
+    <Property Type="DateTime" Name="LastPasswordChangedDate" Precision="3" />
+    <Property Type="DateTime" Name="LastLockedOutDate" Precision="3" />
     <Property Type="Int32" Name="FailedPasswordAttemptCount" />
     <Property Type="Boolean" Name="ChangePwdonLogin" />
     <Property Type="String" Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1199,4 +1149,126 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Dealer">
+    <Key>
+      <PropertyRef Name="DealerId" />
+    </Key>
+    <Property Type="Int32" Name="DealerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceId" Nullable="false" />
+    <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyShortForm" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PinCode" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CompanyVATOrTinNo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+    <Property Type="String" Name="MobileNumber1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber4" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber5" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber6" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber7" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber8" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber9" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber10" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber1Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber2Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber3Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber4Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber5Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber6Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber7Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber8com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber9Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber10Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email3" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email4" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email5" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email6" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email7" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email8" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email9" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email10" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email1Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email3Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email4Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email5Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email6Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email7Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email8Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email9Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email10Com" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InstanceID" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CustomerNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Pin" />
+    <Property Type="Int32" Name="PhoneNumber" />
+    <Property Type="String" Name="MobileNumber1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber4" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber5" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber6" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber7" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber8" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber9" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber10" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber1Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber2Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber3Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber4Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber5Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber6Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber7Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber8com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber9Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobileNumber10Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email1" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email3" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email4" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email5" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email6" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email7" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email8" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email9" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email10" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email1Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email2Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email3Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email4Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email5Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email6Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email7Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email8Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email9Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email10Com" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File1" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File2" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="File3" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="EditedBy" />
+    <Property Type="DateTime" Name="EditedDate" Precision="3" />
+    <Property Type="Boolean" Name="Status" />
+  </EntityType>
 </Schema>

@@ -132,9 +132,47 @@
     <Property Name="City" Type="varchar" MaxLength="50" />
     <Property Name="State" Type="varchar" MaxLength="50" />
     <Property Name="Pin" Type="int" />
-    <Property Name="MobileNumber" Type="int" />
     <Property Name="PhoneNumber" Type="int" />
-    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber1" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber2" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber3" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber4" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber5" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber6" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber7" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber8" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber9" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber10" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber1Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber2Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber3Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber4Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber5Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber6Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber7Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber8com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber9Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber10Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email1" Type="varchar" MaxLength="100" />
+    <Property Name="Email2" Type="varchar" MaxLength="100" />
+    <Property Name="Email3" Type="varchar" MaxLength="100" />
+    <Property Name="Email4" Type="varchar" MaxLength="100" />
+    <Property Name="Email5" Type="varchar" MaxLength="100" />
+    <Property Name="Email6" Type="varchar" MaxLength="100" />
+    <Property Name="Email7" Type="varchar" MaxLength="100" />
+    <Property Name="Email8" Type="varchar" MaxLength="100" />
+    <Property Name="Email9" Type="varchar" MaxLength="100" />
+    <Property Name="Email10" Type="varchar" MaxLength="100" />
+    <Property Name="Email1Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email2Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email3Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email4Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email5Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email6Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email7Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email8Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email9Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email10Com" Type="varchar" MaxLength="50" />
     <Property Name="File1" Type="varchar" MaxLength="500" />
     <Property Name="File2" Type="varchar" MaxLength="500" />
     <Property Name="File3" Type="varchar" MaxLength="500" />
@@ -167,8 +205,42 @@
     <Property Name="MobileNumber2" Type="varchar" MaxLength="50" />
     <Property Name="MobileNumber3" Type="varchar" MaxLength="50" />
     <Property Name="MobileNumber4" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber5" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber6" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber7" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber8" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber9" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber10" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber1Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber2Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber3Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber4Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber5Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber6Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber7Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber8com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber9Com" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber10Com" Type="varchar" MaxLength="50" />
     <Property Name="Email1" Type="varchar" MaxLength="100" />
     <Property Name="Email2" Type="varchar" MaxLength="100" />
+    <Property Name="Email3" Type="varchar" MaxLength="100" />
+    <Property Name="Email4" Type="varchar" MaxLength="100" />
+    <Property Name="Email5" Type="varchar" MaxLength="100" />
+    <Property Name="Email6" Type="varchar" MaxLength="100" />
+    <Property Name="Email7" Type="varchar" MaxLength="100" />
+    <Property Name="Email8" Type="varchar" MaxLength="100" />
+    <Property Name="Email9" Type="varchar" MaxLength="100" />
+    <Property Name="Email10" Type="varchar" MaxLength="100" />
+    <Property Name="Email1Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email2Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email3Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email4Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email5Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email6Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email7Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email8Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email9Com" Type="varchar" MaxLength="50" />
+    <Property Name="Email10Com" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DealerBankDetails">
     <Key>
@@ -518,7 +590,7 @@
     <Property Name="Status" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ_New.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ.dbo.GetCompletedButNotSubmittedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="GetCompletedButNotSubmittedProducts">
     <Key>
@@ -548,7 +620,7 @@
     <Property Name="IsSubmitted" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ_New.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ.dbo.LotUserMappingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="LotUserMappingView">
     <Key>
@@ -569,7 +641,7 @@
     <Property Name="InstanceId" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'PJ_New.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'PJ.dbo.ViewLotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="ViewLotDetails">
     <Key>

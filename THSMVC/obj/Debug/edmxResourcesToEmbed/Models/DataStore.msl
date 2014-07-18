@@ -421,59 +421,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Dealers">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
-        <MappingFragment StoreEntitySet="Dealer">
-          <ScalarProperty Name="Email2" ColumnName="Email2" />
-          <ScalarProperty Name="Email1" ColumnName="Email1" />
-          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
-          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
-          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
-          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
-          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
-          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
-          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="stp_Delete_Dealer_BankDetails_By_Id" FunctionName="THSMVCDataModel.Store.stp_Delete_Dealer_BankDetails_By_Id" />
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="File3" ColumnName="File3" />
-          <ScalarProperty Name="File2" ColumnName="File2" />
-          <ScalarProperty Name="File1" ColumnName="File1" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-          <ScalarProperty Name="Pin" ColumnName="Pin" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="InstanceID" ColumnName="InstanceID" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="THSMVCDataModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -511,6 +459,130 @@
           <ScalarProperty Name="LotName" ColumnName="LotName" />
           <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
           <ScalarProperty Name="LotId" ColumnName="LotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dealers">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Dealer">
+        <MappingFragment StoreEntitySet="Dealer">
+          <ScalarProperty Name="Email10Com" ColumnName="Email10Com" />
+          <ScalarProperty Name="Email9Com" ColumnName="Email9Com" />
+          <ScalarProperty Name="Email8Com" ColumnName="Email8Com" />
+          <ScalarProperty Name="Email7Com" ColumnName="Email7Com" />
+          <ScalarProperty Name="Email6Com" ColumnName="Email6Com" />
+          <ScalarProperty Name="Email5Com" ColumnName="Email5Com" />
+          <ScalarProperty Name="Email4Com" ColumnName="Email4Com" />
+          <ScalarProperty Name="Email3Com" ColumnName="Email3Com" />
+          <ScalarProperty Name="Email2Com" ColumnName="Email2Com" />
+          <ScalarProperty Name="Email1Com" ColumnName="Email1Com" />
+          <ScalarProperty Name="Email10" ColumnName="Email10" />
+          <ScalarProperty Name="Email9" ColumnName="Email9" />
+          <ScalarProperty Name="Email8" ColumnName="Email8" />
+          <ScalarProperty Name="Email7" ColumnName="Email7" />
+          <ScalarProperty Name="Email6" ColumnName="Email6" />
+          <ScalarProperty Name="Email5" ColumnName="Email5" />
+          <ScalarProperty Name="Email4" ColumnName="Email4" />
+          <ScalarProperty Name="Email3" ColumnName="Email3" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="MobileNumber10Com" ColumnName="MobileNumber10Com" />
+          <ScalarProperty Name="MobileNumber9Com" ColumnName="MobileNumber9Com" />
+          <ScalarProperty Name="MobileNumber8com" ColumnName="MobileNumber8com" />
+          <ScalarProperty Name="MobileNumber7Com" ColumnName="MobileNumber7Com" />
+          <ScalarProperty Name="MobileNumber6Com" ColumnName="MobileNumber6Com" />
+          <ScalarProperty Name="MobileNumber5Com" ColumnName="MobileNumber5Com" />
+          <ScalarProperty Name="MobileNumber4Com" ColumnName="MobileNumber4Com" />
+          <ScalarProperty Name="MobileNumber3Com" ColumnName="MobileNumber3Com" />
+          <ScalarProperty Name="MobileNumber2Com" ColumnName="MobileNumber2Com" />
+          <ScalarProperty Name="MobileNumber1Com" ColumnName="MobileNumber1Com" />
+          <ScalarProperty Name="MobileNumber10" ColumnName="MobileNumber10" />
+          <ScalarProperty Name="MobileNumber9" ColumnName="MobileNumber9" />
+          <ScalarProperty Name="MobileNumber8" ColumnName="MobileNumber8" />
+          <ScalarProperty Name="MobileNumber7" ColumnName="MobileNumber7" />
+          <ScalarProperty Name="MobileNumber6" ColumnName="MobileNumber6" />
+          <ScalarProperty Name="MobileNumber5" ColumnName="MobileNumber5" />
+          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
+          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
+          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
+          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompanyVATOrTinNo" ColumnName="CompanyVATOrTinNo" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CompanyShortForm" ColumnName="CompanyShortForm" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="InstanceId" ColumnName="InstanceId" />
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="THSMVCDataModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="File3" ColumnName="File3" />
+          <ScalarProperty Name="File2" ColumnName="File2" />
+          <ScalarProperty Name="File1" ColumnName="File1" />
+          <ScalarProperty Name="Email10Com" ColumnName="Email10Com" />
+          <ScalarProperty Name="Email9Com" ColumnName="Email9Com" />
+          <ScalarProperty Name="Email8Com" ColumnName="Email8Com" />
+          <ScalarProperty Name="Email7Com" ColumnName="Email7Com" />
+          <ScalarProperty Name="Email6Com" ColumnName="Email6Com" />
+          <ScalarProperty Name="Email5Com" ColumnName="Email5Com" />
+          <ScalarProperty Name="Email4Com" ColumnName="Email4Com" />
+          <ScalarProperty Name="Email3Com" ColumnName="Email3Com" />
+          <ScalarProperty Name="Email2Com" ColumnName="Email2Com" />
+          <ScalarProperty Name="Email1Com" ColumnName="Email1Com" />
+          <ScalarProperty Name="Email10" ColumnName="Email10" />
+          <ScalarProperty Name="Email9" ColumnName="Email9" />
+          <ScalarProperty Name="Email8" ColumnName="Email8" />
+          <ScalarProperty Name="Email7" ColumnName="Email7" />
+          <ScalarProperty Name="Email6" ColumnName="Email6" />
+          <ScalarProperty Name="Email5" ColumnName="Email5" />
+          <ScalarProperty Name="Email4" ColumnName="Email4" />
+          <ScalarProperty Name="Email3" ColumnName="Email3" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="MobileNumber10Com" ColumnName="MobileNumber10Com" />
+          <ScalarProperty Name="MobileNumber9Com" ColumnName="MobileNumber9Com" />
+          <ScalarProperty Name="MobileNumber8com" ColumnName="MobileNumber8com" />
+          <ScalarProperty Name="MobileNumber7Com" ColumnName="MobileNumber7Com" />
+          <ScalarProperty Name="MobileNumber6Com" ColumnName="MobileNumber6Com" />
+          <ScalarProperty Name="MobileNumber5Com" ColumnName="MobileNumber5Com" />
+          <ScalarProperty Name="MobileNumber4Com" ColumnName="MobileNumber4Com" />
+          <ScalarProperty Name="MobileNumber3Com" ColumnName="MobileNumber3Com" />
+          <ScalarProperty Name="MobileNumber2Com" ColumnName="MobileNumber2Com" />
+          <ScalarProperty Name="MobileNumber1Com" ColumnName="MobileNumber1Com" />
+          <ScalarProperty Name="MobileNumber10" ColumnName="MobileNumber10" />
+          <ScalarProperty Name="MobileNumber9" ColumnName="MobileNumber9" />
+          <ScalarProperty Name="MobileNumber8" ColumnName="MobileNumber8" />
+          <ScalarProperty Name="MobileNumber7" ColumnName="MobileNumber7" />
+          <ScalarProperty Name="MobileNumber6" ColumnName="MobileNumber6" />
+          <ScalarProperty Name="MobileNumber5" ColumnName="MobileNumber5" />
+          <ScalarProperty Name="MobileNumber4" ColumnName="MobileNumber4" />
+          <ScalarProperty Name="MobileNumber3" ColumnName="MobileNumber3" />
+          <ScalarProperty Name="MobileNumber2" ColumnName="MobileNumber2" />
+          <ScalarProperty Name="MobileNumber1" ColumnName="MobileNumber1" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Pin" ColumnName="Pin" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InstanceID" ColumnName="InstanceID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

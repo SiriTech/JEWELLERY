@@ -24,8 +24,8 @@ namespace THSMVC.Classes
                                               Address = d.Address,
                                               City = d.City,
                                               CustometNumber = d.CustomerNumber,
-                                              EmailAddress = d.EmailAddress,
-                                              Mobile = (int)d.MobileNumber,
+                                              Email1 = d.Email1,
+                                              MobileNUmber1 = d.MobileNumber1,
                                               PhoneNumber = (int)d.PhoneNumber,
                                               State = d.State
                                           }).ToList<CustomerModel>();

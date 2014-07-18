@@ -7,7 +7,7 @@
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-            LoadProducts();
+            LoadProducts(true,true,false,false,false,false,true);
             
         });
         function Create() {
@@ -24,7 +24,7 @@
             $("#divCreateProduct").show();
             GetContentByActionAndControllerForEdit('EditProduct', 'Product', 'Add/Edit Product', id, '#divCreateProduct');
         }
-        function LoadProducts() {
+        function LoadProducts(col_ProductName, col_ShortForm, col_ValueAddedByPerc, col_ValueAddedFixed, col_MakingChargesPerGram, col_MakingChargesFixed, col_IsStoneStr) {
             var gridDataUrl;
             gridDataUrl = '/Product/JsonProductCollection';
             jQuery("#list").jqGrid({
@@ -33,23 +33,25 @@
                 mtype: 'POST',
                 colNames: ['Id', 'Product Name', 'ShortForm', 'ValueAddedByPerc', 'ValueAddedFixed', 'MakingChargesPerGram', 'MakingChargesFixed', 'IsStone'],
                 colModel: [
-                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 2 } },
-                  { name: 'ProductName', index: 'ProductName', width:50, align: 'left', hidden: false, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 3} },
-                  { name: 'ShortForm', index: 'ShortForm', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 4} },
-                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 5} },
-                  { name: 'ValueAddedFixed', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 6} },
-                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 7} },
-                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', align: 'left', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 8} },
-                  { name: 'IsStoneStr', index: 'IsStoneStr', align: 'center', hidden: true, editable: false, viewable: false, formoptions: { elmsuffix: '   ', rowpos: 1, colpos: 9} }
+                  { name: 'Id', index: 'Id', align: 'left', hidedlg: true, hidden: true, editable: false, viewable: false },
+                  { name: 'ProductName', index: 'ProductName', align: 'left', hidden: !col_ProductName, editable: false, viewable: false },
+                  { name: 'ShortForm', index: 'ShortForm',hidden:!col_ShortForm, editable: false, viewable: false },
+                  { name: 'ValueAddedByPerc', index: 'ValueAddedByPerc', hidden: !col_ValueAddedByPerc, editable: false, viewable: false },
+                  { name: 'ValueAddedFixed', index: 'ValueAddedFixed', hidden: !col_ValueAddedFixed, editable: false, viewable: false },
+                  { name: 'MakingChargesPerGram', index: 'MakingChargesPerGram', hidden: !col_MakingChargesPerGram, editable: false, viewable: false },
+                  { name: 'MakingChargesFixed', index: 'MakingChargesFixed', hidden: !col_MakingChargesFixed, editable: false, viewable: false },
+                  { name: 'IsStoneStr', index: 'IsStoneStr', align: 'center',hidden:!col_IsStoneStr, editable: false, viewable: false}
                 ],
                 rownumbers: true,
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 height: 'auto',
                 autowidth: true,
+                gridview: true,
                 pager: jQuery('#pager'),
                 sortname: 'ProductName',
-                viewrecords: true,
+                viewrecords: false,
+            	shrinkToFit:true,
                 sortorder: "asc",
                 caption: "Products",
                 gridComplete: function () {
@@ -125,14 +127,44 @@
 
        }, // delete options
        { closeOnEscape: true, multipleSearch: true, closeAfterSearch: true }, // search options
-       { closeOnEscape: true, width: 350 } // view options
+       { closeOnEscape: true } // view options
     );
        jQuery("#list").jqGrid('navButtonAdd', '#pager', {
            caption: "Show/Hide",
            buttonicon: "ui-icon-newwin",
            title: "Show/Hide Columns",
            onClickButton: function () {
-               jQuery("#list").setColumns({ ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) { setTimeout("imagePreview()", 2000); } });
+           	jQuery("#list").setColumns({
+           		ShrinkToFit: true, colnameview: false, recreateForm: true, afterSubmitForm: function (id) {
+           			var col_ProductName = false;
+           			var col_ShortForm = false;
+           			var col_ValueAddedByPerc = false;
+           			var col_ValueAddedFixed = false;
+           			var col_MakingChargesPerGram = false;
+           			var col_MakingChargesFixed = false;
+           			var col_IsStoneStr = false;
+           			$('#' + id[0].id+" table").find('input[type="checkbox"]:checked').each(function () {
+           				//this is the current checkbox
+           				if (this.id == "col_ProductName")
+           					col_ProductName = true;
+           				if (this.id == "col_ShortForm")
+           					col_ShortForm = true;
+           				if (this.id == "col_ValueAddedByPerc")
+           					col_ValueAddedByPerc = true;
+           				if (this.id == "col_ValueAddedFixed")
+           					col_ValueAddedFixed = true;
+           				if (this.id == "col_MakingChargesPerGram")
+           					col_MakingChargesPerGram = true;
+           				if (this.id == "col_MakingChargesFixed")
+           					col_MakingChargesFixed = true;
+           				if (this.id == "col_IsStoneStr")
+           					col_IsStoneStr = true;
+
+           			});
+           			$('#list').jqGrid('GridUnload');
+           			LoadProducts(col_ProductName, col_ShortForm, col_ValueAddedByPerc, col_ValueAddedFixed, col_MakingChargesPerGram, col_MakingChargesFixed, col_IsStoneStr);
+           		}
+           	});
                return false;
            }
        });
@@ -146,7 +178,8 @@
     }
     });
 
-            $.extend($.jgrid.search, { Find: 'Search' });
+       $.extend($.jgrid.search, { Find: 'Search' });
+      
 
         }
     </script>
