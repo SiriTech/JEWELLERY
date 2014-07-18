@@ -79,7 +79,7 @@ namespace THSMVC.App_Code
                 lot.LotName = objLot.LotName;
                 lot.NoOfPieces = (int)objLot.NoOfPieces;
                 lot.ProductGroupId = objLot.ProductGroupId;
-                lot.Weight = (int)objLot.Weight;
+                lot.Weight = (decimal)objLot.Weight;
                 lot.IsMRP = objLot.IsMRP;
                 lot.MRP = objLot.MRP;
                 lot.DiffAllowed = objLot.DiffAllowed;

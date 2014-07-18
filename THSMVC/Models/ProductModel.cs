@@ -18,6 +18,7 @@ namespace THSMVC.Models
         public decimal? MakingChargesPerGram { get; set; }
         public decimal? MakingChargesFixed { get; set; }
         public bool IsStone { get; set; }
+        public string IsStoneStr { get; set; }
         public bool IsWeightless { get; set; }
         public int ProductCategoryId { get; set; }
         public int ProductGroupId { get; set; }

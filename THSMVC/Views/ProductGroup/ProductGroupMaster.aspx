@@ -57,7 +57,7 @@
                 },
 
                 hidegrid: true //To show/hide the button in the caption bar to hide/show the grid.
-            }).navGrid('#pager', { search: false, view: false, edit: false, add: false, del: true, searchtext: "" },
+            }).navGrid('#pager', { search: false, view: false, edit: false, add: false, del: false, searchtext: "" },
        {
            closeOnEscape: true, url: "/Administration/EditJsonSiteLogs", closeAfterEdit: false, width: 350, checkOnSubmit: false, topinfo: "Transaction Successful..", bottominfo: "Fields marked with(*) are required.", beforeShowForm: function (formid) { $("#tr_ID", formid).hide(); $("#FrmTinfo").css("display", "none"); }, afterSubmit: // Function for show msg after submit the form in edit
               function (response, postdata) {
