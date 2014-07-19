@@ -9,6 +9,19 @@
         $(document).ready(function () {
             LoadDealers();
         });
+
+        function SearchDealer() {
+            var DataUrl = '/Dealer/JsonDealerCollection';
+            var CName = $("#txtCompanyNameSearch").val();
+            var DName = $("#txtDealerNameSearch").val();
+            var TinNo = $("#txtTinNoSearch").val();
+
+            DataUrl = DataUrl + '?companyName=' + CName + '&dealerName=' + DName + '&tinNo=' + TinNo;
+
+            // Set the parameters in the grid data source
+            jQuery('#list').jqGrid('setGridParam', { url: DataUrl }).trigger("reloadGrid");
+        }
+
         function Create() {
             $("#divDealerMaster").hide();
             $("#CreateDealer").hide();
@@ -162,6 +175,20 @@
         </div>
     </div>
     <div id="divDealerMaster">
+
+        <div class="clear" style="padding-bottom : 10px;">
+            Company Name :
+            <input type="text" id="txtCompanyNameSearch" />
+            &nbsp;&nbsp;
+            Dealer Name :
+            <input type="text" id="txtDealerNameSearch" />
+            &nbsp;&nbsp;
+            Tin No :
+            <input type="text" id="txtTinNoSearch" />
+            &nbsp;&nbsp;
+            <input type="button" value="Search" onclick="SearchDealer()"/>
+
+        </div>
 
         <div id="gridWrapper" style="width: 100%;">
 

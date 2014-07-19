@@ -17,7 +17,9 @@ namespace THSMVC.Controllers
 		[LogsRequest]
 		public ActionResult ProductMaster(string Id, string MenuId)
 		{
-			return View();
+            ProductModel model = new ProductModel();
+
+            return View(model);
 		}
 		[LogsRequest]
 		public ActionResult AddEditProduct()
@@ -146,7 +148,7 @@ namespace THSMVC.Controllers
 			using (ProductLogic logicLayer = new ProductLogic())
 				return logicLayer.GetProducts();
 		}
-		public ActionResult JsonProductCollection(GridSettings grid)
+		public ActionResult JsonProductCollection(GridSettings grid, int? productGroupId, int? ProductCatId)
 		{
 			try
 			{
@@ -189,6 +191,16 @@ namespace THSMVC.Controllers
 
 				//paging
 				context = context.Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToArray().AsQueryable();
+
+                //search
+                if (productGroupId != null && productGroupId != 0)
+                {
+                    context = context.Where(e => e.ProductGroupId == productGroupId);
+                }
+                if (ProductCatId != null && ProductCatId != 0)
+                {
+                    context = context.Where(e => e.ProductCategoryId == ProductCatId);
+                }
 
 				// Format the data for the jqGrid
 				var jsonData = new

@@ -30,7 +30,7 @@ namespace THSMVC.Classes
                                                         City=d.City,
                                                         State=d.State,
                                                         PinCode=d.PinCode,
-                                                        TinNo=d.CompanyVATOrTinNo
+                                                        TinNo=d.CompanyVATOrTinNo == null || d.CompanyVATOrTinNo == "" ? "" : d.CompanyVATOrTinNo
                                                     }).ToList<DealerModel>();
             return Dealer.AsQueryable();
         }

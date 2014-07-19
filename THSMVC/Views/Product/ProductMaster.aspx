@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<THSMVC.Models.ProductModel>" %>
 
 <!DOCTYPE html>
 
@@ -8,8 +8,26 @@
     <script type="text/javascript">
         $(document).ready(function () {
             LoadProducts(true,true,false,false,false,false,true);
-            
+
         });
+
+        function SearchProducts() {
+            var DataUrl = '/Product/JsonProductCollection';
+            var PrdctGrpId = $("#ProductGroupId").val();
+            var PrdctCatId = $("#ProductCategoryId").val();
+
+            if ((PrdctGrpId == '' || PrdctGrpId == 0) && (PrdctCatId == '' || PrdctCatId == 0)) {
+                Failure("Please select any one to search");
+                return;
+            }
+
+            DataUrl = DataUrl + '?productGroupId=' + PrdctGrpId + '&ProductCatId=' + PrdctCatId;
+
+            // Set the parameters in the grid data source
+            jQuery('#list').jqGrid('setGridParam', { url: DataUrl }).trigger("reloadGrid");
+
+        }
+
         function Create() {
             $("#divProductMaster").hide();
             $("#CreateProduct").hide();
@@ -199,6 +217,17 @@
     </div>
     <div id="divProductMaster">
         
+        <div class="clear" style="padding-bottom : 10px;">
+            Product Group :
+            <%= Html.DropDownListFor(m => m.ProductGroupId, Model.ProductGroups, "Select Group", new { title="Select Product Group from the list" })%>
+            &nbsp;&nbsp;
+            Product Category :
+            <%= Html.DropDownListFor(m => m.ProductCategoryId, Model.ProductCategories, "Select Category", new { title="Select Product Category from the list" })%>
+            &nbsp;&nbsp;
+            <input type="button" value="Search" onclick="SearchProducts()"/>
+
+        </div>
+
         <div id="gridWrapper" style="width: 100%;">
            
             <div>

@@ -21,11 +21,12 @@ namespace THSMVC.Classes
                                           {
                                               Id = d.Id,
                                               Name = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.Name + "</a>",
+                                              NameStr = d.Name,
                                               Address = d.Address,
                                               City = d.City,
                                               CustometNumber = d.CustomerNumber,
                                               Email1 = d.Email1,
-                                              MobileNUmber1 = d.MobileNumber1,
+                                              MobileNUmber1 = d.MobileNumber1 == null || d.MobileNumber1 == "" ? "" : d.MobileNumber1,
                                               PhoneNumber = (int)d.PhoneNumber,
                                               State = d.State
                                           }).ToList<CustomerModel>();

@@ -11,6 +11,18 @@
 
         });
 
+        function SearchCustomer() {
+            var DataUrl = '/Customer/JsonCustomerCollection';
+            var CName = $("#txtCustNameSearch").val();
+            var CNo = $("#txtCustNoSearch").val();
+            var MobNo = $("#txtMobNoSearch").val();
+
+            DataUrl = DataUrl + '?custName=' + CName + '&custNo=' + CNo + '&mobile=' + MobNo;
+
+            // Set the parameters in the grid data source
+            jQuery('#list').jqGrid('setGridParam', { url: DataUrl }).trigger("reloadGrid");
+        }
+
         function UpdateCustomer(id) {
             $("#divCustomerMaster").hide();
             $("#CreateCustomer").hide();
@@ -173,6 +185,16 @@
         <div class="clear">
             <div class="ContentdivBorder" id="divLotInfo">
                 <div id="divCustomerMaster">
+                    <div class="clear" style="padding-bottom: 10px;">
+                        Cust Name :
+                        <input type="text" id="txtCustNameSearch" />
+                        &nbsp;&nbsp; Cust Number :
+                        <input type="text" id="txtCustNoSearch" />
+                        &nbsp;&nbsp; Mobile No :
+                        <input type="text" id="txtMobNoSearch" />
+                        &nbsp;&nbsp;
+                        <input type="button" value="Search" onclick="SearchCustomer()" />
+                    </div>
                     <div id="gridWrapper" style="width: 100%;">
                         <div>
                             <table id="list" class="scroll" cellpadding="0" cellspacing="0">

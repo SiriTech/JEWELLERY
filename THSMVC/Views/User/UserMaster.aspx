@@ -16,6 +16,24 @@
         $(document).ready(function () {
             LoadUsers();
         });
+
+        function SearchUsers() {
+            var DataUrl = '/User/JsonUserCollection';
+            var UName = $("#txtUserNameSearch").val();
+            var Mobile = $("#txtMobileNumberSearch").val();
+
+//            if ((UName == '' || UName == 0) && (Mobile == '' || Mobile == 0)) {
+//                Failure("Please any one search criteria to search");
+//                return;
+//            }
+
+            DataUrl = DataUrl + '?userName=' + UName + '&mobileNumber=' + Mobile;
+
+            // Set the parameters in the grid data source
+            jQuery('#list').jqGrid('setGridParam', { url: DataUrl }).trigger("reloadGrid");
+        }
+
+
         function Create() {
             $("#divUserMaster").hide();
             $("#CreateUser").hide();
@@ -180,6 +198,17 @@
     </div>
     <div id="divUserMaster">
         
+         <div class="clear" style="padding-bottom : 10px;">
+            Name :
+            <input type="text" id="txtUserNameSearch" />
+            &nbsp;&nbsp;
+            Mobile Number :
+            <input type="text" id="txtMobileNumberSearch" />
+            &nbsp;&nbsp;
+            <input type="button" value="Search" onclick="SearchUsers()"/>
+
+        </div>
+
         <div id="gridWrapper" style="width: 100%;">
            
             <div>

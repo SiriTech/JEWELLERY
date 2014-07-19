@@ -286,7 +286,7 @@ namespace THSMVC.Controllers
 				return logicLayer.GetCustomers();
 		}
 
-		public ActionResult JsonCustomerCollection(GridSettings grid)
+		public ActionResult JsonCustomerCollection(GridSettings grid, string custName, string custNo, string mobile)
 		{
 			try
 			{
@@ -329,6 +329,22 @@ namespace THSMVC.Controllers
 
 				//paging
 				context = context.Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToArray().AsQueryable();
+
+                //search
+                if (custName != null && !string.IsNullOrEmpty(custName))
+                {
+                    context = context.Where(e => e.NameStr.ToLower().Contains(custName.ToLower()));
+                    //context = context.Where(e => e.Name.StartsWith(custName, StringComparison.OrdinalIgnoreCase));
+                }
+                if (custNo != null && !string.IsNullOrEmpty(custNo))
+                {
+                    context = context.Where(e => e.CustometNumber.ToLower().Contains(custNo.ToLower()));
+                }
+
+                if (mobile != null && !string.IsNullOrEmpty(mobile))
+                {
+                    context = context.Where(e => e.MobileNUmber1.ToLower().Contains(mobile.ToLower()) || e.MobileNUmber2.ToLower().Contains(mobile.ToLower()) || e.MobileNUmber3.ToLower().Contains(mobile.ToLower()));
+                }
 
 				// Format the data for the jqGrid
 				var jsonData = new

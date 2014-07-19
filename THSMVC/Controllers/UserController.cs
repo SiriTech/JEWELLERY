@@ -264,7 +264,7 @@ namespace THSMVC.Controllers
             using (UserLogic logicLayer = new UserLogic())
                 return logicLayer.GetUsers();
         }
-        public ActionResult JsonUserCollection(GridSettings grid)
+        public JsonResult JsonUserCollection(GridSettings grid, string userName, string mobileNumber)
         {
             try
             {
@@ -307,6 +307,18 @@ namespace THSMVC.Controllers
 
                 //paging
                 context = context.Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToArray().AsQueryable();
+
+                //search
+                if (userName != null && !string.IsNullOrEmpty(userName.ToString()))
+                {
+                    //context = context.Where(e => e.Username.Contains(userName.ToString()));
+                    context = context.Where(e => e.NameStr.StartsWith(userName, StringComparison.OrdinalIgnoreCase));
+                }
+                if (mobileNumber != null && !string.IsNullOrEmpty(mobileNumber.ToString()))
+                {
+                    //context = context.Where(e => e.Mobile.Equals(mobileNumber.ToString()));
+                    context = context.Where(e => e.Mobile.Contains(mobileNumber));
+                }
 
                 // Format the data for the jqGrid
                 var jsonData = new

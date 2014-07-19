@@ -390,7 +390,7 @@ namespace THSMVC.Controllers
             using (DealerLogic logicLayer = new DealerLogic())
                 return logicLayer.GetDealers();
         }
-        public ActionResult JsonDealerCollection(GridSettings grid)
+        public ActionResult JsonDealerCollection(GridSettings grid, string companyName, string dealerName, string tinNo)
         {
             try
             {
@@ -434,6 +434,22 @@ namespace THSMVC.Controllers
                 //paging
                 context = context.Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToArray().AsQueryable();
 
+                //search
+                if (companyName != null && !string.IsNullOrEmpty(companyName))
+                {
+                    //context = context.Where(e => e.Username.Contains(userName.ToString()));
+                    context = context.Where(e => e.CompanyName.StartsWith(companyName, StringComparison.OrdinalIgnoreCase));
+                }
+                if (dealerName != null && !string.IsNullOrEmpty(dealerName))
+                {
+                    context = context.Where(e => e.DealerName.Contains(dealerName));
+                }
+
+                if (tinNo != null && !string.IsNullOrEmpty(tinNo))
+                {
+                    context = context.Where(e => e.TinNo.Contains(tinNo));
+                }
+
                 // Format the data for the jqGrid
                 var jsonData = new
                 {
@@ -449,13 +465,14 @@ namespace THSMVC.Controllers
                             s.Id.ToString(),
                             s.CompanyName.ToString(),
                             s.DealerName.ToString().Replace("$$$$","'UpdateDealer("+s.Id.ToString()+")'").Replace("****","href='#'"),
-                            s.CompanyShortForm==null?"":s.CompanyShortForm,
-                            s.Address==null?"":s.Address,
-                            s.City==null?"":s.City,
-                            s.State==null?"":s.State,
-                            s.PinCode==null?"":s.PinCode,
-                            s.TinNo==null?"":s.TinNo,
+                            //s.CompanyShortForm==null?"":s.CompanyShortForm,
+                            //s.Address==null?"":s.Address,
+                            //s.City==null?"":s.City,
+                            //s.State==null?"":s.State,
+                            //s.PinCode==null?"":s.PinCode,
+                            
                             s.MobileNUmber1==null?"":s.MobileNUmber1,
+                            s.TinNo,
                             s.Email1 == null?"":s.Email1
                         }
                           }).ToArray()

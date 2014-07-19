@@ -25,11 +25,12 @@ namespace THSMVC.Classes
                                                     {
                                                         Id = u.Id,
                                                         Name = "<a style='color:gray;font-weight:bold;' title='Click to Edit' **** onclick=$$$$; >" + d.Name + "</a>",
+                                                        NameStr = d.Name,
                                                         Address=d.Address,
                                                         City=d.City,
                                                         State=d.State,
                                                         PinCode=d.PinCode,
-                                                        Mobile=d.Mobile,
+                                                        Mobile=d.Mobile == "" || d.Mobile == null ? "" : d.Mobile,
                                                         Phone=d.Phone,
                                                         Email=u.Email,
                                                         Username=u.UserName,

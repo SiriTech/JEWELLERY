@@ -10,6 +10,7 @@ namespace THSMVC.Models
         public int Id { get; set; }
         public int InstanceId { get; set; }
         public string Name { get; set; }
+        public string NameStr { get; set; }
         public string CustometNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

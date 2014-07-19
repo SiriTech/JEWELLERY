@@ -27,7 +27,9 @@ namespace THSMVC.Classes
                                                        MakingChargesPerGram = d.MakingChargesPerGram,
                                                        ShortForm = d.ShortForm,
                                                        ValueAddedByPerc = d.ValueAddedByPerc,
-                                                       ValueAddedFixed = d.ValueAddedFixed
+                                                       ValueAddedFixed = d.ValueAddedFixed,
+                                                       ProductCategoryId = d.ProductCategoryId,
+                                                       ProductGroupId = d.ProductGroupId
                                                     }).ToList<ProductModel>();
             return Product.AsQueryable();
         }
